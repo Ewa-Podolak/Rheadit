@@ -9,8 +9,9 @@ class userController extends Controller
 {
     public function CheckLogin($username, $password)
     {
-        $info = user->GetUserInfo($username, $password);
-        if(!$info->IsEmpty())
+        $user = new user;
+        $info = $user->GetUserInfo($username, $password);
+        if($info)
             return ['loggedin' => true];
             //return $this->ReturnInformation($info);
         else
@@ -19,10 +20,11 @@ class userController extends Controller
 
     public function RegisterUser($username, $password, $email)
     {
-        $info = user->GetUserInfo($username, $password);
-        if($info->IsEmpty())
+        $user = new user;
+        $info = $user->GetUserInfo($username, $password);
+        if(!$info)
         {
-            user->CreateUser($username, $password, $email);
+            $user->CreateNewUser($username, $password, $email);
             return ['usercreated' => true];
             //return $this->ReturnInformation($info);
         }
@@ -42,11 +44,13 @@ class userController extends Controller
 
     public function DeleteUser($userid)
     {
-        user->DeleteUser($userid);
+        $user = new user;
+        $user->DeleteUser($userid);
+        return ['status' => true];
     }
 
     public function ReturnInformation($dbinfo)
     {
-
+        
     }
 }

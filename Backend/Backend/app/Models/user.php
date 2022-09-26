@@ -10,7 +10,7 @@ class user extends Model
     use HasFactory;
 
     protected $table = 'users';
-    protected $timestamps = false;
+    public $timestamps = false;
 
     public function GetUserInfo($username, $password)
     {
