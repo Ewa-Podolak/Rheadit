@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/4504875609.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Document</title>
+</head>
+<body id="loginPage">
+    <div class="loginContainer">
+        <h1>Login:</h1>
+        <form>
+            <div class="inputcontainer">
+                <label for="username">Username: </label>
+                <input id="username" type="text">
+            </div>
+            <div class="inputcontainer">
+                <label for="password">Password: </label>
+                <input id="password" type="text">
+            </div>
+            <p class="error" id="loginerror"></p>
+            <button type="button" id="loginBtn">Login</button>
+            <p>Forgot password? <button type="button" id="forgotPassword">Click here</button></p>
+            <button type="button" id="registerBtn">Register</button>
+        </form>
+    </div>
+
+    <div class="registerContainer">
+        <h1>Register:</h1>
+        <form>
+            <div class="inputcontainer">
+                <label for="email">Email: </label>
+                <input id="registerEmail" type="text">
+            </div>
+            <div class="inputcontainer">
+                <label for="username">Username: </label>
+                <input id="registerUsername" type="text">
+            </div>
+            <div class="inputcontainer">
+                <label for="password">Password: </label>
+                <input id="registerPassword" type="text">
+            </div>
+
+            <p class="error" id="registererror"></p>
+
+            <button type="button" id="makeAccountBtn">Make account</button>
+        </form>
+    </div>
+    <script src="./code.js"></script>
+</body>
+</html>
