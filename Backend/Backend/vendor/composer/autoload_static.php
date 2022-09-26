@@ -640,7 +640,7 @@ class ComposerStaticInitb031edb201a2cb76925cc9253d91c7b9
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\followersFactory' => __DIR__ . '/../..' . '/database/factories/followersFactory.php',
         'Database\\Factories\\interactionsFactory' => __DIR__ . '/../..' . '/database/factories/interactionsFactory.php',
-        'Database\\Factories\\postsFactory' => __DIR__ . '/../..' . '/database/factories/postsFactory.php',
+        'Database\\Factories\\postFactory' => __DIR__ . '/../..' . '/database/factories/postFactory.php',
         'Database\\Factories\\userFactory' => __DIR__ . '/../..' . '/database/factories/userFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\followersSeeder' => __DIR__ . '/../..' . '/database/seeders/followersSeeder.php',
