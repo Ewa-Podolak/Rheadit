@@ -1,0 +1,67 @@
+$pink: #FAB3A9;
+$green: #A7C4B5;
+$dark: #373F47;
+$light: #F6F6F2;
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    background-color: $green;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.loginContainer{
+    background-color: $light;
+    width: 90%;
+    border-radius: 15px;
+    padding: 5%;
+    color: $dark;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .inputcontainer{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 2%;
+
+            label{
+                padding-right: 2%;
+            }
+        }
+
+        p{
+            padding: 5%;
+        }
+
+        input, button{
+            background-color: $pink;
+            border: none;
+            border-radius: 15px;
+        }
+
+        input{
+            padding: 3%;
+        }
+
+        button{
+            padding: 3%;
+            margin: 2%;
+            width: 50%;
+        }
+    }
+}
