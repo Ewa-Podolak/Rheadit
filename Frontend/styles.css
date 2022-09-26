@@ -41,6 +41,13 @@ input, button {
   border-radius: 15px;
 }
 
+button {
+  padding: 3%;
+  margin: 2%;
+  width: 50%;
+  border: none;
+}
+
 input {
   padding: 3%;
   border: transparent 1px solid;
@@ -102,12 +109,6 @@ input {
 .loginContainer form p, .registerContainer form p {
   padding: 5%;
 }
-.loginContainer form button, .registerContainer form button {
-  padding: 3%;
-  margin: 2%;
-  width: 50%;
-  border: none;
-}
 
 .registerContainer {
   display: none;
@@ -141,12 +142,14 @@ input {
   width: 40%;
   top: 12%;
   right: 5%;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px;
 }
 .navbar .dropDown .triangle {
   width: 0;
   height: 0;
   position: absolute;
-  right: 0;
+  right: 5px;
   top: -10px;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
@@ -158,6 +161,7 @@ input {
   justify-content: center;
   align-items: center;
   list-style: none;
+  border-radius: 5px;
   background-color: #F6F6F2;
 }
 .navbar .dropDown ul li {
@@ -166,17 +170,95 @@ input {
 .navbar .dropDown ul li #username {
   padding: 5%;
 }
-.navbar .profile {
+.navbar #profilePic {
+  border: #373F47 1px solid;
+}
+
+.profile {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: end;
 }
-.navbar .profile #profilePic {
+.profile #profilePic {
   height: 5vh;
-  border: #373F47 1px solid;
 }
-.navbar .profile h2 {
+.profile h2 {
   font-size: 12px;
   padding: 2%;
+}
+
+.createnewPost {
+  margin-top: 5%;
+  width: 90vw;
+  background-color: #F6F6F2;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+.createnewPost img {
+  height: 8vh;
+}
+.createnewPost i {
+  padding: 5%;
+}
+.createnewPost input {
+  width: 70%;
+  height: 60%;
+}
+
+.postsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+.postsContainer .post {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 5%;
+  padding: 5% 0;
+  background-color: #F6F6F2;
+  border-radius: 15px;
+}
+.postsContainer .post .votes {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-right: #373F47 1px solid;
+}
+.postsContainer .post .votes h2 {
+  font-size: 10px;
+  padding: 5% 0;
+}
+.postsContainer .post .thePost {
+  width: 80%;
+  height: 100%;
+  padding: 0 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.postsContainer .post .thePost #comment {
+  font-size: 15px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 20%;
+  margin-top: 40%;
+}
+.postsContainer .post .thePost img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  border-radius: 15px;
 }/*# sourceMappingURL=styles.css.map */
