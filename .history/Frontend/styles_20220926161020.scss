@@ -357,8 +357,8 @@ input{
     margin-top: 5%;
     border-radius: 15px;
 
+    box-shadow: gray 0px 7px 29px 0px;
 
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
     #username{
         padding: 5%;
@@ -374,8 +374,6 @@ input{
     width: 90%;
     height: fit-content;
     padding: 5%;
-
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
     display: flex;
     flex-direction: column;

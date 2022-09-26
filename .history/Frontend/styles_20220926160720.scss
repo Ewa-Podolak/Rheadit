@@ -357,9 +357,6 @@ input{
     margin-top: 5%;
     border-radius: 15px;
 
-
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
     #username{
         padding: 5%;
         font-size: 30px;
@@ -375,12 +372,12 @@ input{
     height: fit-content;
     padding: 5%;
 
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    border: $pink 1px solid;
 
     i{
         padding-bottom: 2%;
@@ -400,6 +397,7 @@ input{
         padding: 5%;
         width: 45%;
 
+        border: $pink 1px solid;
 
         span{
             background-color: $pink;

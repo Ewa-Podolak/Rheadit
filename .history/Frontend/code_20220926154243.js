@@ -59,7 +59,7 @@ if (window.location.href.includes("index.html")){
 // home
 
 
-if (window.location.href.includes("home.html") || window.location.href.includes("profile.html")){
+if (window.location.href.includes("home.html")){
 
     var goToProfile = document.getElementById("goProfile");
     console.log(goToProfile);
@@ -114,18 +114,5 @@ if (window.location.href.includes("home.html") || window.location.href.includes(
             dropDown.style.display = "none";
             dropDownDisplay = false;
         }
-    })
-
-
-    var logo = document.getElementById("logo");
-
-    logo.addEventListener("click", function(){
-        window.location.href = "home.html";
-    })
-
-    var logoutBtn = document.getElementById("logout")
-
-    logoutBtn.addEventListener("click", function(){
-        window.location.href = "index.html"
     })
 }

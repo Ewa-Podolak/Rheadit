@@ -122,10 +122,4 @@ if (window.location.href.includes("home.html") || window.location.href.includes(
     logo.addEventListener("click", function(){
         window.location.href = "home.html";
     })
-
-    var logoutBtn = document.getElementById("logout")
-
-    logoutBtn.addEventListener("click", function(){
-        window.location.href = "index.html"
-    })
 }
