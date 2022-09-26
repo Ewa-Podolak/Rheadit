@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #FAB3A9;
+}
+
+.loginContainer {
+  background-color: #F6F6F2;
+}/*# sourceMappingURL=styles_20220923151233.css.map */
