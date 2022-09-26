@@ -1,0 +1,18 @@
+$pink: #FAB3A9;
+$green: #A7C4B5;
+$dark: #373F47;
+$light: #F6F6F2;
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: $pink;
+}
+
+.loginContainer{
+    background-color: $light;
+}
