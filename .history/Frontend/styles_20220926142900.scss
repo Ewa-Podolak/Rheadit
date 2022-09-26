@@ -295,7 +295,7 @@ input{
     .comments{
 
         display: none;
-
+        
         background-color: $light;
         width: 100%;
         padding-bottom: 5%;
@@ -321,7 +321,6 @@ input{
             li{
                 display: flex;
                 flex-direction: row;
-                margin: 2%;
 
                 .comment{
                     display: flex;

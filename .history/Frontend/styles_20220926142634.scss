@@ -307,11 +307,10 @@ input{
         .commentBar{
             display: flex;
             flex-direction: row;
-            align-items: center;
         }
 
         .commentInput{
-            width: 80%;
+            width: 90%;
             margin: 5%;
         }
 
@@ -321,7 +320,6 @@ input{
             li{
                 display: flex;
                 flex-direction: row;
-                margin: 2%;
 
                 .comment{
                     display: flex;

@@ -276,8 +276,13 @@ input {
   flex-direction: column;
   justify-content: center;
 }
+.postsContainer .comments .commentBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .postsContainer .comments .commentInput {
-  width: 90%;
+  width: 80%;
   margin: 5%;
 }
 .postsContainer .comments ul {
@@ -286,6 +291,7 @@ input {
 .postsContainer .comments ul li {
   display: flex;
   flex-direction: row;
+  margin: 2%;
 }
 .postsContainer .comments ul li .comment {
   display: flex;
