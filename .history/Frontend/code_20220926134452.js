@@ -79,24 +79,10 @@ if (window.location.href.includes("home.html")){
     })
 }
 
-var commentBtns = document.querySelectorAll(".commentbtn");
-var comments = document.querySelectorAll(".comments");
-var posts = document.querySelectorAll(".post");
-var commentsdisplayed = false;
+var commentBtn = document.getElementById("comment");
+var comments = document.querySelector(".comments");
+console.log(commentBtn);
 
-for (let x = 0; x < commentBtns.length; x++){
-    commentBtns[x].addEventListener('click', event => {
-        if (!commentsdisplayed){
-            comments[x].style.display = "flex";  
-            posts[x].style.borderBottomRightRadius = "0";            
-            posts[x].style.borderBottomLeftRadius = "0";  
-            commentsdisplayed = true;
-        }          
-        else{
-            comments[x].style.display = "none";  
-            posts[x].style.borderBottomRightRadius = "15px";            
-            posts[x].style.borderBottomLeftRadius = "15px";  
-            commentsdisplayed = false;
-        }
-    });
-}
+commentBtn.addEventListener("click", function(){
+    comments.style.display = "flex"; 
+})

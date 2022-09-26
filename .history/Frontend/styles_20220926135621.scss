@@ -227,7 +227,7 @@ input{
     margin-top: 5%;
     width: 90vw;
     background-color: $light;
-    height: 8%;
+    height: 10vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -298,16 +298,11 @@ input{
 
         background-color: $light;
         width: 100%;
-        padding-bottom: 5%;
+        padding: 5% 0;
         border-bottom-right-radius: 15px;
         border-bottom-left-radius: 15px;
         flex-direction: column;
         justify-content: center;
-
-        .commentInput{
-            width: 90%;
-            margin: 5%;
-        }
 
         ul{
             list-style:none;

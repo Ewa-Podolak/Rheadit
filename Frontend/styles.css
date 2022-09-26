@@ -174,6 +174,19 @@ input {
   border: #373F47 1px solid;
 }
 
+.votes {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-right: #373F47 1px solid;
+}
+.votes h2 {
+  font-size: 10px;
+  padding: 5% 0;
+}
+
 .profile {
   display: flex;
   flex-direction: row;
@@ -192,7 +205,7 @@ input {
   margin-top: 5%;
   width: 90vw;
   background-color: #F6F6F2;
-  height: 10vh;
+  height: 8%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -208,6 +221,10 @@ input {
 .createnewPost input {
   width: 70%;
   height: 60%;
+}
+
+.postAndComments {
+  width: 100%;
 }
 
 .postsContainer {
@@ -226,19 +243,6 @@ input {
   background-color: #F6F6F2;
   border-radius: 15px;
 }
-.postsContainer .post .votes {
-  width: 20%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  border-right: #373F47 1px solid;
-}
-.postsContainer .post .votes h2 {
-  font-size: 10px;
-  padding: 5% 0;
-}
 .postsContainer .post .thePost {
   width: 80%;
   height: 100%;
@@ -248,7 +252,7 @@ input {
   justify-content: center;
   align-items: flex-start;
 }
-.postsContainer .post .thePost #comment {
+.postsContainer .post .thePost .commentbtn {
   font-size: 15px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -261,4 +265,38 @@ input {
      object-fit: cover;
   width: 100%;
   border-radius: 15px;
+}
+.postsContainer .comments {
+  display: none;
+  background-color: #F6F6F2;
+  width: 100%;
+  padding-bottom: 5%;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  flex-direction: column;
+  justify-content: center;
+}
+.postsContainer .comments .commentInput {
+  width: 90%;
+  margin: 5%;
+}
+.postsContainer .comments ul {
+  list-style: none;
+}
+.postsContainer .comments ul li {
+  display: flex;
+  flex-direction: row;
+}
+.postsContainer .comments ul li .comment {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.postsContainer .comments ul li .comment .commentText {
+  font-size: 15px;
+  padding-left: 5%;
+  width: 100%;
+}
+.postsContainer .comments ul li .profile {
+  justify-content: flex-start;
 }/*# sourceMappingURL=styles.css.map */
