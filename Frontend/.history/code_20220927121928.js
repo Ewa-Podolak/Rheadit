@@ -30,6 +30,7 @@ if (window.location.href.includes("index.html")){
                     var username = data.username;
                     window.localStorage.setItem("userid", userid);
                     window.localStorage.setItem("username", username);
+
                     window.location.href = "home.html";
                 }
                 else{
@@ -40,7 +41,7 @@ if (window.location.href.includes("index.html")){
         }
     })
 
-    // register check ////// needs updating on ewas side
+    // register check
 
     var registerContainer = document.querySelector(".registerContainer");
     var registerBtn = document.getElementById("registerBtn");
@@ -74,7 +75,6 @@ if (window.location.href.includes("index.html")){
             })
             .then((response) => response.json())
             .then((data) => {
-
                 registererrortext.style.display = "none";
                 console.log(data);
                 if (data.usercreated == true){

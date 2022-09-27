@@ -1,7 +1,5 @@
 // login
 
-// login check
-
 if (window.location.href.includes("index.html")){
 
     var loginBtn = document.getElementById("loginBtn");
@@ -21,15 +19,8 @@ if (window.location.href.includes("index.html")){
             .then(response => response.json())
             .then(data => { 
 
-                console.log(data);
-
-                if(data.userid != null){
+                if(data.loggedin == true){
                     errortext.style.display = "none";
-
-                    var userid = data.userid;
-                    var username = data.username;
-                    window.localStorage.setItem("userid", userid);
-                    window.localStorage.setItem("username", username);
                     window.location.href = "home.html";
                 }
                 else{
@@ -39,8 +30,6 @@ if (window.location.href.includes("index.html")){
             });
         }
     })
-
-    // register check ////// needs updating on ewas side
 
     var registerContainer = document.querySelector(".registerContainer");
     var registerBtn = document.getElementById("registerBtn");
@@ -74,7 +63,6 @@ if (window.location.href.includes("index.html")){
             })
             .then((response) => response.json())
             .then((data) => {
-
                 registererrortext.style.display = "none";
                 console.log(data);
                 if (data.usercreated == true){
@@ -88,8 +76,6 @@ if (window.location.href.includes("index.html")){
             });
         }
     })
-
-    // forgot password
 
     var forgotPassword = document.getElementById("forgotPassword");
 

@@ -40,7 +40,7 @@ if (window.location.href.includes("index.html")){
         }
     })
 
-    // register check ////// needs updating on ewas side
+    // register check
 
     var registerContainer = document.querySelector(".registerContainer");
     var registerBtn = document.getElementById("registerBtn");
@@ -75,16 +75,18 @@ if (window.location.href.includes("index.html")){
             .then((response) => response.json())
             .then((data) => {
 
-                registererrortext.style.display = "none";
                 console.log(data);
-                if (data.usercreated == true){
-                    registererrortext.style.display = "none";
-                    window.location.href = "home.html";
-                }
-                else{
-                    registererrortext.style.display = "block";
-                    registererrortext.innerHTML = "Username already exists";
-                }
+
+                // registererrortext.style.display = "none";
+                // console.log(data);
+                // if (data.usercreated == true){
+                //     registererrortext.style.display = "none";
+                //     window.location.href = "home.html";
+                // }
+                // else{
+                //     registererrortext.style.display = "block";
+                //     registererrortext.innerHTML = "Username already exists";
+                // }
             });
         }
     })

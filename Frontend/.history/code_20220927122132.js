@@ -40,7 +40,7 @@ if (window.location.href.includes("index.html")){
         }
     })
 
-    // register check ////// needs updating on ewas side
+    // register check
 
     var registerContainer = document.querySelector(".registerContainer");
     var registerBtn = document.getElementById("registerBtn");
