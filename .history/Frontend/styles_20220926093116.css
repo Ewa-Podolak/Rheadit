@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+#loginpage {
+  justify-content: center;
+}
+
+body {
+  background-color: #A7C4B5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loginContainer, .registerContainer {
+  margin: 5%;
+  background-color: #F6F6F2;
+  width: 90%;
+  border-radius: 15px;
+  padding: 5%;
+  color: #373F47;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loginContainer .error, .registerContainer .error {
+  display: none;
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(255, 0, 0, 0.7);
+}
+.loginContainer #loginBtn, .loginContainer #makeAccount, .registerContainer #loginBtn, .registerContainer #makeAccount {
+  margin-top: 5%;
+}
+.loginContainer h1, .registerContainer h1 {
+  padding: 2%;
+}
+.loginContainer form, .registerContainer form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loginContainer form .inputcontainer, .registerContainer form .inputcontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2%;
+}
+.loginContainer form .inputcontainer label, .registerContainer form .inputcontainer label {
+  padding-right: 2%;
+}
+.loginContainer form input:focus, .registerContainer form input:focus {
+  border: #373F47 1px solid;
+  outline: none;
+}
+.loginContainer form p, .registerContainer form p {
+  padding: 5%;
+}
+.loginContainer form input, .loginContainer form button, .registerContainer form input, .registerContainer form button {
+  background-color: #FAB3A9;
+  border-radius: 15px;
+}
+.loginContainer form input, .registerContainer form input {
+  padding: 3%;
+  border: transparent 1px solid;
+  justify-content: end;
+}
+.loginContainer form button, .registerContainer form button {
+  padding: 3%;
+  margin: 2%;
+  width: 50%;
+  border: none;
+}
+
+.registerContainer {
+  display: none;
+}
+
+.navbar {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 10vh;
+}
+.navbar ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+.navbar #logo {
+  width: 40vw;
+}/*# sourceMappingURL=styles_20220926093116.css.map */
