@@ -44,16 +44,25 @@ class userController extends Controller
 
     public function DeleteUser($userid)
     {
+  
+    }
+
+    public function UpdatePicture($userid, $newpicture)
+    {
         $user = new user;
-        $user->DeleteUser($userid);
-        return ['status' => true];
+        return $user->UpdatePicture($userid, $newpicture);
+    }
+
+    public function UpdateBio($userid, $bio)
+    {
+        $user = new user;
+        return $user->UpdateBio($userid, $bio);
     }
 
     public function GetProfile($userid)
     {
         $user = new user;
-        $userprofile = $user->GetProfile($userid);
-        return $userprofile;
+        return $user->GetProfile($userid);
     }
 
     public function ReturnInformation($dbinfo)

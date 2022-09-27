@@ -12,12 +12,5 @@ class comment extends Model
     protected $table = 'comments';
     public $timestamps = false;
 
-    public function DeleteUser($userid)
-    {
-        $this::
-            join('posts', 'comments.postid', '=', 'posts.postid')
-                ->where('comments.userid', $userid)
-                    ->orwhere('posts.userid', $userid)
-                        ->delete();
-    }
+   
 }

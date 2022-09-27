@@ -14,6 +14,8 @@ return new class extends Migration
             $table->string('username', 12);
             $table->string('password', 72);
             $table->string('email');
+            $table->string('profilepic')->nullable()->default(Null);
+            $table->string('bio')->nullable()->default(Null);
         });
     }
 
