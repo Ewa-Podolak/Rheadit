@@ -8,18 +8,17 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('interactions', function (Blueprint $table)
+        Schema::create('community', function (Blueprint $table)
         {
             $table->increments('id');
             $table->integer('userid');
-            $table->integer('commentid')->nullable();
-            $table->integer('postid')->nullable();
-            $table->boolean('liked'); //0 = downvote, 1 = upvote
+            $table->string('community', 30);
+            $table->string('authority', 6);
         });
     }
 
     public function down()
     {
-        Schema::drop('interactions');
+        Schema::drop('community');
     }
 };

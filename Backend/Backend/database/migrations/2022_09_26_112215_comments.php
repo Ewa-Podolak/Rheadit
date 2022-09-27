@@ -14,7 +14,6 @@ return new class extends Migration
             $table->integer('userid');
             $table->string('title', 30);
             $table->string('body', 150)->nullable()->default(NULL);
-            $table->string('Community', 30)->nullable()->default(NULL);
             $table->timestamp('created_at')->useCurrent();
             $table->boolean('favourited')->nullable()->default(false);
         });

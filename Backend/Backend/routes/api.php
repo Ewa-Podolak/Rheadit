@@ -13,17 +13,17 @@ Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLo
 
 Route::post('/users/register/{username}/{pasword}/{email}', [userController::class, 'RegisterUser']); //Creates new user if user with same username doesn't exist yet //Working
 
-Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password
+Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
 
-Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password
+Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password //welp
 
 Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //Working
 
-Route::get('/users/{userid}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts, comments
+Route::get('/users/{userid}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts, comments //I am crying
 
 
 //Posts Routes
-Route::get('/posts/homepage/{pagenumber}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage
+Route::get('/posts/homepage/{pagenumber}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
 
 Route::get('/posts/userposts/newsest/{userid}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
 
