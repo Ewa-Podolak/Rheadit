@@ -408,7 +408,6 @@ input{
     flex-direction: row;
     width: 90%;
     justify-content: space-between;
-    align-items: center;
     margin-top: 5%;
     
     .members, button{
@@ -418,15 +417,8 @@ input{
         width: 45%;
     }
 
-    .members{
-        display: flex;
-        align-items: center;
-        height: 80%;
-    }
-
     button{
         background-color: $pink;
-        margin: 0;
     }
 }
 

@@ -421,12 +421,11 @@ input{
     .members{
         display: flex;
         align-items: center;
-        height: 80%;
+        height: 40px;
     }
 
     button{
         background-color: $pink;
-        margin: 0;
     }
 }
 

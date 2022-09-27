@@ -59,7 +59,7 @@ if (window.location.href.includes("index.html")){
 // home 
 
 
-if (!window.location.href.includes("index.html")){
+if (window.location.href.includes("home.html") || window.location.href.includes("profile.html")){
 
     var goToProfile = document.getElementById("goProfile");
     console.log(goToProfile);
@@ -138,9 +138,7 @@ if (window.location.href.includes("group.html")){
     console.log(joinGroup);
 
     joinGroup.addEventListener("click", function(){
-        console.log("press");
-        joinGroup.innerHTML = "Requested";
-        joinGroup.style.fontWeight = "700"
+        joinGroup.style.innerHTML = "Requested";
     })
 
 }

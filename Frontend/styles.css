@@ -358,7 +358,32 @@ input {
   padding: 5%;
   width: 45%;
 }
-.follow .followers span, .follow .following span {
+
+.membersAndJoin {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5%;
+}
+.membersAndJoin .members, .membersAndJoin button {
+  background-color: #F6F6F2;
+  border-radius: 15px;
+  padding: 5%;
+  width: 45%;
+}
+.membersAndJoin .members {
+  display: flex;
+  align-items: center;
+  height: 80%;
+}
+.membersAndJoin button {
+  background-color: #FAB3A9;
+  margin: 0;
+}
+
+span {
   background-color: #FAB3A9;
   padding: 5%;
   border-radius: 15px;
