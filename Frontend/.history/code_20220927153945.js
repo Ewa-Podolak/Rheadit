@@ -362,37 +362,6 @@ if (!window.location.href.includes("index.html")){
             interactions.appendChild(commentbtnEl);
 
 
-            var userid = window.localStorage.getItem("userid");
-            arrowup.addEventListener("click", function(){
-
-                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                        console.log(data);
-                });
-            });
-
-            arrowdown.addEventListener("click", function(){
-
-                fetch(`http://localhost:8000/api/posts/downvote/${x+1}/${userid}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                        console.log(data);
-                });
-
-            });
-
-
             // comments
 
         }
