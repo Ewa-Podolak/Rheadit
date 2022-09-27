@@ -13,14 +13,17 @@ Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLo
 
 Route::post('/users/register/{username}/{pasword}/{email}', [userController::class, 'RegisterUser']); //Creates new user if user with same username doesn't exist yet //Works
 
+Route::patch('/users/profilepicture/{userid}/{linktopicture}', [userController::class, 'UpdatePicture']); //Allows user to change their profile picture //works
+
+Route::patch('/users/bio/{userid}/{linktopicture}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
+
 Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
 
 Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password //welp
 
 Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //i am crying
 
-Route::get('/users/{userid}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts 
-
+Route::get('/users/{username}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts //more crying but in egyptian
 
 //Posts Routes
 Route::get('/posts/homepage/{pagenumber}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
@@ -40,8 +43,6 @@ Route::post('/posts/downvote/{postid}/{userid}', [postController::class, 'Downvo
 Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post //welp
 
 Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Deletes post //works
-
-Route::get('/posts/{postid}', [postController::class, 'ReturnPost']); //Returns post with upvotes, head, username, community //works
 
 
 //Comments Routes

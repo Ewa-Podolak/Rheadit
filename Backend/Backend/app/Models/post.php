@@ -40,22 +40,6 @@ class post extends Model
         return ['head'=>$post->title, 'upvotes'=> $votes, 'username'=>$username, 'community'=>$post->title];
     }
 
-    public function DeletePost($postid, $userid)
-    {
-        if(($this::where('postid', $postid)->first())->userid == $userid)
-        {   
-            $comments = comment::where('postid', $postid)->get();
-            foreach($comments as $x)
-                interaction::where('commentid', $x->commentid)->delete();
-            comment::where('postid', $postid)->delete();
-            interaction::where('postid', $postid)->delete();
-            $this::where('postid', $postid)->delete();
-            return ['deleted'=>true];
-        }
-        else
-            return ['deleted'=>false];
-    }
-
     public function PostInCommunity($community, $userid)
     {
         // $communitystatus = communitymember::where('userid', $userid)->where('community', $community)->first();
@@ -131,7 +115,7 @@ class post extends Model
         {
             switch ($communitystatus[0]->authority)
             {
-                case 'memeber':
+                case 'member':
                     $auth = 1;
                     break;
                 case 'mod':

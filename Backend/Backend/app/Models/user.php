@@ -23,25 +23,14 @@ class user extends Model
         $this::insert(['username' => $username, 'password' => $password, 'email' => $email]);
     }
 
-    public function DeleteUser($userid)
-    {
-        $this::where('userid', $userid)->delete();
-
-        $follower = new follower();
-        $follower->DeleteUser($userid);
-
-        $interaction = new interaction();
-        $interaction->DeleteUser($userid);
-    
-        $comment = new comment();
-        $comment->DeleteUser($userid);
-
-        $post = new post();
-        $post->DeleteUser($userid);
-    }
-
     public function GetProfile($userid)
     {
         
+    }
+
+    public function UpdatePicture($userid, $newpicture)
+    {
+        $this::where('userid', $userid)->update(['profilepic'=>$newpicture]);
+        return ['updated'=>true];
     }
 }

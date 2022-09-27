@@ -12,15 +12,6 @@ class interaction extends Model
     protected $table = 'interactions';
     public $timestamps = false;
 
-    public function DeleteUser($userid)
-    {
-        $this::
-            join('comments', 'interactions.commentid', '=', 'comments.commentid')
-                ->join('posts', 'interactions.postid', '=', 'posts.postid')
-                    ->join('posts', 'comments.postid', '=', 'posts.postid')
-                        ->where('interactions.userid', $userid)
-                            ->orwhere('comments.userid', $userid)
-                                ->orwhere('posts.userid', $userid)
-                                    ->delete();
-    }
+   
+    
 }

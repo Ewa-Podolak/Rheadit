@@ -11,9 +11,14 @@ class follower extends Model
 
     protected $table = 'followers';
     public $timestamps = false;
-
-    public function DeleteUser($userid)
+    
+    public function GetFollowersList($username)
     {
-        $this::where('user', $userid)->orwhere('follower', $userid)->delete();
+
+    }
+   
+    public function GetFollowedList($username)
+    {
+        
     }
 }
