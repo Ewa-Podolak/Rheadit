@@ -154,26 +154,6 @@ if (!window.location.href.includes("index.html")){
         })
     }
 
-
-
-
-
-
-
-
-    // group
-
-    if (window.location.href.includes("group.html")){
-
-        var joinGroup = document.getElementById("joinGroup");
-
-        joinGroup.addEventListener("click", function(){
-            joinGroup.innerHTML = "Requested";
-            joinGroup.style.fontWeight = "700"
-        })
-
-    }
-
     //comments
 
     var commentBtns = document.querySelectorAll(".commentbtn");
@@ -216,15 +196,14 @@ if (!window.location.href.includes("index.html")){
 
     var postsContainer = document.querySelector(".postsContainer");
 
-    //get posts
+    //get homepage posts
 
-    if(postsContainer.id == "homePage"){ // homepage posts
+    if(postsContainer.id == "homePage"){
         var pagenumber = 1;
         fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            populatePosts(data);
         });
     }
     else if (postsContainer.id == "profilePage"){
@@ -243,10 +222,17 @@ if (!window.location.href.includes("index.html")){
             // show popular group posts
         }
     }
+}
 
-    function populatePosts(data){
-        for (let x = 0; x < data.length; x++){
-            
-        }
-    }
+// group
+
+if (window.location.href.includes("group.html")){
+
+    var joinGroup = document.getElementById("joinGroup");
+
+    joinGroup.addEventListener("click", function(){
+        joinGroup.innerHTML = "Requested";
+        joinGroup.style.fontWeight = "700"
+    })
+
 }
