@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\post;
 use Illuminate\Http\Request;
 use App\Models\user;
 
@@ -12,10 +13,9 @@ class userController extends Controller
         $user = new user;
         $info = $user->GetUserInfo($username, $password);
         if($info)
-            return ['loggedin' => true];
-            //return $this->ReturnInformation($info);
+            return $this->ReturnInformation($info);
         else
-            return ['loggedin' => false];
+            return ['userid' => null, 'username' => null];
     }
 
     public function RegisterUser($username, $password, $email)
@@ -24,12 +24,11 @@ class userController extends Controller
         $info = $user->GetUserInfo($username, $password);
         if(!$info)
         {
-            $user->CreateNewUser($username, $password, $email);
-            return ['usercreated' => true];
-            //return $this->ReturnInformation($info);
+            $user->CreateNewUser($username, $password, $email);;
+            return $this->ReturnInformation($info);
         }
         else
-            return ['usercreated' => false];
+            return ['userid' => null, 'username' => null];
     }
 
     public function SendEmail($email)
@@ -58,6 +57,6 @@ class userController extends Controller
 
     public function ReturnInformation($dbinfo)
     {
-        
+        return ['userid'=> $dbinfo->userid, 'username' => $dbinfo->username];
     }
 }
