@@ -55,25 +55,35 @@ if (window.location.href.includes("index.html")){
         }
         else{
 
+            // fetch(`http://localhost:8000/api/users/register/{username}/{pasword}/{email}`, {
+            //     method: 'POST',
+            //     headers: {
+            //       'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(data),
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(data);
+            // });
+
+
             fetch(`http://localhost:8000/api/users/register/{username}/{pasword}/{email}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify(data)
             })
             .then((response) => response.json())
             .then((data) => {
-                registererrortext.style.display = "none";
                 console.log(data);
-                if (data.usercreated == true){
-                    registererrortext.style.display = "none";
-                    window.location.href = "home.html";
-                }
-                else{
-                    registererrortext.style.display = "block";
-                    registererrortext.innerHTML = "Username already exists";
-                }
             });
+
+
+            // registererrortext.style.display = "none";
+            // window.location.href = "home.html";
+            // console.log("send to ewa")
         }
     })
 

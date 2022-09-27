@@ -66,12 +66,10 @@ if (window.location.href.includes("index.html")){
                 registererrortext.style.display = "none";
                 console.log(data);
                 if (data.usercreated == true){
-                    registererrortext.style.display = "none";
                     window.location.href = "home.html";
                 }
                 else{
-                    registererrortext.style.display = "block";
-                    registererrortext.innerHTML = "Username already exists";
+                    alert("username already exists");
                 }
             });
         }
