@@ -9,15 +9,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 //User Routes
+Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLogin']); //Checks Login Credentials //Works
 
+Route::post('/users/register/{username}/{pasword}/{email}', [userController::class, 'RegisterUser']); //Creates new user if user with same username doesn't exist yet //Works
 
 Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
 
 Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password //welp
 
-Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //Working
+Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //i am crying
 
-Route::get('/users/{userid}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts, comments //I am crying
+Route::get('/users/{userid}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts 
 
 
 //Posts Routes
