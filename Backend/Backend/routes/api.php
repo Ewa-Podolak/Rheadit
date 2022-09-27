@@ -4,7 +4,7 @@ use App\Http\Controllers\followerController;
 use App\Http\Controllers\interactionController;
 use App\Http\Controllers\postController;
 use App\Http\Controllers\userController;
-//use use App\Http\Controllers\communityController;
+use App\Http\Controllers\communityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,15 +33,15 @@ Route::get('/posts/{community}/newest', [postController::class, 'GetCommunityNew
 
 Route::get('/posts/{community}/liked', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community
 
-Route::patch('/posts/upvote/{postid}/{userid}', [postController::class, 'UpvotePost']); //Allows user to like post
+Route::post('/posts/upvote/{postid}/{userid}', [postController::class, 'UpvotePost']); //Allows user to like post //works
 
-Route::patch('/posts/downvote/{postid}/{userid}', [postController::class, 'DownvotePost']); //Allows user to dislike post
+Route::post('/posts/downvote/{postid}/{userid}', [postController::class, 'DownvotePost']); //Allows user to dislike post //works
 
-Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post
+Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post //welp
 
-Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Deletes post
+Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Deletes post //works
 
-Route::get('/posts/{postid}', [postController::class, 'ReturnPost']); //Returns post with upvotes, first coment page and other information
+Route::get('/posts/{postid}', [postController::class, 'ReturnPost']); //Returns post with upvotes, head, username, community //works
 
 
 //Comments Routes
@@ -65,11 +65,8 @@ Route::get('/followers/list/followers/{userid}', [followerController::class, 'Ge
 Route::get('/followers/list/followed/{userid}', [followerController::class, 'GetFollowedList']); //Returns list of all usernames of followed
 
 //Community
-//Route::get('/community/{community name}/{userid}', [communityController::class, 'LevelOfAuthority']); //Returns level of authroity
-//[unauthrised, memeber, mod, owener] of a community
+Route::post('/community/{communityname}/join/{userid}', [communityController::class, 'JoinCommunity']); //Allows user to join community //works
 
-//Route::patch('/community/{community name}/join/{userid}', [communityController::class, 'JoinCommunity']); //Allows user to join community
+Route::delete('/community/{communityname}/leave/{userid}', [communityController::class, 'LeaveCommunity']); //Allows user to leave //works
 
-//Route::get('/community/{community name}/leave/{userid}', [communityController::class, 'LeaveCommunity']); //Allows user to leave
-
-//Route::get('/community/{community name}/transferownership/{userid}', [communityController::class, 'TransferOwnership']); //Allows for community ownership transfer
+Route::patch('/community/{communityname}/transferownership/{userid}/{newonwerid}', [communityController::class, 'TransferOwnership']); //Allows for community ownership transfer //works

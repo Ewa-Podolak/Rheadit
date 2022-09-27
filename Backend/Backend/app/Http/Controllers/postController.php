@@ -36,22 +36,26 @@ class postController extends Controller
 
     public function UpvotePost($postid, $userid)
     {
-
+        $post = new post;
+        return $post->UpvotePost($postid, $userid);
     }
 
     public function DownvotePost($postid, $userid)
     {
-
+        $post = new post;
+        return $post->DownvotePost($postid, $userid);
     }
 
     public function PostInCommunity($community, $userid)
     {
-
+        $post = new post;
+        return $post->PostInCommunity($community, $userid);
     }
 
     public function DeletePost($postid, $userid)
     {
-
+        $post = new post;
+        return $post->DeletePost($postid, $userid);
     }
 
     public function ReturnPost($postid)
