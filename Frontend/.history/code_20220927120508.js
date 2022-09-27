@@ -169,24 +169,21 @@ if (!window.location.href.includes("index.html")){
     //// posts 
 
     // recent or popular
-
-    if (!window.location.href.includes("home.html")){
-        var recent = true;
-        var mostRecent = document.getElementById("mostRecent");
-        var mostPopular = document.getElementById("mostPopular");
-        mostRecent.addEventListener("click", function(){
-            recent = true;
-        })
-        mostPopular.addEventListener("click", function(){
-            recent = false;
-        })
-    }
+    var recent = true;
+    var mostRecent = document.getElementById("mostRecent");
+    var mostPopular = document.getElementById("mostPopular");
+    mostRecent.addEventListener("click", function(){
+        recent = true;
+    })
+    mostPopular.addEventListener("click", function(){
+        recent = false;
+    })
 
     var postsContainer = document.querySelector(".postsContainer");
 
     if(postsContainer.id == "homePage"){ //get homepage posts
-        var pagenumber = 1;
-        fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}`)
+        var pagenumber = 0;
+        fetch(`http://localhost:8000/api/posts/homepage/{pagenumber}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);

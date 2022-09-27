@@ -170,7 +170,7 @@ if (!window.location.href.includes("index.html")){
 
     // recent or popular
 
-    if (!window.location.href.includes("home.html")){
+    if (!window.location.href.includes(home.html)){
         var recent = true;
         var mostRecent = document.getElementById("mostRecent");
         var mostPopular = document.getElementById("mostPopular");
@@ -185,12 +185,12 @@ if (!window.location.href.includes("index.html")){
     var postsContainer = document.querySelector(".postsContainer");
 
     if(postsContainer.id == "homePage"){ //get homepage posts
-        var pagenumber = 1;
-        fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        });
+        // var pagenumber = 0;
+        // fetch(`http://localhost:8000/api/posts/homepage/{pagenumber}`)
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log(data);
+        // });
     }
     else if (postsContainer.id == "profilePage"){
         if(recent){
