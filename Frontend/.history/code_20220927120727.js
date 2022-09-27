@@ -185,8 +185,8 @@ if (!window.location.href.includes("index.html")){
     var postsContainer = document.querySelector(".postsContainer");
 
     if(postsContainer.id == "homePage"){ //get homepage posts
-        var pagenumber = 1;
-        fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}`)
+        var pagenumber = 0;
+        fetch(`http://localhost:8000/api/posts/homepage/{pagenumber}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
