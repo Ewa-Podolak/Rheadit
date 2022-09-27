@@ -207,6 +207,10 @@ input {
   padding: 5% 0;
 }
 
+#body {
+  font-size: 10px;
+}
+
 .profile {
   display: flex;
   flex-direction: row;
@@ -289,10 +293,6 @@ input {
 .postsContainer .post .thePost h2 {
   font-weight: 200;
   padding-bottom: 2%;
-}
-.postsContainer .post .thePost h3, .postsContainer .post .thePost #body {
-  font-size: 15px;
-  font-weight: 200;
 }
 .postsContainer .comments {
   display: none;
@@ -417,4 +417,4 @@ span {
   background-color: #FAB3A9;
   padding: 2% 5%;
   border-radius: 15px;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20220927141411.css.map */

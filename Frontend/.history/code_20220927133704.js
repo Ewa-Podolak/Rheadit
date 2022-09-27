@@ -264,14 +264,15 @@ if (!window.location.href.includes("index.html")){
             post.appendChild(votes);
 
             const arrowup = document.createElement("i");
-            arrowup.classList.add("fa-solid", "fa-circle-arrow-up");
+            //arrowup.classList.add(""); //fa-solid fa-circle-arrow-up
 
             const numVotes = document.createElement("h2");
-            numVotes.innerHTML = data[x].votes
+            numVotes.innerHTML = "number" // change
+            //votes.id.add(numVotes) ///////////////////////////// not sure if this works
             votes.id = numVotes
 
             const arrowdown = document.createElement("i");
-            arrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
+            //arrowdown.classList.add(""); //fa-solid fa-circle-arrow-down
 
             votes.appendChild(arrowup);
             votes.appendChild(numVotes);
@@ -288,12 +289,11 @@ if (!window.location.href.includes("index.html")){
             thePost.appendChild(profile);
 
             const profilePic = document.createElement("img");
-            profilePic.id = "profilePic" 
-            profilePic.src = "./images/607426-200.png" // change
+            profilePic.id = "profilePic" /////////////////////////////////////
+            profilePic.src = "./images/607426-200.png" //////////////////////////////
 
             const usernameEl = document.createElement("h2");
-            usernameEl.id = "username";
-            usernameEl.innerHTML = data[x].username
+            usernameEl.id = "username"; /////////////
 
             profile.appendChild(profilePic);
             profile.appendChild(usernameEl);
@@ -303,19 +303,13 @@ if (!window.location.href.includes("index.html")){
 
             thePost.appendChild(postImgTxt);
 
-            const HeadtextEl = document.createElement("h2");
-            HeadtextEl.id = "text" 
-            HeadtextEl.innerHTML = data[x].head; 
-
-            const BodytextEl = document.createElement("h3");
-            BodytextEl.id = "body" 
-            BodytextEl.innerHTML = "body"; 
+            const textEl = document.createElement("h2");
+            textEl.id = "text" ////////////////////////////////////////////
 
             // const postImg = document.createElement("img"); ///// if has image
             // postImg.src = "" ///// if has image
 
-            postImgTxt.appendChild(HeadtextEl);
-            postImgTxt.appendChild(BodytextEl);
+            postImgTxt.appendChild(textEl);
             // postImgTxt.appendChild(postImg); ///// if has image
 
             const interactions = document.createElement("div");

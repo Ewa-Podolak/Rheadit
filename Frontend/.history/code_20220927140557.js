@@ -263,15 +263,19 @@ if (!window.location.href.includes("index.html")){
 
             post.appendChild(votes);
 
-            const arrowup = document.createElement("i");
-            arrowup.classList.add("fa-solid", "fa-circle-arrow-up");
+            const arrowup = document.createElement("img");
+            arrowup.src = "./images/rsz_arrow-up (1).png"
+            //arrowup.classList.add(""); //fa-solid fa-circle-arrow-up
 
             const numVotes = document.createElement("h2");
             numVotes.innerHTML = data[x].votes
             votes.id = numVotes
 
-            const arrowdown = document.createElement("i");
-            arrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
+            const arrowdown = document.createElement("img");
+            //arrowdown.classList.add("arrows");
+            //arrowdown.src = "./images/rsz_arrow-downsvg.png"
+            arrowdown.classList.add("fa-solid"); 
+            arrowdown.classList.add("fa-circle-arrow-down"); 
 
             votes.appendChild(arrowup);
             votes.appendChild(numVotes);
@@ -303,19 +307,14 @@ if (!window.location.href.includes("index.html")){
 
             thePost.appendChild(postImgTxt);
 
-            const HeadtextEl = document.createElement("h2");
-            HeadtextEl.id = "text" 
-            HeadtextEl.innerHTML = data[x].head; 
-
-            const BodytextEl = document.createElement("h3");
-            BodytextEl.id = "body" 
-            BodytextEl.innerHTML = "body"; 
+            const textEl = document.createElement("h2");
+            textEl.id = "text" 
+            textEl.innerHTML = data[x].head; 
 
             // const postImg = document.createElement("img"); ///// if has image
             // postImg.src = "" ///// if has image
 
-            postImgTxt.appendChild(HeadtextEl);
-            postImgTxt.appendChild(BodytextEl);
+            postImgTxt.appendChild(textEl);
             // postImgTxt.appendChild(postImg); ///// if has image
 
             const interactions = document.createElement("div");

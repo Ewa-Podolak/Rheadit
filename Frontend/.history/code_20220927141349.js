@@ -307,7 +307,7 @@ if (!window.location.href.includes("index.html")){
             HeadtextEl.id = "text" 
             HeadtextEl.innerHTML = data[x].head; 
 
-            const BodytextEl = document.createElement("h3");
+            const BodytextEl = document.createElement("h2");
             BodytextEl.id = "body" 
             BodytextEl.innerHTML = "body"; 
 

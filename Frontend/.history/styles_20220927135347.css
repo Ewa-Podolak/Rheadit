@@ -206,6 +206,10 @@ input {
   font-size: 10px;
   padding: 5% 0;
 }
+.votes img {
+  width: 20px;
+  height: 20px;
+}
 
 .profile {
   display: flex;
@@ -289,10 +293,6 @@ input {
 .postsContainer .post .thePost h2 {
   font-weight: 200;
   padding-bottom: 2%;
-}
-.postsContainer .post .thePost h3, .postsContainer .post .thePost #body {
-  font-size: 15px;
-  font-weight: 200;
 }
 .postsContainer .comments {
   display: none;
@@ -417,4 +417,4 @@ span {
   background-color: #FAB3A9;
   padding: 2% 5%;
   border-radius: 15px;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20220927135347.css.map */

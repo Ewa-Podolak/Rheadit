@@ -307,9 +307,9 @@ if (!window.location.href.includes("index.html")){
             HeadtextEl.id = "text" 
             HeadtextEl.innerHTML = data[x].head; 
 
-            const BodytextEl = document.createElement("h3");
-            BodytextEl.id = "body" 
-            BodytextEl.innerHTML = "body"; 
+            const BodytextEl = document.createElement("h2");
+            BodytextEl.id = "text" 
+            BodytextEl.innerHTML = data[x].head; 
 
             // const postImg = document.createElement("img"); ///// if has image
             // postImg.src = "" ///// if has image

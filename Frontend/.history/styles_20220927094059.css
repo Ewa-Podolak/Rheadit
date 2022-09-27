@@ -290,10 +290,6 @@ input {
   font-weight: 200;
   padding-bottom: 2%;
 }
-.postsContainer .post .thePost h3, .postsContainer .post .thePost #body {
-  font-size: 15px;
-  font-weight: 200;
-}
 .postsContainer .comments {
   display: none;
   background-color: #F6F6F2;
@@ -417,4 +413,4 @@ span {
   background-color: #FAB3A9;
   padding: 2% 5%;
   border-radius: 15px;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20220927094059.css.map */

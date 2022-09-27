@@ -227,6 +227,10 @@ input{
     }
 }
 
+#body{
+    font-size: 15px;
+}
+
 .profile{
     display: flex;
     flex-direction: row;
@@ -313,11 +317,6 @@ input{
             h2{
                 font-weight: 200;
                 padding-bottom: 2%;
-            }
-
-            h3, #body{
-                font-size: 15px;
-                font-weight: 200;
             }
         }
     }

@@ -263,7 +263,7 @@ if (!window.location.href.includes("index.html")){
 
             post.appendChild(votes);
 
-            const arrowup = document.createElement("i");
+            const arrowup = document.createElement("img");
             arrowup.classList.add("fa-solid", "fa-circle-arrow-up");
 
             const numVotes = document.createElement("h2");
@@ -303,19 +303,14 @@ if (!window.location.href.includes("index.html")){
 
             thePost.appendChild(postImgTxt);
 
-            const HeadtextEl = document.createElement("h2");
-            HeadtextEl.id = "text" 
-            HeadtextEl.innerHTML = data[x].head; 
-
-            const BodytextEl = document.createElement("h3");
-            BodytextEl.id = "body" 
-            BodytextEl.innerHTML = "body"; 
+            const textEl = document.createElement("h2");
+            textEl.id = "text" 
+            textEl.innerHTML = data[x].head; 
 
             // const postImg = document.createElement("img"); ///// if has image
             // postImg.src = "" ///// if has image
 
-            postImgTxt.appendChild(HeadtextEl);
-            postImgTxt.appendChild(BodytextEl);
+            postImgTxt.appendChild(textEl);
             // postImgTxt.appendChild(postImg); ///// if has image
 
             const interactions = document.createElement("div");

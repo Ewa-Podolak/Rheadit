@@ -225,6 +225,11 @@ input{
         font-size: 10px;
         padding: 5% 0;
     }
+
+    img{
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .profile{
@@ -313,11 +318,6 @@ input{
             h2{
                 font-weight: 200;
                 padding-bottom: 2%;
-            }
-
-            h3, #body{
-                font-size: 15px;
-                font-weight: 200;
             }
         }
     }
