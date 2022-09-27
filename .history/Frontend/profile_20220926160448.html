@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/4504875609.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">
+            <img id="logo" src="./images/Screenshot_2022-09-23_at_14.46.15-removebg-preview.png" alt="logo">
+        </div>
+        <div class="searchBar">
+            <input type="text" placeholder="Search Rheadit...">
+        </div>
+        <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+        
+        <div class="dropDown">
+            <div class="triangle"></div>
+            <ul>
+                <li id="goProfile">        
+                    <div class="profile">
+                        <img id="profilePic" src="./images/607426-200.png">
+                        <h2 id="username">username</h2>
+                    </div>
+                </li>
+                <li id="newpost"><i class="fa-solid fa-circle-plus"></i></li>
+                <li id="notification"><i class="fa-solid fa-bell"></i></li>
+                <li id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="profileBox">
+        <img id="profilePic" src="./images/607426-200.png">
+        <div id="username">username</div>
+    </div>
+
+    <div class="follow">
+        <div class="followers">Followers: <span>125</span></div>
+        <div class="following">Following: <span>293</span></div>
+    </div>
+
+    <div class="bio">
+        <i class="fa-solid fa-pen"></i>
+        <p>this is my bio this is my bio this is my bio this is my bio</p>
+    </div>
+
+
+    <div class="postsContainer">
+
+        <div class="postAndComments">
+            
+            <div class="post">
+                <div class="votes">
+                    <i class="fa-solid fa-circle-arrow-up"></i>
+                    <h2 id="numVotes">number</h2>
+                    <i class="fa-solid fa-circle-arrow-down"></i>
+                </div>
+                <div class="thePost">
+                    <div class="profile">
+                        <img id="profilePic" src="./images/607426-200.png">
+                        <h2 id="username">username</h2>
+                    </div>
+                    <div class="postImgTxt">
+                        <h2 id="text">this is some text</h2>
+                        <!-- if has image -->
+                        <img src="./images/photo-1453728013993-6d66e9c9123a.jpeg">
+                    </div>
+                    <div class="interactions">
+                        <button class="commentbtn">Tails</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comments">
+                <div class="commentBar">
+                    <input class="commentInput" type="text" placeholder="Comment something...">
+                    <i class="fa-solid fa-circle-chevron-right"></i>
+                </div>
+                <ul>
+
+                    <li>
+                        <div class="votes">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <h2 id="numVotes">number</h2>
+                            <i class="fa-solid fa-circle-arrow-down"></i>
+                        </div>
+
+                        <div class="comment">
+                            <div class="profile">
+                                <img id="profilePic" src="./images/607426-200.png">
+                                <h2 id="username">username</h2>
+                            </div>
+                            <p class="commentText">this is my comment</p>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="postAndComments">
+            
+            <div class="post">
+                <div class="votes">
+                    <i class="fa-solid fa-circle-arrow-up"></i>
+                    <h2 id="numVotes">number</h2>
+                    <i class="fa-solid fa-circle-arrow-down"></i>
+                </div>
+                <div class="thePost">
+                    <div class="profile">
+                        <img id="profilePic" src="./images/607426-200.png">
+                        <h2 id="username">username</h2>
+                    </div>
+                    <div class="postImgTxt">
+                        <h2 id="text">this is some text</h2>
+                        <!-- if has image -->
+                        <img src="">
+                    </div>
+                    <div class="interactions">
+                        <button class="commentbtn">Tails</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comments">
+                <div class="commentBar">
+                    <input class="commentInput" type="text" placeholder="Comment something...">
+                    <i class="fa-solid fa-circle-chevron-right"></i>
+                </div>
+                <ul>
+                    <li>
+                        <div class="votes">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <h2 id="numVotes">number</h2>
+                            <i class="fa-solid fa-circle-arrow-down"></i>
+                        </div>
+
+                        <div class="comment">
+                            <div class="profile">
+                                <img id="profilePic" src="./images/607426-200.png">
+                                <h2 id="username">username</h2>
+                            </div>
+                            <p class="commentText">this is my comment</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="votes">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <h2 id="numVotes">number</h2>
+                            <i class="fa-solid fa-circle-arrow-down"></i>
+                        </div>
+
+                        <div class="comment">
+                            <div class="profile">
+                                <img id="profilePic" src="./images/607426-200.png">
+                                <h2 id="username">username</h2>
+                            </div>
+                            <p class="commentText">this is my comment</p>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    
+    <script src="code.js"></script>
+</body>
+</html>

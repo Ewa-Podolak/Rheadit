@@ -1,0 +1,28 @@
+.loginContainer, .registerContainer {
+  width: 50%;
+}
+
+.follow, .membersAndJoin {
+  flex-direction: column;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5%;
+}
+.follow .followers, .follow .following, .membersAndJoin .followers, .membersAndJoin .following {
+  width: 70%;
+  margin: 5%;
+}
+.follow .members, .follow #joinGroup, .membersAndJoin .members, .membersAndJoin #joinGroup {
+  width: 70%;
+  margin: 5%;
+}
+.follow #joinGroup, .membersAndJoin #joinGroup {
+  padding: 10%;
+}
+
+.wholeProfile {
+  flex-direction: row;
+}/*# sourceMappingURL=desktop.css.map */
