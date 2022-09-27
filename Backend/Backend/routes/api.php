@@ -4,26 +4,26 @@ use App\Http\Controllers\followerController;
 use App\Http\Controllers\interactionController;
 use App\Http\Controllers\postController;
 use App\Http\Controllers\userController;
-use App\Models\interaction;
+//use use App\Http\Controllers\communityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 //User Routes
-Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLogin']); //Checks Login Credentials
+Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLogin']); //Checks Login Credentials //Working
 
-Route::post('/users/register/{username}/{pasword}/{email}', [userController::class, 'RegisterUser']); //Creates new user if user with same username doesn't exist yet
+Route::post('/users/register/{username}/{pasword}/{email}', [userController::class, 'RegisterUser']); //Creates new user if user with same username doesn't exist yet //Working
 
 Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password
 
 Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password
 
-Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account
+Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //Working
 
-Route::get('/users/{userid}', [userController::class, 'ShowProfile']); //Returns username, number of followers, followed, posts, comments
+Route::get('/users/{userid}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts, comments
 
 
 //Posts Routes
-Route::get('/posts/homepage', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage
+Route::get('/posts/homepage/{pagenumber}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage
 
 Route::get('/posts/userposts/newsest/{userid}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
 
@@ -33,11 +33,11 @@ Route::get('/posts/{community}/newest', [postController::class, 'GetCommunityNew
 
 Route::get('/posts/{community}/liked', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community
 
-Route::patch('/posts/upvote/{upvote}/{userid}', [postController::class, 'PostInCommunity']); //Allows user to like post
+Route::patch('/posts/upvote/{postid}/{userid}', [postController::class, 'UpvotePost']); //Allows user to like post
 
-Route::patch('/posts/downvote/{post}/{userid}', [postController::class, 'PostInCommunity']); //Allows user to dislike post
+Route::patch('/posts/downvote/{postid}/{userid}', [postController::class, 'DownvotePost']); //Allows user to dislike post
 
-Route::post('/posts/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post
+Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post
 
 Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Deletes post
 

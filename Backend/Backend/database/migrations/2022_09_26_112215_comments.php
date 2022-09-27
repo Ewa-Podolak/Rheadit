@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table)
+        Schema::create('comments', function (Blueprint $table)
         {
             $table->increments('postid');
             $table->integer('userid');
@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('body', 150)->nullable()->default(NULL);
             $table->string('Community', 30)->nullable()->default(NULL);
             $table->timestamp('created_at')->useCurrent();
+            $table->boolean('favourited')->nullable()->default(false);
         });
     }
 
     public function down()
     {
-        Schema::drop('posts');
+        Schema::drop('comments');
     }
 };

@@ -49,6 +49,13 @@ class userController extends Controller
         return ['status' => true];
     }
 
+    public function GetProfile($userid)
+    {
+        $user = new user;
+        $userprofile = $user->GetProfile($userid);
+        return $userprofile;
+    }
+
     public function ReturnInformation($dbinfo)
     {
         

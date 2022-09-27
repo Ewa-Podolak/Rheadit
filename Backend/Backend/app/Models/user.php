@@ -26,5 +26,17 @@ class user extends Model
     public function DeleteUser($userid)
     {
         $this::where('userid', $userid)->delete();
+
+        $follower = new follower();
+        $follower->DeleteUser($userid);
+
+        $interaction = new interaction();
+        $interaction->DeleteUser($userid);
+    
+        $comment = new comment();
+        $comment->DeleteUser($userid);
+
+        $post = new post();
+        $post->DeleteUser($userid);
     }
 }
