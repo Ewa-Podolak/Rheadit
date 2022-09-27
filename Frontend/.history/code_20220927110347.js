@@ -55,7 +55,7 @@ if (window.location.href.includes("index.html")){
         }
         else{
 
-            fetch(`http://localhost:8000/api/users/register/${registerusername}/${registerpassword}/${registeremail}`, {
+            fetch(`http://localhost:8000/api/users/register/${registerusername}/${registerpasword}/${registeremail}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
