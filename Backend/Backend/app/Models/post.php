@@ -70,7 +70,7 @@ class post extends Model
         }
         else if($interaction[0]->liked == 0) //DownVoted by user
         {
-            interaction::where('postid', $postid)->where('userid', $userid)->update(['upvote'=>1]);
+            interaction::where('postid', $postid)->where('userid', $userid)->update(['liked'=>1]);
             return ['upvoted'=>true];
         }
         else if($interaction[0]->liked == 1) //UpVoted by user
