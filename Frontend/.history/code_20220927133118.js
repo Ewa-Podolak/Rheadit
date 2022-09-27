@@ -264,14 +264,14 @@ if (!window.location.href.includes("index.html")){
             post.appendChild(votes);
 
             const arrowup = document.createElement("i");
-            //arrowup.classList.add(""); //fa-solid fa-circle-arrow-up
+            arrowup.classList.add("fa-solid fa-circle-arrow-up");
 
             const numVotes = document.createElement("h2");
             numVotes.innerHTML = "number" // change
             votes.id.add(numVotes) ///////////////////////////// not sure if this works
 
             const arrowdown = document.createElement("i");
-            //arrowdown.classList.add(""); //fa-solid fa-circle-arrow-down
+            arrowdown.classList.add("fa-solid fa-circle-arrow-down");
 
             votes.appendChild(arrowup);
             votes.appendChild(numVotes);

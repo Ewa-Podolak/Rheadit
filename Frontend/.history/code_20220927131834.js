@@ -264,14 +264,13 @@ if (!window.location.href.includes("index.html")){
             post.appendChild(votes);
 
             const arrowup = document.createElement("i");
-            //arrowup.classList.add(""); //fa-solid fa-circle-arrow-up
+            arrowup.classList.add("fa-solid fa-circle-arrow-up");
 
             const numVotes = document.createElement("h2");
-            numVotes.innerHTML = "number" // change
             votes.id.add(numVotes) ///////////////////////////// not sure if this works
 
             const arrowdown = document.createElement("i");
-            //arrowdown.classList.add(""); //fa-solid fa-circle-arrow-down
+            arrowdown.classList.add("fa-solid fa-circle-arrow-down");
 
             votes.appendChild(arrowup);
             votes.appendChild(numVotes);
@@ -296,34 +295,6 @@ if (!window.location.href.includes("index.html")){
 
             profile.appendChild(profilePic);
             profile.appendChild(usernameEl);
-
-            const postImgTxt = document.createElement("div");
-            postImgTxt.classList.add("postImgTxt");
-
-            thePost.appendChild(postImgTxt);
-
-            const textEl = document.createElement("h2");
-            textEl.id = "text" ////////////////////////////////////////////
-
-            // const postImg = document.createElement("img"); ///// if has image
-            // postImg.src = "" ///// if has image
-
-            postImgTxt.appendChild(textEl);
-            // postImgTxt.appendChild(postImg); ///// if has image
-
-            const interactions = document.createElement("div");
-            interactions.classList.add("interactions");
-
-            thePost.appendChild(interactions);
-
-            const commentbtnEl = document.createElement("button");
-            commentbtnEl.classList.add("commentbtn");
-            commentbtnEl.innerHTML = "Tails";
-
-            interactions.appendChild(commentbtnEl);
-
-
-            // comments
 
         }
     }
