@@ -56,6 +56,7 @@ class postController extends Controller
 
     public function ReturnPost($postid)
     {
-
+        $post = new post;
+        return $post->ReturnPost($postid);
     }
 }

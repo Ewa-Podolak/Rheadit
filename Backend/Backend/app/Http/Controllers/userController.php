@@ -24,7 +24,8 @@ class userController extends Controller
         $info = $user->GetUserInfo($username, $password);
         if(!$info)
         {
-            $user->CreateNewUser($username, $password, $email);;
+            $user->CreateNewUser($username, $password, $email);
+            $info = $user->GetUserInfo($username, $password);
             return $this->ReturnInformation($info);
         }
         else

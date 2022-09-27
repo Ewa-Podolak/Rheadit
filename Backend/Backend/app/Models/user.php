@@ -39,4 +39,9 @@ class user extends Model
         $post = new post();
         $post->DeleteUser($userid);
     }
+
+    public function GetProfile($userid)
+    {
+        
+    }
 }
