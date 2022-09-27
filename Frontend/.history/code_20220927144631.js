@@ -106,7 +106,6 @@ if (window.location.href.includes("index.html")){
 if (!window.location.href.includes("index.html")){
 
     var pagenumber = 1;
-    var postsContainer = document.querySelector(".postsContainer");
 
     // get posts for page
 
@@ -227,34 +226,22 @@ if (!window.location.href.includes("index.html")){
     })
 
     minusPageNum.addEventListener("click", function(){
-        if (pagenumber > 1){
-            pagenumber--;
-            pageNum.innerHTML = pagenumber
-            getPosts(pagenumber);
-        }
+        pagenumber--;
+        pageNum.innerHTML = pagenumber
+        getPosts(pagenumber);
     })
 
     //get posts
 
     function getPosts(pagenumber){
+        var postsContainer = document.querySelector(".postsContainer");
         if(postsContainer.id == "homePage"){ // homepage posts
 
             fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-
-                if(data.length == 0){
-                    console.log("empty")
-                    populatePosts(data);
-                    postsContainer.innerHTML = "no more posts to show";
-                    
-                    plusPageNum.disabled = true;
-                }
-                else{
-                    plusPageNum.disabled = false;
-                    populatePosts(data);
-                }
+                populatePosts(data);
             });
         }
         else if (postsContainer.id == "profilePage"){
@@ -276,7 +263,6 @@ if (!window.location.href.includes("index.html")){
     }
 
     function populatePosts(data){
-        postsContainer.innerHTML = "";
         for (let x = 0; x < data.length; x++){
             const postAndComments = document.createElement("div");
             postAndComments.classList.add("postAndComments");

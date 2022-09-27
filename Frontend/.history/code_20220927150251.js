@@ -221,13 +221,15 @@ if (!window.location.href.includes("index.html")){
     var pageNum = document.getElementById("pageNum");
 
     plusPageNum.addEventListener("click", function(){
+        console.log(pagenumber);
         pagenumber++;
         pageNum.innerHTML = pagenumber
         getPosts(pagenumber);
     })
 
     minusPageNum.addEventListener("click", function(){
-        if (pagenumber > 1){
+        if (pagenumber > 0){
+            console.log(pagenumber);
             pagenumber--;
             pageNum.innerHTML = pagenumber
             getPosts(pagenumber);
@@ -247,8 +249,7 @@ if (!window.location.href.includes("index.html")){
                 if(data.length == 0){
                     console.log("empty")
                     populatePosts(data);
-                    postsContainer.innerHTML = "no more posts to show";
-                    
+                    postsContainer.innerHTML = "no more posts";
                     plusPageNum.disabled = true;
                 }
                 else{

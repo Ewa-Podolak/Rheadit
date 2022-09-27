@@ -247,6 +247,7 @@ input {
 }
 
 .postsContainer {
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -290,7 +291,7 @@ input {
   font-weight: 200;
   padding-bottom: 2%;
 }
-.postsContainer .post .thePost h3, .postsContainer .post .thePost #body {
+.postsContainer .post .thePost h3 {
   font-size: 15px;
   font-weight: 200;
 }
@@ -417,4 +418,24 @@ span {
   background-color: #FAB3A9;
   padding: 2% 5%;
   border-radius: 15px;
+}
+
+.noBtn {
+  background-color: transparent;
+}
+
+.pageNumContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: #F6F6F2;
+  padding: 1% 3%;
+  border-radius: 15px;
+  justify-content: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-items: center;
+}
+.pageNumContainer #pageNum {
+  padding: 10%;
 }/*# sourceMappingURL=styles.css.map */

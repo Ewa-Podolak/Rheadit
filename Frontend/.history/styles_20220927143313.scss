@@ -272,7 +272,6 @@ input{
 }
 
 .postsContainer{
-    margin-top: 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -467,10 +466,6 @@ span{
     border-radius: 15px;
 }
 
-.noBtn{
-    background-color: transparent;
-}
-
 .pageNumContainer{
     display: flex;
     flex-direction: row;
@@ -482,6 +477,7 @@ span{
     align-items: center;
 
     #pageNum{
+        width: 50%;
         padding: 10%;
     }
 }

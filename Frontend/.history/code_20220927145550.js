@@ -227,11 +227,9 @@ if (!window.location.href.includes("index.html")){
     })
 
     minusPageNum.addEventListener("click", function(){
-        if (pagenumber > 1){
-            pagenumber--;
-            pageNum.innerHTML = pagenumber
-            getPosts(pagenumber);
-        }
+        pagenumber--;
+        pageNum.innerHTML = pagenumber
+        getPosts(pagenumber);
     })
 
     //get posts
@@ -247,12 +245,10 @@ if (!window.location.href.includes("index.html")){
                 if(data.length == 0){
                     console.log("empty")
                     populatePosts(data);
-                    postsContainer.innerHTML = "no more posts to show";
-                    
-                    plusPageNum.disabled = true;
+                    postsContainer.innerHTML = "no more posts";
+                    plusPageNum.setAttribute(disabled, disabled);
                 }
                 else{
-                    plusPageNum.disabled = false;
                     populatePosts(data);
                 }
             });

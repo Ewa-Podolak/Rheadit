@@ -105,13 +105,6 @@ if (window.location.href.includes("index.html")){
 
 if (!window.location.href.includes("index.html")){
 
-    var pagenumber = 1;
-    var postsContainer = document.querySelector(".postsContainer");
-
-    // get posts for page
-
-    getPosts(pagenumber);
-
     // go to home page
 
     var logo = document.getElementById("logo");
@@ -160,6 +153,13 @@ if (!window.location.href.includes("index.html")){
             window.location.href = "profile.html";
         })
     }
+
+
+
+
+
+
+
 
     // group
 
@@ -214,8 +214,11 @@ if (!window.location.href.includes("index.html")){
         })
     }
 
+    var postsContainer = document.querySelector(".postsContainer");
+
     // pagenum
 
+    var pagenumber = 1;
     var plusPageNum = document.getElementById("plusPageNum");
     var minusPageNum = document.getElementById("minusPageNum");
     var pageNum = document.getElementById("pageNum");
@@ -223,38 +226,25 @@ if (!window.location.href.includes("index.html")){
     plusPageNum.addEventListener("click", function(){
         pagenumber++;
         pageNum.innerHTML = pagenumber
-        getPosts(pagenumber);
+        getPosts();
     })
 
     minusPageNum.addEventListener("click", function(){
-        if (pagenumber > 1){
-            pagenumber--;
-            pageNum.innerHTML = pagenumber
-            getPosts(pagenumber);
-        }
+        pagenumber--;
+        pageNum.innerHTML = pagenumber
+        getPosts();
     })
 
     //get posts
 
-    function getPosts(pagenumber){
+    function getPosts(){
         if(postsContainer.id == "homePage"){ // homepage posts
 
             fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-
-                if(data.length == 0){
-                    console.log("empty")
-                    populatePosts(data);
-                    postsContainer.innerHTML = "no more posts to show";
-                    
-                    plusPageNum.disabled = true;
-                }
-                else{
-                    plusPageNum.disabled = false;
-                    populatePosts(data);
-                }
+                populatePosts(data);
             });
         }
         else if (postsContainer.id == "profilePage"){
@@ -276,7 +266,6 @@ if (!window.location.href.includes("index.html")){
     }
 
     function populatePosts(data){
-        postsContainer.innerHTML = "";
         for (let x = 0; x < data.length; x++){
             const postAndComments = document.createElement("div");
             postAndComments.classList.add("postAndComments");
