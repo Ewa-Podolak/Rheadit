@@ -3,32 +3,30 @@
 if (window.location.href.includes("index.html")){
 
     var loginBtn = document.getElementById("loginBtn");
+    var username = document.getElementById("username");
+    var password = document.getElementById("password");
     var errortext = document.querySelector("#loginerror");
 
+    var usernameval = username.value;
+    var passwordval = password.value;
+
     loginBtn.addEventListener("click", function(){
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
-
-        if (username == "" || password == "")
-        {
-            errortext.style.display = "block";
-            errortext.innerHTML = "Please enter a username and password";
-        }
-        else{
-            fetch(`http://localhost:8000/api/users/login/${username}/${password}`)
-            .then(response => response.json())
-            .then(data => { 
-
-                if(data.loggedin == true){
-                    errortext.style.display = "none";
-                    window.location.href = "home.html";
-                }
-                else{
-                    errortext.style.display = "block";
-                    errortext.innerHTML = "Username and password dont match";
-                }
-            });
-        }
+        fetch(`http://localhost:8000/api/users/login/${usernameval}/${passwordval}`)
+        .then(response => response.json())
+        .then(data => { 
+            if (usernameval == "" || passwordval == "")
+            {
+                errortext.style.display = "block";
+                errortext.innerHTML = "Please enter a username and password";
+            }
+            else{
+                errortext.style.display = "none";
+                // window.location.href = "home.html";
+                console.log(usernameval);
+                console.log(passwordval);
+                console.log(data);
+            }
+        });
     })
 
     var registerContainer = document.querySelector(".registerContainer");

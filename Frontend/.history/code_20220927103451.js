@@ -3,33 +3,32 @@
 if (window.location.href.includes("index.html")){
 
     var loginBtn = document.getElementById("loginBtn");
+    var username = document.getElementById("username");
+    var password = document.getElementById("password");
     var errortext = document.querySelector("#loginerror");
 
-    loginBtn.addEventListener("click", function(){
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+    var usernameval = username.value;
+    var passwordval = password.value;
 
-        if (username == "" || password == "")
-        {
-            errortext.style.display = "block";
-            errortext.innerHTML = "Please enter a username and password";
-        }
-        else{
-            fetch(`http://localhost:8000/api/users/login/${username}/${password}`)
-            .then(response => response.json())
-            .then(data => { 
-
-                if(data.loggedin == true){
-                    errortext.style.display = "none";
-                    window.location.href = "home.html";
-                }
-                else{
-                    errortext.style.display = "block";
-                    errortext.innerHTML = "Username and password dont match";
-                }
-            });
-        }
-    })
+    fetch(`http://localhost:8000/api/users/login/${username.value}/${password.value}`)
+    .then(response => response.json())
+    .then(data => {
+    
+        loginBtn.addEventListener("click", function(){
+            if (username.value == "" || password.value == "")
+            {
+                errortext.style.display = "block";
+                errortext.innerHTML = "Please enter a username and password";
+            }
+            else{
+                errortext.style.display = "none";
+                // window.location.href = "home.html";
+                console.log(username.value);
+                console.log(password.value);
+                console.log(data);
+            }
+        })
+    });
 
     var registerContainer = document.querySelector(".registerContainer");
     var registerBtn = document.getElementById("registerBtn");

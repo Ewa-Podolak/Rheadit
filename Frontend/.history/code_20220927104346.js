@@ -3,11 +3,16 @@
 if (window.location.href.includes("index.html")){
 
     var loginBtn = document.getElementById("loginBtn");
+    var username = document.getElementById("username");
+    var password = document.getElementById("password");
     var errortext = document.querySelector("#loginerror");
 
     loginBtn.addEventListener("click", function(){
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+        username = username.value;
+        password = password.value;
+
+        console.log(username);
+        console.log(password);
 
         if (username == "" || password == "")
         {
@@ -18,14 +23,16 @@ if (window.location.href.includes("index.html")){
             fetch(`http://localhost:8000/api/users/login/${username}/${password}`)
             .then(response => response.json())
             .then(data => { 
+                console.log(data);
+                console.log(data.loggedin);
+                console.log(data.loggedin == "true");
 
                 if(data.loggedin == true){
                     errortext.style.display = "none";
                     window.location.href = "home.html";
                 }
                 else{
-                    errortext.style.display = "block";
-                    errortext.innerHTML = "Username and password dont match";
+                    alert("not correct");
                 }
             });
         }

@@ -6,8 +6,13 @@ if (window.location.href.includes("index.html")){
     var errortext = document.querySelector("#loginerror");
 
     loginBtn.addEventListener("click", function(){
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        username = username.value;
+        password = password.value;
+
+        console.log(username);
+        console.log(password);
 
         if (username == "" || password == "")
         {
