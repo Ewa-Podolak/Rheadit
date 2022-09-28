@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table)
         {
-            $table->increments('postid');
+            $table->increments(('commentid'));
+            $table->integer('postid');
             $table->integer('userid');
-            $table->string('title', 30);
-            $table->string('body', 150)->nullable()->default(NULL);
+            $table->string('comment', 100);
             $table->timestamp('created_at')->useCurrent();
             $table->boolean('favourited')->nullable()->default(false);
         });

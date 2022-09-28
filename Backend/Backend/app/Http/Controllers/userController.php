@@ -59,10 +59,10 @@ class userController extends Controller
         return $user->UpdateBio($userid, $bio);
     }
 
-    public function GetProfile($userid)
+    public function GetProfile($username)
     {
         $user = new user;
-        return $user->GetProfile($userid);
+        return $user->GetProfile($username);
     }
 
     public function ReturnInformation($dbinfo)
