@@ -307,17 +307,13 @@ if (!window.location.href.includes("index.html")){
             numVotes.innerHTML = data[x].votes
             votes.id = numVotes
 
-            const arrowdownBtn = document.createElement("button");
-            arrowdownBtn.classList.add("arrowdownBtn");
-
             const arrowdown = document.createElement("i");
             arrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
 
             arrowupBtn.appendChild(arrowup);
             votes.appendChild(arrowupBtn);
             votes.appendChild(numVotes);
-            arrowdownBtn.appendChild(arrowdown);
-            votes.appendChild(arrowdownBtn);
+            votes.appendChild(arrowdown);
 
             const thePost = document.createElement("div");
             thePost.classList.add("thePost");
@@ -371,13 +367,12 @@ if (!window.location.href.includes("index.html")){
 
             interactions.appendChild(commentbtnEl);
 
+
             var userid = window.localStorage.getItem("userid");
-
             arrowup.addEventListener("click", function(){
-
-                console.log("arrowup clicked");
-
-                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, { // is this asking if ive upvoted or is it upvoting?
+                
+                
+                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -387,16 +382,17 @@ if (!window.location.href.includes("index.html")){
                 .then((data) => {
                     console.log(data);
                     if (data.upvoted == true){
-                        arrowupBtn.style.backgroundColor = "red";
+                        if(upvoted == false){
+                            upvoted = true;
+                        }
+                        else{
+                            upvoted = false
+                        }
                     }
                 });
-
-                
             });
 
             arrowdown.addEventListener("click", function(){
-
-                console.log("arrowdown clicked");
 
                 fetch(`http://localhost:8000/api/posts/downvote/${x+1}/${userid}`, {
                     method: 'POST',
@@ -407,12 +403,24 @@ if (!window.location.href.includes("index.html")){
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-                    if (data.downvote == true){
-                        arrowdownBtn.style.backgroundColor = "red";
+                    if (data.downvoted == true){
+                        if(downvoted == false){
+                            downvoted = true;
+                        }
+                        else{
+                            downvoted = false
+                        }
                     }
                 });
 
             });
+
+            if (upvoted){
+                arrowupBtn.style.backgroundcolour = "red"
+            }
+            if (downvoted){
+                arrowdownBtn.style.backgroundcolour = "red"
+            }
 
 
             // comments

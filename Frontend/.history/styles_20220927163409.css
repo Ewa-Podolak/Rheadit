@@ -18,7 +18,7 @@
   justify-content: center;
 }
 
-.arrowupBtn, .arrowdownBtn {
+.arrowupBtn {
   background-color: #F6F6F2;
   padding: 1%;
   width: 18px;
@@ -444,4 +444,4 @@ span {
 }
 .pageNumContainer #pageNum {
   padding: 10%;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20220927163409.css.map */

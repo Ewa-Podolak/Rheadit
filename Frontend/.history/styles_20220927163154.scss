@@ -24,10 +24,8 @@ $light: #F6F6F2;
     justify-content: center;
 }
 
-.arrowupBtn, .arrowdownBtn{
-    background-color: $light;
-    padding: 1%;
-    width: 18px;
+.arrowupBtn{
+    background-color: red;
 }
 
 body{

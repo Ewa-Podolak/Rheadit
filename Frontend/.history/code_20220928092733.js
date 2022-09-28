@@ -308,7 +308,7 @@ if (!window.location.href.includes("index.html")){
             votes.id = numVotes
 
             const arrowdownBtn = document.createElement("button");
-            arrowdownBtn.classList.add("arrowdownBtn");
+            arrowupBtn.classList.add("arrowdownBtn");
 
             const arrowdown = document.createElement("i");
             arrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
@@ -317,7 +317,7 @@ if (!window.location.href.includes("index.html")){
             votes.appendChild(arrowupBtn);
             votes.appendChild(numVotes);
             arrowdownBtn.appendChild(arrowdown);
-            votes.appendChild(arrowdownBtn);
+            votes.appendChild(arrowdown);
 
             const thePost = document.createElement("div");
             thePost.classList.add("thePost");
@@ -377,7 +377,7 @@ if (!window.location.href.includes("index.html")){
 
                 console.log("arrowup clicked");
 
-                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, { // is this asking if ive upvoted or is it upvoting?
+                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

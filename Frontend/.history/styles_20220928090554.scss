@@ -30,6 +30,11 @@ $light: #F6F6F2;
     width: 18px;
 }
 
+.arrowdownBtn{
+    background-color: $light;
+    padding: 1%;
+}
+
 body{
     background-color: $green;
     display: flex;

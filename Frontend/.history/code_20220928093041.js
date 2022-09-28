@@ -377,7 +377,7 @@ if (!window.location.href.includes("index.html")){
 
                 console.log("arrowup clicked");
 
-                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, { // is this asking if ive upvoted or is it upvoting?
+                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
