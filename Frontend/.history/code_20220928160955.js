@@ -245,6 +245,7 @@ if (!window.location.href.includes("index.html")){
             })
 
             if (personal == "true"){
+                console.log("personal features")
                 var editBio = document.getElementById("editBio");
                 var editProfile = document.getElementById("editProfile");
                 var newBio = document.getElementById("newBio");
@@ -336,6 +337,7 @@ if (!window.location.href.includes("index.html")){
 
     function getPosts(pagenumber){
         if(postsContainer.id == "homePage"){
+            console.log("getposts");
 
             var userid = window.localStorage.getItem("userid");
 
@@ -345,6 +347,7 @@ if (!window.location.href.includes("index.html")){
                 console.log(data)
 
                 if(data.length == 0){
+                    console.log("empty")
                     populatePosts(data, pagenumber);
                     postsContainer.innerHTML = "no more posts to show";
                     
@@ -375,6 +378,8 @@ if (!window.location.href.includes("index.html")){
     }
 
     function populatePosts(data, pagenumber){
+
+        console.log("populateposts")
 
         postsContainer.innerHTML = "";
         for (let x = 0; x < data.length; x++){
@@ -481,6 +486,7 @@ if (!window.location.href.includes("index.html")){
             var userid = window.localStorage.getItem("userid");
 
             arrowupBtn.addEventListener("click", function(){
+                console.log("arrowup clicked");
 
                 fetch(`http://localhost:8000/api/interactions/upvotepost/${x+1}/${userid}`, { 
                     method: 'POST',
@@ -501,6 +507,7 @@ if (!window.location.href.includes("index.html")){
             })
 
             arrowdownBtn.addEventListener("click", function(){
+                console.log("arrowdown clicked");
 
                     fetch(`http://localhost:8000/api/interactions/downvotepost/${x+1}/${userid}`, {
                         method: 'POST',
@@ -589,8 +596,12 @@ if (!window.location.href.includes("index.html")){
             var profilePics = document.querySelectorAll(".postProfilePic");
             var usernames = document.querySelectorAll(".postUsername");
 
+            console.log("profilepics: " + profilePics.length);
+            console.log("usernames: " + usernames.length);
+
             for (let y = 0; y < profilePics.length; y++){
                 profilePics[y].addEventListener("click", function(){
+                    console.log(usernames[y].innerHTML);
                     if (usernames[y].innerHTML == window.localStorage.getItem("username"))
                     {
                         window.location.href = "profile.html";
