@@ -120,6 +120,7 @@ if (window.location.href.includes("index.html")){
 // all pages
 
 if (!window.location.href.includes("index.html")){
+
     var pagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
 
@@ -130,166 +131,160 @@ if (!window.location.href.includes("index.html")){
         var goToProfile = document.getElementById("goProfile");
         goToProfile.addEventListener("click", function(){
             window.location.href = "profile.html";
-            window.localStorage.setItem("personal", true);
+            personalProfile();
         })
+
+    // going to profile
+
+    var profilePics = document.querySelectorAll(".postProfilePic");
+    var usernames = document.querySelectorAll(".postUsername");
+
+    console.log("profilepics: " + profilePics.length);
+    console.log("usernames: " + username.length);
+
+    for (let y = 0; y < profilePics.length; y++){
+        profilePics[y].addEventListener("click", function(){
+            window.location.href = "profile.html";
+        })
+    }
+
+    function personalProfile(){
+        var editBio = document.getElementById("editBio");
+        var editProfile = document.getElementById("editProfile");
+
+        editBio.style.display = "block";
+        editProfile.style.display = "block";
+    }
 
     // pagenum
 
-        if (window.location.href.includes("home.html")){
-            var plusPageNum = document.getElementById("plusPageNum");
-            var minusPageNum = document.getElementById("minusPageNum");
-            var pageNum = document.getElementById("pageNum");
+    if (window.location.href.includes("home.html")){
+        var plusPageNum = document.getElementById("plusPageNum");
+        var minusPageNum = document.getElementById("minusPageNum");
+        var pageNum = document.getElementById("pageNum");
 
-            plusPageNum.addEventListener("click", function(){
-                pagenumber++;
+        plusPageNum.addEventListener("click", function(){
+            pagenumber++;
+            pageNum.innerHTML = pagenumber
+            getPosts(pagenumber);
+        })
+
+        minusPageNum.addEventListener("click", function(){
+            if (pagenumber > 1){
+                pagenumber--;
                 pageNum.innerHTML = pagenumber
                 getPosts(pagenumber);
-            })
-
-            minusPageNum.addEventListener("click", function(){
-                if (pagenumber > 1){
-                    pagenumber--;
-                    pageNum.innerHTML = pagenumber
-                    getPosts(pagenumber);
-                }
-            })
-        }
-
-    // personal profile
-
-        if(window.location.href.includes("profile")){
-            var personal = window.localStorage.getItem("personal");
-            if (personal == "true"){
-                console.log("personal features")
-                var editBio = document.getElementById("editBio");
-                var editProfile = document.getElementById("editProfile");
-                var bioText = document.getElementById("bioText");
-                var newBio = document.getElementById("newBio");
-                var newBioBtn = document.getElementById("newBioBtn");
-        
-                editBio.style.display = "block";
-                editProfile.style.display = "block";
-
-                editBio.addEventListener("click", function(){
-                    newBio.style.display = "block";
-                    newBioBtn.style.display = "block";
-                    newBioBtn.addEventListener("click", function(){
-                        bioText.innerHTML = newBio.value;
-                        ///////////// /users/bio/{userid}/{linktopicture} 
-
-                        fetch(`http://localhost:8000/api/users/bio/{userid}/${newBio.value}`, {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                                console.log(data);
-                        });
-                    })
-                })
-
-                editProfile.addEventListener("click", function(){
-                    
-                })
             }
-
-            
-        }
+        })
+    }
 
     // go to home page
 
-        var logo = document.getElementById("logo");
-        logo.addEventListener("click", function(){
-            window.location.href = "home.html";
-        })
+    var logo = document.getElementById("logo");
+    logo.addEventListener("click", function(){
+        window.location.href = "home.html";
+    })
 
     // loging out
 
-        var logoutBtn = document.getElementById("logout")
-        logoutBtn.addEventListener("click", function(){
-            window.location.href = "index.html"
-        })
+    var logoutBtn = document.getElementById("logout")
+    logoutBtn.addEventListener("click", function(){
+        window.location.href = "index.html"
+    })
 
     // open / close menu
 
-        var hamburger = document.querySelector(".hamburger");
-        var dropDown = document.querySelector(".dropDown");
-        var dropDownDisplay = false;
-        hamburger.addEventListener("click", function(){
-            if (dropDownDisplay == false)
-            {
-                dropDown.style.display = "flex";
-                dropDownDisplay = true;
-            }
-            else{
-                dropDown.style.display = "none";
-                dropDownDisplay = false;
-            }
+    var hamburger = document.querySelector(".hamburger");
+    var dropDown = document.querySelector(".dropDown");
+    var dropDownDisplay = false;
+    hamburger.addEventListener("click", function(){
+        if (dropDownDisplay == false)
+        {
+            dropDown.style.display = "flex";
+            dropDownDisplay = true;
+        }
+        else{
+            dropDown.style.display = "none";
+            dropDownDisplay = false;
+        }
+    })
+
+
+
+
+
+
+
+    // groups
+
+    if (window.location.href.includes("group.html")){
+
+        var joinGroup = document.getElementById("joinGroup");
+
+        joinGroup.addEventListener("click", function(){
+            joinGroup.innerHTML = "Requested";
+            joinGroup.style.fontWeight = "700"
         })
 
+    }
 
-    // groups // needs api
+    //comments
 
-        if (window.location.href.includes("group.html")){
+    var commentBtns = document.querySelectorAll(".commentbtn");
+    var comments = document.querySelectorAll(".comments");
+    var posts = document.querySelectorAll(".post");
+    var comsDispalyedArray = new Array(commentBtns.length).fill(false);
+    
+    for (let x = 0; x < commentBtns.length; x++){
+        commentBtns[x].addEventListener('click', event => {
+            if (comsDispalyedArray[x] == false){
+                comments[x].style.display = "flex";  
+                posts[x].style.borderBottomRightRadius = "0";            
+                posts[x].style.borderBottomLeftRadius = "0";  
+                comsDispalyedArray[x] = true;
+            }          
+            else{
+                comments[x].style.display = "none";  
+                posts[x].style.borderBottomRightRadius = "15px";            
+                posts[x].style.borderBottomLeftRadius = "15px";  
+                comsDispalyedArray[x] = false;
+            }
+        });
+    }
 
-            var joinGroup = document.getElementById("joinGroup");
-
-            joinGroup.addEventListener("click", function(){
-                joinGroup.innerHTML = "Requested";
-                joinGroup.style.fontWeight = "700"
-            })
-
-        }
-
-    // display comments on button click
-
-        var commentBtns = document.querySelectorAll(".commentbtn");
-        var comments = document.querySelectorAll(".comments");
-        var posts = document.querySelectorAll(".post");
-        var comsDispalyedArray = new Array(commentBtns.length).fill(false);
-        
-        for (let x = 0; x < commentBtns.length; x++){
-            commentBtns[x].addEventListener('click', event => {
-                if (comsDispalyedArray[x] == false){
-                    comments[x].style.display = "flex";  
-                    posts[x].style.borderBottomRightRadius = "0";            
-                    posts[x].style.borderBottomLeftRadius = "0";  
-                    comsDispalyedArray[x] = true;
-                }          
-                else{
-                    comments[x].style.display = "none";  
-                    posts[x].style.borderBottomRightRadius = "15px";            
-                    posts[x].style.borderBottomLeftRadius = "15px";  
-                    comsDispalyedArray[x] = false;
-                }
-            });
-        }
+    //// posts 
 
     // recent or popular
 
-        if (!window.location.href.includes("home.html")){
-            var recent = true;
-            var mostRecent = document.getElementById("mostRecent");
-            var mostPopular = document.getElementById("mostPopular");
-            mostRecent.addEventListener("click", function(){
-                recent = true;
-            })
-            mostPopular.addEventListener("click", function(){
-                recent = false;
-            })
-        }
+    if (!window.location.href.includes("home.html")){
+        var recent = true;
+        var mostRecent = document.getElementById("mostRecent");
+        var mostPopular = document.getElementById("mostPopular");
+        mostRecent.addEventListener("click", function(){
+            recent = true;
+        })
+        mostPopular.addEventListener("click", function(){
+            recent = false;
+        })
+    }
 
-    // //get posts
+
+
+
+
+
+
+
+    //get posts
 
     function getPosts(pagenumber){
-        if(postsContainer.id == "homePage"){
+        if(postsContainer.id == "homePage"){ // homepage posts
             console.log("getposts");
 
             fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
 
                 if(data.length == 0){
                     console.log("empty")
@@ -304,26 +299,25 @@ if (!window.location.href.includes("index.html")){
                 }
             });
         }
-        // else if (postsContainer.id == "profilePage"){
-        //     if(recent){
-        //         // show recent profile posts
-        //     }
-        //     else{
-        //         // show popular profile posts
-        //     }
-        // }
-        // else if (postsContainer.id == "groupPage"){
-        //     if(recent){
-        //         // show recent group posts
-        //     }
-        //     else{
-        //         // show popular group posts
-        //     }
-        // }
+        else if (postsContainer.id == "profilePage"){
+            if(recent){
+                // show recent profile posts
+            }
+            else{
+                // show popular profile posts
+            }
+        }
+        else if (postsContainer.id == "groupPage"){
+            if(recent){
+                // show recent group posts
+            }
+            else{
+                // show popular group posts
+            }
+        }
     }
 
     function populatePosts(data){
-
         console.log("populateposts")
 
         postsContainer.innerHTML = "";
@@ -421,73 +415,52 @@ if (!window.location.href.includes("index.html")){
 
             interactions.appendChild(commentbtnEl);
 
-            // votes
+            var userid = window.localStorage.getItem("userid");
 
-                var userid = window.localStorage.getItem("userid");
+            arrowup.addEventListener("click", function(){
 
-                arrowup.addEventListener("click", function(){
+                console.log("arrowup clicked");
 
-                    console.log("arrowup clicked");
-
-                    fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, { 
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-                        if (data.upvoted == true){
-                            arrowupBtn.style.backgroundColor = "red";
-                        }
-                    });
-
-                    
-                });
-
-                arrowdown.addEventListener("click", function(){
-
-                    console.log("arrowdown clicked");
-
-                    fetch(`http://localhost:8000/api/posts/downvote/${x+1}/${userid}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-                        if (data.downvote == true){
-                            arrowdownBtn.style.backgroundColor = "red";
-                        }
-                    });
-
-                });
-        }
-
-        // going to profile // not working
-
-            var profilePics = document.querySelectorAll(".postProfilePic");
-            var usernames = document.querySelectorAll(".postUsername");
-
-            console.log("profilepics: " + profilePics.length);
-            console.log("usernames: " + usernames.length);
-
-            for (let y = 0; y < profilePics.length; y++){
-                profilePics[y].addEventListener("click", function(){
-                    console.log(usernames[y].innerHTML);
-                    if (usernames[y].innerHTML == window.localStorage.getItem("username"))
-                    {
-                        window.location.href = "profile.html";
-                        window.localStorage.setItem("personal", true);
-                    }
-                    else{
-                        window.location.href = "profile.html";
-                        window.localStorage.setItem("personal", false);
-                    }
+                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 })
-            }
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.upvoted == true){
+                        arrowupBtn.style.backgroundColor = "red";
+                    }
+                });
+
+                
+            });
+
+            arrowdown.addEventListener("click", function(){
+
+                console.log("arrowdown clicked");
+
+                fetch(`http://localhost:8000/api/posts/downvote/${x+1}/${userid}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.downvote == true){
+                        arrowdownBtn.style.backgroundColor = "red";
+                    }
+                });
+
+            });
+
+
+            // comments
+
+        }
     }
 }

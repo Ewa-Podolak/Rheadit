@@ -155,47 +155,19 @@ if (!window.location.href.includes("index.html")){
             })
         }
 
-    // personal profile
+    // persoanl profile
 
         if(window.location.href.includes("profile")){
             var personal = window.localStorage.getItem("personal");
+            console.log(personal);
             if (personal == "true"){
                 console.log("personal features")
                 var editBio = document.getElementById("editBio");
                 var editProfile = document.getElementById("editProfile");
-                var bioText = document.getElementById("bioText");
-                var newBio = document.getElementById("newBio");
-                var newBioBtn = document.getElementById("newBioBtn");
         
                 editBio.style.display = "block";
                 editProfile.style.display = "block";
-
-                editBio.addEventListener("click", function(){
-                    newBio.style.display = "block";
-                    newBioBtn.style.display = "block";
-                    newBioBtn.addEventListener("click", function(){
-                        bioText.innerHTML = newBio.value;
-                        ///////////// /users/bio/{userid}/{linktopicture} 
-
-                        fetch(`http://localhost:8000/api/users/bio/{userid}/${newBio.value}`, {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                                console.log(data);
-                        });
-                    })
-                })
-
-                editProfile.addEventListener("click", function(){
-                    
-                })
             }
-
-            
         }
 
     // go to home page
