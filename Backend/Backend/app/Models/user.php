@@ -40,7 +40,7 @@ class user extends Model
 
     public function UpdateBio($userid, $newbio)
     {
-        $this::where('userid', $userid)->update(['profilepic'=>$newbio]);
+        $this::where('userid', $userid)->update(['bio'=>$newbio]);
         return ['updated'=>true];
     }
 }
