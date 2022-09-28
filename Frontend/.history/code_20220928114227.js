@@ -184,6 +184,7 @@ if (!window.location.href.includes("index.html")){
                     newBioBtn.style.display = "block";
                     newBioBtn.addEventListener("click", function(){
                         bioText.innerHTML = newBio.value;
+                        ///////////// /users/bio/{userid}/{linktopicture} 
 
                         fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}/${newBio.value}`, {
                             method: 'PATCH',
