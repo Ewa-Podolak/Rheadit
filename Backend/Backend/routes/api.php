@@ -22,9 +22,11 @@ Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //
 
 Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password //welp
 
-Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //i am crying
+Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //i am crying 
 
-Route::get('/users/{username}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts //works
+Route::get('/users/{username}', [userController::class, 'GetProfile']); //Returns username, bio, profilpic, number of followers, followed/following //works
+
+
 
 //Posts Routes
 Route::get('/posts/homepage/{pagenumber}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
@@ -42,25 +44,29 @@ Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostI
 Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Deletes post //works
 
 
+
 //Comments Routes
 Route::get('/commments/{postid}/{page}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes 
 //and whether they are favourited by the creater
 //Remember to discuss page numebr with Milllie!!!!!
+//more crying in egyptian
 
-Route::patch('/commments/favourite/{postid}/{userid}', [interactionController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment 
+Route::patch('/commments/favourite/{postid}/{commentid}/{userid}', [interactionController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment 
 
-Route::post('/commments/create/{postid}/{userid}', [interactionController::class, 'CreateComment']); //Allows user to create comment
+Route::post('/commments/create/{postid}/{title}/{body}/{userid}', [interactionController::class, 'CreateComment']); //Allows user to create comment
 
-Route::delete('/commments/delete/{postid}/{userid}', [interactionController::class, 'GetComments']); //Allows user to delete a comment
+Route::delete('/commments/delete/{commentid}/{userid}', [interactionController::class, 'GetComments']); //Allows user to delete a comment
+
+
 
 //Interaction Routes
-Route::post('/interactions/upvotepost/{postid}/{userid}', [interactionController::class, 'UpvotePost']); //Allows user to like post 
+Route::post('/interactions/upvotepost/{postid}/{userid}', [interactionController::class, 'UpvotePost']); //Allows user to like post //works
 
-Route::post('/interactions/downvotepost/{postid}/{userid}', [interactionController::class, 'DownvotePost']); //Allows user to dislike post 
+Route::post('/interactions/downvotepost/{postid}/{userid}', [interactionController::class, 'DownvotePost']); //Allows user to dislike post //works
 
-Route::patch('/interactions/upvotecomment/{postid}/{userid}', [interactionController::class, 'Upvotecomment']); //Allows user to upvote commment
+Route::post('/interactions/upvotecomment/{commentid}/{userid}', [interactionController::class, 'Upvotecomment']); //Allows user to upvote commment //works
 
-Route::patch('/interactions/downvotecomment/{postid}/{userid}', [interactionController::class, 'DownvoteComments']); //Allows user to downvote comment
+Route::post('/interactions/downvotecomment/{commentid}/{userid}', [interactionController::class, 'DownvoteComment']); //Allows user to downvote comment //works
 
 
 
@@ -68,6 +74,8 @@ Route::patch('/interactions/downvotecomment/{postid}/{userid}', [interactionCont
 Route::get('/followers/list/followers/{username}', [followerController::class, 'GetFollowersList']); //Returns list of all usernames of followers //works
 
 Route::get('/followers/list/followed/{username}', [followerController::class, 'GetFollowedList']); //Returns list of all usernames of followed/following //works
+
+
 
 //Community
 Route::post('/community/{communityname}/join/{userid}', [communityController::class, 'JoinCommunity']); //Allows user to join community //works

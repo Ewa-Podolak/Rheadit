@@ -64,6 +64,65 @@ class interaction extends Model
         return ['downvote'=>false];
     }
 
+    public function UpvoteComment($commentid, $userid)
+    {
+        $interaction = $this::where('userid', $userid)->where('commentid', $commentid)->get();
+        $postid = comment::where('commentid', $commentid)->first()->postid;
+        $community = post::where('postid', $postid)->first()->community;
+
+        if($interaction->IsEmpty())
+        {
+            $authority = $this->GetAuthority($userid, ($community));
+            if ($authority > 0)
+            {
+                $this::insert(['userid'=>$userid, 'commentid'=>$commentid, 'liked'=>1]);
+                return ['upvoted'=>true];
+            }
+        }
+        else if($interaction[0]->liked == 0) //DownVoted by user
+        {
+            $this::where('commentid', $commentid)->where('userid', $userid)->update(['liked'=>1]);
+            return ['upvoted'=>true];
+        }
+        else if($interaction[0]->liked == 1) //UpVoted by user
+        {
+            $this::where('commentid', $commentid)->where('userid', $userid)->delete();
+            return ['upvoted'=>true];
+        }
+
+        return ['upvoted'=>false];
+    }
+
+    public function DownvoteComment($commentid, $userid)
+    {
+        $interaction = $this::where('userid', $userid)->where('commentid', $commentid)->get();
+        $postid = comment::where('commentid', $commentid)->first()->postid;
+        $community = post::where('postid', $postid)->first()->community;
+
+        if($interaction->IsEmpty())
+        {
+            $authority = $this->GetAuthority($userid, ($community));
+            $authority = $this->GetAuthority($userid, ((post::where('postid', $interaction[0])->postid)->first())->community);
+            if ($authority > 0)
+            {
+                $this::insert(['userid'=>$userid, 'commentid'=>$commentid, 'liked'=>0]);
+                return ['downvote'=>true];
+            }
+        }
+        else if($interaction[0]->liked == 1) //DownVoted by user
+        {
+            $this::where('commentid', $commentid)->where('userid', $userid)->update(['liked'=>0]);
+            return ['downvote'=>true];
+        }
+        else if($interaction[0]->liked == 0) //UpVoted by user
+        {
+            $this::where('commentid', $commentid)->where('userid', $userid)->delete();
+            return ['downvote'=>true];
+        }
+
+        return ['downvote'=>false];
+    }
+
     public function GetAuthority($userid, $community)
     {
         $communitystatus = community::where('userid', $userid)->where('community', $community)->get();

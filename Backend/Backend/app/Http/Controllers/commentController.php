@@ -10,36 +10,24 @@ class commentController extends Controller
     public function GetComments($postid, $page)
     {
         $comment = new comment;
-        $comment->GetComments($postid, $page);
+        return $comment->GetComments($postid, $page);
     }
 
-    public function UpvoteComment($postid, $userid)
+    public function FavouriteComment($postid, $commentid, $userid)
     {
         $comment = new comment;
-        $comment->UpvoteComment($postid, $userid);
+        $comment->FavouriteComment($postid, $commentid, $userid);
     }
 
-    public function DownvoteComment($postid, $userid)
+    public function CreateComment($postid, $title, $body, $userid)
     {
         $comment = new comment;
-        $comment->DownvoteComment($postid, $userid);
+        $comment->CreateComment($postid, $title, $body, $userid);
     }
 
-    public function FavouriteComment($postid, $userid)
+    public function DeleteComment($commentid, $userid)
     {
         $comment = new comment;
-        $comment->FavouriteComment($postid, $userid);
-    }
-
-    public function CreateComment($postid, $userid)
-    {
-        $comment = new comment;
-        $comment->CreateComment($postid, $userid);
-    }
-
-    public function DeleteComment($postid, $userid)
-    {
-        $comment = new comment;
-        $comment->DeleteComment($postid, $userid);
+        $comment->DeleteComment($commentid, $userid);
     }
 }

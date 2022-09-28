@@ -37,7 +37,7 @@ class post extends Model
         $votes = $this->Votes($postid);
         $username = user::where('userid', $post->userid)->first()->username; 
 
-        return ['head'=>$post->title, 'upvotes'=> $votes, 'username'=>$username, 'community'=>$post->title];
+        return ['head'=>$post->title, 'upvotes'=> $votes, 'username'=>$username, 'community'=>$post->title, 'created_at'=>$post->created_at];
     }
 
     public function PostInCommunity($community, $userid)

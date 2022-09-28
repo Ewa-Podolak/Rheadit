@@ -25,30 +25,41 @@ class comment extends Model
         return $upvotes-$downvotes;
     }
     
-    public function UpvoteComment($postid, $userid)
+    public function FavouriteComment($postid, $commentid, $userid)
+    {
+        
+    }
+    
+    public function CreateComment($postid, $title, $body, $userid)
     {
     
     }
     
-    public function DownvoteComment($postid, $userid)
+    public function DeleteComment($commentid, $userid)
     {
     
     }
     
-    public function FavouriteComment($postid, $userid)
+    public function GetAuthority($userid, $community)
     {
-    
+        $communitystatus = community::where('userid', $userid)->where('community', $community)->get();
+        if(!$communitystatus->IsEmpty())
+        {
+            switch ($communitystatus[0]->authority)
+            {
+                case 'member':
+                    $auth = 1;
+                    break;
+                case 'mod':
+                    $auth = 2;
+                    break;
+                case 'owner':
+                    $auth = 3;
+                    break;
+            }
+            return $auth;
+        }
+        else
+            return 0;
     }
-    
-    public function CreateComment($postid, $userid)
-    {
-    
-    }
-    
-    public function DeleteComment($postid, $userid)
-    {
-    
-    }
-    
-   
 }
