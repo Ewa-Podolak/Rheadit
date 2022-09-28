@@ -166,7 +166,6 @@ if (!window.location.href.includes("index.html")){
             var followers = document.getElementById("numOfFollowers");
             var following = document.getElementById("numOfFollowing");
             var bioText = document.getElementById("bioText");
-            var profilePicture = document.querySelector(".profilepagePic");
 
             fetch(`http://localhost:8000/api/users/${username}`)
             .then(response => response.json())
@@ -177,15 +176,6 @@ if (!window.location.href.includes("index.html")){
                 bioText.innerHTML = data.bio;
                 followers.innerHTML = data.followers;
                 following.innerHTML = data.following;
-                if (!data.profilepic == "null")
-                {
-                    profilePicture.src = data.profilepic;
-                }
-                else{
-                    profilePicture.src = "./images/607426-200.png";
-                    // "./images/photo-1453728013993-6d66e9c9123a.jpeg"
-                    // "./images/607426-200.png"
-                }
             });
 
 
@@ -220,31 +210,7 @@ if (!window.location.href.includes("index.html")){
                 })
 
                 editProfile.addEventListener("click", function(){
-                    var profilePicEditorContainer = document.querySelector(".profilePicEditorContainer");
-                    profilePicEditorContainer.style.display = "flex"
-                    var close = document.querySelector(".close");
-                    var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
-                    var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
-                    close.addEventListener("click", function(){
-                        profilePicEditorContainer.style.display = "none"
-                    })
-                    submitNewProfilePic.addEventListener("click", function(){ 
-                        var linktopicture = submitNewProfilePicBox.value;
-                        var userid = window.localStorage.getItem("userid");
-
-                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}/${linktopicture}`, { /// not working
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                                console.log(data);
-
-                                profilePicEditorContainer.style.display = "none"     
-                        });
-                    })
+                    
                 })
             }
 

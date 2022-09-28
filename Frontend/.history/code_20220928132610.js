@@ -228,11 +228,10 @@ if (!window.location.href.includes("index.html")){
                     close.addEventListener("click", function(){
                         profilePicEditorContainer.style.display = "none"
                     })
-                    submitNewProfilePic.addEventListener("click", function(){ 
+                    submitNewProfilePic.addEventListener("click", function(){ /////////////////////////////////////////////
                         var linktopicture = submitNewProfilePicBox.value;
-                        var userid = window.localStorage.getItem("userid");
 
-                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}/${linktopicture}`, { /// not working
+                        fetch(`http://localhost:8000/api/users/profilepicture/${document.localStorage.getItem("userid")}/${linktopicture}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -241,8 +240,6 @@ if (!window.location.href.includes("index.html")){
                         .then((response) => response.json())
                         .then((data) => {
                                 console.log(data);
-
-                                profilePicEditorContainer.style.display = "none"     
                         });
                     })
                 })

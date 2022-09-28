@@ -85,10 +85,9 @@ $light: #F6F6F2;
 .boxBasics{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 5%;
-
+    padding-top: 5%;
 }
 
 #newBio, #newBioBtn{

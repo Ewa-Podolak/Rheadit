@@ -221,29 +221,10 @@ if (!window.location.href.includes("index.html")){
 
                 editProfile.addEventListener("click", function(){
                     var profilePicEditorContainer = document.querySelector(".profilePicEditorContainer");
+                    var close = document.querySelector("close");
                     profilePicEditorContainer.style.display = "flex"
-                    var close = document.querySelector(".close");
-                    var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
-                    var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
                     close.addEventListener("click", function(){
                         profilePicEditorContainer.style.display = "none"
-                    })
-                    submitNewProfilePic.addEventListener("click", function(){ 
-                        var linktopicture = submitNewProfilePicBox.value;
-                        var userid = window.localStorage.getItem("userid");
-
-                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}/${linktopicture}`, { /// not working
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                                console.log(data);
-
-                                profilePicEditorContainer.style.display = "none"     
-                        });
                     })
                 })
             }

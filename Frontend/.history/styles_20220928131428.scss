@@ -79,6 +79,7 @@ $light: #F6F6F2;
 
     h1{
         font-size: 20px;
+        padding-right: 5%;
     }
 }
 
@@ -87,8 +88,7 @@ $light: #F6F6F2;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 5%;
-
+    padding-top: 5%;
 }
 
 #newBio, #newBioBtn{

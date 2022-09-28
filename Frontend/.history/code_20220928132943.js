@@ -232,7 +232,7 @@ if (!window.location.href.includes("index.html")){
                         var linktopicture = submitNewProfilePicBox.value;
                         var userid = window.localStorage.getItem("userid");
 
-                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}/${linktopicture}`, { /// not working
+                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}/${linktopicture}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -241,8 +241,6 @@ if (!window.location.href.includes("index.html")){
                         .then((response) => response.json())
                         .then((data) => {
                                 console.log(data);
-
-                                profilePicEditorContainer.style.display = "none"     
                         });
                     })
                 })

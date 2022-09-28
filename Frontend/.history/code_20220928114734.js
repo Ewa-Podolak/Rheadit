@@ -160,40 +160,22 @@ if (!window.location.href.includes("index.html")){
         if(window.location.href.includes("profile")){
 
             var personal = window.localStorage.getItem("personal");
-            var username = window.localStorage.getItem("usernameToGet");
-
-            var usernameText = document.getElementById("usernameText");
-            var followers = document.getElementById("numOfFollowers");
-            var following = document.getElementById("numOfFollowing");
-            var bioText = document.getElementById("bioText");
-            var profilePicture = document.querySelector(".profilepagePic");
+            var username = window.localStorage.getItem("username");
+            console.log(username);
 
             fetch(`http://localhost:8000/api/users/${username}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-
-                usernameText.innerHTML = username;
-                bioText.innerHTML = data.bio;
-                followers.innerHTML = data.followers;
-                following.innerHTML = data.following;
-                if (!data.profilepic == "null")
-                {
-                    profilePicture.src = data.profilepic;
-                }
-                else{
-                    profilePicture.src = "./images/607426-200.png";
-                    // "./images/photo-1453728013993-6d66e9c9123a.jpeg"
-                    // "./images/607426-200.png"
-                }
             });
 
-
+            
 
             if (personal == "true"){
                 console.log("personal features")
                 var editBio = document.getElementById("editBio");
                 var editProfile = document.getElementById("editProfile");
+                var bioText = document.getElementById("bioText");
                 var newBio = document.getElementById("newBio");
                 var newBioBtn = document.getElementById("newBioBtn");
         
@@ -220,31 +202,7 @@ if (!window.location.href.includes("index.html")){
                 })
 
                 editProfile.addEventListener("click", function(){
-                    var profilePicEditorContainer = document.querySelector(".profilePicEditorContainer");
-                    profilePicEditorContainer.style.display = "flex"
-                    var close = document.querySelector(".close");
-                    var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
-                    var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
-                    close.addEventListener("click", function(){
-                        profilePicEditorContainer.style.display = "none"
-                    })
-                    submitNewProfilePic.addEventListener("click", function(){ 
-                        var linktopicture = submitNewProfilePicBox.value;
-                        var userid = window.localStorage.getItem("userid");
-
-                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}/${linktopicture}`, { /// not working
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                                console.log(data);
-
-                                profilePicEditorContainer.style.display = "none"     
-                        });
-                    })
+                    
                 })
             }
 
@@ -535,12 +493,10 @@ if (!window.location.href.includes("index.html")){
                     {
                         window.location.href = "profile.html";
                         window.localStorage.setItem("personal", true);
-                        window.localStorage.setItem("usernameToGet", usernames[y].innerHTML)
                     }
                     else{
                         window.location.href = "profile.html";
                         window.localStorage.setItem("personal", false);
-                        window.localStorage.setItem("usernameToGet", usernames[y].innerHTML)
                     }
                 })
             }
