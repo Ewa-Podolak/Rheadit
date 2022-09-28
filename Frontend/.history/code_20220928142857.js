@@ -497,8 +497,8 @@ if (!window.location.href.includes("index.html")){
                         console.log(data);
 
                         if (data.upvoted == true){
-                            arrowupBtns[x].id = "on";
-                            arrowdownBtns[x].id = "off";
+                            arrowupBtns[x].setAttribute("id", "on");
+                            arrowdownBtns[x].setAttribute("id", "off")
                         }
                     });
 
@@ -520,13 +520,32 @@ if (!window.location.href.includes("index.html")){
                     .then((data) => {
                         console.log(data);
                         if (data.downvote == true){
-                            arrowdownBtns[x].id = "on";
-                            arrowupBtns[x].id = "off";
+                            arrowdownBtns[x].setAttribute("id", "on");
+                            arrowupBtns[x].setAttribute("id", "off");
                         }
                     });
 
                 });
             }
+
+            // var arrowBtns = document.querySelectorAll(".arrowBtn");
+
+            // for (let x = 0; x < arrowBtns.length; x++){
+            //     console.log(arrowupBtns[x]);
+            //     // if(arrowupBtns[x].getAttribute("on") == "true"){
+            //     //     arrowupBtns[x].style.backgroundColor = "red";
+            //     // }
+            //     // else{
+            //     //     arrowupBtns[x].style.backgroundColor = "#F6F6F2";
+            //     // }
+
+            //     // if(arrowdownBtns[x].getAttribute("on") == "true"){
+            //     //     arrowdownBtns[x].style.backgroundColor = "red";
+            //     // }
+            //     // else{
+            //     //     arrowdownBtns[x].style.backgroundColor = "#F6F6F2";
+            //     // }
+            // }
 
 
         // going to profile

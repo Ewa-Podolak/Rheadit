@@ -399,7 +399,7 @@ if (!window.location.href.includes("index.html")){
             post.appendChild(votes);
 
             const arrowupBtn = document.createElement("button");
-            arrowupBtn.classList.add("arrowupBtn", "arrowBtn");
+            arrowupBtn.classList.add("arrowupBtn");
 
             const arrowup = document.createElement("i");
             arrowup.classList.add("fa-solid", "fa-circle-arrow-up");
@@ -409,7 +409,7 @@ if (!window.location.href.includes("index.html")){
             votes.id = numVotes
 
             const arrowdownBtn = document.createElement("button");
-            arrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
+            arrowdownBtn.classList.add("arrowdownBtn");
 
             const arrowdown = document.createElement("i");
             arrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
@@ -433,7 +433,7 @@ if (!window.location.href.includes("index.html")){
             const profilePic = document.createElement("img");
             profilePic.id = "profilePic" 
             profilePic.classList.add("postProfilePic");
-            profilePic.src = "./images/607426-200.png" // change
+            profilePic.src = data.profilepic; // change
 
             const usernameEl = document.createElement("h2");
             usernameEl.id = "username";
@@ -497,8 +497,10 @@ if (!window.location.href.includes("index.html")){
                         console.log(data);
 
                         if (data.upvoted == true){
+                            arrowupBtns[x].style.backgroundColor = "red";
+
                             arrowupBtns[x].id = "on";
-                            arrowdownBtns[x].id = "off";
+                            arrowdownBtns[x].id = "off"
                         }
                     });
 
@@ -520,12 +522,26 @@ if (!window.location.href.includes("index.html")){
                     .then((data) => {
                         console.log(data);
                         if (data.downvote == true){
-                            arrowdownBtns[x].id = "on";
-                            arrowupBtns[x].id = "off";
+                            arrowdownBtns[x].style.backgroundColor = "red";
+
+                            arrowdownBtns[x].id = "on"
+                            arrowupBtns[x].id = "off"
                         }
                     });
 
                 });
+            }
+
+        // already upvoted and downvoted
+
+        // arrowupBtns[x].id = "on";
+        // arrowdownBtns[x].id = "off"
+
+            if(arrowupBtns[x].id == "on"){
+                arrowupBtns[x].style.backgroundColor = "red";
+            }
+            else{
+                arrowupBtns[x].style.backgroundColor = "#F6F6F2";
             }
 
 

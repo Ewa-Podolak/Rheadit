@@ -497,8 +497,10 @@ if (!window.location.href.includes("index.html")){
                         console.log(data);
 
                         if (data.upvoted == true){
-                            arrowupBtns[x].id = "on";
-                            arrowdownBtns[x].id = "off";
+                            arrowupBtns[x].style.backgroundColor = "red";
+
+                            arrowupBtns[x].setAttribute("on", true);
+                            arrowdownBtns[x].setAttribute("on", false)
                         }
                     });
 
@@ -520,12 +522,34 @@ if (!window.location.href.includes("index.html")){
                     .then((data) => {
                         console.log(data);
                         if (data.downvote == true){
-                            arrowdownBtns[x].id = "on";
-                            arrowupBtns[x].id = "off";
+                            arrowdownBtns[x].style.backgroundColor = "red";
+
+                            arrowdownBtns[x].setAttribute("on", true);
+                            arrowupBtns[x].setAttribute("on", false);
                         }
                     });
 
                 });
+            }
+
+            var arrowBtns = document.querySelectorAll(".arrowBtn");
+            console.log(arrowupBtns[1]);
+
+            for (let x = 0; x < arrowBtns.length; x++){
+                console.log(arrowupBtns[1]);
+                // if(arrowupBtns[x].getAttribute("on") == "true"){
+                //     arrowupBtns[x].style.backgroundColor = "red";
+                // }
+                // else{
+                //     arrowupBtns[x].style.backgroundColor = "#F6F6F2";
+                // }
+
+                // if(arrowdownBtns[x].getAttribute("on") == "true"){
+                //     arrowdownBtns[x].style.backgroundColor = "red";
+                // }
+                // else{
+                //     arrowdownBtns[x].style.backgroundColor = "#F6F6F2";
+                // }
             }
 
 

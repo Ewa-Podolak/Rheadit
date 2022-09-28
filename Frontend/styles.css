@@ -6,6 +6,14 @@
   color: #373F47;
 }
 
+#on {
+  background-color: red;
+}
+
+#off {
+  background-color: #F6F6F2;
+}
+
 .wholeProfile {
   width: 100%;
   display: flex;
