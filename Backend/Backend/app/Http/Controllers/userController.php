@@ -44,7 +44,8 @@ class userController extends Controller
 
     public function DeleteUser($userid)
     {
-  
+        $user = new user;
+        return $user->DeleteUser($userid);
     }
 
     public function UpdatePicture($userid, $newpicture)

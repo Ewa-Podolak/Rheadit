@@ -14,7 +14,7 @@ class post extends Model
     protected $table = 'posts';
     public $timestamps = false;
 
-    public function GetHomePage($page)
+    public function GetHomePage($page, $userid)
     {
         $allposts = $this::orderby('created_at')->get();
         $numberofpostsmax = $allposts->count();
@@ -27,8 +27,18 @@ class post extends Model
                 if($x < $numberofpostsmax)
                 {
                     $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
+                    $voted = interaction::where('userid', $userid)->where('postid', $allposts[$x]->postid)->get();
+                    if(!$voted->IsEmpty())
+                    {
+                        if($voted[0]->liked == 1)
+                            $voted = 'upvote';
+                        else
+                            $voted = 'downvoted';
+                    }
+                    else
+                        $voted = null;
                     $votes = $this->Votes($allposts[$x]->postid);
-                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->title, 'username'=>$username, 'votes'=>$votes]);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->title, 'username'=>$username, 'votes'=>$votes, 'voted'=>$voted]);
                 }
             }
         return($postsarray);
@@ -57,5 +67,37 @@ class post extends Model
         $upvotes = interaction::where('postid', $postid)->where('liked', 1)->get()->count();
         $downvotes = interaction::where('postid', $postid)->where('liked', 0)->get()->count();
         return $upvotes-$downvotes;
+    }
+
+
+
+    public function DeletePost($postid, $userid) //When the user deletes their post
+    {
+        $comments = new comment;
+        $interactions = new interaction;
+
+        if($this::where('postid', $postid)->first()->userid == $userid)
+        {
+        //Delete Comments
+        $tobedeletedcomments = $comments::where('postid', $postid)->get();
+
+        foreach($tobedeletedcomments as $comment)
+            $comments->DeletedPost($comment->commentid);
+
+        //Delete Likes
+        $interactions->DeleteLikesPost($postid);
+
+        return ['Delted'=>true];
+        }
+
+        return ['Deleted'=>false];
+    }
+
+    public function DeletePosts($postids) //When user deleted so multiple posts are deleted 
+    {
+        //Delete Comments
+
+
+        //Delete Likes
     }
 }

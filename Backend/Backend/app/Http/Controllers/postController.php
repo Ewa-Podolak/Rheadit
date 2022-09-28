@@ -7,10 +7,10 @@ use App\Models\post;
 
 class postController extends Controller
 {
-    public function GetHomepagePosts($pagenumber)
+    public function GetHomepagePosts($pagenumber, $userid)
     {
         $post = new post;
-        return $post->GetHomePage($pagenumber);
+        return $post->GetHomePage($pagenumber, $userid);
     }
 
     public function GetUserNewestPosts($userid)
