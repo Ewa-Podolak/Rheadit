@@ -227,24 +227,23 @@ if (!window.location.href.includes("index.html")){
             var followersOrFollowingListContainer = document.querySelector(".followersOrFollowingListContainer");
 
             followersBtn.addEventListener("click", function(){
-                followersOrFollowingListContainer.style.display = "flex";
-
-                var close = document.querySelector(".Fclose");
+                var close = document.querySelector(".close");
                 close.addEventListener("click", function(){
-                    followersOrFollowingListContainer.style.display = "none"
+                    profilePicEditorContainer.style.display = "none"
                 })
+                followersOrFollowingListContainer.style.display = "block";
             })
 
             followingBtn.addEventListener("click", function(){
-                followersOrFollowingListContainer.style.display = "flex";
-
-                var close = document.querySelector(".Fclose");
+                var close = document.querySelector(".close");
                 close.addEventListener("click", function(){
-                    followersOrFollowingListContainer.style.display = "none"
+                    profilePicEditorContainer.style.display = "none"
                 })
+                followersOrFollowingListContainer.style.display = "block";
             })
 
             if (personal == "true"){
+                console.log("personal features")
                 var editBio = document.getElementById("editBio");
                 var editProfile = document.getElementById("editProfile");
                 var newBio = document.getElementById("newBio");
@@ -318,6 +317,30 @@ if (!window.location.href.includes("index.html")){
 
         }
 
+    // display comments on button click
+
+        var commentBtns = document.querySelectorAll(".commentbtn");
+        var comments = document.querySelectorAll(".comments");
+        var posts = document.querySelectorAll(".post");
+        var comsDispalyedArray = new Array(commentBtns.length).fill(false);
+        
+        for (let x = 0; x < commentBtns.length; x++){
+            commentBtns[x].addEventListener('click', event => {
+                if (comsDispalyedArray[x] == false){
+                    comments[x].style.display = "flex";  
+                    posts[x].style.borderBottomRightRadius = "0";            
+                    posts[x].style.borderBottomLeftRadius = "0";  
+                    comsDispalyedArray[x] = true;
+                }          
+                else{
+                    comments[x].style.display = "none";  
+                    posts[x].style.borderBottomRightRadius = "15px";            
+                    posts[x].style.borderBottomLeftRadius = "15px";  
+                    comsDispalyedArray[x] = false;
+                }
+            });
+        }
+
     // recent or popular
 
         if (!window.location.href.includes("home.html")){
@@ -336,6 +359,7 @@ if (!window.location.href.includes("index.html")){
 
     function getPosts(pagenumber){
         if(postsContainer.id == "homePage"){
+            console.log("getposts");
 
             var userid = window.localStorage.getItem("userid");
 
@@ -345,14 +369,15 @@ if (!window.location.href.includes("index.html")){
                 console.log(data)
 
                 if(data.length == 0){
-                    populatePosts(data, pagenumber);
+                    console.log("empty")
+                    populatePosts(data);
                     postsContainer.innerHTML = "no more posts to show";
                     
                     plusPageNum.disabled = true;
                 }
                 else{
                     plusPageNum.disabled = false;
-                    populatePosts(data, pagenumber);
+                    populatePosts(data);
                 }
             });
         }
@@ -374,7 +399,9 @@ if (!window.location.href.includes("index.html")){
         // }
     }
 
-    function populatePosts(data, pagenumber){
+    function populatePosts(data){
+
+        console.log("populateposts")
 
         postsContainer.innerHTML = "";
         for (let x = 0; x < data.length; x++){
@@ -481,6 +508,7 @@ if (!window.location.href.includes("index.html")){
             var userid = window.localStorage.getItem("userid");
 
             arrowupBtn.addEventListener("click", function(){
+                console.log("arrowup clicked");
 
                 fetch(`http://localhost:8000/api/interactions/upvotepost/${x+1}/${userid}`, { 
                     method: 'POST',
@@ -495,12 +523,12 @@ if (!window.location.href.includes("index.html")){
                     if (data.upvoted == true){
                         arrowdownBtn.style.backgroundColor = "#F6F6F2"
                         arrowupBtn.style.backgroundColor = "red";
-                        getPosts(1);
                     }
                 });
             })
 
             arrowdownBtn.addEventListener("click", function(){
+                console.log("arrowdown clicked");
 
                     fetch(`http://localhost:8000/api/interactions/downvotepost/${x+1}/${userid}`, {
                         method: 'POST',
@@ -515,72 +543,9 @@ if (!window.location.href.includes("index.html")){
                         if (data.downvote == true){
                             arrowupBtn.style.backgroundColor = "#F6F6F2"
                             arrowdownBtn.style.backgroundColor = "red";
-                            getPosts(1)
                         }
                     });
             })
-
-
-            // comments
-
-            const comments = document.createElement("div");
-            comments.classList.add("comments");
-
-            postAndComments.appendChild(comments);
-
-            const commentBar = document.createElement("div");
-            commentBar.classList.add("commentBar");
-
-            comments.appendChild(commentBar);
-
-            const commentInput = document.createElement("input");
-            commentInput.classList.add("commentInput");
-            commentInput.type = "text";
-            commentInput.placeholder = "Comment something...";
-
-            commentBar.appendChild(commentInput);
-
-            const makeComment = document.createElement("i");
-            makeComment.classList.add("fa-solid", "fa-circle-chevron-right");
-
-            commentBar.appendChild(makeComment);
-
-            const ul = document.createElement("ul");
-
-            comments.appendChild(ul);
-
-            // fetch comments
-            // /comments/${x+1}/${pagenumber}
-
-            fetch(`http://localhost:8000/api/comments/${x+1}/${pagenumber}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            });
-        }
-
-        //display comments on button click
-
-        var commentBtns = document.querySelectorAll(".commentbtn");
-        var comments = document.querySelectorAll(".comments");
-        var posts = document.querySelectorAll(".post");
-        var comsDispalyedArray = new Array(commentBtns.length).fill(false);
-        
-        for (let x = 0; x < commentBtns.length; x++){
-            commentBtns[x].addEventListener('click', event => {
-                if (comsDispalyedArray[x] == false){
-                    comments[x].style.display = "flex";  
-                    posts[x].style.borderBottomRightRadius = "0";            
-                    posts[x].style.borderBottomLeftRadius = "0";  
-                    comsDispalyedArray[x] = true;
-                }          
-                else{
-                    comments[x].style.display = "none";  
-                    posts[x].style.borderBottomRightRadius = "15px";            
-                    posts[x].style.borderBottomLeftRadius = "15px";  
-                    comsDispalyedArray[x] = false;
-                }
-            });
         }
 
 
@@ -589,8 +554,12 @@ if (!window.location.href.includes("index.html")){
             var profilePics = document.querySelectorAll(".postProfilePic");
             var usernames = document.querySelectorAll(".postUsername");
 
+            console.log("profilepics: " + profilePics.length);
+            console.log("usernames: " + usernames.length);
+
             for (let y = 0; y < profilePics.length; y++){
                 profilePics[y].addEventListener("click", function(){
+                    console.log(usernames[y].innerHTML);
                     if (usernames[y].innerHTML == window.localStorage.getItem("username"))
                     {
                         window.location.href = "profile.html";
