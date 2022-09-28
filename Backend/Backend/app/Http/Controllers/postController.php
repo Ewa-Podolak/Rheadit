@@ -34,18 +34,6 @@ class postController extends Controller
 
     }
 
-    public function UpvotePost($postid, $userid)
-    {
-        $post = new post;
-        return $post->UpvotePost($postid, $userid);
-    }
-
-    public function DownvotePost($postid, $userid)
-    {
-        $post = new post;
-        return $post->DownvotePost($postid, $userid);
-    }
-
     public function PostInCommunity($community, $userid)
     {
         $post = new post;

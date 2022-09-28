@@ -23,14 +23,24 @@ class user extends Model
         $this::insert(['username' => $username, 'password' => $password, 'email' => $email]);
     }
 
-    public function GetProfile($userid)
+    public function GetProfile($username)
     {
-        
+        $user = $this::where('username', $username)->get();
+        $followers = follower::where('user', $user[0]->userid)->get()->count();
+        $following = follower::where('follower', $user[0]->userid)->get()->count();
+
+        return ['username'=>$user[0]->username, 'bio'=>$user[0]->bio, 'profilepic'=>$user[0]->profilepic, 'followers'=>$following, 'following'=>$followers];
     }
 
     public function UpdatePicture($userid, $newpicture)
     {
         $this::where('userid', $userid)->update(['profilepic'=>$newpicture]);
+        return ['updated'=>true];
+    }
+
+    public function UpdateBio($userid, $newbio)
+    {
+        $this::where('userid', $userid)->update(['profilepic'=>$newbio]);
         return ['updated'=>true];
     }
 }

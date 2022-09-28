@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\commentController;
 use App\Http\Controllers\followerController;
 use App\Http\Controllers\interactionController;
 use App\Http\Controllers\postController;
@@ -15,7 +16,7 @@ Route::post('/users/register/{username}/{pasword}/{email}', [userController::cla
 
 Route::patch('/users/profilepicture/{userid}/{linktopicture}', [userController::class, 'UpdatePicture']); //Allows user to change their profile picture //works
 
-Route::patch('/users/bio/{userid}/{linktopicture}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
+Route::patch('/users/bio/{userid}/{bio}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
 
 Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
 
@@ -23,7 +24,7 @@ Route::patch('/users/resetpassword/{username}/{password}', [userController::clas
 
 Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //i am crying
 
-Route::get('/users/{username}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts //more crying but in egyptian
+Route::get('/users/{username}', [userController::class, 'GetProfile']); //Returns username, number of followers, followed, posts //works
 
 //Posts Routes
 Route::get('/posts/homepage/{pagenumber}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
@@ -36,23 +37,15 @@ Route::get('/posts/{community}/newest', [postController::class, 'GetCommunityNew
 
 Route::get('/posts/{community}/liked', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community
 
-Route::post('/posts/upvote/{postid}/{userid}', [postController::class, 'UpvotePost']); //Allows user to like post //works
-
-Route::post('/posts/downvote/{postid}/{userid}', [postController::class, 'DownvotePost']); //Allows user to dislike post //works
-
 Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post //welp
 
 Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Deletes post //works
 
 
 //Comments Routes
-Route::get('/commments/{postid}/{page}', [interactionController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes 
+Route::get('/commments/{postid}/{page}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes 
 //and whether they are favourited by the creater
 //Remember to discuss page numebr with Milllie!!!!!
-
-Route::patch('/commments/upvote/{postid}/{userid}', [interactionController::class, 'Upvotecomment']); //Allows user to upvote 
-
-Route::patch('/commments/downvote/{postid}/{userid}', [interactionController::class, 'GetComments']); //Allows user to downvote
 
 Route::patch('/commments/favourite/{postid}/{userid}', [interactionController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment 
 
@@ -60,10 +53,21 @@ Route::post('/commments/create/{postid}/{userid}', [interactionController::class
 
 Route::delete('/commments/delete/{postid}/{userid}', [interactionController::class, 'GetComments']); //Allows user to delete a comment
 
-//Followers Routes
-Route::get('/followers/list/followers/{userid}', [followerController::class, 'GetFollowersList']); //Returns list of all usernames of followers
+//Interaction Routes
+Route::post('/interactions/upvote/{postid}/{userid}', [postController::class, 'UpvotePost']); //Allows user to like post 
 
-Route::get('/followers/list/followed/{userid}', [followerController::class, 'GetFollowedList']); //Returns list of all usernames of followed
+Route::post('/interactions/downvote/{postid}/{userid}', [postController::class, 'DownvotePost']); //Allows user to dislike post 
+
+Route::patch('/interactions/upvote/{postid}/{userid}', [interactionController::class, 'Upvotecomment']); //Allows user to upvote commment
+
+Route::patch('/interactions/downvote/{postid}/{userid}', [interactionController::class, 'DownvoteComments']); //Allows user to downvote comment
+
+
+
+//Followers Routes
+Route::get('/followers/list/followers/{username}', [followerController::class, 'GetFollowersList']); //Returns list of all usernames of followers //works
+
+Route::get('/followers/list/followed/{username}', [followerController::class, 'GetFollowedList']); //Returns list of all usernames of followed/following //works
 
 //Community
 Route::post('/community/{communityname}/join/{userid}', [communityController::class, 'JoinCommunity']); //Allows user to join community //works
