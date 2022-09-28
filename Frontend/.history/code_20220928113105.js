@@ -158,13 +158,6 @@ if (!window.location.href.includes("index.html")){
     // personal profile
 
         if(window.location.href.includes("profile")){
-
-            fetch(`http://localhost:8000/api/users/${window.sessionStorage.getItem("username")}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            });
-
             var personal = window.localStorage.getItem("personal");
             if (personal == "true"){
                 console.log("personal features")
@@ -184,7 +177,7 @@ if (!window.location.href.includes("index.html")){
                         bioText.innerHTML = newBio.value;
                         ///////////// /users/bio/{userid}/{linktopicture} 
 
-                        fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}/${newBio.value}`, {
+                        fetch(`http://localhost:8000/api/users/bio/{userid}/${newBio.value}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',

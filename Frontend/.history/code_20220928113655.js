@@ -162,7 +162,6 @@ if (!window.location.href.includes("index.html")){
             fetch(`http://localhost:8000/api/users/${window.sessionStorage.getItem("username")}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
             });
 
             var personal = window.localStorage.getItem("personal");
