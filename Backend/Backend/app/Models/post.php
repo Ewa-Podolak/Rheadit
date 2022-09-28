@@ -70,6 +70,27 @@ class post extends Model
     }
 
 
+    public function GetUserNewestPosts($userid)
+    {
+
+    }
+
+    public function GetUserLikedPosts($userid)
+    {
+
+    }
+
+    public function GetCommunityNewestPosts($community)
+    {
+
+    }
+
+    public function GetCommunityLikedPosts($community)
+    {
+
+    }
+
+
 
     public function DeletePost($postid, $userid) //When the user deletes their post
     {

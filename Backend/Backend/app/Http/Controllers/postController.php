@@ -15,23 +15,26 @@ class postController extends Controller
 
     public function GetUserNewestPosts($userid)
     {
-
-
+        $post = new post;
+        return $post->GetUserNewestPosts($userid);
     }
 
     public function GetUserLikedPosts($userid)
     {
-
+        $post = new post;
+        return $post->GetUserLikedPosts($userid);
     }
 
     public function GetCommunityNewestPosts($community)
     {
-
+        $post = new post;
+        return $post->GetCommunityNewestPosts($community);
     }
 
     public function GetCommunityLikedPosts($community)
     {
-
+        $post = new post;
+        return $post->GetCommunityLikedPosts($community);
     }
 
     public function PostInCommunity($community, $userid)

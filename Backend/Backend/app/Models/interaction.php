@@ -46,20 +46,17 @@ class interaction extends Model
             $authority = $this->GetAuthority($userid, ($this::where('postid', $postid)->first()->community));
             if ($authority > 0)
             {
-                dd('here');
                 $this::insert(['userid'=>$userid, 'postid'=>$postid, 'liked'=>0]);
                 return ['downvote'=>true];
             }
         }
         else if($interaction[0]->liked == 1) //DownVoted by user
         {
-            dd('here');
             $this::where('postid', $postid)->where('userid', $userid)->update(['liked'=>0]);
             return ['downvote'=>true];
         }
         else if($interaction[0]->liked == 0) //UpVoted by user
         {
-            dd('here');
             $this::where('postid', $postid)->where('userid', $userid)->delete();
             return ['downvote'=>true];
         }
