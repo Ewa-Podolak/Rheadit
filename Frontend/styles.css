@@ -24,6 +24,14 @@
   width: 18px;
 }
 
+#editBio, #editProfile {
+  display: none;
+}
+
+#newBio, #newBioBtn {
+  display: none;
+}
+
 body {
   background-color: #A7C4B5;
   display: flex;

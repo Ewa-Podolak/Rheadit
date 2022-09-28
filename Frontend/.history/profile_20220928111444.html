@@ -40,27 +40,22 @@
 
     <div class="wholeProfile">
         <div class="profileBox">
-            <img id="groupProfilePic" src="./images/607426-200.png">
-            <div id="groupUsername">username</div>
+            <img id="profilePic" src="./images/607426-200.png">
+            <button id="editProfile">edit profile</button>
+            <div id="username">username</div>
         </div>
 
-        <div class="membersAndJoin">
-            <div class="members">Members: <span>125</span></div>
-            <button id="joinGroup">Join</button>
+        <div class="follow">
+            <div class="followers">Followers: <span>125</span></div>
+            <div class="following">Following: <span>293</span></div>
         </div>
-
     </div>
 
     <div class="bio">
         <i class="fa-solid fa-pen"></i>
-        <p>this is my bio this is my bio this is my bio this is my bio</p>
-    </div>
-
-    <div class="createnewPost">
-        <img id="profilePic" src="./images/607426-200.png">
-        <input type="text" placeholder="New head" disabled>
-        <i class="fa-regular fa-image"></i>
-        <i class="fa-solid fa-circle-chevron-right"></i>
+        <button id="editBio">edit bio</button>
+        <input type="text" placeholder="new bio" id="newBio">
+        <p id="bioText">this is my bio this is my bio this is my bio this is my bio</p>
     </div>
 
     <div class="popularOrRecent">
@@ -68,7 +63,8 @@
         <button id="mostPopular">Most Popular</button>
     </div>
 
-    <div class="postsContainer" id="groupPage">
+
+    <div class="postsContainer" id="profilePage">
 
     </div>
 
@@ -77,6 +73,7 @@
         <h3 id="pageNum">1</h3>
         <button class="noBtn" id="plusPageNum"><i class="fa-solid fa-circle-arrow-right"></i></button>
     </div>
+
     
     <script src="code.js"></script>
 </body>

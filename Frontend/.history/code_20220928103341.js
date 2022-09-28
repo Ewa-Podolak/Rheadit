@@ -120,6 +120,7 @@ if (window.location.href.includes("index.html")){
 // all pages
 
 if (!window.location.href.includes("index.html")){
+
     var pagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
 
@@ -130,8 +131,30 @@ if (!window.location.href.includes("index.html")){
         var goToProfile = document.getElementById("goProfile");
         goToProfile.addEventListener("click", function(){
             window.location.href = "profile.html";
-            window.localStorage.setItem("personal", true);
+            personalProfile();
         })
+
+    // going to profile // not working
+
+        var profilePics = document.querySelectorAll(".postProfilePic");
+        var usernames = document.querySelectorAll(".postUsername");
+
+        console.log("profilepics: " + profilePics.length);
+        console.log("usernames: " + username.length);
+
+        for (let y = 0; y < profilePics.length; y++){
+            profilePics[y].addEventListener("click", function(){
+                window.location.href = "profile.html";
+            })
+        }
+
+        function personalProfile(){
+            var editBio = document.getElementById("editBio");
+            var editProfile = document.getElementById("editProfile");
+
+            editBio.style.display = "block";
+            editProfile.style.display = "block";
+        }
 
     // pagenum
 
@@ -153,49 +176,6 @@ if (!window.location.href.includes("index.html")){
                     getPosts(pagenumber);
                 }
             })
-        }
-
-    // personal profile
-
-        if(window.location.href.includes("profile")){
-            var personal = window.localStorage.getItem("personal");
-            if (personal == "true"){
-                console.log("personal features")
-                var editBio = document.getElementById("editBio");
-                var editProfile = document.getElementById("editProfile");
-                var bioText = document.getElementById("bioText");
-                var newBio = document.getElementById("newBio");
-                var newBioBtn = document.getElementById("newBioBtn");
-        
-                editBio.style.display = "block";
-                editProfile.style.display = "block";
-
-                editBio.addEventListener("click", function(){
-                    newBio.style.display = "block";
-                    newBioBtn.style.display = "block";
-                    newBioBtn.addEventListener("click", function(){
-                        bioText.innerHTML = newBio.value;
-                        ///////////// /users/bio/{userid}/{linktopicture} 
-
-                        fetch(`http://localhost:8000/api/users/bio/{userid}/${newBio.value}`, {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                                console.log(data);
-                        });
-                    })
-                })
-
-                editProfile.addEventListener("click", function(){
-                    
-                })
-            }
-
-            
         }
 
     // go to home page
@@ -267,6 +247,8 @@ if (!window.location.href.includes("index.html")){
             });
         }
 
+    //// posts 
+
     // recent or popular
 
         if (!window.location.href.includes("home.html")){
@@ -281,7 +263,14 @@ if (!window.location.href.includes("index.html")){
             })
         }
 
-    // //get posts
+
+
+
+
+
+
+
+    //get posts
 
     function getPosts(pagenumber){
         if(postsContainer.id == "homePage"){
@@ -323,7 +312,6 @@ if (!window.location.href.includes("index.html")){
     }
 
     function populatePosts(data){
-
         console.log("populateposts")
 
         postsContainer.innerHTML = "";
@@ -421,73 +409,52 @@ if (!window.location.href.includes("index.html")){
 
             interactions.appendChild(commentbtnEl);
 
-            // votes
+            var userid = window.localStorage.getItem("userid");
 
-                var userid = window.localStorage.getItem("userid");
+            arrowup.addEventListener("click", function(){
 
-                arrowup.addEventListener("click", function(){
+                console.log("arrowup clicked");
 
-                    console.log("arrowup clicked");
-
-                    fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, { 
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-                        if (data.upvoted == true){
-                            arrowupBtn.style.backgroundColor = "red";
-                        }
-                    });
-
-                    
-                });
-
-                arrowdown.addEventListener("click", function(){
-
-                    console.log("arrowdown clicked");
-
-                    fetch(`http://localhost:8000/api/posts/downvote/${x+1}/${userid}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-                        if (data.downvote == true){
-                            arrowdownBtn.style.backgroundColor = "red";
-                        }
-                    });
-
-                });
-        }
-
-        // going to profile // not working
-
-            var profilePics = document.querySelectorAll(".postProfilePic");
-            var usernames = document.querySelectorAll(".postUsername");
-
-            console.log("profilepics: " + profilePics.length);
-            console.log("usernames: " + usernames.length);
-
-            for (let y = 0; y < profilePics.length; y++){
-                profilePics[y].addEventListener("click", function(){
-                    console.log(usernames[y].innerHTML);
-                    if (usernames[y].innerHTML == window.localStorage.getItem("username"))
-                    {
-                        window.location.href = "profile.html";
-                        window.localStorage.setItem("personal", true);
-                    }
-                    else{
-                        window.location.href = "profile.html";
-                        window.localStorage.setItem("personal", false);
-                    }
+                fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 })
-            }
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.upvoted == true){
+                        arrowupBtn.style.backgroundColor = "red";
+                    }
+                });
+
+                
+            });
+
+            arrowdown.addEventListener("click", function(){
+
+                console.log("arrowdown clicked");
+
+                fetch(`http://localhost:8000/api/posts/downvote/${x+1}/${userid}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.downvote == true){
+                        arrowdownBtn.style.backgroundColor = "red";
+                    }
+                });
+
+            });
+
+
+            // comments
+
+        }
     }
 }

@@ -171,22 +171,11 @@ if (!window.location.href.includes("index.html")){
                 editProfile.style.display = "block";
 
                 editBio.addEventListener("click", function(){
+                    
                     newBio.style.display = "block";
                     newBioBtn.style.display = "block";
                     newBioBtn.addEventListener("click", function(){
                         bioText.innerHTML = newBio.value;
-                        ///////////// /users/bio/{userid}/{linktopicture} 
-
-                        fetch(`http://localhost:8000/api/users/bio/{userid}/${newBio.value}`, {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                                console.log(data);
-                        });
                     })
                 })
 
