@@ -515,7 +515,7 @@ if (!window.location.href.includes("index.html")){
                         if (data.downvote == true){
                             arrowupBtn.style.backgroundColor = "#F6F6F2"
                             arrowdownBtn.style.backgroundColor = "red";
-                            getPosts(1)
+                            //getPosts(1)
                         }
                     });
             })
@@ -556,19 +556,6 @@ if (!window.location.href.includes("index.html")){
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-
-                for (let y = 0; y < data.length; y++){
-                    //for each comment
-
-                    const li = document.createElement("li")
-
-                    ul.appendChild(li);
-
-                    const commentVotes = document.createElement("div");
-                    commentVotes.classList.add("votes");
-
-                    li.appendChild(commentVotes);
-                }
             });
         }
 
