@@ -222,28 +222,9 @@ if (!window.location.href.includes("index.html")){
                 editProfile.addEventListener("click", function(){
                     var profilePicEditorContainer = document.querySelector(".profilePicEditorContainer");
                     profilePicEditorContainer.style.display = "flex"
-                    var close = document.querySelector(".close");
-                    var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
-                    var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
+                    var close = document.querySelector("close");
                     close.addEventListener("click", function(){
                         profilePicEditorContainer.style.display = "none"
-                    })
-                    submitNewProfilePic.addEventListener("click", function(){ 
-                        var linktopicture = submitNewProfilePicBox.value;
-                        var userid = window.localStorage.getItem("userid");
-
-                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}/${linktopicture}`, { /// not working
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                                console.log(data);
-
-                                profilePicEditorContainer.style.display = "none"     
-                        });
                     })
                 })
             }
@@ -399,7 +380,7 @@ if (!window.location.href.includes("index.html")){
             post.appendChild(votes);
 
             const arrowupBtn = document.createElement("button");
-            arrowupBtn.classList.add("arrowupBtn", "arrowBtn");
+            arrowupBtn.classList.add("arrowupBtn");
 
             const arrowup = document.createElement("i");
             arrowup.classList.add("fa-solid", "fa-circle-arrow-up");
@@ -409,7 +390,7 @@ if (!window.location.href.includes("index.html")){
             votes.id = numVotes
 
             const arrowdownBtn = document.createElement("button");
-            arrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
+            arrowdownBtn.classList.add("arrowdownBtn");
 
             const arrowdown = document.createElement("i");
             arrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
@@ -473,20 +454,16 @@ if (!window.location.href.includes("index.html")){
             commentbtnEl.innerHTML = "Tails";
 
             interactions.appendChild(commentbtnEl);
-        }
 
-        // votes
+            // votes
 
-            var userid = window.localStorage.getItem("userid");
-            var arrowupBtns = document.querySelectorAll(".arrowupBtn")
-            var arrowdownBtns = document.querySelectorAll(".arrowdownBtn")
+                var userid = window.localStorage.getItem("userid");
 
-            for (let x = 0; x < arrowupBtns.length; x++){
-                arrowupBtns[x].addEventListener("click", function(){
+                arrowup.addEventListener("click", function(){
 
                     console.log("arrowup clicked");
 
-                    fetch(`http://localhost:8000/api/interactions/upvotepost/${x+1}/${userid}`, { 
+                    fetch(`http://localhost:8000/api/posts/upvote/${x+1}/${userid}`, { 
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -494,23 +471,20 @@ if (!window.location.href.includes("index.html")){
                     })
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data);
-
-                        if (data.upvoted == true){
-                            arrowupBtns[x].id = "on";
-                            arrowdownBtns[x].id = "off";
-                        }
+                        console.log(data); /////////////////////// changed
+                        // if (data.upvoted == true){
+                        //     arrowupBtn.style.backgroundColor = "red";
+                        // }
                     });
 
+                    
                 });
-            }
 
-            for (let x = 0; x < arrowdownBtns.length; x++){
-                arrowdownBtns[x].addEventListener("click", function(){
+                arrowdown.addEventListener("click", function(){
 
                     console.log("arrowdown clicked");
 
-                    fetch(`http://localhost:8000/api/interactions/downvotepost/${x+1}/${userid}`, {
+                    fetch(`http://localhost:8000/api/posts/downvote/${x+1}/${userid}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -518,18 +492,16 @@ if (!window.location.href.includes("index.html")){
                     })
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data);
-                        if (data.downvote == true){
-                            arrowdownBtns[x].id = "on";
-                            arrowupBtns[x].id = "off";
-                        }
+                        console.log(data); ///////////////////// changed
+                        // if (data.downvote == true){
+                        //     arrowdownBtn.style.backgroundColor = "red";
+                        // }
                     });
 
                 });
-            }
+        }
 
-
-        // going to profile
+        // going to profile // not working
 
             var profilePics = document.querySelectorAll(".postProfilePic");
             var usernames = document.querySelectorAll(".postUsername");

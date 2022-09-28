@@ -497,8 +497,10 @@ if (!window.location.href.includes("index.html")){
                         console.log(data);
 
                         if (data.upvoted == true){
+                            arrowupBtns[x].style.backgroundColor = "red";
+
                             arrowupBtns[x].id = "on";
-                            arrowdownBtns[x].id = "off";
+                            arrowdownBtns[x].id = "off"
                         }
                     });
 
@@ -520,13 +522,37 @@ if (!window.location.href.includes("index.html")){
                     .then((data) => {
                         console.log(data);
                         if (data.downvote == true){
-                            arrowdownBtns[x].id = "on";
-                            arrowupBtns[x].id = "off";
+                            arrowdownBtns[x].style.backgroundColor = "red";
+
+                            arrowdownBtns[x].setAttribute("on");
+                            arrowupBtns[x].id = "off"
                         }
                     });
 
                 });
             }
+
+        // already upvoted and downvoted
+
+        // arrowupBtns[x].id = "on";
+        // arrowdownBtns[x].id = "off"
+        var arrowBtns = document.querySelectorAll(".arrowBtn");
+
+        for (let x = 0; x < arrowBtns.length; x++){
+            if(arrowupBtns[x].id == "on"){
+                arrowupBtns[x].style.backgroundColor = "red";
+            }
+            else{
+                arrowupBtns[x].style.backgroundColor = "#F6F6F2";
+            }
+
+            if(arrowdownBtns[x].id == "on"){
+                arrowdownBtns[x].style.backgroundColor = "red";
+            }
+            else{
+                arrowdownBtns[x].style.backgroundColor = "#F6F6F2";
+            }
+        }
 
 
         // going to profile

@@ -12,14 +12,6 @@ $light: #F6F6F2;
     
 }
 
-#on{
-    background-color: red;
-}
-
-#off{
-    background-color: $light;
-}
-
 .wholeProfile{
     width: 100%;
     display: flex;
@@ -55,12 +47,10 @@ $light: #F6F6F2;
     
     input{
         width: 70%;
-        margin: 5%;
     }
 
     button{
-        width: 30%;
-        margin: 5%;
+        width: 25%;
     }
 }
 
@@ -73,8 +63,6 @@ $light: #F6F6F2;
 
     height: 100vh;
     width: 100vw;
-
-    padding: 5%;
 }
 
 .profilePicEditor{
@@ -84,19 +72,6 @@ $light: #F6F6F2;
     width: 90vw;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-
-    h1{
-        font-size: 20px;
-    }
-}
-
-.boxBasics{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5%;
-
 }
 
 #newBio, #newBioBtn{
