@@ -129,12 +129,12 @@ class comment extends Model
 
 
 
-    public function DeletedPost($commentids) //WhenPost is deleted
+    public function DeletedPost($commentid) //WhenPost is deleted
     {
         $interaction = new interaction;
 
-        $interaction->DeleteLikesComment($commentids);
-        $this::where('commentid', $commentids)->delete();
+        $interaction->DeleteLikesComment($commentid);
+        $this::where('commentid', $commentid)->delete();
     }
 
     public function DeletedComment($commentid, $userid) //When the comment is deleted

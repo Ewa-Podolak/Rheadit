@@ -70,6 +70,27 @@ class post extends Model
     }
 
 
+    public function GetUserNewestPosts($userid)
+    {
+
+    }
+
+    public function GetUserLikedPosts($userid)
+    {
+
+    }
+
+    public function GetCommunityNewestPosts($community)
+    {
+
+    }
+
+    public function GetCommunityLikedPosts($community)
+    {
+
+    }
+
+
 
     public function DeletePost($postid, $userid) //When the user deletes their post
     {
@@ -93,11 +114,19 @@ class post extends Model
         return ['Deleted'=>false];
     }
 
-    public function DeletePosts($postids) //When user deleted so multiple posts are deleted 
+    public function DeletePosts($postid) //When user deleted so multiple posts are deleted 
     {
+        $comments = new comment;
+        $interactions = new interaction;
+
         //Delete Comments
+        $tobedeletedcomments = $comments->DeletedPost(comment::where('postid', $postid)->get());
+
+        foreach($tobedeletedcomments as $comment)
+            $comments->DeletedPost($comment->commentid);
 
 
         //Delete Likes
+        $interactions->DeleteLikesPost($postid);
     }
 }

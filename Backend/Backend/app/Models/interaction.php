@@ -151,7 +151,7 @@ class interaction extends Model
         $this::where('postid', $postid)->delete();
     }
 
-    
+
     
     public function DeleteLikesComment($commentid) //When comment is deleted
     {
