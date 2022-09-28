@@ -22,11 +22,14 @@ class post extends Model
         if($numberofpostsmax + 1 == $page * 10)
             return ['postid' => null, 'title' => null, 'body' => null];
         else
-            for($x = (($page - 1) * 10); $x < $numberofpostsmax; $x++)
+            for($x = (($page - 1) * 10); $x < $page * 10; $x++)
             {
-                $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
-                $votes = $this->Votes($allposts[$x]->postid);
-                array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->title, 'username'=>$username, 'votes'=>$votes]);
+                if($x < $numberofpostsmax)
+                {
+                    $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
+                    $votes = $this->Votes($allposts[$x]->postid);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->title, 'username'=>$username, 'votes'=>$votes]);
+                }
             }
         return($postsarray);
     }
