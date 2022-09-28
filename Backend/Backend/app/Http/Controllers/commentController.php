@@ -16,18 +16,18 @@ class commentController extends Controller
     public function FavouriteComment($postid, $commentid, $userid)
     {
         $comment = new comment;
-        $comment->FavouriteComment($postid, $commentid, $userid);
+        return $comment->FavouriteComment($postid, $commentid, $userid);
     }
 
-    public function CreateComment($postid, $title, $body, $userid)
+    public function CreateComment($postid, $commenttext, $userid)
     {
         $comment = new comment;
-        $comment->CreateComment($postid, $title, $body, $userid);
+        //return $comment->CreateComment($postid, $commenttext, $userid);
     }
 
     public function DeleteComment($commentid, $userid)
     {
         $comment = new comment;
-        $comment->DeleteComment($commentid, $userid);
+        return $comment->DeletedComment($commentid, $userid);
     }
 }

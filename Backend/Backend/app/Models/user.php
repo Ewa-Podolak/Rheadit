@@ -43,4 +43,9 @@ class user extends Model
         $this::where('userid', $userid)->update(['bio'=>$newbio]);
         return ['updated'=>true];
     }
+
+    public function DeleteUser($userid)
+    {
+        
+    }
 }

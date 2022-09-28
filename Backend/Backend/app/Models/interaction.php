@@ -145,5 +145,16 @@ class interaction extends Model
         else
             return 0;
     }
+
+    public function DeleteLikesPost($postid) //When post is deleted
+    {
+        $this::where('postid', $postid)->delete();
+    }
+
     
+    
+    public function DeleteLikesComment($commentid) //When comment is deleted
+    {
+        $this::where('commentid', $commentid)->delete();
+    }
 }

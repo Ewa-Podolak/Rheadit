@@ -77,18 +77,31 @@ class comment extends Model
     }
     
     public function FavouriteComment($postid, $commentid, $userid)
-    {
-        
+    { 
+        $commentinfo = comment::where('commentid', $commentid);
+        if(post::where('postid', $postid)->first()->userid == $userid && $commentinfo->first()->favourited == 0)
+        {
+            $commentinfo->update(['favourited'=>1]);
+            return ['favourited'=>true];
+        }
+        else if(post::where('postid', $postid)->first()->userid == $userid && $commentinfo->first()->favourited == 1)
+        {
+            $commentinfo->update(['favourited'=>0]);
+            return ['favourited'=>true];
+        }
+        return ['favourited'=>false];
     }
     
-    public function CreateComment($postid, $title, $body, $userid)
+    public function CreateComment($postid, $comment, $userid)
     {
-    
-    }
-    
-    public function DeleteComment($commentid, $userid)
-    {
-    
+        $community = post::where('postid', $postid)->first()->community;
+        if($this->GetAuthority($userid, $community) > 0)
+        {
+            $this::insert(['postid'=>$postid, 'userid'=>$userid, 'comment'=>$comment]);
+            return ['created'=>true];
+        }
+        else
+            return ['created'=>false];
     }
     
     public function GetAuthority($userid, $community)
@@ -112,5 +125,27 @@ class comment extends Model
         }
         else
             return 0;
+    }
+
+
+
+    public function DeletedPost($commentids) //WhenPost is deleted
+    {
+        $interaction = new interaction;
+
+        $interaction->DeleteLikesComment($commentids);
+        $this::where('commentid', $commentids)->delete();
+    }
+
+    public function DeletedComment($commentid, $userid) //When the comment is deleted
+    {
+        $interaction = new interaction;
+        if($this::where('commentid', $commentid)->first()->userid == $userid)
+        {
+            $interaction->DeleteLikesComment($commentid);
+            $this::where('commentid', $commentid)->delete();
+            return ['deleted'=>true];
+        }
+        return ['deleted'=>false];
     }
 }

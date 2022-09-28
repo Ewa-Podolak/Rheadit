@@ -14,7 +14,7 @@ Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLo
 
 Route::post('/users/register/{username}/{pasword}/{email}', [userController::class, 'RegisterUser']); //Creates new user if user with same username doesn't exist yet //Works
 
-Route::patch('/users/profilepicture/{userid}/{linktopicture}', [userController::class, 'UpdatePicture']); //Allows user to change their profile picture //works
+Route::patch('/users/profilepicture/{userid}/{linktopicture}', [userController::class, 'UpdatePicture']); //Allows user to change their profile picture //no workey
 
 Route::patch('/users/bio/{userid}/{bio}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
 
@@ -29,7 +29,7 @@ Route::get('/users/{username}', [userController::class, 'GetProfile']); //Return
 
 
 //Posts Routes
-Route::get('/posts/homepage/{pagenumber}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
+Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
 
 Route::get('/posts/userposts/newsest/{userid}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
 
@@ -46,16 +46,16 @@ Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'Delete
 
 
 //Comments Routes
-Route::get('/commments/{postid}/{page}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes 
+Route::get('/comments/{postid}/{page}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes //works
 //and whether they are favourited by the creater
 //Remember to discuss page numebr with Milllie!!!!!
 //more crying in egyptian
 
-Route::patch('/commments/favourite/{postid}/{commentid}/{userid}', [interactionController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment 
+Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment //works
 
-Route::post('/commments/create/{postid}/{title}/{body}/{userid}', [interactionController::class, 'CreateComment']); //Allows user to create comment
+Route::post('/comments/create/{postid}/{comment}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment //works
 
-Route::delete('/commments/delete/{commentid}/{userid}', [interactionController::class, 'GetComments']); //Allows user to delete a comment
+Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'GetComments']); //Allows user to delete a comment //works
 
 
 
