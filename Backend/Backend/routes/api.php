@@ -54,13 +54,13 @@ Route::post('/commments/create/{postid}/{userid}', [interactionController::class
 Route::delete('/commments/delete/{postid}/{userid}', [interactionController::class, 'GetComments']); //Allows user to delete a comment
 
 //Interaction Routes
-Route::post('/interactions/upvote/{postid}/{userid}', [postController::class, 'UpvotePost']); //Allows user to like post 
+Route::post('/interactions/upvotepost/{postid}/{userid}', [interactionController::class, 'UpvotePost']); //Allows user to like post 
 
-Route::post('/interactions/downvote/{postid}/{userid}', [postController::class, 'DownvotePost']); //Allows user to dislike post 
+Route::post('/interactions/downvotepost/{postid}/{userid}', [interactionController::class, 'DownvotePost']); //Allows user to dislike post 
 
-Route::patch('/interactions/upvote/{postid}/{userid}', [interactionController::class, 'Upvotecomment']); //Allows user to upvote commment
+Route::patch('/interactions/upvotecomment/{postid}/{userid}', [interactionController::class, 'Upvotecomment']); //Allows user to upvote commment
 
-Route::patch('/interactions/downvote/{postid}/{userid}', [interactionController::class, 'DownvoteComments']); //Allows user to downvote comment
+Route::patch('/interactions/downvotecomment/{postid}/{userid}', [interactionController::class, 'DownvoteComments']); //Allows user to downvote comment
 
 
 
