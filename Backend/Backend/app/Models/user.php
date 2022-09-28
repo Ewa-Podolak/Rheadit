@@ -46,6 +46,17 @@ class user extends Model
 
     public function DeleteUser($userid)
     {
+        $community = new community;
+
+        $alljoinedcommunities = community::where('userid', $userid)->get();
+
+        foreach($alljoinedcommunities as $community)
+            $community->LeaveComunity($community->community, $userid);
         
+        follower::where('user', $userid)->orwhere('follower', $userid)->delete();
+
+        $this::where('userid', $userid)->delete();
+
+        return ['deleted'=>true];
     }
 }

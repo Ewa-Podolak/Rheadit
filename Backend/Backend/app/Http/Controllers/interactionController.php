@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\interaction;
-use Illuminate\Http\Request;
 
 class interactionController extends Controller
 {

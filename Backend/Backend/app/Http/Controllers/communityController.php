@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\community;
-use Illuminate\Http\Request;
 
 class communityController extends Controller
 {
@@ -23,5 +22,11 @@ class communityController extends Controller
     {
         $community = new community;
         return $community->TransferOwnership($communityname, $userid, $newowner);
+    }
+
+    public function DeleteComunity($communityname, $userid)
+    {
+        $community = new community;
+        return $community->DeleteCommunity($communityname, $userid);
     }
 }

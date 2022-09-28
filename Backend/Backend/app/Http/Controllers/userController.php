@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\post;
-use Illuminate\Http\Request;
 use App\Models\user;
 
 class userController extends Controller

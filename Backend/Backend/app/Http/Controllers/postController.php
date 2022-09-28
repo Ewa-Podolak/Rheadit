@@ -36,6 +36,13 @@ class postController extends Controller
 
     public function PostInCommunity($community, $userid)
     {
+        
+        // $validated = request()->validate([
+        //     'title' => 'required|unique:posts|max:1',
+        //     'body' => ['required', 'max:8'],
+        // ]);
+        // dd('jk');
+
         $post = new post;
         return $post->PostInCommunity($community, $userid);
     }

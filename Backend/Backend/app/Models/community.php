@@ -25,10 +25,17 @@ class community extends Model
 
     public function LeaveCommunity($community, $userid)
     {
+        $post = new post;
+
         $owner = $this::where('community', $community)->where('userid', $userid);
 
         if(!$owner->get()->IsEmpty())
         {
+            $allposts = post::where('userid', $userid)->where('communtiy', $community)->get();
+
+            foreach($allposts as $post)
+                $post->DeletePosts($post->postid);
+
             $owner->delete();
             return ['left'=>true];
         }
@@ -43,5 +50,19 @@ class community extends Model
             return ['transfered'=>true];
         }
         return ['transfered'=>false];
+    }
+
+    public function DeleteCommunity($community, $userid)
+    {
+        if($this::where('userid', $userid)->where('community', $community)->first()->authority == 'owner')
+        {
+            $allusers = $this::where('community', $community)->get();
+
+            foreach($allusers as $user)
+                $this->LeaveCommunity($community, $user->userid);
+
+            return ['deleted'=>true];
+        }
+        return ['deleted'=>false];
     }
 }

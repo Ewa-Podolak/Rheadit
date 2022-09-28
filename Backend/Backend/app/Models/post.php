@@ -93,11 +93,19 @@ class post extends Model
         return ['Deleted'=>false];
     }
 
-    public function DeletePosts($postids) //When user deleted so multiple posts are deleted 
+    public function DeletePosts($postid) //When user deleted so multiple posts are deleted 
     {
+        $comments = new comment;
+        $interactions = new interaction;
+
         //Delete Comments
+        $tobedeletedcomments = $comments->DeletedPost(comment::where('postid', $postid)->get());
+
+        foreach($tobedeletedcomments as $comment)
+            $comments->DeletedPost($comment->commentid);
 
 
         //Delete Likes
+        $interactions->DeleteLikesPost($postid);
     }
 }

@@ -22,7 +22,7 @@ Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //
 
 Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password //welp
 
-Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //i am crying 
+Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //works
 
 Route::get('/users/{username}', [userController::class, 'GetProfile']); //Returns username, bio, profilpic, number of followers, followed/following //works
 
@@ -45,41 +45,41 @@ Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'Delete
 
 
 
-//Comments Routes
-Route::get('/comments/{postid}/{page}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes //works
+//Comments Routes //All works
+Route::get('/comments/{postid}/{page}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes
 //and whether they are favourited by the creater
-//Remember to discuss page numebr with Milllie!!!!!
-//more crying in egyptian
 
-Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment //works
+Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment
 
-Route::post('/comments/create/{postid}/{comment}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment //works
+Route::post('/comments/create/{postid}/{comment}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment
 
-Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'GetComments']); //Allows user to delete a comment //works
+Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'GetComments']); //Allows user to delete a comment
 
 
 
-//Interaction Routes
-Route::post('/interactions/upvotepost/{postid}/{userid}', [interactionController::class, 'UpvotePost']); //Allows user to like post //works
+//Interaction Routes //All works
+Route::post('/interactions/upvotepost/{postid}/{userid}', [interactionController::class, 'UpvotePost']); //Allows user to like post
 
-Route::post('/interactions/downvotepost/{postid}/{userid}', [interactionController::class, 'DownvotePost']); //Allows user to dislike post //works
+Route::post('/interactions/downvotepost/{postid}/{userid}', [interactionController::class, 'DownvotePost']); //Allows user to dislike post
 
-Route::post('/interactions/upvotecomment/{commentid}/{userid}', [interactionController::class, 'Upvotecomment']); //Allows user to upvote commment //works
+Route::post('/interactions/upvotecomment/{commentid}/{userid}', [interactionController::class, 'Upvotecomment']); //Allows user to upvote commment
 
-Route::post('/interactions/downvotecomment/{commentid}/{userid}', [interactionController::class, 'DownvoteComment']); //Allows user to downvote comment //works
-
-
-
-//Followers Routes
-Route::get('/followers/list/followers/{username}', [followerController::class, 'GetFollowersList']); //Returns list of all usernames of followers //works
-
-Route::get('/followers/list/followed/{username}', [followerController::class, 'GetFollowedList']); //Returns list of all usernames of followed/following //works
+Route::post('/interactions/downvotecomment/{commentid}/{userid}', [interactionController::class, 'DownvoteComment']); //Allows user to downvote comment
 
 
 
-//Community
-Route::post('/community/{communityname}/join/{userid}', [communityController::class, 'JoinCommunity']); //Allows user to join community //works
+//Followers Routes //All works
+Route::get('/followers/list/followers/{username}', [followerController::class, 'GetFollowersList']); //Returns list of all usernames of followers
 
-Route::delete('/community/{communityname}/leave/{userid}', [communityController::class, 'LeaveCommunity']); //Allows user to leave //works
+Route::get('/followers/list/followed/{username}', [followerController::class, 'GetFollowedList']); //Returns list of all usernames of followed/following
 
-Route::patch('/community/{communityname}/transferownership/{userid}/{newonwerid}', [communityController::class, 'TransferOwnership']); //Allows for community ownership transfer //works
+
+
+//Community //All works
+Route::post('/community/{communityname}/join/{userid}', [communityController::class, 'JoinCommunity']); //Allows user to join community
+
+Route::delete('/community/{communityname}/leave/{userid}', [communityController::class, 'LeaveCommunity']); //Allows user to leave
+
+Route::patch('/community/{communityname}/transferownership/{userid}/{newonwerid}', [communityController::class, 'TransferOwnership']); //Allows for community ownership transfer
+
+Route::delete('/community/delete/{communityname}/{userid}', [commentController::class, 'DeleteCommunity']); //Allows owner to delete a community
