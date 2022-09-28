@@ -40,10 +40,10 @@ class interaction extends Model
 
     public function DownvotePost($postid, $userid)
     {
-        $interaction = post::where('userid', $userid)->where('postid', $postid)->get();
+        $interaction = $this::where('userid', $userid)->where('postid', $postid)->get();
         if($interaction->IsEmpty())
         {
-            $authority = $this->GetAuthority($userid, ($this::where('postid', $postid)->first()->community));
+            $authority = $this->GetAuthority($userid, (post::where('postid', $postid)->first()->community));
             if ($authority > 0)
             {
                 $this::insert(['userid'=>$userid, 'postid'=>$postid, 'liked'=>0]);

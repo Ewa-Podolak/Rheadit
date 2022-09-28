@@ -72,7 +72,7 @@ class post extends Model
 
     public function GetUserNewestPosts($userid)
     {
-
+        $posts = $this::where('userid', $userid)->get();
     }
 
     public function GetUserLikedPosts($userid)
