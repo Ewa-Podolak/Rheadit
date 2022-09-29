@@ -474,8 +474,7 @@ if (!window.location.href.includes("index.html")){
             if(data[x].voted == "upvote"){
                 arrowupBtn.style.backgroundColor = "red";
             }
-
-            if(data[x].voted == "downvoted"){
+            else if(data[x].voted == "downvote"){
                 arrowdownBtn.style.backgroundColor = "red";
             }
 
@@ -516,7 +515,7 @@ if (!window.location.href.includes("index.html")){
                         if (data.downvote == true){
                             arrowupBtn.style.backgroundColor = "#F6F6F2"
                             arrowdownBtn.style.backgroundColor = "red";
-                            getPosts(1)
+                            //getPosts(1)
                         }
                     });
             })

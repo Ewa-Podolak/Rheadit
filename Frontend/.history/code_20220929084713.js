@@ -474,8 +474,8 @@ if (!window.location.href.includes("index.html")){
             if(data[x].voted == "upvote"){
                 arrowupBtn.style.backgroundColor = "red";
             }
-
-            if(data[x].voted == "downvoted"){
+            
+            if(data[x].voted == "downvote"){
                 arrowdownBtn.style.backgroundColor = "red";
             }
 
