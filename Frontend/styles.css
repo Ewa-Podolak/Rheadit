@@ -142,6 +142,15 @@ input {
   justify-content: end;
 }
 
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #FAB3A9 inset !important;
+  -webkit-text-fill-color: #373F47 !important;
+}
+
 .loginContainer, .registerContainer {
   margin: 5%;
   background-color: #F6F6F2;
@@ -169,6 +178,7 @@ input {
 .loginContainer .error, .registerContainer .error {
   display: none;
   font-style: italic;
+  text-align: center;
   font-size: 12px;
   color: rgba(255, 0, 0, 0.7);
 }
