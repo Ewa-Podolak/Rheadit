@@ -233,13 +233,10 @@ if (!window.location.href.includes("index.html")){
                 
                 boxContents.innerHTML = "k"
 
-                fetch(`http://localhost:8000/api/followers/list/followers/${username}`) /////////// not giving anything
+                fetch(`http://localhost:8000/api/followers/list/followers/${username}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    // reset // boxContents.innerHTML = "Followers: "
-                    // for loop in each follower
-                    // boxContents.innerHTML += data.follower
                 });
 
                 var closeFollowers = document.querySelector("#closeBtn");
@@ -250,15 +247,8 @@ if (!window.location.href.includes("index.html")){
 
             followingBtn.addEventListener("click", function(){
                 followersOrFollowingListContainer.style.display = "flex";
-
-                fetch(`http://localhost:8000/api/followers/list/followed/${username}`) /////////// not giving anything
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    // reset // boxContents.innerHTML = "Following: "
-                    // for loop in each following
-                    // boxContents.innerHTML += data.following
-                });
+                
+                boxContents.innerHTML = "k"
 
                 var closeFollowing = document.querySelector("#closeBtn");
                 closeFollowing.addEventListener("click", function(){

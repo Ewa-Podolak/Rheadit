@@ -189,7 +189,7 @@ if (!window.location.href.includes("index.html")){
 
 
 
-    // profile
+    // personal profile
 
         if(window.location.href.includes("profile")){
 
@@ -230,17 +230,7 @@ if (!window.location.href.includes("index.html")){
 
             followersBtn.addEventListener("click", function(){
                 followersOrFollowingListContainer.style.display = "flex";
-                
                 boxContents.innerHTML = "k"
-
-                fetch(`http://localhost:8000/api/followers/list/followers/${username}`) /////////// not giving anything
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    // reset // boxContents.innerHTML = "Followers: "
-                    // for loop in each follower
-                    // boxContents.innerHTML += data.follower
-                });
 
                 var closeFollowers = document.querySelector("#closeBtn");
                 closeFollowers.addEventListener("click", function(){
@@ -250,15 +240,7 @@ if (!window.location.href.includes("index.html")){
 
             followingBtn.addEventListener("click", function(){
                 followersOrFollowingListContainer.style.display = "flex";
-
-                fetch(`http://localhost:8000/api/followers/list/followed/${username}`) /////////// not giving anything
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    // reset // boxContents.innerHTML = "Following: "
-                    // for loop in each following
-                    // boxContents.innerHTML += data.following
-                });
+                boxContents.innerHTML = "k"
 
                 var closeFollowing = document.querySelector("#closeBtn");
                 closeFollowing.addEventListener("click", function(){

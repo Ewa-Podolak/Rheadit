@@ -6,14 +6,6 @@
   color: #373F47;
 }
 
-#on {
-  background-color: red;
-}
-
-#off {
-  background-color: #F6F6F2;
-}
-
 .wholeProfile {
   width: 100%;
   display: flex;
@@ -56,7 +48,21 @@
   margin: 5%;
 }
 
-.profilePicEditorContainer, .followersOrFollowingListContainer {
+.followersOrFollowingListContainer {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 5%;
+}
+
+.boxContents {
+  padding: 5%;
+}
+
+.profilePicEditorContainer {
   position: absolute;
   display: none;
   justify-content: center;
@@ -283,7 +289,6 @@ input {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: end;
 }
 .profile #profilePic {
   height: 5vh;
@@ -405,7 +410,7 @@ input {
   width: 100%;
 }
 .postsContainer .comments ul li .profile {
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .profileBox {
@@ -416,6 +421,7 @@ input {
   margin: 5%;
   border-radius: 15px;
   width: 50%;
+  padding: 2% 0;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .profileBox #username, .profileBox #groupUsername {
@@ -496,8 +502,13 @@ span {
   background-color: transparent;
 }
 
+#commentDate {
+  font-size: 10px;
+}
+
 .pageNumContainer {
   display: flex;
+  margin: 5%;
   flex-direction: row;
   background-color: #F6F6F2;
   padding: 1% 3%;

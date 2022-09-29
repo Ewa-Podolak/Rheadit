@@ -237,7 +237,7 @@ if (!window.location.href.includes("index.html")){
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    // reset // boxContents.innerHTML = "Followers: "
+                    // reset // boxContents.innerHTML = ""
                     // for loop in each follower
                     // boxContents.innerHTML += data.follower
                 });
@@ -250,15 +250,10 @@ if (!window.location.href.includes("index.html")){
 
             followingBtn.addEventListener("click", function(){
                 followersOrFollowingListContainer.style.display = "flex";
+                
+                boxContents.innerHTML = "k"
 
-                fetch(`http://localhost:8000/api/followers/list/followed/${username}`) /////////// not giving anything
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    // reset // boxContents.innerHTML = "Following: "
-                    // for loop in each following
-                    // boxContents.innerHTML += data.following
-                });
+
 
                 var closeFollowing = document.querySelector("#closeBtn");
                 closeFollowing.addEventListener("click", function(){

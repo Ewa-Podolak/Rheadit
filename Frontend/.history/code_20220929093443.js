@@ -189,7 +189,7 @@ if (!window.location.href.includes("index.html")){
 
 
 
-    // profile
+    // personal profile
 
         if(window.location.href.includes("profile")){
 
@@ -225,25 +225,12 @@ if (!window.location.href.includes("index.html")){
             var followersBtn = document.querySelector(".followers");
             var followingBtn = document.querySelector(".following");
             var followersOrFollowingListContainer = document.querySelector(".followersOrFollowingListContainer");
-            var boxContents = document.querySelector(".boxContents");
-
 
             followersBtn.addEventListener("click", function(){
                 followersOrFollowingListContainer.style.display = "flex";
-                
-                boxContents.innerHTML = "k"
 
-                fetch(`http://localhost:8000/api/followers/list/followers/${username}`) /////////// not giving anything
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    // reset // boxContents.innerHTML = "Followers: "
-                    // for loop in each follower
-                    // boxContents.innerHTML += data.follower
-                });
-
-                var closeFollowers = document.querySelector("#closeBtn");
-                closeFollowers.addEventListener("click", function(){
+                var close = document.querySelector(".Fclose");
+                close.addEventListener("click", function(){
                     followersOrFollowingListContainer.style.display = "none"
                 })
             })
@@ -251,17 +238,8 @@ if (!window.location.href.includes("index.html")){
             followingBtn.addEventListener("click", function(){
                 followersOrFollowingListContainer.style.display = "flex";
 
-                fetch(`http://localhost:8000/api/followers/list/followed/${username}`) /////////// not giving anything
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    // reset // boxContents.innerHTML = "Following: "
-                    // for loop in each following
-                    // boxContents.innerHTML += data.following
-                });
-
-                var closeFollowing = document.querySelector("#closeBtn");
-                closeFollowing.addEventListener("click", function(){
+                var close = document.querySelector(".Fclose");
+                close.addEventListener("click", function(){
                     followersOrFollowingListContainer.style.display = "none"
                 })
             })
@@ -572,32 +550,8 @@ if (!window.location.href.includes("index.html")){
 
             comments.appendChild(ul);
 
-            makeComment.addEventListener("click", function(){
-                // /comments/create/{postid}/{comment}/{userid}
-                var comment = commentInput.value;
-
-                console.log(x+1);
-                console.log(comment);
-                console.log(userid);
-
-                if (comment != ""){
-                    fetch(`http://localhost:8000/api/comments/create/${x+1}/${comment}/${userid}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then(response => response.json())
-                    .then((data) => {
-                            console.log(data);
-                    });
-                }
-                else{
-                    alert("comment something");
-                }
-            })
-
             // fetch comments
+            // /comments/${x+1}/${pagenumber}
 
             fetch(`http://localhost:8000/api/comments/${x+1}/${pagenumber}`)
             .then(response => response.json())
@@ -674,19 +628,18 @@ if (!window.location.href.includes("index.html")){
                     comment.appendChild(commentText);
 
                     if(data[y].voted == "upvote"){
-                        commentarrowupBtn.style.backgroundColor = "#FAB3A9";
+                        arrowupBtn.style.backgroundColor = "#FAB3A9";
                     }
         
                     if(data[y].voted == "downvoted"){
-                        commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
+                        arrowdownBtn.style.backgroundColor = "#FAB3A9";
                     }
         
                     var userid = window.localStorage.getItem("userid");
 
                     commentarrowupBtn.addEventListener("click", function(){
 
-                        // /interactions/upvotecomment/{commentid}/{userid}
-                        fetch(`http://localhost:8000/api/interactions/upvotecomment/${y+1}/${userid}`, { 
+                        fetch(`http://localhost:8000/api/interactions/upvotepost/${x+1}/${userid}`, { 
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -706,23 +659,22 @@ if (!window.location.href.includes("index.html")){
         
                     commentarrowdownBtn.addEventListener("click", function(){
         
-                        // /interactions/downvotecomment/{commentid}/{userid}
-                        fetch(`http://localhost:8000/api/interactions/downvotecomment/${y+1}/${userid}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then(response => response.json())
-                        .then((data) => {
-                            console.log(data);
-    
-                            if (data.downvote == true){
-                                commentarrowupBtn.style.backgroundColor = "#F6F6F2"
-                                commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
-                                getPosts(1)
-                            }
-                        });
+                            fetch(`http://localhost:8000/api/interactions/downvotepost/${x+1}/${userid}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log(data);
+        
+                                if (data.downvote == true){
+                                    commentarrowupBtn.style.backgroundColor = "#F6F6F2"
+                                    commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
+                                    getPosts(1)
+                                }
+                            });
                     })
 
                 }
