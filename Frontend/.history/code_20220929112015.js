@@ -78,15 +78,7 @@ if (window.location.href.includes("index.html")){
 
                 registererrortext.style.display = "none";
                 console.log(data);
-
-                if (data.userid != null){
-
-                    var userid = data.userid;
-                    var username = data.username;
-                    window.localStorage.setItem("userid", userid);
-                    window.localStorage.setItem("username", username);
-                    window.localStorage.setItem("usernameToGet", username);
-
+                if (data.usercreated == true){
                     registererrortext.style.display = "none";
                     window.location.href = "home.html";
                 }

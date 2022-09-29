@@ -78,8 +78,8 @@ if (window.location.href.includes("index.html")){
 
                 registererrortext.style.display = "none";
                 console.log(data);
-
-                if (data.userid != null){
+                console.log(data.userid)
+                if (data.userid == true){
 
                     var userid = data.userid;
                     var username = data.username;
@@ -88,7 +88,7 @@ if (window.location.href.includes("index.html")){
                     window.localStorage.setItem("usernameToGet", username);
 
                     registererrortext.style.display = "none";
-                    window.location.href = "home.html";
+                    //window.location.href = "home.html";
                 }
                 else{
                     registererrortext.style.display = "block";

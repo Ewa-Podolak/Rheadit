@@ -319,8 +319,24 @@ input {
   height: 60%;
 }
 
+.btn:focus {
+  outline: none;
+  border: transparent;
+}
+
+.btn:hover {
+  outline: none;
+  border: transparent;
+}
+
 .postAndComments {
   width: 100%;
+}
+
+.seeMore {
+  width: 60%;
+  margin: 0 20%;
+  background-color: #F6F6F2;
 }
 
 .postsContainer {
@@ -352,11 +368,11 @@ input {
 }
 .postsContainer .post .thePost .commentbtn {
   font-size: 15px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   padding: 20%;
   margin-top: 40%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 .postsContainer .post .thePost img {
   -o-object-fit: cover;

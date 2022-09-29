@@ -30,7 +30,6 @@ if (window.location.href.includes("index.html")){
                     var username = data.username;
                     window.localStorage.setItem("userid", userid);
                     window.localStorage.setItem("username", username);
-                    window.localStorage.setItem("usernameToGet", username);
                     window.location.href = "home.html";
                 }
                 else{
@@ -78,15 +77,7 @@ if (window.location.href.includes("index.html")){
 
                 registererrortext.style.display = "none";
                 console.log(data);
-
-                if (data.userid != null){
-
-                    var userid = data.userid;
-                    var username = data.username;
-                    window.localStorage.setItem("userid", userid);
-                    window.localStorage.setItem("username", username);
-                    window.localStorage.setItem("usernameToGet", username);
-
+                if (data.usercreated == true){
                     registererrortext.style.display = "none";
                     window.location.href = "home.html";
                 }
@@ -203,7 +194,7 @@ if (!window.location.href.includes("index.html")){
         if(window.location.href.includes("profile")){
 
             var personal = window.localStorage.getItem("personal");
-            var usernameProfile = window.localStorage.getItem("usernameToGet");
+            var username = window.localStorage.getItem("usernameToGet");
 
             var usernameText = document.getElementById("usernameText");
             var followers = document.getElementById("numOfFollowers");
@@ -211,12 +202,12 @@ if (!window.location.href.includes("index.html")){
             var bioText = document.getElementById("bioText");
             var profilePicture = document.querySelector(".profilepagePic");
 
-            fetch(`http://localhost:8000/api/users/${usernameProfile}`)
+            fetch(`http://localhost:8000/api/users/${username}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
 
-                usernameText.innerHTML = usernameProfile;
+                usernameText.innerHTML = username;
                 bioText.innerHTML = data.bio;
                 followers.innerHTML = data.followers;
                 following.innerHTML = data.following;
@@ -242,7 +233,7 @@ if (!window.location.href.includes("index.html")){
                 
                 boxContents.innerHTML = "k"
 
-                fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) /////////// not giving anything
+                fetch(`http://localhost:8000/api/followers/list/followers/${username}`) /////////// not giving anything
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
@@ -260,7 +251,7 @@ if (!window.location.href.includes("index.html")){
             followingBtn.addEventListener("click", function(){
                 followersOrFollowingListContainer.style.display = "flex";
 
-                fetch(`http://localhost:8000/api/followers/list/followed/${usernameProfile}`) /////////// not giving anything
+                fetch(`http://localhost:8000/api/followers/list/followed/${username}`) /////////// not giving anything
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
@@ -498,7 +489,7 @@ if (!window.location.href.includes("index.html")){
 
             const commentbtnEl = document.createElement("button");
             commentbtnEl.classList.add("commentbtn");
-            commentbtnEl.innerHTML = "Tails: 0";
+            commentbtnEl.innerHTML = "Tails";
 
             interactions.appendChild(commentbtnEl);
 
@@ -682,8 +673,6 @@ if (!window.location.href.includes("index.html")){
 
                     comment.appendChild(commentText);
 
-                    commentbtnEl.innerHTML = `Tails: ${data.length}`;
-
                     if(data[y].voted == "upvote"){
                         commentarrowupBtn.style.backgroundColor = "#FAB3A9";
                     }
@@ -737,13 +726,6 @@ if (!window.location.href.includes("index.html")){
                     })
 
                 }
-
-                // if data.length > (what number is a page of comments (ewa))
-                var seeMore = document.createElement("button");
-                seeMore.classList.add("seeMore");
-                seeMore.innerHTML = "see more..."
-
-                comments.appendChild(seeMore);
             });
         }
 

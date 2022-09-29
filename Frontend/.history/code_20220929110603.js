@@ -78,15 +78,7 @@ if (window.location.href.includes("index.html")){
 
                 registererrortext.style.display = "none";
                 console.log(data);
-
-                if (data.userid != null){
-
-                    var userid = data.userid;
-                    var username = data.username;
-                    window.localStorage.setItem("userid", userid);
-                    window.localStorage.setItem("username", username);
-                    window.localStorage.setItem("usernameToGet", username);
-
+                if (data.usercreated == true){
                     registererrortext.style.display = "none";
                     window.location.href = "home.html";
                 }
@@ -498,7 +490,7 @@ if (!window.location.href.includes("index.html")){
 
             const commentbtnEl = document.createElement("button");
             commentbtnEl.classList.add("commentbtn");
-            commentbtnEl.innerHTML = "Tails: 0";
+            commentbtnEl.innerHTML = "Tails";
 
             interactions.appendChild(commentbtnEl);
 
@@ -737,13 +729,6 @@ if (!window.location.href.includes("index.html")){
                     })
 
                 }
-
-                // if data.length > (what number is a page of comments (ewa))
-                var seeMore = document.createElement("button");
-                seeMore.classList.add("seeMore");
-                seeMore.innerHTML = "see more..."
-
-                comments.appendChild(seeMore);
             });
         }
 

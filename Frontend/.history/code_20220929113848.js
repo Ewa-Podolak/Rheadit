@@ -88,7 +88,7 @@ if (window.location.href.includes("index.html")){
                     window.localStorage.setItem("usernameToGet", username);
 
                     registererrortext.style.display = "none";
-                    window.location.href = "home.html";
+                    //window.location.href = "home.html";
                 }
                 else{
                     registererrortext.style.display = "block";

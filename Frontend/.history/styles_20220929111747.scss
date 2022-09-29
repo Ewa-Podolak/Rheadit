@@ -358,16 +358,6 @@ input{
     }
 }
 
-.btn:focus { 
-    outline:none;
-    border: transparent;
-}
-
-.btn:hover{
-    outline:none;
-    border: transparent;
-}
-
 .postAndComments{
     width: 100%;
 }
@@ -375,7 +365,6 @@ input{
 .seeMore{
     width: 60%;
     margin: 0 20%;
-    background-color: $light;
 }
 
 .postsContainer{
