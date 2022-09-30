@@ -285,7 +285,7 @@ if (!window.location.href.includes("index.html")){
                 var editProfile = document.getElementById("editProfile");
                 var newBio = document.getElementById("newBio");
                 var newBioBtn = document.getElementById("newBioBtn");
-                var followBtn = document.getElementById("followBtn");
+                var followBtn = document.getElementById("#followBtn");
 
                 followBtn.style.display = "none";
         
