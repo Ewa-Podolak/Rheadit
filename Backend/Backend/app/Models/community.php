@@ -31,7 +31,7 @@ class community extends Model
 
         if(!$owner->get()->IsEmpty())
         {
-            $allposts = post::where('userid', $userid)->where('communtiy', $community)->get();
+            $allposts = post::where('userid', $userid)->where('community', $community)->get();
 
             foreach($allposts as $post)
                 $post->DeletePosts($post->postid);
