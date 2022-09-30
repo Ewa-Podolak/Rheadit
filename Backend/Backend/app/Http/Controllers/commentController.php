@@ -6,10 +6,10 @@ use App\Models\comment;
 
 class commentController extends Controller
 {
-    public function GetComments($postid, $page)
+    public function GetComments($postid, $page, $userid)
     {
         $comment = new comment;
-        return $comment->GetComments($postid, $page);
+        return $comment->GetComments($postid, $page, $userid);
     }
 
     public function FavouriteComment($postid, $commentid, $userid)

@@ -46,7 +46,7 @@ Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'Delete
 
 
 //Comments Routes //All works
-Route::get('/comments/{postid}/{page}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes
+Route::get('/comments/{postid}/{page}/{userid}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes
 //and whether they are favourited by the creater
 
 Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment

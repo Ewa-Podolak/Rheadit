@@ -12,7 +12,7 @@ class comment extends Model
     protected $table = 'comments';
     public $timestamps = false;
 
-    public function GetComments($postid, $page)
+    public function GetComments($postid, $page, $userid)
     {
         $allfavouritecomments = $this::where('postid', $postid)->where('favourited', 1)->orderby('created_at')->get();
         $allnotfavouritecomments = $this::where('postid', $postid)->where('favourited', 0)->orderby('created_at')->get();
@@ -23,24 +23,45 @@ class comment extends Model
         foreach($allfavouritecomments as $comment)
         {
             $comment['votes'] = $this->Votes($comment->commentid);
+            $voted = interaction::where('userid', $userid)->where('commentid', $comment->commentid)->get();
+            if(!$voted->IsEmpty())
+                    {
+                        if($voted[0]->liked == 1)
+                            $voted = 'upvote';
+                        else
+                            $voted = 'downvoted';
+                    }
+                    else
+                        $voted = null;
             array_push($favouritecommentarray, ['commentid'=>$comment->commentid, 
                                                 'comment'=>$comment->comment, 
                                                 'votes'=>$comment->votes, 
                                                 'favourited'=>true,
                                                 'created_at'=>$comment->created_at, 
-                                                'username'=>user::where('userid', $comment->userid)->first()->username]);
+                                                'username'=>user::where('userid', $comment->userid)->first()->username,
+                                                'voted'=>$voted]);
         }
 
         foreach($allnotfavouritecomments as $comment)
         {
             $comment['votes'] = $this->Votes($comment->commentid);
-            $comment['votes'] = $this->Votes($comment->commentid);
+            $voted = interaction::where('userid', $userid)->where('commentid', $comment->commentid)->get();
+            if(!$voted->IsEmpty())
+                    {
+                        if($voted[0]->liked == 1)
+                            $voted = 'upvote';
+                        else
+                            $voted = 'downvoted';
+                    }
+                    else
+                        $voted = null;
             array_push($notfavouritecommentarray, ['commentid'=>$comment->commentid, 
                                                 'comment'=>$comment->comment, 
                                                 'votes'=>$comment->votes, 
                                                 'favourited'=>false,
                                                 'created_at'=>$comment->created_at, 
-                                                'username'=>user::where('userid', $comment->userid)->first()->username]);
+                                                'username'=>user::where('userid', $comment->userid)->first()->username,
+                                                'voted'=>$voted]);
         }
 
         $votes = array_column($favouritecommentarray, 'votes');

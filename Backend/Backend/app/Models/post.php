@@ -38,19 +38,30 @@ class post extends Model
                     else
                         $voted = null;
                     $votes = $this->Votes($allposts[$x]->postid);
-                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->title, 'username'=>$username, 'votes'=>$votes, 'voted'=>$voted]);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->body,
+                    'username'=>$username, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
                 }
             }
         return($postsarray);
     }
 
-    public function ReturnPost($postid)
+    public function ReturnPost($postid, $userid)
     {
         $post = $this::where('postid', $postid)->first();
         $votes = $this->Votes($postid);
         $username = user::where('userid', $post->userid)->first()->username; 
+        $voted = interaction::where('userid', $userid)->where('postid', $postid)->get();
+                    if(!$voted->IsEmpty())
+                    {
+                        if($voted[0]->liked == 1)
+                            $voted = 'upvote';
+                        else
+                            $voted = 'downvoted';
+                    }
+                    else
+                        $voted = null;
 
-        return ['head'=>$post->title, 'upvotes'=> $votes, 'username'=>$username, 'community'=>$post->title, 'created_at'=>$post->created_at];
+        return ['postid'=>$post->postid, 'head'=>$post->title, 'body'=>$post->body, 'username'=>$username, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at];
     }
 
     public function PostInCommunity($community, $userid)
@@ -135,7 +146,7 @@ class post extends Model
 
     public function GetCommunityLikedPosts($community, $page)
     {
-        $posts = $this::where('userid', $userid)->get();
+        $posts = $this::where('community', $community)->get();
 
         if(count($posts) + 1 == $page * 5)
         {
