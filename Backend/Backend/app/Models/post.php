@@ -70,24 +70,88 @@ class post extends Model
     }
 
 
-    public function GetUserNewestPosts($userid)
+    public function GetUserNewestPosts($userid, $page)
     {
         $posts = $this::where('userid', $userid)->get();
+
+        if(count($posts) + 1 == $page * 5)
+        {
+            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+        }
+        else
+        {
+            $endarray = [];
+            for($x = ($page - 1) * 5; $x < ($page * 5); $x++)
+            {
+                if($x < count($posts))
+                    array_push($endarray, $posts[$x]);
+            }
+        }
+
+        return $endarray;
     }
 
-    public function GetUserLikedPosts($userid)
+    public function GetUserLikedPosts($userid, $page)
     {
+        $posts = $this::where('userid', $userid)->get();
 
+        if(count($posts) + 1 == $page * 5)
+        {
+            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+        }
+        else
+        {
+            $endarray = [];
+            for($x = ($page - 1) * 5; $x < ($page * 5); $x++)
+            {
+                if($x < count($posts))
+                    array_push($endarray, $posts[$x]);
+            }
+        }
+
+        return $endarray;
     }
 
-    public function GetCommunityNewestPosts($community)
+    public function GetCommunityNewestPosts($community, $page)
     {
+        $posts = $this::where('community', $community)->get();
 
+        if(count($posts) + 1 == $page * 5)
+        {
+            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+        }
+        else
+        {
+            $endarray = [];
+            for($x = ($page - 1) * 5; $x < ($page * 5); $x++)
+            {
+                if($x < count($posts))
+                    array_push($endarray, $posts[$x]);
+            }
+        }
+
+        return $endarray;
     }
 
-    public function GetCommunityLikedPosts($community)
+    public function GetCommunityLikedPosts($community, $page)
     {
+        $posts = $this::where('userid', $userid)->get();
 
+        if(count($posts) + 1 == $page * 5)
+        {
+            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+        }
+        else
+        {
+            $endarray = [];
+            for($x = ($page - 1) * 5; $x < ($page * 5); $x++)
+            {
+                if($x < count($posts))
+                    array_push($endarray, $posts[$x]);
+            }
+        }
+
+        return $endarray;
     }
 
 

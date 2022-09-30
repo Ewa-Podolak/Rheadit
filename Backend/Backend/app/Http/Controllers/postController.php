@@ -13,28 +13,28 @@ class postController extends Controller
         return $post->GetHomePage($pagenumber, $userid);
     }
 
-    public function GetUserNewestPosts($userid)
+    public function GetUserNewestPosts($userid, $page)
     {
         $post = new post;
-        return $post->GetUserNewestPosts($userid);
+        return $post->GetUserNewestPosts($userid, $page);
     }
 
-    public function GetUserLikedPosts($userid)
+    public function GetUserLikedPosts($userid, $page)
     {
         $post = new post;
-        return $post->GetUserLikedPosts($userid);
+        return $post->GetUserLikedPosts($userid, $page);
     }
 
-    public function GetCommunityNewestPosts($community)
+    public function GetCommunityNewestPosts($community, $page)
     {
         $post = new post;
-        return $post->GetCommunityNewestPosts($community);
+        return $post->GetCommunityNewestPosts($community, $page);
     }
 
-    public function GetCommunityLikedPosts($community)
+    public function GetCommunityLikedPosts($community, $page)
     {
         $post = new post;
-        return $post->GetCommunityLikedPosts($community);
+        return $post->GetCommunityLikedPosts($community, $page);
     }
 
     public function PostInCommunity($community, $userid)

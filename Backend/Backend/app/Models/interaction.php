@@ -102,7 +102,6 @@ class interaction extends Model
         if($interaction->IsEmpty())
         {
             $authority = $this->GetAuthority($userid, ($community));
-            $authority = $this->GetAuthority($userid, ((post::where('postid', $interaction[0])->postid)->first())->community);
             if ($authority > 0)
             {
                 $this::insert(['userid'=>$userid, 'commentid'=>$commentid, 'liked'=>0]);
