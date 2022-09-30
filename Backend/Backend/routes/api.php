@@ -14,8 +14,10 @@ Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLo
 
 Route::post('/users/register/{username}/{pasword}/{email}', [userController::class, 'RegisterUser']); //Creates new user if user with same username doesn't exist yet //Works
 
-Route::patch('/users/profilepicture/{userid}', [userController::class, 'UpdatePicture']); //Allows user to change their profile picture //no workey
+//Sent in body
+Route::patch('/users/profilepicture/{userid}', [userController::class, 'UpdatePicture']); //Allows user to change their profile picture //works
 
+//Sent in body
 Route::patch('/users/bio/{userid}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
 
 Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password //welp

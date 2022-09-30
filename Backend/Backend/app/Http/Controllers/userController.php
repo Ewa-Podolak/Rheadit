@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\user;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class userController extends Controller
 {
@@ -47,17 +47,17 @@ class userController extends Controller
         return $user->DeleteUser($userid);
     }
 
-    public function UpdatePicture($userid, Request $request)
+    public function UpdatePicture($userid)
     {
         $user = new user;
-        $newpicture = $request()->json()->profilepic;
-        dd($newpicture);
+        $newpicture = request()->profilepic;
         return $user->UpdatePicture($userid, $newpicture);
     }
 
-    public function UpdateBio($userid, $bio)
+    public function UpdateBio($userid)
     {
         $user = new user;
+        $bio = request()->bio;
         return $user->UpdateBio($userid, $bio);
     }
 

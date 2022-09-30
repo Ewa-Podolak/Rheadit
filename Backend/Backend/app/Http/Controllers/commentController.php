@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\comment;
+use Illuminate\Http\Request;
 
 class commentController extends Controller
 {
@@ -18,13 +19,15 @@ class commentController extends Controller
         return $comment->FavouriteComment($postid, $commentid, $userid);
     }
 
-    public function CreateComment($postid, $commenttext, $userid)
+    public function CreateComment( $postid, $userid)
     {
         $comment = new comment;
-        $validated = request()->validate([
-                'comment' => 'required|unique:posts|max:1',
-            ]);
-        //return $comment->CreateComment($postid, $commenttext, $userid);
+        // $validated = request()->validate([
+        //         'comment' => 'required|max:255',
+        //     ]);
+        //     dd($validated);
+        $commenttext = $request->all();
+        return $comment->CreateComment($postid, $commenttext, $userid);
     }
 
     public function DeleteComment($commentid, $userid)
