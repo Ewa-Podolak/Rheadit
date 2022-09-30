@@ -26,6 +26,13 @@ class follower extends Model
 
     public function Follow($userid, $username)
     {
+        $usernameid = user::where('username', $username)->first()->userid;
+        $follow = $this::where('user', $usernameid)->where('follower', $userid)->get();
+        if($follow->IsEmpty())
+            $this::insert(['user'=>$usernameid, 'follower'=>$userid]);
+        else
+            $this::where('user', $usernameid)->where('follower', $userid)->delete();
         
+        return ['followed'=>true];
     }
 }

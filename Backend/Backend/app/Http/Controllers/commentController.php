@@ -21,7 +21,10 @@ class commentController extends Controller
     public function CreateComment($postid, $commenttext, $userid)
     {
         $comment = new comment;
-        return $comment->CreateComment($postid, $commenttext, $userid);
+        $validated = request()->validate([
+                'comment' => 'required|unique:posts|max:1',
+            ]);
+        //return $comment->CreateComment($postid, $commenttext, $userid);
     }
 
     public function DeleteComment($commentid, $userid)

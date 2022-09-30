@@ -33,7 +33,7 @@ class user extends Model
         else
             $followed = true;
 
-        return ['username'=>$user[0]->username, 'bio'=>$user[0]->bio, 'profilepic'=>$user[0]->profilepic, 'followers'=>$following, 'following'=>$followers, 'followed'=>$followed];
+        return ['username'=>$user[0]->username, 'bio'=>$user[0]->bio, 'profilepic'=>$user[0]->profilepic, 'followers'=>$followers, 'following'=>$following, 'followed'=>$followed];
     }
 
     public function UpdatePicture($userid, $newpicture)

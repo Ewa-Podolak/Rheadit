@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\user;
+use GuzzleHttp\Psr7\Request;
 
 class userController extends Controller
 {
@@ -46,9 +47,11 @@ class userController extends Controller
         return $user->DeleteUser($userid);
     }
 
-    public function UpdatePicture($userid, $newpicture)
+    public function UpdatePicture($userid, Request $request)
     {
         $user = new user;
+        $newpicture = $request()->json()->profilepic;
+        dd($newpicture);
         return $user->UpdatePicture($userid, $newpicture);
     }
 
