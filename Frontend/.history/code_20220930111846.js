@@ -623,6 +623,8 @@ if (!window.location.href.includes("index.html")){
                     //for each comment per post
                     commentidarray.push(data[y].commentid);
 
+                    console.log(commentidarray);
+
                     
 
                     const li = document.createElement("li")
@@ -705,7 +707,8 @@ if (!window.location.href.includes("index.html")){
 
                     commentarrowupBtn.addEventListener("click", function(){
 
-                        var commentid = commentidarray[y]; ///////// doesnt work
+                        // /interactions/upvotecomment/{commentid}/{userid}
+                        var commentid = commentidarray[y];
                         
                         console.log(commentid);
 
