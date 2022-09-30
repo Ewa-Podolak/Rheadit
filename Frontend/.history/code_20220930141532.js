@@ -331,20 +331,11 @@ if (!window.location.href.includes("index.html")){
         if (window.location.href.includes("group.html")){
 
             var groupname = window.localStorage.getItem("groupname");
-            var userid = window.localStorage.getItem("userid");
+            console.log(groupname);
             getPosts(pagenumber, groupname);
             var joinGroup = document.getElementById("joinGroup");
 
-            // /community/getinfo/{communityname}/{userid}
-            console.log(groupname);
-            console.log(userid);
-
-            fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
-            .then(response => response.json())
-            .then(data => {
-
-            });
-        
+            
 
             joinGroup.addEventListener("click", function(){
                 joinGroup.innerHTML = "Requested";
@@ -373,10 +364,9 @@ if (!window.location.href.includes("index.html")){
     // //get posts
 
     function getPosts(pagenumber, groupname){
-
-        var userid = window.localStorage.getItem("userid");
-
         if(postsContainer.id == "homePage"){
+
+            var userid = window.localStorage.getItem("userid");
 
             fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}/${userid}`)
             .then(response => response.json())
@@ -453,10 +443,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        //plusPageNum.disabled = true;
+                        plusPageNum.disabled = true;
                     }
                     else{
-                        //plusPageNum.disabled = false;
+                        plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -478,10 +468,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                       // plusPageNum.disabled = true;
+                        plusPageNum.disabled = true;
                     }
                     else{
-                       // plusPageNum.disabled = false;
+                        plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -554,7 +544,7 @@ if (!window.location.href.includes("index.html")){
 
             const groupname = document.createElement("h2");
             groupname.id = "groupname";
-            groupname.innerHTML = data[x].community; 
+            groupname.innerHTML = "group: " + data[x].community; 
 
             profile.appendChild(profilePic);
             profile.appendChild(usernameEl);

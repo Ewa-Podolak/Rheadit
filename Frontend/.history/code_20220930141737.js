@@ -331,20 +331,11 @@ if (!window.location.href.includes("index.html")){
         if (window.location.href.includes("group.html")){
 
             var groupname = window.localStorage.getItem("groupname");
-            var userid = window.localStorage.getItem("userid");
+            console.log(groupname);
             getPosts(pagenumber, groupname);
             var joinGroup = document.getElementById("joinGroup");
 
-            // /community/getinfo/{communityname}/{userid}
-            console.log(groupname);
-            console.log(userid);
-
-            fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
-            .then(response => response.json())
-            .then(data => {
-
-            });
-        
+            
 
             joinGroup.addEventListener("click", function(){
                 joinGroup.innerHTML = "Requested";
@@ -453,10 +444,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        //plusPageNum.disabled = true;
+                        plusPageNum.disabled = true;
                     }
                     else{
-                        //plusPageNum.disabled = false;
+                        plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -478,10 +469,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                       // plusPageNum.disabled = true;
+                        plusPageNum.disabled = true;
                     }
                     else{
-                       // plusPageNum.disabled = false;
+                        plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });

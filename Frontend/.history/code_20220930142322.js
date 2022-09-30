@@ -331,13 +331,12 @@ if (!window.location.href.includes("index.html")){
         if (window.location.href.includes("group.html")){
 
             var groupname = window.localStorage.getItem("groupname");
+            console.log(groupname);
             var userid = window.localStorage.getItem("userid");
             getPosts(pagenumber, groupname);
             var joinGroup = document.getElementById("joinGroup");
 
             // /community/getinfo/{communityname}/{userid}
-            console.log(groupname);
-            console.log(userid);
 
             fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
             .then(response => response.json())
