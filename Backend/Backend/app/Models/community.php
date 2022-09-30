@@ -61,6 +61,7 @@ class community extends Model
             foreach($allusers as $user)
                 $this->LeaveCommunity($community, $user->userid);
 
+            user::where('username', $community)->delete();
             return ['deleted'=>true];
         }
         return ['deleted'=>false];

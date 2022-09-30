@@ -83,19 +83,43 @@ class post extends Model
 
     public function GetUserNewestPosts($userid, $page)
     {
-        $posts = $this::where('userid', $userid)->get();
+        $posts = $this::where('userid', $userid)->orderby('created_at', 'asc')->get();
 
-        if(count($posts) + 1 == $page * 5)
+        if($posts->count() + 1 == $page * 5)
         {
-            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+            return ['postid' => null, 'title' => null, 'body' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
         {
             $endarray = [];
             for($x = ($page - 1) * 5; $x < ($page * 5); $x++)
             {
-                if($x < count($posts))
-                    array_push($endarray, $posts[$x]);
+                if($x < $posts->count())
+                {
+                    $votes = $this->Votes($posts[$x]->postid);
+                    $postuserid = $this::where('postid', $posts[$x]->postid)->first()->userid;
+                    $username = user::where('userid', $postuserid)->first()->username;
+                    $voted = interaction::where('userid', $userid)->where('postid', $posts[$x]->commentid)->get();
+                    if(!$voted->IsEmpty())
+                    {
+                        if($voted[0]->liked == 1)
+                            $voted = 'upvote';
+                        else
+                            $voted = 'downvoted';
+                    }
+                    else
+                        $voted = null;
+
+                    array_push($endarray,
+                    ['postid' => $posts[$x]->postid, 
+                    'title' => $posts[$x]->title, 
+                    'body' => $posts[$x]->body, 
+                    'votes' => $votes, 
+                    'created_at'=>$posts[$x]->created_at, 
+                    'username'=>$username, 
+                    'voted'=>$voted,
+                    'community'=>$posts[$x]->community]);
+                }
             }
         }
 
@@ -104,61 +128,135 @@ class post extends Model
 
     public function GetUserLikedPosts($userid, $page)
     {
-        $posts = $this::where('userid', $userid)->get();
+        $posts = $this::where('userid', $userid)->orderby('created_at', 'asc')->get();
 
-        if(count($posts) + 1 == $page * 5)
+        if($posts->count() + 1 == $page * 5)
         {
-            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+            return ['postid' => null, 'title' => null, 'body' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
         {
             $endarray = [];
-            for($x = ($page - 1) * 5; $x < ($page * 5); $x++)
+
+            foreach($posts as $post)
             {
-                if($x < count($posts))
-                    array_push($endarray, $posts[$x]);
+                $votes = $this->Votes($post->postid);
+                $postuserid = $this::where('postid', $post->postid)->first()->userid;
+                $username = user::where('userid', $postuserid)->first()->username;
+                $voted = interaction::where('userid', $userid)->where('postid', $post->postid)->get();
+                if(!$voted->IsEmpty())
+                {
+                    if($voted[0]->liked == 1)
+                        $voted = 'upvote';
+                    else
+                        $voted = 'downvoted';
+                }
+                else
+                    $voted = null;
+
+                array_push($endarray,
+                ['postid' => $post->postid, 
+                'title' => $post->title, 
+                'body' => $post->body, 
+                'votes' => $votes, 
+                'created_at'=>$post->created_at, 
+                'username'=>$username, 
+                'voted'=>$voted,
+                'community'=>$post->community]);
+
+                $votes = array_column($endarray, 'votes');
+                array_multisort($votes, SORT_DESC, $endarray);
             }
         }
 
         return $endarray;
     }
 
-    public function GetCommunityNewestPosts($community, $page)
+    public function GetCommunityNewestPosts($community, $userid, $page)
     {
-        $posts = $this::where('community', $community)->get();
+        $posts = $this::where('community', $community)->orderby('created_at', 'asc')->get();
 
-        if(count($posts) + 1 == $page * 5)
+        if($posts->count() + 1 == $page * 10)
         {
-            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+            return ['postid' => null, 'title' => null, 'body' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
         {
             $endarray = [];
-            for($x = ($page - 1) * 5; $x < ($page * 5); $x++)
+            for($x = ($page - 1) * 10; $x < ($page * 10); $x++)
             {
-                if($x < count($posts))
-                    array_push($endarray, $posts[$x]);
+                if($x < $posts->count())
+                {
+                    $votes = $this->Votes($posts[$x]->postid);
+                    $postuserid = $this::where('postid', $posts[$x]->postid)->first()->userid;
+                    $username = user::where('userid', $postuserid)->first()->username;
+                    $voted = interaction::where('userid', $userid)->where('postid', $posts[$x]->commentid)->get();
+                    if(!$voted->IsEmpty())
+                    {
+                        if($voted[0]->liked == 1)
+                            $voted = 'upvote';
+                        else
+                            $voted = 'downvoted';
+                    }
+                    else
+                        $voted = null;
+
+                    array_push($endarray,
+                    ['postid' => $posts[$x]->postid, 
+                    'title' => $posts[$x]->title, 
+                    'body' => $posts[$x]->body, 
+                    'votes' => $votes, 
+                    'created_at'=>$posts[$x]->created_at, 
+                    'username'=>$username, 
+                    'voted'=>$voted,
+                    'community'=>$posts[$x]->community]);
+                }
             }
         }
 
         return $endarray;
     }
 
-    public function GetCommunityLikedPosts($community, $page)
+    public function GetCommunityLikedPosts($community, $userid, $page)
     {
-        $posts = $this::where('community', $community)->get();
+        $posts = $this::where('community', $community)->orderby('created_at', 'asc')->get();
 
-        if(count($posts) + 1 == $page * 5)
+        if($posts->count() + 1 == $page * 5)
         {
-            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+            return ['postid' => null, 'title' => null, 'body' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
         {
             $endarray = [];
-            for($x = ($page - 1) * 5; $x < ($page * 5); $x++)
+
+            foreach($posts as $post)
             {
-                if($x < count($posts))
-                    array_push($endarray, $posts[$x]);
+                $votes = $this->Votes($post->postid);
+                $postuserid = $this::where('postid', $post->postid)->first()->userid;
+                $username = user::where('userid', $postuserid)->first()->username;
+                $voted = interaction::where('userid', $userid)->where('postid', $post->postid)->get();
+                if(!$voted->IsEmpty())
+                {
+                    if($voted[0]->liked == 1)
+                        $voted = 'upvote';
+                    else
+                        $voted = 'downvoted';
+                }
+                else
+                    $voted = null;
+
+                array_push($endarray,
+                ['postid' => $post->postid, 
+                'title' => $post->title, 
+                'body' => $post->body, 
+                'votes' => $votes, 
+                'created_at'=>$post->created_at, 
+                'username'=>$username, 
+                'voted'=>$voted,
+                'community'=>$post->community]);
+
+                $votes = array_column($endarray, 'votes');
+                array_multisort($votes, SORT_DESC, $endarray);
             }
         }
 
