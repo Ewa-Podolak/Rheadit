@@ -14,9 +14,9 @@ Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLo
 
 Route::post('/users/register/{username}/{pasword}/{email}', [userController::class, 'RegisterUser']); //Creates new user if user with same username doesn't exist yet //Works
 
-Route::patch('/users/profilepicture/{userid}/{linktopicture}', [userController::class, 'UpdatePicture']); //Allows user to change their profile picture //no workey
+Route::patch('/users/profilepicture/{userid}', [userController::class, 'UpdatePicture']); //Allows user to change their profile picture //no workey
 
-Route::patch('/users/bio/{userid}/{bio}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
+Route::patch('/users/bio/{userid}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
 
 Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
 
@@ -25,6 +25,7 @@ Route::patch('/users/resetpassword/{username}/{password}', [userController::clas
 Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //works
 
 Route::get('/users/{userid}/{username}', [userController::class, 'GetProfile']); //Returns username, bio, profilpic, number of followers, followed/following //works
+//userid is logged in person, username is the person they want to follow
 
 
 
