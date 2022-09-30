@@ -339,8 +339,12 @@ if (!window.location.href.includes("index.html")){
             console.log(groupname);
             console.log(userid);
 
-            
-            fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
+            fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -355,12 +359,7 @@ if (!window.location.href.includes("index.html")){
 
                 // /community/{communityname}/join/{userid}
 
-                fetch(`http://localhost:8000/api/community/${groupname}/join/${userid}`,{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
+                fetch(`http://localhost:8000/api/community/${groupname}/join/${userid}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);

@@ -338,8 +338,6 @@ if (!window.location.href.includes("index.html")){
             // /community/getinfo/{communityname}/{userid}
             console.log(groupname);
             console.log(userid);
-
-            
             fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
             .then(response => response.json())
             .then(data => {
@@ -350,21 +348,6 @@ if (!window.location.href.includes("index.html")){
             joinGroup.addEventListener("click", function(){
                 joinGroup.innerHTML = "Requested";
                 joinGroup.style.fontWeight = "700"
-
-                // join group
-
-                // /community/{communityname}/join/{userid}
-
-                fetch(`http://localhost:8000/api/community/${groupname}/join/${userid}`,{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                });
             })
         }
 
