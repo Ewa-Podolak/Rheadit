@@ -24,20 +24,20 @@ Route::patch('/users/resetpassword/{username}/{password}', [userController::clas
 
 Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //works
 
-Route::get('/users/{username}', [userController::class, 'GetProfile']); //Returns username, bio, profilpic, number of followers, followed/following //works
+Route::get('/users/{userid}/{username}', [userController::class, 'GetProfile']); //Returns username, bio, profilpic, number of followers, followed/following //works
 
 
 
 //Posts Routes
 Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
 
-Route::get('/posts/userposts/newest/{userid}/{page}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
+Route::get('/posts/userposts/newest/{userid}/{page}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user //works
 
-Route::get('/posts/userposts/liked/{userid}/{page}', [postController::class, 'GetUserLikedPosts']); //Returns the most liked posts of the user
+Route::get('/posts/userposts/liked/{userid}/{page}', [postController::class, 'GetUserLikedPosts']); //Returns the most liked posts of the user //works
 
-Route::get('/posts/{community}/newest/{userid}/{page}', [postController::class, 'GetCommunityNewestPosts']); //Returns the newest posts for a community
+Route::get('/posts/{community}/newest/{userid}/{page}', [postController::class, 'GetCommunityNewestPosts']); //Returns the newest posts for a community //works
 
-Route::get('/posts/{community}/liked/{userid}/{page}', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community
+Route::get('/posts/{community}/liked/{userid}/{page}', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community //works
 
 Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post //welp
 
@@ -73,6 +73,8 @@ Route::get('/followers/list/followers/{username}', [followerController::class, '
 
 Route::get('/followers/list/followed/{username}', [followerController::class, 'GetFollowedList']); //Returns list of all usernames of followed/following
 
+Route::get('/followers/follow/{userid}/{username}', [followerController::class, 'Follow']); //Returns list of all usernames of followed/following
+//userid is logged in user, usernme is username of person they want to follow
 
 
 //Community //All works

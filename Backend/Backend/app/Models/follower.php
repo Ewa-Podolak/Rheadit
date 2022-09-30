@@ -23,4 +23,9 @@ class follower extends Model
         $userid = user::where('username', $username)->first()->userid;
         return $this::join('users', 'followers.user','=','users.userid')->where('followers.follower', $userid)->get('users.username');
     }
+
+    public function Follow($userid, $username)
+    {
+        
+    }
 }
