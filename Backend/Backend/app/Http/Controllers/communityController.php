@@ -29,4 +29,10 @@ class communityController extends Controller
         $community = new community;
         return $community->DeleteCommunity($communityname, $userid);
     }
+
+    public function GetCommunity($communityname, $userid)
+    {
+        $community = new community;
+        return $community->GetCommunity($communityname, $userid);
+    }
 }

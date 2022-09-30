@@ -12,8 +12,8 @@ return new class extends Migration
         {
             $table->increments('userid');
             $table->string('username', 12);
-            $table->string('password', 72);
-            $table->string('email');
+            $table->string('password', 72)->nullable();
+            $table->string('email')->nullable();
             $table->string('profilepic')->nullable()->default(Null);
             $table->string('bio')->nullable()->default(Null);
         });

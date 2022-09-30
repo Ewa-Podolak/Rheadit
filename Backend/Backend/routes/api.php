@@ -31,13 +31,13 @@ Route::get('/users/{username}', [userController::class, 'GetProfile']); //Return
 //Posts Routes
 Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
 
-Route::get('/posts/userposts/newsest/{userid}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
+Route::get('/posts/userposts/newest/{userid}/{page}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
 
-Route::get('/posts/userposts/liked/{userid}', [postController::class, 'GetUserLikedPosts']); //Returns the most liked posts of the user
+Route::get('/posts/userposts/liked/{userid}/{page}', [postController::class, 'GetUserLikedPosts']); //Returns the most liked posts of the user
 
-Route::get('/posts/{community}/newest', [postController::class, 'GetCommunityNewestPosts']); //Returns the newest posts for a community
+Route::get('/posts/{community}/newest/{userid}/{page}', [postController::class, 'GetCommunityNewestPosts']); //Returns the newest posts for a community
 
-Route::get('/posts/{community}/liked', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community
+Route::get('/posts/{community}/liked/{userid}/{page}', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community
 
 Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post //welp
 
@@ -82,4 +82,6 @@ Route::delete('/community/{communityname}/leave/{userid}', [communityController:
 
 Route::patch('/community/{communityname}/transferownership/{userid}/{newonwerid}', [communityController::class, 'TransferOwnership']); //Allows for community ownership transfer
 
-Route::delete('/community/delete/{communityname}/{userid}', [commentController::class, 'DeleteCommunity']); //Allows owner to delete a community
+Route::delete('/community/delete/{communityname}/{userid}', [communityController::class, 'DeleteCommunity']); //Allows owner to delete a community
+
+Route::get('/community/getinfo/{communityname}/{userid}', [communityController::class, 'GetCommunity']); //returns community information

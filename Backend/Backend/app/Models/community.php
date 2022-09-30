@@ -61,8 +61,34 @@ class community extends Model
             foreach($allusers as $user)
                 $this->LeaveCommunity($community, $user->userid);
 
+            user::where('username', $community)->delete();
             return ['deleted'=>true];
         }
         return ['deleted'=>false];
+    }
+
+    public function GetCommunity($communityname, $userid)
+    {
+        $profileinfo = user::where('username', $communityname)->first();
+
+        $ownerid = $this::where('community', $communityname)->where('authority', 'owner')->first()->userid;
+        $ownername = user::where('userid', $ownerid);
+
+        $modnumber = $this::where('community', $communityname)->where('authority', 'mod')->get()->count();
+        $membernumber = $this::where('community', $communityname)->get()->count();
+
+        $userrole = $this::where('community', $communityname)->where('userid', $userid)->get();
+        if($userrole->IsEmpty())
+            $userrole = null;
+        else
+            $userrole = $userrole[0]->authority;
+
+        return ['communityname'=>$communityname, 
+                'ownername'=>$ownername, 
+                'modnumber'=>$modnumber, 
+                'memebernumber'=>$membernumber, 
+                'profilepic'=>$profileinfo->profilepic, 
+                'bio'=>$profileinfo->bio, 
+                'userrole'=>$userrole];
     }
 }
