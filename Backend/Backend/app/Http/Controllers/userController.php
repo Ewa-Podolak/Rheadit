@@ -20,7 +20,7 @@ class userController extends Controller
     {
         $user = new user;
         $info = $user->GetUserInfo($username, $password);
-        if(!$info)
+        if(!$info && $password != null && $email != null)
         {
             $user->CreateNewUser($username, $password, $email);
             $info = $user->GetUserInfo($username, $password);

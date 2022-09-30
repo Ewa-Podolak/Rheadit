@@ -82,4 +82,6 @@ Route::delete('/community/{communityname}/leave/{userid}', [communityController:
 
 Route::patch('/community/{communityname}/transferownership/{userid}/{newonwerid}', [communityController::class, 'TransferOwnership']); //Allows for community ownership transfer
 
-Route::delete('/community/delete/{communityname}/{userid}', [commentController::class, 'DeleteCommunity']); //Allows owner to delete a community
+Route::delete('/community/delete/{communityname}/{userid}', [communityController::class, 'DeleteCommunity']); //Allows owner to delete a community
+
+Route::get('/community/getinfo/{communityname}/{userid}', [communityController::class, 'GetCommunity']); //returns community information //welp

@@ -65,4 +65,25 @@ class community extends Model
         }
         return ['deleted'=>false];
     }
+
+    public function GetCommunity($communityname, $userid)
+    {
+        $profileinfo = user::where('username', $communityname)->first();
+
+        $ownerid = $this::where('community', $communityname)->where('authority', 'owner')->first()->userid;
+        $ownername = user::where('userid', $ownerid);
+
+        $modnumber = $this::where('community', $communityname)->where('authority', 'mod')->get()->count();
+        $membernumber = $this::where('community', $communityname)->get()->count();
+
+        $userrole = $this::where('community', $communityname)->where('userid', $userid)->first()->authority;
+
+        return ['communityname'=>$communityname, 
+                'ownername'=>$ownername, 
+                'modnumber'=>$modnumber, 
+                'memebernumber'=>$membernumber, 
+                'profilepic'=>$profileinfo->profilepic, 
+                'bio'=>$profileinfo->bio, 
+                'userrole'=>$userrole];
+    }
 }
