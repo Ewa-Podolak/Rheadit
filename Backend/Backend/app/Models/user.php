@@ -21,6 +21,8 @@ class user extends Model
     public function CreateNewUser($username, $password, $email)
     {
         $this::insert(['username' => $username, 'password' => $password, 'email' => $email]);
+        $userid = $this::where('username', $username)->first()->userid;
+        community::insert(['userid'=>$userid, 'community'=>'homepage', 'authority'=>'member']);
     }
 
     public function GetProfile($userid, $username)

@@ -13,6 +13,12 @@ class postController extends Controller
         return $post->GetHomePage($pagenumber, $userid);
     }
 
+    public function GetExploreHomePage($pagenumber, $userid)
+    {
+        $post = new post;
+        return $post->GetExploreHomePage($pagenumber, $userid);
+    }
+
     public function GetUserNewestPosts($userid, $page)
     {
         $post = new post;

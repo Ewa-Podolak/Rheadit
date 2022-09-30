@@ -16,9 +16,62 @@ class post extends Model
 
     public function GetHomePage($page, $userid)
     {
-        $allposts = $this::orderby('created_at')->get();
+        $allposts = $this::join('community', 'posts.community', '=', 'community.community')->where('community.userid', $userid)->orderby('created_at')->get();
         $numberofpostsmax = $allposts->count();
         $postsarray = [];
+        if($numberofpostsmax + 1 == $page * 10)
+            return ['postid' => null, 'title' => null, 'body' => null];
+        else
+            for($x = (($page - 1) * 10); $x < $page * 10; $x++)
+            {
+                if($x < $numberofpostsmax)
+                {
+                    $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
+                    $voted = interaction::where('userid', $userid)->where('postid', $allposts[$x]->postid)->get();
+                    if(!$voted->IsEmpty())
+                    {
+                        if($voted[0]->liked == 1)
+                            $voted = 'upvote';
+                        else
+                            $voted = 'downvoted';
+                    }
+                    else
+                        $voted = null;
+                    $votes = $this->Votes($allposts[$x]->postid);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->body,
+                    'username'=>$username, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
+                }
+            }
+        return($postsarray);
+    }
+
+    public function GetExploreHomePage($page, $userid)
+    {
+        $allposts = $this::
+        orderby('created_at')->get();
+        $allcommunities = community::where('userid', $userid)->get();
+        $numberofpostsmax = $allposts->count();
+
+        for($x = 0; $x<$numberofpostsmax; $x++)
+        {
+            foreach($allcommunities as $community)
+            {
+                if($allposts[$x]->community == $community->community)
+                {
+                    unset($allposts[$x]);
+                }
+            }
+        }
+        $numberofpostsmax = $allposts->count();
+        $postsarray = [];
+        $x = 0;
+        $tempallposts = $allposts;
+        foreach($tempallposts as $post)
+        {
+            $allposts[$x]=$post;
+            $x++;
+        }
+
         if($numberofpostsmax + 1 == $page * 10)
             return ['postid' => null, 'title' => null, 'body' => null];
         else
