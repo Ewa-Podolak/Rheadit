@@ -613,17 +613,16 @@ if (!window.location.href.includes("index.html")){
 
             // fetch comments
 
-            var commentidarray = [];
-
             fetch(`http://localhost:8000/api/comments/${x+1}/${pagenumber}/${userid}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data); // every posts comments
 
                 for (let y = 0; y < data.length; y++){
                     //for each comment per post
-                    commentidarray.push(data[y].commentid);
+                    console.log(data[y]);
 
-                    
+
 
                     const li = document.createElement("li")
 
@@ -702,15 +701,17 @@ if (!window.location.href.includes("index.html")){
                     }
         
                     var userid = window.localStorage.getItem("userid");
+                    //console.log(y+1)
 
                     commentarrowupBtn.addEventListener("click", function(){
 
-                        var commentid = commentidarray[y]; ///////// doesnt work
+                        // /interactions/upvotecomment/{commentid}/{userid}
+
                         
-                        console.log(commentid);
+                        console.log(userid)
 
 
-                        fetch(`http://localhost:8000/api/interactions/upvotecomment/${commentid}/${userid}`, { 
+                        fetch(`http://localhost:8000/api/interactions/upvotecomment/${y+1}/${userid}`, { 
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -731,9 +732,9 @@ if (!window.location.href.includes("index.html")){
                     commentarrowdownBtn.addEventListener("click", function(){
         
                         // /interactions/downvotecomment/{commentid}/{userid}
-                        var commentid = commentidarray[y];
 
-                        console.log(commentid)
+                        console.log(y+1)
+                        console.log(userid)
 
                         fetch(`http://localhost:8000/api/interactions/downvotecomment/${y+1}/${userid}`, {
                             method: 'POST',

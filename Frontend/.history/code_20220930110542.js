@@ -618,10 +618,12 @@ if (!window.location.href.includes("index.html")){
             fetch(`http://localhost:8000/api/comments/${x+1}/${pagenumber}/${userid}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data.length); // every posts comments
+                //commentidarray.push(data[x].commentid);
 
                 for (let y = 0; y < data.length; y++){
                     //for each comment per post
-                    commentidarray.push(data[y].commentid);
+                    console.log(data[y]);
 
                     
 
@@ -705,7 +707,8 @@ if (!window.location.href.includes("index.html")){
 
                     commentarrowupBtn.addEventListener("click", function(){
 
-                        var commentid = commentidarray[y]; ///////// doesnt work
+                        // /interactions/upvotecomment/{commentid}/{userid}
+                        var commentid = commentidarray[y];
                         
                         console.log(commentid);
 
