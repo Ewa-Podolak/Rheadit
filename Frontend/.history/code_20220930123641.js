@@ -430,66 +430,14 @@ if (!window.location.href.includes("index.html")){
             else{
                 // show popular profile posts
                 // /posts/userposts/liked/{userid}/{page}
-
-                fetch(`http://localhost:8000/api/posts/userposts/liked/${userid}/${pagenumber}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-
-                    if(data.length == 0){
-                        populatePosts(data, pagenumber);
-                        postsContainer.innerHTML = "no more posts to show";
-                        
-                        plusPageNum.disabled = true;
-                    }
-                    else{
-                        plusPageNum.disabled = false;
-                        populatePosts(data, pagenumber);
-                    }
-                });
             }
         }
         else if (postsContainer.id == "groupPage"){
             if(recent){
                 // show recent group posts
-                // /posts/{community}/newest/{userid}/{page}
-                fetch(`http://localhost:8000/api/posts/{community}/newest/${userid}/${pagenumber}`) ///// community name not got
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-
-                    if(data.length == 0){
-                        populatePosts(data, pagenumber);
-                        postsContainer.innerHTML = "no more posts to show";
-                        
-                        plusPageNum.disabled = true;
-                    }
-                    else{
-                        plusPageNum.disabled = false;
-                        populatePosts(data, pagenumber);
-                    }
-                });
             }
             else{
                 // show popular group posts
-                // /posts/{community}/liked/{userid}/{page}
-
-                fetch(`http://localhost:8000/api/posts/{community}/liked/${userid}/${pagenumber}`) ///// community name not got
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-
-                    if(data.length == 0){
-                        populatePosts(data, pagenumber);
-                        postsContainer.innerHTML = "no more posts to show";
-                        
-                        plusPageNum.disabled = true;
-                    }
-                    else{
-                        plusPageNum.disabled = false;
-                        populatePosts(data, pagenumber);
-                    }
-                });
             }
         }
     }
