@@ -115,6 +115,8 @@ if (!window.location.href.includes("index.html")){
     var pagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
 
+    getPosts(pagenumber);
+
     // going to own profile page
 
         var goToProfile = document.getElementById("goProfile");
@@ -130,19 +132,17 @@ if (!window.location.href.includes("index.html")){
             var minusPageNum = document.getElementById("minusPageNum");
             var pageNum = document.getElementById("pageNum");
 
-            getPosts(pagenumber, null);
-
             plusPageNum.addEventListener("click", function(){
                 pagenumber++;
                 pageNum.innerHTML = pagenumber
-                getPosts(pagenumber, null);
+                getPosts(pagenumber);
             })
 
             minusPageNum.addEventListener("click", function(){
                 if (pagenumber > 1){
                     pagenumber--;
                     pageNum.innerHTML = pagenumber
-                    getPosts(pagenumber, null);
+                    getPosts(pagenumber);
                 }
             })
         }
@@ -178,11 +178,17 @@ if (!window.location.href.includes("index.html")){
             }
         })
 
+
+    // group
+
+    if (window.location.href.includes("group")){
+        // /community/{communityname}/join/{userid}
+    }
+
+
     // profile
 
         if(window.location.href.includes("profile")){
-
-            getPosts(pagenumber, null);
 
             var personal = window.localStorage.getItem("personal");
             var usernameProfile = window.localStorage.getItem("usernameToGet");
@@ -330,26 +336,13 @@ if (!window.location.href.includes("index.html")){
 
         if (window.location.href.includes("group.html")){
 
-            var groupname = window.localStorage.getItem("groupname");
-            var userid = window.localStorage.getItem("userid");
-            getPosts(pagenumber, groupname);
             var joinGroup = document.getElementById("joinGroup");
-
-            // /community/getinfo/{communityname}/{userid}
-            console.log(groupname);
-            console.log(userid);
-
-            fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
-            .then(response => response.json())
-            .then(data => {
-
-            });
-        
 
             joinGroup.addEventListener("click", function(){
                 joinGroup.innerHTML = "Requested";
                 joinGroup.style.fontWeight = "700"
             })
+
         }
 
     // recent or popular
@@ -361,22 +354,21 @@ if (!window.location.href.includes("index.html")){
             mostRecent.addEventListener("click", function(){
                 recent = true;
                 console.log("recent");
-                getPosts(0, null);
+                getPosts(0);
             })
             mostPopular.addEventListener("click", function(){
                 recent = false;
                 console.log("popular");
-                getPosts(0, null);
+                getPosts(0);
             })
         }
 
     // //get posts
 
-    function getPosts(pagenumber, groupname){
-
-        var userid = window.localStorage.getItem("userid");
-
+    function getPosts(pagenumber){
         if(postsContainer.id == "homePage"){
+
+            var userid = window.localStorage.getItem("userid");
 
             fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}/${userid}`)
             .then(response => response.json())
@@ -444,7 +436,7 @@ if (!window.location.href.includes("index.html")){
             if(recent){
                 // show recent group posts
                 // /posts/{community}/newest/{userid}/{page}
-                fetch(`http://localhost:8000/api/posts/${groupname}/newest/${userid}/${pagenumber}`) ///// community name not got
+                fetch(`http://localhost:8000/api/posts/{community}/newest/${userid}/${pagenumber}`) ///// community name not got
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
@@ -453,10 +445,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        //plusPageNum.disabled = true;
+                        plusPageNum.disabled = true;
                     }
                     else{
-                        //plusPageNum.disabled = false;
+                        plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -465,23 +457,19 @@ if (!window.location.href.includes("index.html")){
                 // show popular group posts
                 // /posts/{community}/liked/{userid}/{page}
 
-                fetch(`http://localhost:8000/api/posts/${groupname}/liked/${userid}/${pagenumber}`) ///// community name not got
+                fetch(`http://localhost:8000/api/posts/{community}/liked/${userid}/${pagenumber}`) ///// community name not got
                 .then(response => response.json())
                 .then(data => {
-
-                    console.log(groupname);
-                    console.log(userid);
-                    console.log(pagenumber);
                     console.log(data);
 
                     if(data.length == 0){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                       // plusPageNum.disabled = true;
+                        plusPageNum.disabled = true;
                     }
                     else{
-                       // plusPageNum.disabled = false;
+                        plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -554,7 +542,7 @@ if (!window.location.href.includes("index.html")){
 
             const groupname = document.createElement("h2");
             groupname.id = "groupname";
-            groupname.innerHTML = data[x].community; 
+            groupname.innerHTML = "group: " + data[x].community; 
 
             profile.appendChild(profilePic);
             profile.appendChild(usernameEl);
