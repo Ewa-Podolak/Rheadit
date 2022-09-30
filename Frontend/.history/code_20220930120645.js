@@ -249,14 +249,10 @@ if (!window.location.href.includes("index.html")){
                 fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) /////////// not giving anything
                 .then(response => response.json())
                 .then(data => {
-
                     console.log(data);
                     boxContents.innerHTML = "Followers: "
-                    console.log(data[0].username)
-                    for (let x = 0; x < data.length; x++){
-                        boxContents.innerHTML += `<br>`;
-                        boxContents.innerHTML += data[0].username;
-                    }
+                    // for loop in each follower
+                    // boxContents.innerHTML += data.follower
                 });
 
                 var closeFollowers = document.querySelector("#closeBtn");
@@ -273,10 +269,11 @@ if (!window.location.href.includes("index.html")){
                 .then(data => {
                     console.log(data);
                     boxContents.innerHTML = "Following: "
-                    console.log(data[0].username)
+                    // for loop in each following
                     for (let x = 0; x < data.length; x++){
-                        boxContents.innerHTML += data[0].username;
+                        boxContents.innerHTML += data.following
                     }
+                    // boxContents.innerHTML += data.following
                 });
 
                 var closeFollowing = document.querySelector("#closeBtn");
@@ -370,13 +367,9 @@ if (!window.location.href.includes("index.html")){
             var mostPopular = document.getElementById("mostPopular");
             mostRecent.addEventListener("click", function(){
                 recent = true;
-                console.log("recent");
-                getPosts(0);
             })
             mostPopular.addEventListener("click", function(){
                 recent = false;
-                console.log("popular");
-                getPosts(0);
             })
         }
 
@@ -404,94 +397,22 @@ if (!window.location.href.includes("index.html")){
                 }
             });
         }
-        else if (postsContainer.id == "profilePage"){
-            if(recent){
-                // show recent profile posts
-                // /posts/userposts/newest/{userid}/{page}
-
-                fetch(`http://localhost:8000/api/posts/userposts/newest/${userid}/${pagenumber}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-
-                    if(data.length == 0){
-                        populatePosts(data, pagenumber);
-                        postsContainer.innerHTML = "no more posts to show";
-                        
-                        plusPageNum.disabled = true;
-                    }
-                    else{
-                        plusPageNum.disabled = false;
-                        populatePosts(data, pagenumber);
-                    }
-                });
-            
-            }
-            else{
-                // show popular profile posts
-                // /posts/userposts/liked/{userid}/{page}
-
-                fetch(`http://localhost:8000/api/posts/userposts/liked/${userid}/${pagenumber}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-
-                    if(data.length == 0){
-                        populatePosts(data, pagenumber);
-                        postsContainer.innerHTML = "no more posts to show";
-                        
-                        plusPageNum.disabled = true;
-                    }
-                    else{
-                        plusPageNum.disabled = false;
-                        populatePosts(data, pagenumber);
-                    }
-                });
-            }
-        }
-        else if (postsContainer.id == "groupPage"){
-            if(recent){
-                // show recent group posts
-                // /posts/{community}/newest/{userid}/{page}
-                fetch(`http://localhost:8000/api/posts/{community}/newest/${userid}/${pagenumber}`) ///// community name not got
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-
-                    if(data.length == 0){
-                        populatePosts(data, pagenumber);
-                        postsContainer.innerHTML = "no more posts to show";
-                        
-                        plusPageNum.disabled = true;
-                    }
-                    else{
-                        plusPageNum.disabled = false;
-                        populatePosts(data, pagenumber);
-                    }
-                });
-            }
-            else{
-                // show popular group posts
-                // /posts/{community}/liked/{userid}/{page}
-
-                fetch(`http://localhost:8000/api/posts/{community}/liked/${userid}/${pagenumber}`) ///// community name not got
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-
-                    if(data.length == 0){
-                        populatePosts(data, pagenumber);
-                        postsContainer.innerHTML = "no more posts to show";
-                        
-                        plusPageNum.disabled = true;
-                    }
-                    else{
-                        plusPageNum.disabled = false;
-                        populatePosts(data, pagenumber);
-                    }
-                });
-            }
-        }
+        // else if (postsContainer.id == "profilePage"){
+        //     if(recent){
+        //         // show recent profile posts
+        //     }
+        //     else{
+        //         // show popular profile posts
+        //     }
+        // }
+        // else if (postsContainer.id == "groupPage"){
+        //     if(recent){
+        //         // show recent group posts
+        //     }
+        //     else{
+        //         // show popular group posts
+        //     }
+        // }
     }
 
     function populatePosts(data, pagenumber){
