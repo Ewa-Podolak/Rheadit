@@ -31,20 +31,23 @@ Route::get('/users/{userid}/{username}', [userController::class, 'GetProfile']);
 
 
 
-//Posts Routes
-Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage //Works
+//Posts Routes //All works
+Route::get('/posts/{postid}/{userid}', [postController::class, 'ReturnPost']); //Gets Post //Works
 
-Route::get('/posts/userposts/newest/{userid}/{page}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user //works
+Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage
 
-Route::get('/posts/userposts/liked/{userid}/{page}', [postController::class, 'GetUserLikedPosts']); //Returns the most liked posts of the user //works
+Route::get('/posts/userposts/newest/{userid}/{page}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
 
-Route::get('/posts/{community}/newest/{userid}/{page}', [postController::class, 'GetCommunityNewestPosts']); //Returns the newest posts for a community //works
+Route::get('/posts/userposts/liked/{userid}/{page}', [postController::class, 'GetUserLikedPosts']); //Returns the most liked posts of the user
 
-Route::get('/posts/{community}/liked/{userid}/{page}', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community //works
+Route::get('/posts/{community}/newest/{userid}/{page}', [postController::class, 'GetCommunityNewestPosts']); //Returns the newest posts for a community
 
-Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //User creates post //welp
+Route::get('/posts/{community}/liked/{userid}/{page}', [postController::class, 'GetCommunityLikedPOsts']); //Returns the most liked posts for a community
 
-Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Deletes post //works
+Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //Allows user to create post
+
+Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Deletes post or mod/owner
+
 
 
 
@@ -54,9 +57,9 @@ Route::get('/comments/{postid}/{page}/{userid}', [commentController::class, 'Get
 
 Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment
 
-Route::post('/comments/create/{postid}/{comment}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment
+Route::post('/comments/create/{postid}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment
 
-Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'GetComments']); //Allows user to delete a comment
+Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'GetComments']); //Allows user or mod/owner to delete a comment
 
 
 
@@ -90,3 +93,8 @@ Route::patch('/community/{communityname}/transferownership/{userid}/{newonwerid}
 Route::delete('/community/delete/{communityname}/{userid}', [communityController::class, 'DeleteCommunity']); //Allows owner to delete a community
 
 Route::get('/community/getinfo/{communityname}/{userid}', [communityController::class, 'GetCommunity']); //returns community information
+
+Route::patch('/community/requestmod/{communityname}/{userid}', [communityController::class, 'RequestMod']); //returns community information
+
+Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //returns community information
+//userid is currently logged in oerson, username is the person they want to approve

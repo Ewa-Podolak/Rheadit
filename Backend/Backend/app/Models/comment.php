@@ -161,7 +161,11 @@ class comment extends Model
     public function DeletedComment($commentid, $userid) //When the comment is deleted
     {
         $interaction = new interaction;
-        if($this::where('commentid', $commentid)->first()->userid == $userid)
+        $postid = $this::where('commentid', $commentid)->first()->postid;
+        $communtiy = post::where('postid', $postid)->first()->community;
+        $authority = $this->GetAuthority($userid, $communtiy);
+
+        if($this::where('commentid', $commentid)->first()->userid == $userid || $authority > 1)
         {
             $interaction->DeleteLikesComment($commentid);
             $this::where('commentid', $commentid)->delete();

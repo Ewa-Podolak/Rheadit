@@ -91,4 +91,38 @@ class community extends Model
                 'bio'=>$profileinfo->bio, 
                 'userrole'=>$userrole];
     }
+
+    public function RequestMod($community, $userid)
+    {
+        $info = $this::where('community', $community)->where('userid', $userid);
+        if(!$info->get()->IsEmpty())
+        {
+            if($info->first()->authority=='member')
+            {
+                if($info->first()->requestmod==false)
+                {
+                    $info->update(['requestmod'=>true]);
+                    return ['request'=>true];
+                }
+                else
+                {
+                    $info->update(['requestmod'=>false]);
+                    return ['request'=>true];
+                }
+            }
+        }
+        return ['request'=>false];
+    }
+
+    public function ApproveMod($community, $userid, $username)
+    {
+        $authority = $this::where('community', $community)->where('userid', $userid)->first()->authority;
+        if($authority=='owner'||$authority=='mod')
+        {
+            $usernameid = user::where('username', $username)->first()->userid;
+            $this::where('community', $community)->where('userid', $usernameid)->update(['authority'=>'mod', 'requestmod'=>0]);
+            return ['approved'=>true];
+        }
+        return ['approved'=>false];
+    }
 }

@@ -35,4 +35,16 @@ class communityController extends Controller
         $community = new community;
         return $community->GetCommunity($communityname, $userid);
     }
+
+    public function RequestMod($communityname, $userid)
+    {
+        $community = new community;
+        return $community->RequestMod($communityname, $userid);
+    }
+
+    public function ApproveMod($communityname, $userid, $username)
+    {
+        $community = new community;
+        return $community->ApproveMod($communityname, $userid, $username);
+    }
 }
