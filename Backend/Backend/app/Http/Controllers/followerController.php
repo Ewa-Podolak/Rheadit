@@ -17,4 +17,10 @@ class followerController extends Controller
         $follower = new follower;
         return $follower->GetFollowedList($username);
     }
+
+    public function Follow($userid, $username)
+    {
+        $follower = new follower;
+        return $follower->Follow($userid, $username);
+    }
 }

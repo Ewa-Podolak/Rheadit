@@ -21,7 +21,7 @@ class commentController extends Controller
     public function CreateComment($postid, $commenttext, $userid)
     {
         $comment = new comment;
-        //return $comment->CreateComment($postid, $commenttext, $userid);
+        return $comment->CreateComment($postid, $commenttext, $userid);
     }
 
     public function DeleteComment($commentid, $userid)
