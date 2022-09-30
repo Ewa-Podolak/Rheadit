@@ -76,7 +76,11 @@ class community extends Model
         $modnumber = $this::where('community', $communityname)->where('authority', 'mod')->get()->count();
         $membernumber = $this::where('community', $communityname)->get()->count();
 
-        $userrole = $this::where('community', $communityname)->where('userid', $userid)->first()->authority;
+        $userrole = $this::where('community', $communityname)->where('userid', $userid)->get();
+        if($userrole->IsEmpty())
+            $userrole = null;
+        else
+            $userrole = $userrole[0]->authority;
 
         return ['communityname'=>$communityname, 
                 'ownername'=>$ownername, 
