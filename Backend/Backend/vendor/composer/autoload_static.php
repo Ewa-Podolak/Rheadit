@@ -341,8 +341,8 @@ class ComposerStaticInit3dbd498186daf2a79ae04c4b99f66e7d
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -645,7 +645,6 @@ class ComposerStaticInit3dbd498186daf2a79ae04c4b99f66e7d
         'Database\\Factories\\followersFactory' => __DIR__ . '/../..' . '/database/factories/followersFactory.php',
         'Database\\Factories\\interactionsFactory' => __DIR__ . '/../..' . '/database/factories/interactionsFactory.php',
         'Database\\Factories\\postFactory' => __DIR__ . '/../..' . '/database/factories/postFactory.php',
-        'Database\\Factories\\userFactory' => __DIR__ . '/../..' . '/database/factories/userFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\followersSeeder' => __DIR__ . '/../..' . '/database/seeders/followersSeeder.php',
         'Database\\Seeders\\interactionsSeeder' => __DIR__ . '/../..' . '/database/seeders/interactionsSeeder.php',
