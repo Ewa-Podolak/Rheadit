@@ -12,8 +12,8 @@ return new class extends Migration
         {
             $table->increments('postid');
             $table->integer('userid');
-            $table->string('title', 30);
-            $table->string('body', 150)->nullable()->default(NULL);
+            $table->string('title', 75);
+            $table->string('body', 255)->nullable()->default(NULL);
             $table->string('community', 30)->nullable()->default(NULL);
             $table->timestamp('created_at')->useCurrent();
         });

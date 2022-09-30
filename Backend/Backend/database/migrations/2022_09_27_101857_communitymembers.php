@@ -14,6 +14,7 @@ return new class extends Migration
             $table->integer('userid');
             $table->string('community', 30);
             $table->string('authority', 6);
+            $table->boolean('requestmod')->default(false);
         });
     }
 

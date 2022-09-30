@@ -19,14 +19,10 @@ class commentController extends Controller
         return $comment->FavouriteComment($postid, $commentid, $userid);
     }
 
-    public function CreateComment( $postid, $userid)
+    public function CreateComment($postid, $userid)
     {
         $comment = new comment;
-        // $validated = request()->validate([
-        //         'comment' => 'required|max:255',
-        //     ]);
-        //     dd($validated);
-        $commenttext = $request->all();
+        $commenttext = request()->comment;
         return $comment->CreateComment($postid, $commenttext, $userid);
     }
 

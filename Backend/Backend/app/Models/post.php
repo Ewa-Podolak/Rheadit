@@ -64,13 +64,15 @@ class post extends Model
         return ['postid'=>$post->postid, 'head'=>$post->title, 'body'=>$post->body, 'username'=>$username, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at];
     }
 
-    public function PostInCommunity($community, $userid)
+    public function PostInCommunity($community, $userid, $title, $body)
     {
-        // $communitystatus = communitymember::where('userid', $userid)->where('community', $community)->first();
-        // if(!$communitystatus->IsEmpty() && ($communitystatus->authority == 'member' || $communitystatus->authority == 'mod' || $communitystatus->authority == 'owner')
-        // {
-            
-        // }
+        if(community::where('userid', $userid)->where('community', $community)->get()->IsEmpty())
+            return ['created'=>false];
+        else
+        {
+            $this::insert(['userid'=>$userid, 'title'=>$title, 'body'=>$body, 'community'=>$community]);
+            return ['created' => true];
+        }
     }
 
     public function Votes($postid)
@@ -269,8 +271,10 @@ class post extends Model
     {
         $comments = new comment;
         $interactions = new interaction;
+        $community = post::where('postid', $postid)->first()->community;
+        $authority = community::where('community', $community)->where('userid', $userid)->first()->authority;
 
-        if($this::where('postid', $postid)->first()->userid == $userid)
+        if($this::where('postid', $postid)->first()->userid == $userid || $authority == 'mod' || $authority == 'owner')
         {
         //Delete Comments
         $tobedeletedcomments = $comments::where('postid', $postid)->get();

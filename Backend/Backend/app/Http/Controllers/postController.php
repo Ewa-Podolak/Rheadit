@@ -39,15 +39,10 @@ class postController extends Controller
 
     public function PostInCommunity($community, $userid)
     {
-        
-        // $validated = request()->validate([
-        //     'title' => 'required|unique:posts|max:1',
-        //     'body' => ['required', 'max:8'],
-        // ]);
-        // dd('jk');
-
         $post = new post;
-        return $post->PostInCommunity($community, $userid);
+        $title = request()->title;
+        $body = request()->body;
+        return $post->PostInCommunity($community, $userid, $title, $body);
     }
 
     public function DeletePost($postid, $userid)
@@ -56,9 +51,9 @@ class postController extends Controller
         return $post->DeletePost($postid, $userid);
     }
 
-    public function ReturnPost($postid)
+    public function ReturnPost($postid, $userid)
     {
         $post = new post;
-        return $post->ReturnPost($postid);
+        return $post->ReturnPost($postid, $userid);
     }
 }
