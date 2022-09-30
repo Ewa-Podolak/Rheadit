@@ -6,14 +6,6 @@
   color: #373F47;
 }
 
-#on {
-  background-color: red;
-}
-
-#off {
-  background-color: #F6F6F2;
-}
-
 .wholeProfile {
   width: 100%;
   display: flex;
@@ -56,7 +48,21 @@
   margin: 5%;
 }
 
-.profilePicEditorContainer, .followersOrFollowingListContainer {
+.followersOrFollowingListContainer {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 5%;
+}
+
+.boxContents {
+  padding: 5%;
+}
+
+.profilePicEditorContainer {
   position: absolute;
   display: none;
   justify-content: center;
@@ -136,6 +142,15 @@ input {
   justify-content: end;
 }
 
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #FAB3A9 inset !important;
+  -webkit-text-fill-color: #373F47 !important;
+}
+
 .loginContainer, .registerContainer {
   margin: 5%;
   background-color: #F6F6F2;
@@ -163,6 +178,7 @@ input {
 .loginContainer .error, .registerContainer .error {
   display: none;
   font-style: italic;
+  text-align: center;
   font-size: 12px;
   color: rgba(255, 0, 0, 0.7);
 }
@@ -283,7 +299,6 @@ input {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: end;
 }
 .profile #profilePic {
   height: 5vh;
@@ -314,8 +329,24 @@ input {
   height: 60%;
 }
 
+.btn:focus {
+  outline: none;
+  border: transparent;
+}
+
+.btn:hover {
+  outline: none;
+  border: transparent;
+}
+
 .postAndComments {
   width: 100%;
+}
+
+.seeMore {
+  width: 60%;
+  margin: 0 20%;
+  background-color: #F6F6F2;
 }
 
 .postsContainer {
@@ -347,11 +378,11 @@ input {
 }
 .postsContainer .post .thePost .commentbtn {
   font-size: 15px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   padding: 20%;
   margin-top: 40%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 .postsContainer .post .thePost img {
   -o-object-fit: cover;
@@ -405,7 +436,7 @@ input {
   width: 100%;
 }
 .postsContainer .comments ul li .profile {
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .profileBox {
@@ -416,6 +447,7 @@ input {
   margin: 5%;
   border-radius: 15px;
   width: 50%;
+  padding: 2% 0;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .profileBox #username, .profileBox #groupUsername {
@@ -496,8 +528,13 @@ span {
   background-color: transparent;
 }
 
+#commentDate {
+  font-size: 10px;
+}
+
 .pageNumContainer {
   display: flex;
+  margin: 5%;
   flex-direction: row;
   background-color: #F6F6F2;
   padding: 1% 3%;
