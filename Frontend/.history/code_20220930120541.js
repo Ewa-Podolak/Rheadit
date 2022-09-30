@@ -249,14 +249,10 @@ if (!window.location.href.includes("index.html")){
                 fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) /////////// not giving anything
                 .then(response => response.json())
                 .then(data => {
-
                     console.log(data);
                     boxContents.innerHTML = "Followers: "
-                    console.log(data[0].username)
-                    for (let x = 0; x < data.length; x++){
-                        boxContents.innerHTML += `<br>`;
-                        boxContents.innerHTML += data[0].username;
-                    }
+                    // for loop in each follower
+                    // boxContents.innerHTML += data.follower
                 });
 
                 var closeFollowers = document.querySelector("#closeBtn");
@@ -273,10 +269,8 @@ if (!window.location.href.includes("index.html")){
                 .then(data => {
                     console.log(data);
                     boxContents.innerHTML = "Following: "
-                    console.log(data[0].username)
-                    for (let x = 0; x < data.length; x++){
-                        boxContents.innerHTML += data[0].username;
-                    }
+                    // for loop in each following
+                    // boxContents.innerHTML += data.following
                 });
 
                 var closeFollowing = document.querySelector("#closeBtn");

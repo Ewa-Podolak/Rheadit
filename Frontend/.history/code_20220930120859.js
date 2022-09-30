@@ -254,7 +254,6 @@ if (!window.location.href.includes("index.html")){
                     boxContents.innerHTML = "Followers: "
                     console.log(data[0].username)
                     for (let x = 0; x < data.length; x++){
-                        boxContents.innerHTML += `<br>`;
                         boxContents.innerHTML += data[0].username;
                     }
                 });
