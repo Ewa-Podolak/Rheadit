@@ -139,7 +139,7 @@ if (!window.location.href.includes("index.html")){
         newpostbtn.addEventListener("click", ()=>{
             console.log("click");
 
-            data = {title: "hello", body: "hello"}; /// fill with proper data
+            data = {title: "", body: ""}; /// fill with proper data
 
             var userid = window.localStorage.getItem("userid");
             fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
@@ -147,7 +147,7 @@ if (!window.location.href.includes("index.html")){
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data);
             })
             .then((response) => response.json())
             .then((data) => {
