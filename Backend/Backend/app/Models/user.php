@@ -57,7 +57,7 @@ class user extends Model
         $alljoinedcommunities = community::where('userid', $userid)->get();
 
         foreach($alljoinedcommunities as $community)
-            $community->LeaveComunity($community->community, $userid);
+            $community->LeaveCommunity($community->community, $userid);
         
         follower::where('user', $userid)->orwhere('follower', $userid)->delete();
 
