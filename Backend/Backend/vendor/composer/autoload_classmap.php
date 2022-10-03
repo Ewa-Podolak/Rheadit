@@ -25,6 +25,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Mail\\ResetPassword1' => $baseDir . '/app/Mail/ResetPassword1.php',
     'App\\Models\\comment' => $baseDir . '/app/Models/comment.php',
     'App\\Models\\community' => $baseDir . '/app/Models/community.php',
     'App\\Models\\follower' => $baseDir . '/app/Models/follower.php',
