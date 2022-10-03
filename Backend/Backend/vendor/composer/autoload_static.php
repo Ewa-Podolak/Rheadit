@@ -525,6 +525,7 @@ class ComposerStaticInit3dbd498186daf2a79ae04c4b99f66e7d
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Mail\\ResetPassword1' => __DIR__ . '/../..' . '/app/Mail/ResetPassword1.php',
         'App\\Models\\comment' => __DIR__ . '/../..' . '/app/Models/comment.php',
         'App\\Models\\community' => __DIR__ . '/../..' . '/app/Models/community.php',
         'App\\Models\\follower' => __DIR__ . '/../..' . '/app/Models/follower.php',
