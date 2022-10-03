@@ -239,10 +239,12 @@ if (!window.location.href.includes("index.html")){
                 following.innerHTML = data.following;
                 if (!data.profilepic == "null")
                 {
-                    profilePicture.src = "./images/607426-200.png";
+                    profilePicture.src = data.profilepic;
                 }
                 else{
-                    profilePicture.src = data.profilepic;
+                    profilePicture.src = "./images/607426-200.png";
+                    // "./images/photo-1453728013993-6d66e9c9123a.jpeg"
+                    // "./images/607426-200.png"
                 }
             });
 
@@ -309,7 +311,6 @@ if (!window.location.href.includes("index.html")){
             deleteuser.addEventListener("click", ()=>{
                 userid = window.localStorage.getItem("userid");
                 console.log(userid);
-                console.log("delete");
                 fetch(`http://localhost:8000/api/users/delete/${userid}`, {
                     method: 'DELETE',
                     headers: {
@@ -340,7 +341,7 @@ if (!window.location.href.includes("index.html")){
                     newBioBtn.style.display = "block";
                     newBioBtn.addEventListener("click", function(){
                         bioText.innerHTML = newBio.value;
-                        var data = { bio: newBio.value}; // change 
+                        var data = { bio: bioText.innerHTML}; // change 
 
                         fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}`, {
                             method: 'PATCH',
@@ -362,22 +363,18 @@ if (!window.location.href.includes("index.html")){
                     var close = document.querySelector(".close");
                     var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
                     var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
-
                     close.addEventListener("click", function(){
                         profilePicEditorContainer.style.display = "none"
                     })
-
                     submitNewProfilePic.addEventListener("click", function(){ 
-
-                        var data = { profilepic: submitNewProfilePicBox.value};
+                        var linktopicture = submitNewProfilePicBox.value;
                         var userid = window.localStorage.getItem("userid");
 
-                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}`, { 
+                        fetch(`http://localhost:8000/api/users/profilepicture/${userid}/${linktopicture}`, { /// not working
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify(data),
                         })
                         .then((response) => response.json())
                         .then((data) => {

@@ -366,18 +366,6 @@ input:-webkit-autofill:active{
         display: flex;
         flex-direction: row;
         width: 100%;
-        align-items: center;
-    }
-
-    .secondbox{
-        width: 100%;
-        margin: 5%;
-        display: none;
-
-        input{
-            margin-left: 2%;
-            width: 95%;
-        }
     }
 
     img{

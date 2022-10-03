@@ -316,38 +316,23 @@ input:-webkit-autofill:active {
   padding: 2%;
 }
 
-.createnewPost {
+.initialbox {
   margin-top: 5%;
   width: 90vw;
   background-color: #F6F6F2;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
 }
-.createnewPost .initialbox {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-}
-.createnewPost .secondbox {
-  width: 100%;
-  margin: 5%;
-  display: none;
-}
-.createnewPost .secondbox input {
-  margin-left: 2%;
-  width: 95%;
-}
-.createnewPost img {
+.initialbox img {
   height: 8vh;
 }
-.createnewPost i {
+.initialbox i {
   padding: 5%;
 }
-.createnewPost input {
+.initialbox input {
   width: 70%;
   height: 60%;
 }
@@ -570,4 +555,4 @@ span {
 }
 .pageNumContainer #pageNum {
   padding: 10%;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20221003124624.css.map */

@@ -233,16 +233,19 @@ if (!window.location.href.includes("index.html")){
             .then(data => {
                 console.log(data);
 
+                profilePicture.src = data.profilepic
                 usernameText.innerHTML = usernameProfile;
                 bioText.innerHTML = data.bio;
                 followers.innerHTML = data.followers;
                 following.innerHTML = data.following;
                 if (!data.profilepic == "null")
                 {
-                    profilePicture.src = "./images/607426-200.png";
+                    profilePicture.src = data.profilepic;
                 }
                 else{
-                    profilePicture.src = data.profilepic;
+                    profilePicture.src = "./images/607426-200.png";
+                    // "./images/photo-1453728013993-6d66e9c9123a.jpeg"
+                    // "./images/607426-200.png"
                 }
             });
 
@@ -309,7 +312,6 @@ if (!window.location.href.includes("index.html")){
             deleteuser.addEventListener("click", ()=>{
                 userid = window.localStorage.getItem("userid");
                 console.log(userid);
-                console.log("delete");
                 fetch(`http://localhost:8000/api/users/delete/${userid}`, {
                     method: 'DELETE',
                     headers: {

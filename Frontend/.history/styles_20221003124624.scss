@@ -352,33 +352,15 @@ input:-webkit-autofill:active{
     }
 }
 
-.createnewPost{
+.initialbox{
     margin-top: 5%;
     width: 90vw;
     background-color: $light;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
-
-    .initialbox{
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        align-items: center;
-    }
-
-    .secondbox{
-        width: 100%;
-        margin: 5%;
-        display: none;
-
-        input{
-            margin-left: 2%;
-            width: 95%;
-        }
-    }
 
     img{
         height: 8vh;

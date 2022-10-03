@@ -353,7 +353,6 @@ input:-webkit-autofill:active{
 }
 
 .createnewPost{
-    margin-top: 5%;
     width: 90vw;
     background-color: $light;
     display: flex;
@@ -366,18 +365,7 @@ input:-webkit-autofill:active{
         display: flex;
         flex-direction: row;
         width: 100%;
-        align-items: center;
-    }
-
-    .secondbox{
-        width: 100%;
-        margin: 5%;
-        display: none;
-
-        input{
-            margin-left: 2%;
-            width: 95%;
-        }
+        margin-top: 5%;
     }
 
     img{

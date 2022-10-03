@@ -29,7 +29,7 @@
 }
 
 .profilepagePic {
-  width: 169px !important;
+  width: 169px;
   height: 169px;
   border-radius: 50%;
   padding: 5%;
@@ -321,25 +321,10 @@ input:-webkit-autofill:active {
   width: 90vw;
   background-color: #F6F6F2;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-}
-.createnewPost .initialbox {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-}
-.createnewPost .secondbox {
-  width: 100%;
-  margin: 5%;
-  display: none;
-}
-.createnewPost .secondbox input {
-  margin-left: 2%;
-  width: 95%;
 }
 .createnewPost img {
   height: 8vh;
@@ -570,4 +555,4 @@ span {
 }
 .pageNumContainer #pageNum {
   padding: 10%;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20220930135923.css.map */

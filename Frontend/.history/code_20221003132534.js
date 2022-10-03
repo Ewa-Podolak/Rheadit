@@ -309,7 +309,6 @@ if (!window.location.href.includes("index.html")){
             deleteuser.addEventListener("click", ()=>{
                 userid = window.localStorage.getItem("userid");
                 console.log(userid);
-                console.log("delete");
                 fetch(`http://localhost:8000/api/users/delete/${userid}`, {
                     method: 'DELETE',
                     headers: {
