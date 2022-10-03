@@ -22,7 +22,8 @@ Route::patch('/users/bio/{userid}', [userController::class, 'UpdateBio']); //All
 
 Route::get('/users/sendemail', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
 
-Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password //welp
+Route::patch('/users/resetpassword/{userid}', [userController::class, 'ResetPassword']); //Updates password //welp
+//Send password in body of api call
 
 Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //works
 

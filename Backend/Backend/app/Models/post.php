@@ -27,6 +27,7 @@ class post extends Model
                 if($x < $numberofpostsmax)
                 {
                     $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
+                    $profilepic = user::where('userid', $allposts[$x]->userid)->first()->profilepic;
                     $voted = interaction::where('userid', $userid)->where('postid', $allposts[$x]->postid)->get();
                     if(!$voted->IsEmpty())
                     {
@@ -38,8 +39,8 @@ class post extends Model
                     else
                         $voted = null;
                     $votes = $this->Votes($allposts[$x]->postid);
-                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->body,
-                    'username'=>$username, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->body,'username'=>$username,
+                    'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
                 }
             }
         return($postsarray);
@@ -80,6 +81,7 @@ class post extends Model
                 if($x < $numberofpostsmax)
                 {
                     $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
+                    $profilepic = user::where('userid', $allposts[$x]->userid)->first()->profilepic; 
                     $voted = interaction::where('userid', $userid)->where('postid', $allposts[$x]->postid)->get();
                     if(!$voted->IsEmpty())
                     {
@@ -91,8 +93,8 @@ class post extends Model
                     else
                         $voted = null;
                     $votes = $this->Votes($allposts[$x]->postid);
-                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->body,
-                    'username'=>$username, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->title, 'body'=>$allposts[$x]->body,'username'=>$username, 
+                    'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
                 }
             }
         return($postsarray);
@@ -103,6 +105,8 @@ class post extends Model
         $post = $this::where('postid', $postid)->first();
         $votes = $this->Votes($postid);
         $username = user::where('userid', $post->userid)->first()->username; 
+        $profilepic = user::where('userid', $post->userid)->first()->profilepic;
+
         $voted = interaction::where('userid', $userid)->where('postid', $postid)->get();
                     if(!$voted->IsEmpty())
                     {
@@ -114,7 +118,7 @@ class post extends Model
                     else
                         $voted = null;
 
-        return ['postid'=>$post->postid, 'head'=>$post->title, 'body'=>$post->body, 'username'=>$username, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at];
+        return ['postid'=>$post->postid, 'head'=>$post->title, 'body'=>$post->body, 'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at];
     }
 
     public function PostInCommunity($community, $userid, $title, $body)
@@ -154,6 +158,7 @@ class post extends Model
                     $votes = $this->Votes($posts[$x]->postid);
                     $postuserid = $this::where('postid', $posts[$x]->postid)->first()->userid;
                     $username = user::where('userid', $postuserid)->first()->username;
+                    $profilepic = user::where('userid', $postuserid)->first()->profilepic;
                     $voted = interaction::where('userid', $userid)->where('postid', $posts[$x]->commentid)->get();
                     if(!$voted->IsEmpty())
                     {
@@ -172,6 +177,7 @@ class post extends Model
                     'votes' => $votes, 
                     'created_at'=>$posts[$x]->created_at, 
                     'username'=>$username, 
+                    'profilepic'=>$profilepic,
                     'voted'=>$voted,
                     'community'=>$posts[$x]->community]);
                 }
@@ -198,6 +204,7 @@ class post extends Model
                 $votes = $this->Votes($post->postid);
                 $postuserid = $this::where('postid', $post->postid)->first()->userid;
                 $username = user::where('userid', $postuserid)->first()->username;
+                $profilepic = user::where('userid', $postuserid)->first()->profilepic;
                 $voted = interaction::where('userid', $userid)->where('postid', $post->postid)->get();
                 if(!$voted->IsEmpty())
                 {
@@ -216,6 +223,7 @@ class post extends Model
                 'votes' => $votes, 
                 'created_at'=>$post->created_at, 
                 'username'=>$username, 
+                'profilepic'=>$profilepic,
                 'voted'=>$voted,
                 'community'=>$post->community]);
 
@@ -245,6 +253,7 @@ class post extends Model
                     $votes = $this->Votes($posts[$x]->postid);
                     $postuserid = $this::where('postid', $posts[$x]->postid)->first()->userid;
                     $username = user::where('userid', $postuserid)->first()->username;
+                    $profilepic = user::where('userid', $postuserid)->first()->profilepic;
                     $voted = interaction::where('userid', $userid)->where('postid', $posts[$x]->commentid)->get();
                     if(!$voted->IsEmpty())
                     {
@@ -263,6 +272,7 @@ class post extends Model
                     'votes' => $votes, 
                     'created_at'=>$posts[$x]->created_at, 
                     'username'=>$username, 
+                    'profilepic'=>$profilepic,
                     'voted'=>$voted,
                     'community'=>$posts[$x]->community]);
                 }
@@ -289,6 +299,7 @@ class post extends Model
                 $votes = $this->Votes($post->postid);
                 $postuserid = $this::where('postid', $post->postid)->first()->userid;
                 $username = user::where('userid', $postuserid)->first()->username;
+                $profilepic = user::where('userid', $postuserid)->first()->profilepic;
                 $voted = interaction::where('userid', $userid)->where('postid', $post->postid)->get();
                 if(!$voted->IsEmpty())
                 {
@@ -307,6 +318,7 @@ class post extends Model
                 'votes' => $votes, 
                 'created_at'=>$post->created_at, 
                 'username'=>$username, 
+                'profilepic'=>$profilepic,
                 'voted'=>$voted,
                 'community'=>$post->community]);
 

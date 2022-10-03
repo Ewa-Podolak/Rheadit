@@ -39,6 +39,7 @@ class comment extends Model
                                                 'favourited'=>true,
                                                 'created_at'=>$comment->created_at, 
                                                 'username'=>user::where('userid', $comment->userid)->first()->username,
+                                                'profilepic'=>user::where('userid', $comment->userid)->first()->profilepic,
                                                 'voted'=>$voted]);
         }
 
@@ -61,6 +62,7 @@ class comment extends Model
                                                 'favourited'=>false,
                                                 'created_at'=>$comment->created_at, 
                                                 'username'=>user::where('userid', $comment->userid)->first()->username,
+                                                'profilepic'=>user::where('userid', $comment->userid)->first()->profilepic,
                                                 'voted'=>$voted]);
         }
 
@@ -75,7 +77,7 @@ class comment extends Model
 
         if(count($commentsarray) + 1 == $page * 5)
         {
-            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null];
+            return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null, 'profilepic'=>null, 'voted'=>null];
         }
         else
         {
