@@ -237,15 +237,14 @@ if (!window.location.href.includes("index.html")){
                 bioText.innerHTML = data.bio;
                 followers.innerHTML = data.followers;
                 following.innerHTML = data.following;
-
-                console.log(data.profilepic);
-                if (!data.profilepic)
+                if (!data.profilepic == "null")
                 {
                     profilePicture.src = "./images/607426-200.png";
                 }
                 else{
                     profilePicture.src = data.profilepic;
                 }
+                profilePicture.src = "./images/607426-200.png";
             });
 
             var followersBtn = document.querySelector(".followers");
@@ -631,12 +630,13 @@ if (!window.location.href.includes("index.html")){
             profilePic.id = "profilePic" 
             profilePic.classList.add("postProfilePic");
 
-            if (!profilePic.src){
+            if (profilePic.src == null){
                 profilePic.src = "./images/607426-200.png";
             }
             else{
                 profilePic.src = data[x].profilepic;
             }
+            profilePic.src = "./images/607426-200.png";
 
             const usernameEl = document.createElement("h2");
             usernameEl.id = "username";
@@ -851,12 +851,13 @@ if (!window.location.href.includes("index.html")){
                     comment.appendChild(commentProfile);
 
                     const commentProfilePic = document.createElement("img");
-                    if (!commentProfilePic.src){
-                        commentProfilePic.src = "./images/607426-200.png";
-                    }
-                    else{
-                        commentProfilePic.src = data[y].profilepic;
-                    }
+                    // if (commentProfilePic.src == null){
+                    //     commentProfilePic.src = "./images/607426-200.png";
+                    // }
+                    // else{
+                    //     commentProfilePic.src = data[y].profilepic;
+                    // }
+                    commentProfilePic.src = "./images/607426-200.png";
 
                     commentProfilePic.id = "profilePic";
 

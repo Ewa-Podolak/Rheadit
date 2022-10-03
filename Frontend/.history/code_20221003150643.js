@@ -239,7 +239,7 @@ if (!window.location.href.includes("index.html")){
                 following.innerHTML = data.following;
 
                 console.log(data.profilepic);
-                if (!data.profilepic)
+                if (data.profilepic == null)
                 {
                     profilePicture.src = "./images/607426-200.png";
                 }
@@ -631,7 +631,7 @@ if (!window.location.href.includes("index.html")){
             profilePic.id = "profilePic" 
             profilePic.classList.add("postProfilePic");
 
-            if (!profilePic.src){
+            if (profilePic.src == null){
                 profilePic.src = "./images/607426-200.png";
             }
             else{
@@ -851,7 +851,7 @@ if (!window.location.href.includes("index.html")){
                     comment.appendChild(commentProfile);
 
                     const commentProfilePic = document.createElement("img");
-                    if (!commentProfilePic.src){
+                    if (commentProfilePic.src == null){
                         commentProfilePic.src = "./images/607426-200.png";
                     }
                     else{

@@ -38,7 +38,7 @@ $light: #F6F6F2;
 
 .profilepagePic{
     width: 169px !important;
-    height: 169px !important;
+    height: 169px;
     border-radius: 50%;
     padding: 5%;
 }
@@ -153,8 +153,8 @@ input{
 
 #profilePic{
     border-radius: 100%;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
 }
 
 #groupname{
@@ -341,7 +341,6 @@ input:-webkit-autofill:active{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 5%;
 
     
 
