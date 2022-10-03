@@ -85,4 +85,11 @@ class user extends Model
             return ['emailsent'=>true];
         }
     }
+
+    public function ResertPassword($userid, $password)
+    {
+        $this::where('userid', $userid)->update(['password'=>$password]);
+
+        return ['updated'=>true];
+    }
 }
