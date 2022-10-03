@@ -112,11 +112,6 @@ if (window.location.href.includes("index.html")){
 // all pages
 
 if (!window.location.href.includes("index.html")){
-
-    var dropdownusername = window.localStorage.getItem("username");
-    var dropUsername = document.querySelector(".dropUsername");
-    dropUsername.innerHTML = dropdownusername;
-
     var pagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
 
@@ -130,45 +125,27 @@ if (!window.location.href.includes("index.html")){
 
     // pagenum
 
-    if (window.location.href.includes("home.html")){
-        getPosts(pagenumber, null);
+        if (window.location.href.includes("home.html")){
+            var plusPageNum = document.getElementById("plusPageNum");
+            var minusPageNum = document.getElementById("minusPageNum");
+            var pageNum = document.getElementById("pageNum");
 
-        var newpostbtn = document.querySelector(".newpostbtn");
-        var newposttxt = document.querySelector(".newposttxt");
-        
-        newpostbtn.addEventListener("click", ()=>{
-            console.log("click");
-            var userid = window.localStorage.getItem("userid");
-            fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-            });
-        })
-    }
-
-    var plusPageNum = document.getElementById("plusPageNum");
-    var minusPageNum = document.getElementById("minusPageNum");
-    var pageNum = document.getElementById("pageNum");
-
-    plusPageNum.addEventListener("click", function(){
-        pagenumber++;
-        pageNum.innerHTML = pagenumber
-        getPosts(pagenumber, null);
-    })
-
-    minusPageNum.addEventListener("click", function(){
-        if (pagenumber > 1){
-            pagenumber--;
-            pageNum.innerHTML = pagenumber
             getPosts(pagenumber, null);
+
+            plusPageNum.addEventListener("click", function(){
+                pagenumber++;
+                pageNum.innerHTML = pagenumber
+                getPosts(pagenumber, null);
+            })
+
+            minusPageNum.addEventListener("click", function(){
+                if (pagenumber > 1){
+                    pagenumber--;
+                    pageNum.innerHTML = pagenumber
+                    getPosts(pagenumber, null);
+                }
+            })
         }
-    })
 
     // go to home page
 
@@ -200,6 +177,10 @@ if (!window.location.href.includes("index.html")){
                 dropDownDisplay = false;
             }
         })
+
+        var dropdownusername = window.localStorage.getItem("username");
+        var dropUsername = document.querySelector(".dropUsername");
+        dropUsername.innerHTML = dropdownusername        
 
     // profile
 
@@ -251,16 +232,11 @@ if (!window.location.href.includes("index.html")){
                 .then(data => {
 
                     console.log(data);
-                    if (data.length > 0){
-                        boxContents.innerHTML = "Followers: "
-                        console.log(data[0].username)
-                        for (let x = 0; x < data.length; x++){
-                            boxContents.innerHTML += `<br>`;
-                            boxContents.innerHTML += data[0].username;
-                        }
-                    }
-                    else{
-                        boxContents.innerHTML = "Followers: 0"
+                    boxContents.innerHTML = "Followers: "
+                    console.log(data[0].username)
+                    for (let x = 0; x < data.length; x++){
+                        boxContents.innerHTML += `<br>`;
+                        boxContents.innerHTML += data[0].username;
                     }
                 });
 
@@ -277,16 +253,10 @@ if (!window.location.href.includes("index.html")){
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    if (data.length > 0){
-                        boxContents.innerHTML = "Following: "
-                        console.log(data[0].username)
-                        for (let x = 0; x < data.length; x++){
-                            boxContents.innerHTML += `<br>`;
-                            boxContents.innerHTML += data[0].username;
-                        }
-                    }
-                    else{
-                        boxContents.innerHTML = "Following: 0"
+                    boxContents.innerHTML = "Following: "
+                    console.log(data[0].username)
+                    for (let x = 0; x < data.length; x++){
+                        boxContents.innerHTML += data[0].username;
                     }
                 });
 
@@ -454,10 +424,10 @@ if (!window.location.href.includes("index.html")){
                     populatePosts(data, pagenumber);
                     postsContainer.innerHTML = "no more posts to show";
                     
-                    plusPageNum.disabled = true;
+                    //plusPageNum.disabled = true;
                 }
                 else{
-                    plusPageNum.disabled = false;
+                    //plusPageNum.disabled = false;
                     populatePosts(data, pagenumber);
                 }
             });
@@ -476,10 +446,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        plusPageNum.disabled = true;
+                        //plusPageNum.disabled = true;
                     }
                     else{
-                        plusPageNum.disabled = false;
+                        //plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -498,10 +468,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        plusPageNum.disabled = true;
+                        //plusPageNum.disabled = true;
                     }
                     else{
-                        plusPageNum.disabled = false;
+                        //plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -520,10 +490,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        plusPageNum.disabled = true;
+                        //plusPageNum.disabled = true;
                     }
                     else{
-                        plusPageNum.disabled = false;
+                        //plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -545,10 +515,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                       plusPageNum.disabled = true;
+                       // plusPageNum.disabled = true;
                     }
                     else{
-                       plusPageNum.disabled = false;
+                       // plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });

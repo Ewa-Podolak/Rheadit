@@ -132,24 +132,6 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
-
-        var newpostbtn = document.querySelector(".newpostbtn");
-        var newposttxt = document.querySelector(".newposttxt");
-        
-        newpostbtn.addEventListener("click", ()=>{
-            console.log("click");
-            var userid = window.localStorage.getItem("userid");
-            fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-            });
-        })
     }
 
     var plusPageNum = document.getElementById("plusPageNum");
@@ -251,16 +233,11 @@ if (!window.location.href.includes("index.html")){
                 .then(data => {
 
                     console.log(data);
-                    if (data.length > 0){
-                        boxContents.innerHTML = "Followers: "
-                        console.log(data[0].username)
-                        for (let x = 0; x < data.length; x++){
-                            boxContents.innerHTML += `<br>`;
-                            boxContents.innerHTML += data[0].username;
-                        }
-                    }
-                    else{
-                        boxContents.innerHTML = "Followers: 0"
+                    boxContents.innerHTML = "Followers: "
+                    console.log(data[0].username)
+                    for (let x = 0; x < data.length; x++){
+                        boxContents.innerHTML += `<br>`;
+                        boxContents.innerHTML += data[0].username;
                     }
                 });
 
@@ -277,16 +254,10 @@ if (!window.location.href.includes("index.html")){
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    if (data.length > 0){
-                        boxContents.innerHTML = "Following: "
-                        console.log(data[0].username)
-                        for (let x = 0; x < data.length; x++){
-                            boxContents.innerHTML += `<br>`;
-                            boxContents.innerHTML += data[0].username;
-                        }
-                    }
-                    else{
-                        boxContents.innerHTML = "Following: 0"
+                    boxContents.innerHTML = "Following: "
+                    console.log(data[0].username)
+                    for (let x = 0; x < data.length; x++){
+                        boxContents.innerHTML += data[0].username;
                     }
                 });
 
@@ -454,10 +425,10 @@ if (!window.location.href.includes("index.html")){
                     populatePosts(data, pagenumber);
                     postsContainer.innerHTML = "no more posts to show";
                     
-                    plusPageNum.disabled = true;
+                    //plusPageNum.disabled = true;
                 }
                 else{
-                    plusPageNum.disabled = false;
+                    //plusPageNum.disabled = false;
                     populatePosts(data, pagenumber);
                 }
             });
@@ -476,10 +447,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        plusPageNum.disabled = true;
+                        //plusPageNum.disabled = true;
                     }
                     else{
-                        plusPageNum.disabled = false;
+                        //plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -498,10 +469,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        plusPageNum.disabled = true;
+                        //plusPageNum.disabled = true;
                     }
                     else{
-                        plusPageNum.disabled = false;
+                        //plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -520,10 +491,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                        plusPageNum.disabled = true;
+                        //plusPageNum.disabled = true;
                     }
                     else{
-                        plusPageNum.disabled = false;
+                        //plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });
@@ -545,10 +516,10 @@ if (!window.location.href.includes("index.html")){
                         populatePosts(data, pagenumber);
                         postsContainer.innerHTML = "no more posts to show";
                         
-                       plusPageNum.disabled = true;
+                       // plusPageNum.disabled = true;
                     }
                     else{
-                       plusPageNum.disabled = false;
+                       // plusPageNum.disabled = false;
                         populatePosts(data, pagenumber);
                     }
                 });

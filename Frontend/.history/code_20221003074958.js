@@ -135,6 +135,8 @@ if (!window.location.href.includes("index.html")){
 
         var newpostbtn = document.querySelector(".newpostbtn");
         var newposttxt = document.querySelector(".newposttxt");
+        console.log(newpostbtn);
+        console.log("hol")
         
         newpostbtn.addEventListener("click", ()=>{
             console.log("click");

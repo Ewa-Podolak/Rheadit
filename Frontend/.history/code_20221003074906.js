@@ -135,21 +135,8 @@ if (!window.location.href.includes("index.html")){
 
         var newpostbtn = document.querySelector(".newpostbtn");
         var newposttxt = document.querySelector(".newposttxt");
-        
-        newpostbtn.addEventListener("click", ()=>{
-            console.log("click");
-            var userid = window.localStorage.getItem("userid");
-            fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-            });
-        })
+        console.log(newpostbtn);
+        console.log("hol");
     }
 
     var plusPageNum = document.getElementById("plusPageNum");
@@ -434,6 +421,21 @@ if (!window.location.href.includes("index.html")){
                 recent = false;
                 console.log("popular");
                 getPosts(0, null);
+            })
+            
+            newpostbtn.addEventListener("click", ()=>{
+                console.log("click");
+                var userid = window.localStorage.getItem("userid");
+                fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                        console.log(data);
+                });
             })
         }
 
