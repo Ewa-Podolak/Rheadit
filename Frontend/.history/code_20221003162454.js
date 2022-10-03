@@ -106,8 +106,6 @@ if (window.location.href.includes("index.html")){
         console.log("forgot password");
 
         // send password reset request ///////////////////
-
-        // '/users/sendemail'
     })
 }
 
@@ -418,18 +416,6 @@ if (!window.location.href.includes("index.html")){
                 showgroupname.innerHTML = data.communityname;
                 showgroupbio.innerHTML = data.bio
                 numgroupmembers.innerHTML = data.memebernumber;
-                joinGroup.innerHTML = data.userrole;
-
-                if (joinGroup.innerHTML == null){ /////////////// could change (depends what not already joined returns)
-                    joinGroup.innerHTML = "join";
-                    joinGroup.disabled = false;
-                }
-
-                // if joinGroup.innerHTML == owner 
-                // show all options to change
-
-                // if joinGroup.innerHTML == mod 
-                // can delte posts
             });
         
 

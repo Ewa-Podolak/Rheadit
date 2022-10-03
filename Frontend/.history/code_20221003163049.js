@@ -106,8 +106,6 @@ if (window.location.href.includes("index.html")){
         console.log("forgot password");
 
         // send password reset request ///////////////////
-
-        // '/users/sendemail'
     })
 }
 
