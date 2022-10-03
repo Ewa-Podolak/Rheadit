@@ -31,9 +31,11 @@ class userController extends Controller
             return ['userid' => null, 'username' => null];
     }
 
-    public function SendEmail($email)
+    public function SendEmail()
     {
-
+        $user = new user;
+        $email = request()->email;
+        return $user->SendEmail($email);
     }
 
     public function ResetPassword($password)

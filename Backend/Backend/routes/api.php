@@ -20,7 +20,7 @@ Route::patch('/users/profilepicture/{userid}', [userController::class, 'UpdatePi
 //Sent in body
 Route::patch('/users/bio/{userid}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
 
-Route::get('/users/sendemail/{email}', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
+Route::get('/users/sendemail', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
 
 Route::patch('/users/resetpassword/{username}/{password}', [userController::class, 'ResetPassword']); //Updates password //welp
 

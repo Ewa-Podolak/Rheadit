@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Mail\ResetPassword1;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class user extends Model
 {
@@ -64,5 +66,23 @@ class user extends Model
         $this::where('userid', $userid)->delete();
 
         return ['deleted'=>true];
+    }
+
+    public function SendEmail($email)
+    {
+        $userid = $this::where('email', $email)->get();
+
+        if($userid->IsEmpty())
+            return ['emailsent'=>false];
+
+        else
+        {
+            $userid = $userid[0]->userid;
+            
+            Mail::to($email)
+                ->send(new ResetPassword1());
+
+            return ['emailsent'=>true];
+        }
     }
 }
