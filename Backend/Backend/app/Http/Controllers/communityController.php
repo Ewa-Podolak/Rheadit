@@ -56,4 +56,19 @@ class communityController extends Controller
         $community = new community;
         return $community->ApproveMod($communityname, $userid, $username);
     }
+
+    public function UpdateCommunityBio($communityname, $userid)
+    {
+        if(community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner')
+        {
+            
+        }
+        $bio = request()->bio;
+    }
+
+    public function UpdateCommunityPic($communityname, $userid)
+    {
+
+        $profilepic = request()->profilepic;
+    }
 }

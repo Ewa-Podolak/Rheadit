@@ -51,7 +51,7 @@ class postController extends Controller
         $body = request()->body;
         $picture = request()->picture;
 
-        if(community::where('userid', $userid)->where('community', $community)->get()->IsEmpty())
+        if(community ::where('userid', $userid)->where('community', $community)->get()->IsEmpty())
             return ['created'=>false];
         else
         {

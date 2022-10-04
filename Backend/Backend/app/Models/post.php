@@ -353,7 +353,7 @@ class post extends Model
         $interactions = new interaction;
 
         //Delete Comments
-        $tobedeletedcomments = $comments->DeletedPost(comment::where('postid', $postid)->get());
+        $tobedeletedcomments = comment::where('postid', $postid)->get();
 
         foreach($tobedeletedcomments as $comment)
             $comments->DeletedPost($comment->commentid);
