@@ -207,21 +207,14 @@ function setupgroupPage(){
                 joinGroup.innerHTML = data.userrole;
             }
 
-            if (joinGroup.innerHTML == "owner"){
-                console.log("owner")
-                ownerpriviledges();
+            if (joinGroup.innerHTML == "admin"){
+                console.log("admin")
             }
 
             if (joinGroup.innerHTML == "mod"){
                 console.log("mod")
             }
         });
-}
-
-function ownerpriviledges(){
-    var editgroupProfile = document.getElementById("groupeditProfile");
-    editgroupProfile.style.display = "block";
-    //editgroupprofilepic(); /// not made yet
 }
 
 function givePersonalControl(){

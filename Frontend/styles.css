@@ -316,6 +316,10 @@ input:-webkit-autofill:active {
   padding: 2%;
 }
 
+#deleteuser {
+  display: none;
+}
+
 .createnewPost {
   margin-top: 5%;
   width: 90vw;
@@ -332,12 +336,12 @@ input:-webkit-autofill:active {
   width: 100%;
   align-items: center;
 }
-.createnewPost .secondbox {
+.createnewPost .secondbox, .createnewPost .thirdbox {
   width: 100%;
   margin: 5%;
   display: none;
 }
-.createnewPost .secondbox input {
+.createnewPost .secondbox input, .createnewPost .thirdbox input {
   margin-left: 2%;
   width: 95%;
 }

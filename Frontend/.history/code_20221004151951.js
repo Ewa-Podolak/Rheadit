@@ -207,21 +207,17 @@ function setupgroupPage(){
                 joinGroup.innerHTML = data.userrole;
             }
 
-            if (joinGroup.innerHTML == "owner"){
-                console.log("owner")
-                ownerpriviledges();
+            if (joinGroup.innerHTML == null){ /////////////// could change (depends what not already joined returns)
+                joinGroup.innerHTML = "join";
+                joinGroup.disabled = false;
             }
 
-            if (joinGroup.innerHTML == "mod"){
-                console.log("mod")
-            }
+            // if joinGroup.innerHTML == owner 
+            // show all options to change
+
+            // if joinGroup.innerHTML == mod 
+            // can delte posts
         });
-}
-
-function ownerpriviledges(){
-    var editgroupProfile = document.getElementById("groupeditProfile");
-    editgroupProfile.style.display = "block";
-    //editgroupprofilepic(); /// not made yet
 }
 
 function givePersonalControl(){
@@ -285,7 +281,7 @@ function newbio(){
         newBioBtn.style.display = "block";
         newBioBtn.addEventListener("click", function(){
             bioText.innerHTML = newBio.value;
-            var data = { bio: newBio.value};
+            var data = { bio: newBio.value}; // change 
 
             fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}`, {
                 method: 'PATCH',
@@ -401,7 +397,7 @@ function getfollowers(followersOrFollowingListContainer, usernameProfile, boxCon
     followersBtn.addEventListener("click", function(){
         followersOrFollowingListContainer.style.display = "flex";
 
-        fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) 
+        fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) /////////// not giving anything
         .then(response => response.json())
         .then(data => {
 
@@ -490,7 +486,7 @@ function populargroupposts(){
 }
 
 function recentgroupposts(){
-    fetch(`http://localhost:8000/api/posts/${groupname}/newest/${userid}/${pagenumber}`) 
+    fetch(`http://localhost:8000/api/posts/${groupname}/newest/${userid}/${pagenumber}`) ///// community name not got
     .then(response => response.json())
     .then(data => {
         console.log(data);
@@ -577,6 +573,8 @@ function populatePosts(data, pagenumber){
 
         postsContainer.appendChild(postAndComments);
 
+        // posts
+
         const post = document.createElement("div");
         post.classList.add("post");
 
@@ -595,6 +593,7 @@ function populatePosts(data, pagenumber){
 
         const numVotes = document.createElement("h2");
         numVotes.innerHTML = data[x].votes
+        //votes.id = numVotes
 
         const arrowdownBtn = document.createElement("button");
         arrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
@@ -655,9 +654,9 @@ function populatePosts(data, pagenumber){
         BodytextEl.innerHTML = data[x].body; 
 
         if (data[x].picture != null){
-            const postImg = document.createElement("img"); 
-            postImg.src = data[x].picture 
-            postImgTxt.appendChild(postImg); 
+            const postImg = document.createElement("img"); ///// if has image
+            postImg.src = data[x].picture ///// if has image
+            postImgTxt.appendChild(postImg); ///// if has image
         }
 
         postImgTxt.appendChild(HeadtextEl);

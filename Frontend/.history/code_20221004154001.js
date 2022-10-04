@@ -207,21 +207,15 @@ function setupgroupPage(){
                 joinGroup.innerHTML = data.userrole;
             }
 
-            if (joinGroup.innerHTML == "owner"){
-                console.log("owner")
-                ownerpriviledges();
-            }
+            // if joinGroup.innerHTML == owner 
+            // show all options to change
 
-            if (joinGroup.innerHTML == "mod"){
+            if (joinGroup.innerHTML == mod){
                 console.log("mod")
             }
+            // if joinGroup.innerHTML == mod 
+            // can delte posts
         });
-}
-
-function ownerpriviledges(){
-    var editgroupProfile = document.getElementById("groupeditProfile");
-    editgroupProfile.style.display = "block";
-    //editgroupprofilepic(); /// not made yet
 }
 
 function givePersonalControl(){
