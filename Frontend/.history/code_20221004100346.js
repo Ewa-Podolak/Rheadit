@@ -166,7 +166,7 @@ if (!window.location.href.includes("index.html")){
             data = {title: newbodytxt.value, body: newposttxt.value};
 
             var userid = window.localStorage.getItem("userid");
-            fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
+            fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -176,10 +176,7 @@ if (!window.location.href.includes("index.html")){
             .then((response) => response.json())
             .then((data) => {
                     console.log(data);
-                    getPosts(1);
             });
-
-            
         })
     }
 

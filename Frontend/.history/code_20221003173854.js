@@ -31,7 +31,6 @@ if (window.location.href.includes("index.html")){
                     window.localStorage.setItem("userid", userid);
                     window.localStorage.setItem("username", username);
                     window.localStorage.setItem("usernameToGet", username);
-
                     window.location.href = "home.html";
                 }
                 else{
@@ -112,6 +111,7 @@ if (window.location.href.includes("index.html")){
         const data = { email: "email example" };
 
         fetch('https://example.com/profile', {
+          method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
           },
@@ -119,7 +119,7 @@ if (window.location.href.includes("index.html")){
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+           
           })
     })
 }
@@ -147,9 +147,7 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
-    }
 
-    if (window.location.href.includes("home.html") || window.location.href.includes("group.html")){
         var newpostbtn = document.querySelector(".newpostbtn");
         var newposttxt = document.querySelector(".newposttxt");
         var secondbox = document.querySelector(".secondbox");
@@ -166,7 +164,7 @@ if (!window.location.href.includes("index.html")){
             data = {title: newbodytxt.value, body: newposttxt.value};
 
             var userid = window.localStorage.getItem("userid");
-            fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
+            fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -176,10 +174,7 @@ if (!window.location.href.includes("index.html")){
             .then((response) => response.json())
             .then((data) => {
                     console.log(data);
-                    getPosts(1);
             });
-
-            
         })
     }
 
@@ -384,7 +379,6 @@ if (!window.location.href.includes("index.html")){
                     var close = document.querySelector(".close");
                     var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
                     var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
-                    var newProfilePic = document.querySelector(".profilepagePic");
 
                     close.addEventListener("click", function(){
                         profilePicEditorContainer.style.display = "none"
@@ -408,9 +402,6 @@ if (!window.location.href.includes("index.html")){
 
                                 profilePicEditorContainer.style.display = "none"     
                         });
-
-                        newProfilePic.src = submitNewProfilePicBox.value;
-
                     })
                 })
             }
@@ -670,9 +661,10 @@ if (!window.location.href.includes("index.html")){
             profilePic.id = "profilePic" 
             profilePic.classList.add("postProfilePic");
 
-            profilePic.src = "./images/607426-200.png";
-         
-            if (data[x].profilepic.includes("http")){
+            if (!profilePic.src){
+                profilePic.src = "./images/607426-200.png";
+            }
+            else{
                 profilePic.src = data[x].profilepic;
             }
 

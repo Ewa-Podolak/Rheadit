@@ -130,10 +130,15 @@ if (!window.location.href.includes("index.html")){
 
     var dropdownusername = window.localStorage.getItem("username");
     var dropUsername = document.querySelector(".dropUsername");
+    var dropPic = window.localStorage.getItem("pic");
     dropUsername.innerHTML = dropdownusername;
 
     var pagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
+
+    if (dropPic.includes("http")){
+        profilePic.src = dropPic;
+    }
 
     // going to own profile page
 
@@ -166,7 +171,7 @@ if (!window.location.href.includes("index.html")){
             data = {title: newbodytxt.value, body: newposttxt.value};
 
             var userid = window.localStorage.getItem("userid");
-            fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
+            fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -176,10 +181,7 @@ if (!window.location.href.includes("index.html")){
             .then((response) => response.json())
             .then((data) => {
                     console.log(data);
-                    getPosts(1);
             });
-
-            
         })
     }
 

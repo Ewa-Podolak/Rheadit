@@ -31,7 +31,6 @@ if (window.location.href.includes("index.html")){
                     window.localStorage.setItem("userid", userid);
                     window.localStorage.setItem("username", username);
                     window.localStorage.setItem("usernameToGet", username);
-
                     window.location.href = "home.html";
                 }
                 else{
@@ -166,7 +165,7 @@ if (!window.location.href.includes("index.html")){
             data = {title: newbodytxt.value, body: newposttxt.value};
 
             var userid = window.localStorage.getItem("userid");
-            fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
+            fetch(`http://localhost:8000/api/posts/po/create/${userid}`, { //// replce po woth homepage group // doesnt work 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -176,10 +175,7 @@ if (!window.location.href.includes("index.html")){
             .then((response) => response.json())
             .then((data) => {
                     console.log(data);
-                    getPosts(1);
             });
-
-            
         })
     }
 
@@ -384,7 +380,6 @@ if (!window.location.href.includes("index.html")){
                     var close = document.querySelector(".close");
                     var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
                     var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
-                    var newProfilePic = document.querySelector(".profilepagePic");
 
                     close.addEventListener("click", function(){
                         profilePicEditorContainer.style.display = "none"
@@ -408,9 +403,6 @@ if (!window.location.href.includes("index.html")){
 
                                 profilePicEditorContainer.style.display = "none"     
                         });
-
-                        newProfilePic.src = submitNewProfilePicBox.value;
-
                     })
                 })
             }
@@ -670,9 +662,10 @@ if (!window.location.href.includes("index.html")){
             profilePic.id = "profilePic" 
             profilePic.classList.add("postProfilePic");
 
-            profilePic.src = "./images/607426-200.png";
-         
-            if (data[x].profilepic.includes("http")){
+            if (!profilePic.src){
+                profilePic.src = "./images/607426-200.png";
+            }
+            else{
                 profilePic.src = data[x].profilepic;
             }
 

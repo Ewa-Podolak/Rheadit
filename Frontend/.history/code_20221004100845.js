@@ -176,10 +176,9 @@ if (!window.location.href.includes("index.html")){
             .then((response) => response.json())
             .then((data) => {
                     console.log(data);
-                    getPosts(1);
             });
 
-            
+            getPosts(0);
         })
     }
 
