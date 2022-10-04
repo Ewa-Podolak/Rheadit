@@ -333,7 +333,6 @@ function setupgeneralProfile(){
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        console.log("logged in:");
         console.log(loggedinUsername)
 
         usernameText.innerHTML = usernameProfile;
@@ -1037,10 +1036,8 @@ function newpost(group){
 
 function goToOwnProfile(){
     goToOwnProfileBtn.addEventListener("click", function(){
-        var dropUser = document.querySelector(".dropUsername");
         window.location.href = "profile.html";
         window.localStorage.setItem("personal", true);
-        window.localStorage.setItem("usernameToGet", dropUser.innerHTML);
     })
 }
 

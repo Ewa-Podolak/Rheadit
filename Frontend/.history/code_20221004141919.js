@@ -1037,10 +1037,10 @@ function newpost(group){
 
 function goToOwnProfile(){
     goToOwnProfileBtn.addEventListener("click", function(){
-        var dropUser = document.querySelector(".dropUsername");
+        var dropUser = document.querySelector("dropUsername");
         window.location.href = "profile.html";
         window.localStorage.setItem("personal", true);
-        window.localStorage.setItem("usernameToGet", dropUser.innerHTML);
+        window.localStorage.setItem("usernameToGet", dropUser);
     })
 }
 

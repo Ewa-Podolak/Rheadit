@@ -1040,7 +1040,7 @@ function goToOwnProfile(){
         var dropUser = document.querySelector(".dropUsername");
         window.location.href = "profile.html";
         window.localStorage.setItem("personal", true);
-        window.localStorage.setItem("usernameToGet", dropUser.innerHTML);
+        window.localStorage.setItem("usernameToGet", dropUser);
     })
 }
 
