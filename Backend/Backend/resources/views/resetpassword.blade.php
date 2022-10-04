@@ -333,7 +333,7 @@
     </style>
   </head>
   <body>
-    <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+    <span class="preheader">Reset Password</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -350,7 +350,7 @@
                     <tr>
                       <td>
                         <p>Hi there,</p>
-                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
+                        <p>Click the button below to be redirected to a reset password page</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -358,7 +358,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
+                                      <td> <a href=$emaillink target="_blank">ResetPassword</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>

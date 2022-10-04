@@ -14,11 +14,13 @@ class ResetPassword1 extends Mailable
 
     public function __construct()
     {
-        //
+
     }
 
     public function build()
     {
-        return $this->view('resetpassword');
+        $userid = 1;
+        $emaillink = "http://localhost:8000/api/users/resetpassword/" . $userid;
+        return $this->view('resetpassword', ['emaillink' => $emaillink]);
     }
 }
