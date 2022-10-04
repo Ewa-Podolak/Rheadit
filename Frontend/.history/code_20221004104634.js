@@ -134,7 +134,7 @@ if (!window.location.href.includes("index.html")){
     var userid = window.localStorage.getItem("userid");
 
     if (window.location.href.includes("home.html")){
-        getPosts(pagenumber, null);
+        getPosts(0, null);
     }
 
     // going to own profile page
@@ -144,6 +144,7 @@ if (!window.location.href.includes("index.html")){
     })
 
     // creating a new post
+
     var newpostbtn = document.querySelector(".newpostbtn");
     var newposttxt = document.querySelector(".newposttxt");
     var secondbox = document.querySelector(".secondbox");
