@@ -18,7 +18,7 @@ class post extends Model
 
         $numberofpostsmax = $allposts->count();
         $postsarray = [];
-        if($numberofpostsmax == $page * 10)
+        if($numberofpostsmax == ($page - 1) * 10)
             return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
             'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null];
         else
@@ -73,7 +73,7 @@ class post extends Model
             $x++;
         }
 
-        if($numberofpostsmax == $page * 10)
+        if($numberofpostsmax == ($page - 1) * 10)
             return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
             'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null];
         else
@@ -133,8 +133,9 @@ class post extends Model
     {
         $posts = $this::where('userid', $userid)->orderby('created_at', 'asc')->get();
 
-        if($posts->count() + 1 == $page * 5)
+        if($posts->count() == ($page - 1) * 5)
         {
+            dd($posts->count());
             return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
@@ -181,7 +182,7 @@ class post extends Model
     {
         $posts = $this::where('userid', $userid)->orderby('created_at', 'asc')->get();
 
-        if($posts->count() + 1 == $page * 5)
+        if($posts->count() == ($page - 1) * 5)
         {
             return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
@@ -230,7 +231,7 @@ class post extends Model
     {
         $posts = $this::where('community', $community)->orderby('created_at', 'asc')->get();
 
-        if($posts->count() + 1 == $page * 10)
+        if($posts->count() == ($page - 1) * 10)
         {
             return ['postid' => null, 'head' => null, 'body' => null, 'picture'=> null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
@@ -278,7 +279,7 @@ class post extends Model
     {
         $posts = $this::where('community', $community)->orderby('created_at', 'asc')->get();
 
-        if($posts->count() + 1 == $page * 5)
+        if($posts->count() == ($page - 1) * 5)
         {
             return ['postid' => null, 'head' => null, 'body' => null, 'picture' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
