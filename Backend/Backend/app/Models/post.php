@@ -135,7 +135,6 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 5)
         {
-            dd($posts->count());
             return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else

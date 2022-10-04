@@ -54,14 +54,14 @@ class userController extends Controller
     public function UpdatePicture($userid)
     {
         $newpicture = request()->profilepic;
-        $this::where('userid', $userid)->update(['profilepic'=>$newpicture]);
+        user::where('userid', $userid)->update(['profilepic'=>$newpicture]);
         return ['updated'=>true];
     }
 
     public function UpdateBio($userid)
     {
         $newbio = request()->bio;
-        $this::where('userid', $userid)->update(['bio'=>$newbio]);
+        user::where('userid', $userid)->update(['bio'=>$newbio]);
         return ['updated'=>true];
     }
 
