@@ -130,48 +130,54 @@ if (!window.location.href.includes("index.html")){
 
     var pagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
-    var goToOwnProfileBtn = document.getElementById("goProfile");
-    var userid = window.localStorage.getItem("userid");
+
+    // going to own profile page
+
+        var goToProfile = document.getElementById("goProfile");
+        goToProfile.addEventListener("click", function(){
+            window.location.href = "profile.html";
+            window.localStorage.setItem("personal", true);
+        })
+
+    // pagenum
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
     }
 
-    // going to own profile page
-    goToOwnProfileBtn.addEventListener("click", function(){
-        window.location.href = "profile.html";
-        window.localStorage.setItem("personal", true);
-    })
+    if (window.location.href.includes("home.html") || window.location.href.includes("group.html")){
+        var newpostbtn = document.querySelector(".newpostbtn");
+        var newposttxt = document.querySelector(".newposttxt");
+        var secondbox = document.querySelector(".secondbox");
+        var newbodytxt = document.querySelector(".newbodytxt");
 
-    // creating a new post
-    var newpostbtn = document.querySelector(".newpostbtn");
-    var newposttxt = document.querySelector(".newposttxt");
-    var secondbox = document.querySelector(".secondbox");
-    var newbodytxt = document.querySelector(".newbodytxt");
-
-    newposttxt.addEventListener("click", ()=>{
-        secondbox.style.display = "flex";
-    })
-    
-    newpostbtn.addEventListener("click", ()=>{
-        secondbox.style.display = "none";
-
-        data = {title: newbodytxt.value, body: newposttxt.value};
-
-        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
+        newposttxt.addEventListener("click", ()=>{
+            secondbox.style.display = "flex";
         })
-        .then((response) => response.json())
-        .then((data) => {
-                console.log(data);
-                getPosts(1);
-        }); 
-    })
-    
+        
+        newpostbtn.addEventListener("click", ()=>{
+            console.log("click");
+            secondbox.style.display = "none";
+
+            data = {title: newbodytxt.value, body: newposttxt.value};
+
+            var userid = window.localStorage.getItem("userid");
+            fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                    console.log(data);
+                    getPosts(1);
+            });
+
+            
+        })
+    }
 
     var plusPageNum = document.getElementById("plusPageNum");
     var minusPageNum = document.getElementById("minusPageNum");
