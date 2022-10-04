@@ -18,7 +18,7 @@ class post extends Model
 
         $numberofpostsmax = $allposts->count();
         $postsarray = [];
-        if($numberofpostsmax + 1 == $page * 10)
+        if($numberofpostsmax == $page * 10)
             return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
             'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null];
         else
@@ -73,7 +73,7 @@ class post extends Model
             $x++;
         }
 
-        if($numberofpostsmax + 1 == $page * 10)
+        if($numberofpostsmax == $page * 10)
             return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
             'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null];
         else
