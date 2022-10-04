@@ -161,7 +161,7 @@ if (!window.location.href.includes("index.html")){
         getPosts(pagenumber, groupname);
 
        
-        newpost(groupname); // if not a member dont do this
+        newpost("priv"); // if not a member dont do this
         
         
         var showgroupbio = document.getElementById("groupBio");
