@@ -34,7 +34,7 @@ class userController extends Controller
     public function SendEmail()
     {
         $user = new user;
-        $email = request()->email;
+         
         return $user->SendEmail($email);
     }
 
@@ -61,7 +61,7 @@ class userController extends Controller
     public function UpdateBio($userid)
     {
         $newbio = request()->bio;
-        user::where('userid', $userid)->update(['bio'=>$newbio]);
+        user ::where('userid', $userid)->update(['bio'=>$newbio]);
         return ['updated'=>true];
     }
 

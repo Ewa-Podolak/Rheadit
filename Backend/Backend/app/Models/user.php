@@ -45,7 +45,7 @@ class user extends Model
         $community = new community;
 
         $alljoinedcommunities = community::where('userid', $userid)->get();
-
+         
         foreach($alljoinedcommunities as $community)
             $community->LeaveCommunity($community->community, $userid);
         

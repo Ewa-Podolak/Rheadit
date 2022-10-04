@@ -15,17 +15,18 @@ class community extends Model
     public function LeaveCommunity($community, $userid)
     {
         $post = new post;
+        $comment = new comment;
 
-        $owner = $this::where('community', $community)->where('userid', $userid);
+        $user = $this::where('community', $community)->where('userid', $userid);
 
-        if(!$owner->get()->IsEmpty())
+        if(!$user->get()->IsEmpty())
         {
             $allposts = post::where('userid', $userid)->where('community', $community)->get();
 
-            foreach($allposts as $post)
-                $post->DeletePosts($post->postid);
-
-            $owner->delete();
+            foreach($allposts as $posts)
+                $post->DeletePosts($posts->postid);
+            
+            $user->delete();
             return ['left'=>true];
         }
         return ['left'=>false];
