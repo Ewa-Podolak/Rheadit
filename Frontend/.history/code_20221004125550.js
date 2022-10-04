@@ -163,7 +163,7 @@ if (!window.location.href.includes("index.html")){
         //if join innerhtml != join
         // newpost();
 
-        if(joinGroup.innerHTML != "join"){
+        if(joinGroup.innerHTML != join){
             newpost();
         }
         

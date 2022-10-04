@@ -163,7 +163,7 @@ if (!window.location.href.includes("index.html")){
         //if join innerhtml != join
         // newpost();
 
-        if(joinGroup.innerHTML != "join"){
+        if(joinGroup.innerHTML != join){
             newpost();
         }
         
@@ -458,6 +458,7 @@ function getPosts(pagenumber, groupname){
                     populatePosts(data, pagenumber);
                 }
             });
+        
         }
         else{
             fetch(`http://localhost:8000/api/posts/userposts/liked/${userid}/${pagenumber}`)
@@ -480,6 +481,8 @@ function getPosts(pagenumber, groupname){
     }
     else if (postsContainer.id == "groupPage"){
         if(recent){
+            // show recent group posts
+            // /posts/{community}/newest/{userid}/{page}
             fetch(`http://localhost:8000/api/posts/${groupname}/newest/${userid}/${pagenumber}`) ///// community name not got
             .then(response => response.json())
             .then(data => {
