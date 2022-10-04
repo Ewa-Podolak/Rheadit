@@ -49,7 +49,14 @@ class postController extends Controller
         $head = request()->head;
         $body = request()->body;
         $picture = request()->picture;
-        return $post->PostInCommunity($community, $userid, $head, $body, $picture);
+
+        if(community::where('userid', $userid)->where('community', $community)->get()->IsEmpty())
+            return ['created'=>false];
+        else
+        {
+            post::insert(['userid'=>$userid, 'head'=>$head, 'body'=>$body, 'picture'=>$picture, 'community'=>$community]);
+            return ['created' => true];
+        }
     }
 
     public function DeletePost($postid, $userid)

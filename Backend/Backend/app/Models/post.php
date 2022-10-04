@@ -124,24 +124,12 @@ class post extends Model
         return ['postid'=>$post->postid, 'head'=>$post->head, 'body'=>$post->body, 'picture'=>$post->picture, 'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at];
     }
 
-    public function PostInCommunity($community, $userid, $head, $body, $picture)
-    {
-        if(community::where('userid', $userid)->where('community', $community)->get()->IsEmpty())
-            return ['created'=>false];
-        else
-        {
-            $this::insert(['userid'=>$userid, 'head'=>$head, 'body'=>$body, 'picture'=>$picture, 'community'=>$community]);
-            return ['created' => true];
-        }
-    }
-
     public function Votes($postid)
     {
         $upvotes = interaction::where('postid', $postid)->where('liked', 1)->get()->count();
         $downvotes = interaction::where('postid', $postid)->where('liked', 0)->get()->count();
         return $upvotes-$downvotes;
     }
-
 
     public function GetUserNewestPosts($userid, $page)
     {
@@ -336,8 +324,6 @@ class post extends Model
 
         return $endarray;
     }
-
-
 
     public function DeletePost($postid, $userid) //When the user deletes their post
     {
