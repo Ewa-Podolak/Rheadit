@@ -162,10 +162,7 @@ if (!window.location.href.includes("index.html")){
 
         //if join innerhtml != join
         // newpost();
-
-        if(joinGroup.innerHTML != join){
-            newpost();
-        }
+        
         
         var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
@@ -1079,4 +1076,3 @@ function togglemenu(){
         }
     })
 }
-

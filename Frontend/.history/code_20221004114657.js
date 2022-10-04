@@ -133,14 +133,16 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
-        newpost();
+    }
+
+    if (!window.location.href.includes("home.html")){
+        var recent = true;
+        postSort();
     }
 
     if(window.location.href.includes("profile")){
-        newpost();
-        var recent = true;
-        postSort();
         var personal = window.localStorage.getItem("personal");
+
         getPosts(pagenumber, null);
         setupgeneralProfile();
 
@@ -150,53 +152,15 @@ if (!window.location.href.includes("index.html")){
     }
 
     if (window.location.href.includes("group.html")){
-        
-        var recent = true;
-        postSort();
+        getPosts(pagenumber, groupname);
 
         var groupname = window.localStorage.getItem("groupname");
         var joinGroup = document.getElementById("joinGroup");
         var showgroupname = document.getElementById("groupUsername");
-
-        getPosts(pagenumber, groupname);
-
-        //if join innerhtml != join
-        // newpost();
-
-        if(joinGroup.innerHTML != join){
-            newpost();
-        }
-        
         var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
-
-        setupgroupPage();
-        jointheGroup();
-    }
-}
-
-function jointheGroup(){
-    if (joinGroup.innerHTML == "join"){
-        joinGroup.addEventListener("click", function(){
-            joinGroup.innerHTML = "Requested";
-            joinGroup.style.fontWeight = "700"
-
-            fetch(`http://localhost:8000/api/community/${groupname}/join/${userid}`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            });
-        })
-    }
-}
-
-function setupgroupPage(){
-    fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
+        
+        fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -217,9 +181,30 @@ function setupgroupPage(){
             // if joinGroup.innerHTML == mod 
             // can delte posts
         });
+    
+
+        joinGroup.addEventListener("click", function(){
+            joinGroup.innerHTML = "Requested";
+            joinGroup.style.fontWeight = "700"
+
+            fetch(`http://localhost:8000/api/community/${groupname}/join/${userid}`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            });
+        })
+    }
 }
 
 function givePersonalControl(){
+
+    deleteuser();
+
     var editBio = document.getElementById("editBio");
     var editProfile = document.getElementById("editProfile");
     var followBtn = document.getElementById("followBtn");
@@ -229,11 +214,7 @@ function givePersonalControl(){
     editProfile.style.display = "block";
 
     newbio();
-    deleteuser();
-    editprofilepic();
-}
 
-function editprofilepic(){
     editProfile.addEventListener("click", function(){
         var profilePicEditorContainer = document.querySelector(".profilePicEditorContainer");
         profilePicEditorContainer.style.display = "flex"
@@ -979,6 +960,7 @@ function populatePosts(data, pagenumber){
 function setupGeneralPage(){
     setdropdownUsername();
     goToOwnProfile();
+    newpost();
     operatePages();
     gotoHome();
     logout();
@@ -997,7 +979,6 @@ function newpost(){
     var secondbox = document.querySelector(".secondbox");
     var newbodytxt = document.querySelector(".newbodytxt");
 
-
     newposttxt.addEventListener("click", ()=>{
         secondbox.style.display = "flex";
     })
@@ -1007,7 +988,7 @@ function newpost(){
         console.log(newbodytxt.value);
         data = {head: newbodytxt.value, body: newposttxt.value, picture: null};
 
-        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, {
+        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1079,4 +1060,3 @@ function togglemenu(){
         }
     })
 }
-

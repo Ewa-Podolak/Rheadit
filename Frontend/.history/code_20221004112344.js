@@ -133,70 +133,121 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
-        newpost();
+    }
+
+    if (!window.location.href.includes("home.html")){
+        var recent = true;
+        postSort();
     }
 
     if(window.location.href.includes("profile")){
-        newpost();
-        var recent = true;
-        postSort();
-        var personal = window.localStorage.getItem("personal");
         getPosts(pagenumber, null);
+
         setupgeneralProfile();
-
-        if (personal == "true"){
-            givePersonalControl();
-        } 
-    }
-
-    if (window.location.href.includes("group.html")){
+        var personal = window.localStorage.getItem("personal");
         
-        var recent = true;
-        postSort();
 
-        var groupname = window.localStorage.getItem("groupname");
-        var joinGroup = document.getElementById("joinGroup");
-        var showgroupname = document.getElementById("groupUsername");
-
-        getPosts(pagenumber, groupname);
-
-        //if join innerhtml != join
-        // newpost();
-
-        if(joinGroup.innerHTML != join){
-            newpost();
-        }
-        
-        var showgroupbio = document.getElementById("groupBio");
-        var numgroupmembers = document.getElementById("numgroupmembers");
-
-        setupgroupPage();
-        jointheGroup();
-    }
-}
-
-function jointheGroup(){
-    if (joinGroup.innerHTML == "join"){
-        joinGroup.addEventListener("click", function(){
-            joinGroup.innerHTML = "Requested";
-            joinGroup.style.fontWeight = "700"
-
-            fetch(`http://localhost:8000/api/community/${groupname}/join/${userid}`,{
-                method: 'POST',
+        var deleteuser = document.getElementById("deleteuser");
+        deleteuser.addEventListener("click", ()=>{
+            userid = window.localStorage.getItem("userid");
+            console.log(userid);
+            console.log("delete");
+            fetch(`http://localhost:8000/api/users/delete/${userid}`, {
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
+            .then((response) => response.json())
+            .then((data) => {
+                    console.log(data);
+                    console.log("deleted");
             });
         })
-    }
-}
 
-function setupgroupPage(){
-    fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
+        if (personal == "true"){
+            var editBio = document.getElementById("editBio");
+            var editProfile = document.getElementById("editProfile");
+            var newBio = document.getElementById("newBio");
+            var newBioBtn = document.getElementById("newBioBtn");
+            var followBtn = document.getElementById("followBtn");
+
+            followBtn.style.display = "none";
+    
+            editBio.style.display = "block";
+            editProfile.style.display = "block";
+
+            editBio.addEventListener("click", function(){
+                newBio.style.display = "block";
+                newBioBtn.style.display = "block";
+                newBioBtn.addEventListener("click", function(){
+                    bioText.innerHTML = newBio.value;
+                    var data = { bio: newBio.value}; // change 
+
+                    fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                            console.log(data);
+                    });
+                })
+            })
+
+            editProfile.addEventListener("click", function(){
+                var profilePicEditorContainer = document.querySelector(".profilePicEditorContainer");
+                profilePicEditorContainer.style.display = "flex"
+                var close = document.querySelector(".close");
+                var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
+                var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
+                var newProfilePic = document.querySelector(".profilepagePic");
+
+                close.addEventListener("click", function(){
+                    profilePicEditorContainer.style.display = "none"
+                })
+
+                submitNewProfilePic.addEventListener("click", function(){ 
+
+                    var data = { profilepic: submitNewProfilePicBox.value};
+                    var userid = window.localStorage.getItem("userid");
+
+                    fetch(`http://localhost:8000/api/users/profilepicture/${userid}`, { 
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                            console.log(data);
+
+                            profilePicEditorContainer.style.display = "none"     
+                    });
+
+                    newProfilePic.src = submitNewProfilePicBox.value;
+
+                })
+            })
+        }
+
+        
+    }
+
+    if (window.location.href.includes("group.html")){
+        getPosts(pagenumber, groupname);
+
+        var groupname = window.localStorage.getItem("groupname");
+        var joinGroup = document.getElementById("joinGroup");
+        var showgroupname = document.getElementById("groupUsername");
+        var showgroupbio = document.getElementById("groupBio");
+        var numgroupmembers = document.getElementById("numgroupmembers");
+        
+        fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -217,205 +268,113 @@ function setupgroupPage(){
             // if joinGroup.innerHTML == mod 
             // can delte posts
         });
-}
+    
 
-function givePersonalControl(){
-    var editBio = document.getElementById("editBio");
-    var editProfile = document.getElementById("editProfile");
-    var followBtn = document.getElementById("followBtn");
+        joinGroup.addEventListener("click", function(){
+            joinGroup.innerHTML = "Requested";
+            joinGroup.style.fontWeight = "700"
 
-    followBtn.style.display = "none";
-    editBio.style.display = "block";
-    editProfile.style.display = "block";
-
-    newbio();
-    deleteuser();
-    editprofilepic();
-}
-
-function editprofilepic(){
-    editProfile.addEventListener("click", function(){
-        var profilePicEditorContainer = document.querySelector(".profilePicEditorContainer");
-        profilePicEditorContainer.style.display = "flex"
-        var close = document.querySelector(".close");
-        var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
-        var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
-        var newProfilePic = document.querySelector(".profilepagePic");
-
-        close.addEventListener("click", function(){
-            profilePicEditorContainer.style.display = "none"
-        })
-
-        submitNewProfilePic.addEventListener("click", function(){ 
-
-            var data = { profilepic: submitNewProfilePicBox.value};
-            var userid = window.localStorage.getItem("userid");
-
-            fetch(`http://localhost:8000/api/users/profilepicture/${userid}`, { 
-                method: 'PATCH',
+            fetch(`http://localhost:8000/api/community/${groupname}/join/${userid}`,{
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
             })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-
-                    profilePicEditorContainer.style.display = "none"     
-            });
-
-            newProfilePic.src = submitNewProfilePicBox.value;
-
-        })
-    })
-}
-
-function newbio(){
-    var newBio = document.getElementById("newBio");
-    var newBioBtn = document.getElementById("newBioBtn");
-
-    editBio.addEventListener("click", function(){
-        newBio.style.display = "block";
-        newBioBtn.style.display = "block";
-        newBioBtn.addEventListener("click", function(){
-            bioText.innerHTML = newBio.value;
-            var data = { bio: newBio.value}; // change 
-
-            fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-            });
-        })
-    })
-}
-
-function deleteuser(){
-    var deleteuser = document.getElementById("deleteuser");
-    deleteuser.addEventListener("click", ()=>{
-        userid = window.localStorage.getItem("userid");
-        console.log(userid);
-        console.log("delete");
-        fetch(`http://localhost:8000/api/users/delete/${userid}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then((response) => response.json())
-        .then((data) => {
+            .then(response => response.json())
+            .then(data => {
                 console.log(data);
-                console.log("deleted");
-        });
-    })
+            });
+        })
+    }
 }
 
 function setupgeneralProfile(){
-
     var usernameProfile = window.localStorage.getItem("usernameToGet");
-    var loggedinUsername = window.localStorage.getItem("username");
+        var loggedinUsername = window.localStorage.getItem("username");
+        var usernameText = document.getElementById("usernameText");
+        var followers = document.getElementById("numOfFollowers");
+        var following = document.getElementById("numOfFollowing");
+        var bioText = document.getElementById("bioText");
+        var profilePicture = document.querySelector(".profilepagePic");
 
-    var usernameText = document.getElementById("usernameText");
-    var followers = document.getElementById("numOfFollowers");
-    var following = document.getElementById("numOfFollowing");
-    var bioText = document.getElementById("bioText");
-    var profilePicture = document.querySelector(".profilepagePic");
-
-    fetch(`http://localhost:8000/api/users/${usernameProfile}/${loggedinUsername}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-
-        usernameText.innerHTML = usernameProfile;
-        bioText.innerHTML = data.bio;
-        followers.innerHTML = data.followers;
-        following.innerHTML = data.following;
-
-        console.log(data.profilepic);
-        if (!data.profilepic)
-        {
-            profilePicture.src = "./images/607426-200.png";
-        }
-        else{
-            profilePicture.src = data.profilepic;
-        }
-    });
-
-    var followersOrFollowingListContainer = document.querySelector(".followersOrFollowingListContainer");
-    var boxContents = document.querySelector(".boxContents");
-
-    getfollowers(followersOrFollowingListContainer, usernameProfile, boxContents);
-    getfollowing(followersOrFollowingListContainer, usernameProfile, boxContents);
-    
-}
-
-function getfollowing(followersOrFollowingListContainer, usernameProfile, boxContents){
-
-    var followingBtn = document.querySelector(".following");
-    followingBtn.addEventListener("click", function(){
-        followersOrFollowingListContainer.style.display = "flex";
-
-        fetch(`http://localhost:8000/api/followers/list/followed/${usernameProfile}`) 
+        fetch(`http://localhost:8000/api/users/${usernameProfile}/${loggedinUsername}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
 
-            if (data.length > 0){
-                boxContents.innerHTML = "Following: "
-                console.log(data[0].username)
-                for (let x = 0; x < data.length; x++){
-                    boxContents.innerHTML += `<br>`;
-                    boxContents.innerHTML += data[0].username;
-                }
+            usernameText.innerHTML = usernameProfile;
+            bioText.innerHTML = data.bio;
+            followers.innerHTML = data.followers;
+            following.innerHTML = data.following;
+
+            console.log(data.profilepic);
+            if (!data.profilepic)
+            {
+                profilePicture.src = "./images/607426-200.png";
             }
             else{
-                boxContents.innerHTML = "Following: 0"
+                profilePicture.src = data.profilepic;
             }
         });
 
-        var closeFollowing = document.querySelector("#closeBtn");
-        closeFollowing.addEventListener("click", function(){
-            followersOrFollowingListContainer.style.display = "none"
-        })
-    })
-}
+        var followersBtn = document.querySelector(".followers");
+        var followingBtn = document.querySelector(".following");
+        var followersOrFollowingListContainer = document.querySelector(".followersOrFollowingListContainer");
+        var boxContents = document.querySelector(".boxContents");
 
-function getfollowers(followersOrFollowingListContainer, usernameProfile, boxContents){
 
-    var followersBtn = document.querySelector(".followers");
-    followersBtn.addEventListener("click", function(){
-        followersOrFollowingListContainer.style.display = "flex";
+        followersBtn.addEventListener("click", function(){
+            followersOrFollowingListContainer.style.display = "flex";
 
-        fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) /////////// not giving anything
-        .then(response => response.json())
-        .then(data => {
+            fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) /////////// not giving anything
+            .then(response => response.json())
+            .then(data => {
 
-            console.log("followers: "+ data);
-            if (data.length > 0){
-                boxContents.innerHTML = "Followers: "
-                console.log(data[0].username)
-                for (let x = 0; x < data.length; x++){
-                    boxContents.innerHTML += `<br>`;
-                    boxContents.innerHTML += data[0].username;
+                console.log(data);
+                if (data.length > 0){
+                    boxContents.innerHTML = "Followers: "
+                    console.log(data[0].username)
+                    for (let x = 0; x < data.length; x++){
+                        boxContents.innerHTML += `<br>`;
+                        boxContents.innerHTML += data[0].username;
+                    }
                 }
-            }
-            else{
-                boxContents.innerHTML = "Followers: 0"
-            }
-        });
+                else{
+                    boxContents.innerHTML = "Followers: 0"
+                }
+            });
 
-        var closeFollowers = document.querySelector("#closeBtn");
-        closeFollowers.addEventListener("click", function(){
-            followersOrFollowingListContainer.style.display = "none"
+            var closeFollowers = document.querySelector("#closeBtn");
+            closeFollowers.addEventListener("click", function(){
+                followersOrFollowingListContainer.style.display = "none"
+            })
         })
-    })
+
+        followingBtn.addEventListener("click", function(){
+            followersOrFollowingListContainer.style.display = "flex";
+
+            fetch(`http://localhost:8000/api/followers/list/followed/${usernameProfile}`) /////////// not giving anything
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.length > 0){
+                    boxContents.innerHTML = "Following: "
+                    console.log(data[0].username)
+                    for (let x = 0; x < data.length; x++){
+                        boxContents.innerHTML += `<br>`;
+                        boxContents.innerHTML += data[0].username;
+                    }
+                }
+                else{
+                    boxContents.innerHTML = "Following: 0"
+                }
+            });
+
+            var closeFollowing = document.querySelector("#closeBtn");
+            closeFollowing.addEventListener("click", function(){
+                followersOrFollowingListContainer.style.display = "none"
+            })
+        })
 }
 
 function postSort(){
@@ -979,6 +938,7 @@ function populatePosts(data, pagenumber){
 function setupGeneralPage(){
     setdropdownUsername();
     goToOwnProfile();
+    newpost();
     operatePages();
     gotoHome();
     logout();
@@ -997,7 +957,6 @@ function newpost(){
     var secondbox = document.querySelector(".secondbox");
     var newbodytxt = document.querySelector(".newbodytxt");
 
-
     newposttxt.addEventListener("click", ()=>{
         secondbox.style.display = "flex";
     })
@@ -1007,7 +966,7 @@ function newpost(){
         console.log(newbodytxt.value);
         data = {head: newbodytxt.value, body: newposttxt.value, picture: null};
 
-        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, {
+        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1079,4 +1038,3 @@ function togglemenu(){
         }
     })
 }
-

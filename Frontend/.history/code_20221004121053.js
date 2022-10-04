@@ -160,9 +160,6 @@ if (!window.location.href.includes("index.html")){
 
         getPosts(pagenumber, groupname);
 
-        //if join innerhtml != join
-        // newpost();
-
         if(joinGroup.innerHTML != join){
             newpost();
         }
@@ -1079,4 +1076,3 @@ function togglemenu(){
         }
     })
 }
-

@@ -133,11 +133,9 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
-        newpost();
     }
 
     if(window.location.href.includes("profile")){
-        newpost();
         var recent = true;
         postSort();
         var personal = window.localStorage.getItem("personal");
@@ -159,24 +157,13 @@ if (!window.location.href.includes("index.html")){
         var showgroupname = document.getElementById("groupUsername");
 
         getPosts(pagenumber, groupname);
-
-        //if join innerhtml != join
-        // newpost();
-
-        if(joinGroup.innerHTML != join){
-            newpost();
-        }
         
         var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
 
         setupgroupPage();
-        jointheGroup();
-    }
-}
+    
 
-function jointheGroup(){
-    if (joinGroup.innerHTML == "join"){
         joinGroup.addEventListener("click", function(){
             joinGroup.innerHTML = "Requested";
             joinGroup.style.fontWeight = "700"
@@ -979,6 +966,7 @@ function populatePosts(data, pagenumber){
 function setupGeneralPage(){
     setdropdownUsername();
     goToOwnProfile();
+    newpost();
     operatePages();
     gotoHome();
     logout();
@@ -997,7 +985,6 @@ function newpost(){
     var secondbox = document.querySelector(".secondbox");
     var newbodytxt = document.querySelector(".newbodytxt");
 
-
     newposttxt.addEventListener("click", ()=>{
         secondbox.style.display = "flex";
     })
@@ -1007,7 +994,7 @@ function newpost(){
         console.log(newbodytxt.value);
         data = {head: newbodytxt.value, body: newposttxt.value, picture: null};
 
-        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, {
+        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1079,4 +1066,3 @@ function togglemenu(){
         }
     })
 }
-

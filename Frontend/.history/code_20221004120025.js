@@ -133,11 +133,9 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
-        newpost();
     }
 
     if(window.location.href.includes("profile")){
-        newpost();
         var recent = true;
         postSort();
         var personal = window.localStorage.getItem("personal");
@@ -159,13 +157,6 @@ if (!window.location.href.includes("index.html")){
         var showgroupname = document.getElementById("groupUsername");
 
         getPosts(pagenumber, groupname);
-
-        //if join innerhtml != join
-        // newpost();
-
-        if(joinGroup.innerHTML != join){
-            newpost();
-        }
         
         var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
@@ -200,6 +191,9 @@ function setupgroupPage(){
         .then(response => response.json())
         .then(data => {
             console.log(data);
+
+            var newpostbtn = document.querySelector(".newpostbtn");
+            newpostbtn.disabled;
 
             showgroupname.innerHTML = data.communityname;
             showgroupbio.innerHTML = data.bio
@@ -979,6 +973,7 @@ function populatePosts(data, pagenumber){
 function setupGeneralPage(){
     setdropdownUsername();
     goToOwnProfile();
+    newpost();
     operatePages();
     gotoHome();
     logout();
@@ -1079,4 +1074,3 @@ function togglemenu(){
         }
     })
 }
-
