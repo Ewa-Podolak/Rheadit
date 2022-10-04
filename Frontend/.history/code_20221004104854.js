@@ -134,7 +134,7 @@ if (!window.location.href.includes("index.html")){
     var userid = window.localStorage.getItem("userid");
 
     if (window.location.href.includes("home.html")){
-        getPosts(pagenumber, null);
+        getPosts(1, null);
     }
 
     // going to own profile page

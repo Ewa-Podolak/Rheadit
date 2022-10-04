@@ -134,7 +134,7 @@ if (!window.location.href.includes("index.html")){
     var userid = window.localStorage.getItem("userid");
 
     if (window.location.href.includes("home.html")){
-        getPosts(pagenumber, null);
+        getPosts(0, null);
     }
 
     // going to own profile page
@@ -144,33 +144,8 @@ if (!window.location.href.includes("index.html")){
     })
 
     // creating a new post
-    var newpostbtn = document.querySelector(".newpostbtn");
-    var newposttxt = document.querySelector(".newposttxt");
-    var secondbox = document.querySelector(".secondbox");
-    var newbodytxt = document.querySelector(".newbodytxt");
 
-    newposttxt.addEventListener("click", ()=>{
-        secondbox.style.display = "flex";
-    })
-    
-    newpostbtn.addEventListener("click", ()=>{
-        secondbox.style.display = "none";
-
-        data = {title: newbodytxt.value, body: newposttxt.value};
-
-        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then((response) => response.json())
-        .then((data) => {
-                console.log(data);
-                getPosts(1);
-        }); 
-    })
+    createnewpost();
     
 
     var plusPageNum = document.getElementById("plusPageNum");
@@ -1032,5 +1007,35 @@ if (!window.location.href.includes("index.html")){
         var dropdownusername = window.localStorage.getItem("username");
         var dropUsername = document.querySelector(".dropUsername");
         dropUsername.innerHTML = dropdownusername;
+    }
+
+    function     createnewpost(){
+        var newpostbtn = document.querySelector(".newpostbtn");
+        var newposttxt = document.querySelector(".newposttxt");
+        var secondbox = document.querySelector(".secondbox");
+        var newbodytxt = document.querySelector(".newbodytxt");
+
+        newposttxt.addEventListener("click", ()=>{
+            secondbox.style.display = "flex";
+        })
+        
+        newpostbtn.addEventListener("click", ()=>{
+            secondbox.style.display = "none";
+
+            data = {title: newbodytxt.value, body: newposttxt.value};
+
+            fetch(`http://localhost:8000/api/posts/home/create/${userid}`, { //// replce po woth homepage group // doesnt work 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                    console.log(data);
+                    getPosts(1);
+            }); 
+        })
     }
 }
