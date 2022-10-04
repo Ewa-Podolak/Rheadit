@@ -8,8 +8,13 @@ class communityController extends Controller
 {
     public function JoinCommunity($communityname, $userid)
     {
-        $community = new community();
-        return $community->JoinCommunity($communityname, $userid);
+        $owner = community::where('community', $communityname)->where('userid', $userid);
+        if($owner->get()->IsEmpty())
+        {
+            community::insert(['userid'=>$userid, 'community'=>$communityname, 'authority'=>'member']);
+            return ['joined'=>true];
+        }
+        return ['joined'=>false];
     }
 
     public function LeaveCommunity($communityname, $userid)
@@ -20,8 +25,12 @@ class communityController extends Controller
 
     public function TransferOwnership($communityname, $userid, $newowner)
     {
-        $community = new community;
-        return $community->TransferOwnership($communityname, $userid, $newowner);
+        if(community::where('community', $communityname)->where('userid', $userid)->get()[0]->authority == 'owner')
+        {
+            community::where('community', $communityname)->where('userid', $userid)->update(['userid'=>$newowner]);
+            return ['transfered'=>true];
+        }
+        return ['transfered'=>false];
     }
 
     public function DeleteComunity($communityname, $userid)

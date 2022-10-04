@@ -23,7 +23,14 @@ class commentController extends Controller
     {
         $comment = new comment;
         $commenttext = request()->comment;
-        return $comment->CreateComment($postid, $commenttext, $userid);
+        $community = post::where('postid', $postid)->first()->community;
+        if($comment->GetAuthority($userid, $community) > 0)
+        {
+            comment::insert(['postid'=>$postid, 'userid'=>$userid, 'comment'=>$commenttext]);
+            return ['created'=>true];
+        }
+        else
+            return ['created'=>false];
     }
 
     public function DeleteComment($commentid, $userid)

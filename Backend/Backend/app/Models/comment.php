@@ -115,18 +115,6 @@ class comment extends Model
         return ['favourited'=>false];
     }
     
-    public function CreateComment($postid, $comment, $userid)
-    {
-        $community = post::where('postid', $postid)->first()->community;
-        if($this->GetAuthority($userid, $community) > 0)
-        {
-            $this::insert(['postid'=>$postid, 'userid'=>$userid, 'comment'=>$comment]);
-            return ['created'=>true];
-        }
-        else
-            return ['created'=>false];
-    }
-    
     public function GetAuthority($userid, $community)
     {
         $communitystatus = community::where('userid', $userid)->where('community', $community)->get();
@@ -149,9 +137,7 @@ class comment extends Model
         else
             return 0;
     }
-
-
-
+    
     public function DeletedPost($commentid) //WhenPost is deleted
     {
         $interaction = new interaction;
