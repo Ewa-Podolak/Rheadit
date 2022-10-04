@@ -48,7 +48,8 @@ class postController extends Controller
         $post = new post;
         $title = request()->title;
         $body = request()->body;
-        return $post->PostInCommunity($community, $userid, $title, $body);
+        $picture = request()->picture;
+        return $post->PostInCommunity($community, $userid, $title, $body, $picture);
     }
 
     public function DeletePost($postid, $userid)

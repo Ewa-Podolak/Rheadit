@@ -197,7 +197,7 @@ class post extends Model
 
         if($posts->count() + 1 == $page * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
+            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
         {
@@ -224,6 +224,7 @@ class post extends Model
                 ['postid' => $post->postid, 
                 'head' => $post->head, 
                 'body' => $post->body, 
+                'picture' => $post->picture,
                 'votes' => $votes, 
                 'created_at'=>$post->created_at, 
                 'username'=>$username, 
@@ -245,7 +246,7 @@ class post extends Model
 
         if($posts->count() + 1 == $page * 10)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
+            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=> null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
         {
@@ -273,6 +274,7 @@ class post extends Model
                     ['postid' => $posts[$x]->postid, 
                     'head' => $posts[$x]->head, 
                     'body' => $posts[$x]->body, 
+                    'picutre'=> $posts[$x]->picture,
                     'votes' => $votes, 
                     'created_at'=>$posts[$x]->created_at, 
                     'username'=>$username, 
@@ -292,7 +294,7 @@ class post extends Model
 
         if($posts->count() + 1 == $page * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
+            return ['postid' => null, 'head' => null, 'body' => null, 'picture' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
         {
@@ -319,6 +321,7 @@ class post extends Model
                 ['postid' => $post->postid, 
                 'head' => $post->head, 
                 'body' => $post->body, 
+                'picture' => $post->picture,
                 'votes' => $votes, 
                 'created_at'=>$post->created_at, 
                 'username'=>$username, 
