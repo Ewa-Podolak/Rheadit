@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\community;
+use App\Models\user;
 
 class communityController extends Controller
 {
@@ -61,14 +62,19 @@ class communityController extends Controller
     {
         if(community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner')
         {
-            
+            user::where('username', $communityname)->update(['bio'=>request()->bio]);
+            return ['updated'=>true];
         }
-        $bio = request()->bio;
+        return ['updated'=>false];
     }
 
     public function UpdateCommunityPic($communityname, $userid)
     {
-
-        $profilepic = request()->profilepic;
+        if(community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner')
+        {
+            user::where('username', $communityname)->update(['profilepic'=>request()->profilepic]);
+            return ['updated'=>true];
+        }
+        return ['updated'=>false];
     }
 }

@@ -101,3 +101,7 @@ Route::patch('/community/requestmod/{communityname}/{userid}', [communityControl
 
 Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //returns community information
 //userid is currently logged in oerson, username is the person they want to approve
+
+Route::patch('/community/updatebio/{communityname}/{userid}', [communityController::class, 'UpdateCommunityBio']); //returns community information
+
+Route::patch('/community/updateprofilepic/{communityname}/{userid}', [communityController::class, 'UpdateCommunityPic']); //returns community information

@@ -150,8 +150,8 @@ class comment extends Model
     {
         $interaction = new interaction;
         $postid = $this::where('commentid', $commentid)->first()->postid;
-        $communtiy = post::where('postid', $postid)->first()->community;
-        $authority = $this->GetAuthority($userid, $communtiy);
+        $community = post::where('postid', $postid)->first()->community;
+        $authority = $this->GetAuthority($userid, $community);
 
         if($this::where('commentid', $commentid)->first()->userid == $userid || $authority > 1)
         {

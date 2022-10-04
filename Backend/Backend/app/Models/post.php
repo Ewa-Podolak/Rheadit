@@ -332,16 +332,17 @@ class post extends Model
 
         if($this::where('postid', $postid)->first()->userid == $userid || $authority == 'mod' || $authority == 'owner')
         {
-        //Delete Comments
-        $tobedeletedcomments = $comments::where('postid', $postid)->get();
+            //Delete Comments
+            $tobedeletedcomments = $comments::where('postid', $postid)->get();
 
-        foreach($tobedeletedcomments as $comment)
-            $comments->DeletedPost($comment->commentid);
+            foreach($tobedeletedcomments as $comment)
+                $comments->DeletedPost($comment->commentid);
 
-        //Delete Likes
-        $interactions->DeleteLikesPost($postid);
+            //Delete Likes
+            $interactions->DeleteLikesPost($postid);
+            dd($postid);
 
-        return ['Delted'=>true];
+            return ['Deleted'=>true];
         }
 
         return ['Deleted'=>false];
@@ -361,5 +362,7 @@ class post extends Model
 
         //Delete Likes
         $interactions->DeleteLikesPost($postid);
+
+        $this::where('postid', $postid)->delete();
     }
 }

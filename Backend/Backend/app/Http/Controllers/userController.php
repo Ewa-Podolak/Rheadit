@@ -35,7 +35,7 @@ class userController extends Controller
     {
         $user = new user;
          
-        return $user->SendEmail($email);
+        //return $user->SendEmail($email);
     }
 
     public function ResetPassword($userid)
