@@ -1002,7 +1002,7 @@ function setdropdownUsername(){
     dropUsername.innerHTML = dropdownusername;
 }
 
-function newpost(group){
+function newpost(){
     var newpostbtn = document.querySelector(".newpostbtn");
     var newposttxt = document.querySelector(".newposttxt");
     var secondbox = document.querySelector(".secondbox");
@@ -1018,7 +1018,7 @@ function newpost(group){
         console.log(newbodytxt.value);
         data = {head: newbodytxt.value, body: newposttxt.value, picture: null};
 
-        fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
+        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

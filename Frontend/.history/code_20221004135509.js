@@ -160,9 +160,11 @@ if (!window.location.href.includes("index.html")){
 
         getPosts(pagenumber, groupname);
 
-       
-        newpost(); // if not a member dont do this
-        
+        console.log(joinGroup.innerHTML)
+        if(joinGroup.innerHTML.includes != "j"){
+            console.log("postable")
+            newpost();
+        }
         
         var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
@@ -1002,7 +1004,7 @@ function setdropdownUsername(){
     dropUsername.innerHTML = dropdownusername;
 }
 
-function newpost(group){
+function newpost(){
     var newpostbtn = document.querySelector(".newpostbtn");
     var newposttxt = document.querySelector(".newposttxt");
     var secondbox = document.querySelector(".secondbox");
@@ -1018,7 +1020,7 @@ function newpost(group){
         console.log(newbodytxt.value);
         data = {head: newbodytxt.value, body: newposttxt.value, picture: null};
 
-        fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
+        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

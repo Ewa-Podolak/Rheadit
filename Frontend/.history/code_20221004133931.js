@@ -160,9 +160,12 @@ if (!window.location.href.includes("index.html")){
 
         getPosts(pagenumber, groupname);
 
-       
-        newpost(); // if not a member dont do this
-        
+        //if join innerhtml != join
+        // newpost();
+
+        if(joinGroup.innerHTML != "join"){
+            newpost();
+        }
         
         var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
@@ -173,6 +176,7 @@ if (!window.location.href.includes("index.html")){
 }
 
 function jointheGroup(){
+    if (joinGroup.innerHTML == "join"){
         joinGroup.addEventListener("click", function(){
             joinGroup.innerHTML = "Requested";
             joinGroup.style.fontWeight = "700"
@@ -188,6 +192,7 @@ function jointheGroup(){
                 console.log(data);
             });
         })
+    }
 }
 
 function setupgroupPage(){
@@ -199,13 +204,7 @@ function setupgroupPage(){
             showgroupname.innerHTML = data.communityname;
             showgroupbio.innerHTML = data.bio
             numgroupmembers.innerHTML = data.memebernumber;
-            if (data.userrole == null){
-                joinGroup.innerHTML = "join"
-                joinGroup.disabled = false;
-            }
-            else{
-                joinGroup.innerHTML = data.userrole;
-            }
+            joinGroup.innerHTML = data.userrole;
 
             if (joinGroup.innerHTML == null){ /////////////// could change (depends what not already joined returns)
                 joinGroup.innerHTML = "join";
@@ -460,7 +459,7 @@ function getPosts(pagenumber, groupname){
 }
 
 function populargroupposts(){
-    fetch(`http://localhost:8000/api/posts/${groupname}/liked/${userid}/${pagenumber}`) 
+    fetch(`http://localhost:8000/api/posts/${groupname}/liked/${userid}/${pagenumber}`) ///// community name not got
     .then(response => response.json())
     .then(data => {
 
@@ -1002,7 +1001,7 @@ function setdropdownUsername(){
     dropUsername.innerHTML = dropdownusername;
 }
 
-function newpost(group){
+function newpost(){
     var newpostbtn = document.querySelector(".newpostbtn");
     var newposttxt = document.querySelector(".newposttxt");
     var secondbox = document.querySelector(".secondbox");
@@ -1018,7 +1017,7 @@ function newpost(group){
         console.log(newbodytxt.value);
         data = {head: newbodytxt.value, body: newposttxt.value, picture: null};
 
-        fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
+        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
