@@ -133,11 +133,11 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
-        newpost("home");
+        newpost();
     }
 
     if(window.location.href.includes("profile")){
-        newpost("home");
+        newpost();
         var recent = true;
         postSort();
         var personal = window.localStorage.getItem("personal");
@@ -160,9 +160,9 @@ if (!window.location.href.includes("index.html")){
 
         getPosts(pagenumber, groupname);
 
-       
-        newpost(groupname); // if not a member dont do this
-        
+        if(joinGroup.innerHTML != "join"){
+            newpost();
+        }
         
         var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
@@ -173,6 +173,7 @@ if (!window.location.href.includes("index.html")){
 }
 
 function jointheGroup(){
+    if (joinGroup.innerHTML == "join"){
         joinGroup.addEventListener("click", function(){
             joinGroup.innerHTML = "Requested";
             joinGroup.style.fontWeight = "700"
@@ -188,6 +189,7 @@ function jointheGroup(){
                 console.log(data);
             });
         })
+    }
 }
 
 function setupgroupPage(){
@@ -1002,7 +1004,7 @@ function setdropdownUsername(){
     dropUsername.innerHTML = dropdownusername;
 }
 
-function newpost(group){
+function newpost(){
     var newpostbtn = document.querySelector(".newpostbtn");
     var newposttxt = document.querySelector(".newposttxt");
     var secondbox = document.querySelector(".secondbox");
@@ -1018,7 +1020,7 @@ function newpost(group){
         console.log(newbodytxt.value);
         data = {head: newbodytxt.value, body: newposttxt.value, picture: null};
 
-        fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
+        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

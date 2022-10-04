@@ -133,11 +133,11 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("home.html")){
         getPosts(pagenumber, null);
-        newpost("home");
+        newpost();
     }
 
     if(window.location.href.includes("profile")){
-        newpost("home");
+        newpost();
         var recent = true;
         postSort();
         var personal = window.localStorage.getItem("personal");
@@ -160,9 +160,12 @@ if (!window.location.href.includes("index.html")){
 
         getPosts(pagenumber, groupname);
 
-       
-        newpost(groupname); // if not a member dont do this
-        
+        //if join innerhtml != join
+        // newpost();
+
+        if(joinGroup.innerHTML != "join"){
+            newpost();
+        }
         
         var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
@@ -173,6 +176,7 @@ if (!window.location.href.includes("index.html")){
 }
 
 function jointheGroup(){
+    if (joinGroup.innerHTML == "join"){
         joinGroup.addEventListener("click", function(){
             joinGroup.innerHTML = "Requested";
             joinGroup.style.fontWeight = "700"
@@ -188,6 +192,7 @@ function jointheGroup(){
                 console.log(data);
             });
         })
+    }
 }
 
 function setupgroupPage(){
@@ -199,13 +204,7 @@ function setupgroupPage(){
             showgroupname.innerHTML = data.communityname;
             showgroupbio.innerHTML = data.bio
             numgroupmembers.innerHTML = data.memebernumber;
-            if (data.userrole == null){
-                joinGroup.innerHTML = "join"
-                joinGroup.disabled = false;
-            }
-            else{
-                joinGroup.innerHTML = data.userrole;
-            }
+            joinGroup.innerHTML = data.userrole;
 
             if (joinGroup.innerHTML == null){ /////////////// could change (depends what not already joined returns)
                 joinGroup.innerHTML = "join";
@@ -443,85 +442,7 @@ function getPosts(pagenumber, groupname){
     }
     else if (postsContainer.id == "profilePage"){
         if(recent){
-            recentprofileposts();
-        }
-        else{
-            popularprofileposts();
-        }
-    }
-    else if (postsContainer.id == "groupPage"){
-        if(recent){
-            recentgroupposts();
-        }
-        else{
-            populargroupposts();
-        }
-    }
-}
-
-function populargroupposts(){
-    fetch(`http://localhost:8000/api/posts/${groupname}/liked/${userid}/${pagenumber}`) 
-    .then(response => response.json())
-    .then(data => {
-
-        console.log(groupname);
-        console.log(userid);
-        console.log(pagenumber);
-        console.log(data);
-
-        if(data.length == 0){
-            populatePosts(data, pagenumber);
-            postsContainer.innerHTML = "no more posts to show";
-            
-           plusPageNum.disabled = true;
-        }
-        else{
-           plusPageNum.disabled = false;
-            populatePosts(data, pagenumber);
-        }
-    });
-}
-
-function recentgroupposts(){
-    fetch(`http://localhost:8000/api/posts/${groupname}/newest/${userid}/${pagenumber}`) ///// community name not got
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-
-        if(data.length == 0){
-            populatePosts(data, pagenumber);
-            postsContainer.innerHTML = "no more posts to show";
-            
-            plusPageNum.disabled = true;
-        }
-        else{
-            plusPageNum.disabled = false;
-            populatePosts(data, pagenumber);
-        }
-    });
-}
-
-function popularprofileposts(){
-    fetch(`http://localhost:8000/api/posts/userposts/liked/${userid}/${pagenumber}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-
-        if(data.length == 0){
-            populatePosts(data, pagenumber);
-            postsContainer.innerHTML = "no more posts to show";
-            
-            plusPageNum.disabled = true;
-        }
-        else{
-            plusPageNum.disabled = false;
-            populatePosts(data, pagenumber);
-        }
-    });
-}
-
-function recentprofileposts(){
-    console.log(userid)
+            console.log(userid)
             console.log(pagenumber)
             fetch(`http://localhost:8000/api/posts/userposts/newest/${userid}/${pagenumber}`)
             .then(response => response.json())
@@ -540,6 +461,71 @@ function recentprofileposts(){
                     populatePosts(data, pagenumber);
                 }
             });
+        }
+        else{
+            fetch(`http://localhost:8000/api/posts/userposts/liked/${userid}/${pagenumber}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                if(data.length == 0){
+                    populatePosts(data, pagenumber);
+                    postsContainer.innerHTML = "no more posts to show";
+                    
+                    plusPageNum.disabled = true;
+                }
+                else{
+                    plusPageNum.disabled = false;
+                    populatePosts(data, pagenumber);
+                }
+            });
+        }
+    }
+    else if (postsContainer.id == "groupPage"){
+        if(recent){
+            fetch(`http://localhost:8000/api/posts/${groupname}/newest/${userid}/${pagenumber}`) ///// community name not got
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                if(data.length == 0){
+                    populatePosts(data, pagenumber);
+                    postsContainer.innerHTML = "no more posts to show";
+                    
+                    plusPageNum.disabled = true;
+                }
+                else{
+                    plusPageNum.disabled = false;
+                    populatePosts(data, pagenumber);
+                }
+            });
+        }
+        else{
+            // show popular group posts
+            // /posts/{community}/liked/{userid}/{page}
+
+            fetch(`http://localhost:8000/api/posts/${groupname}/liked/${userid}/${pagenumber}`) ///// community name not got
+            .then(response => response.json())
+            .then(data => {
+
+                console.log(groupname);
+                console.log(userid);
+                console.log(pagenumber);
+                console.log(data);
+
+                if(data.length == 0){
+                    populatePosts(data, pagenumber);
+                    postsContainer.innerHTML = "no more posts to show";
+                    
+                   plusPageNum.disabled = true;
+                }
+                else{
+                   plusPageNum.disabled = false;
+                    populatePosts(data, pagenumber);
+                }
+            });
+        }
+    }
 }
 
 function homepageposts(){
@@ -1002,7 +988,7 @@ function setdropdownUsername(){
     dropUsername.innerHTML = dropdownusername;
 }
 
-function newpost(group){
+function newpost(){
     var newpostbtn = document.querySelector(".newpostbtn");
     var newposttxt = document.querySelector(".newposttxt");
     var secondbox = document.querySelector(".secondbox");
@@ -1018,7 +1004,7 @@ function newpost(group){
         console.log(newbodytxt.value);
         data = {head: newbodytxt.value, body: newposttxt.value, picture: null};
 
-        fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
+        fetch(`http://localhost:8000/api/posts/home/create/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
