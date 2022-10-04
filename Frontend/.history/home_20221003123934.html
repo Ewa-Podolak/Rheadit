@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/4504875609.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="desktop.css" media="screen and (min-width: 500px)">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img id="logo" src="./images/Screenshot_2022-09-23_at_14.46.15-removebg-preview.png" alt="logo">
+        </div>
+        <div class="searchBar">
+            <input type="text" placeholder="Search Rheadit...">
+        </div>
+        <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+        
+        <div class="dropDown">
+            <div class="triangle"></div>
+            <ul>
+                <li id="goProfile">        
+                    <div class="profile">
+                        <img id="profilePic" src="./images/607426-200.png">
+                        <h2 id="username" class="dropUsername">username</h2>
+                    </div>
+                </li>
+                <li id="newpost"><i class="fa-solid fa-circle-plus"></i></li>
+                <li id="notification"><i class="fa-solid fa-bell"></i></li>
+                <li id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="createnewPost">
+        <img id="profilePic" src="./images/607426-200.png">
+        <input class="newposttxt" type="text" placeholder="New head">
+        <input type="image">
+        <!-- <i class="fa-regular fa-image"></i> -->
+        <i class="fa-solid fa-circle-chevron-right newpostbtn"></i>
+    </div>
+
+    <div class="postsContainer" id="homePage">  <!--  -->
+
+        <!-- <div class="postAndComments"> -->
+            
+            <!-- <div class="post"> 
+                <div class="votes">  
+                    <i class="fa-solid fa-circle-arrow-up"></i> 
+                    <h2 id="numVotes">number</h2> 
+                    <i class="fa-solid fa-circle-arrow-down"></i> 
+                </div> 
+                <div class="thePost">  
+                    <div class="profile"> 
+                        <img id="profilePic" src="./images/607426-200.png">  -->
+                        <!-- <h2 id="username">username</h2> 
+                        <h2 id="groupname"><h2>
+                    </div> 
+                    <div class="postImgTxt"> 
+                        <h2 id="text">this is some text</h2> 
+                        <img src="./images/photo-1453728013993-6d66e9c9123a.jpeg"> 
+                    </div> 
+                    <div class="interactions"> 
+                        <button class="commentbtn">Tails</button> 
+                    </div>  -->
+                <!-- </div>
+            </div>
+
+            <div class="comments"> //
+                <div class="commentBar"> //
+                    <input class="commentInput" type="text" placeholder="Comment something..."> //
+                    <i class="fa-solid fa-circle-chevron-right"></i> //
+                </div>
+                <ul> -->
+
+                    <!-- <li>
+                        
+                        <div class="votes">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <h2 id="numVotes">number</h2>
+                            <i class="fa-solid fa-circle-arrow-down"></i>
+                        </div>
+
+                        <div class="comment">
+                            <div class="profile">
+                                <img id="profilePic" src="./images/607426-200.png">
+                                <h2 id="username">username</h2>
+                            </div>
+                            <p class="commentText">this is my comment</p>
+                        </div>
+
+                    </li> -->
+
+                    <!-- <li>
+                        <div class="votes">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <h2 id="numVotes">number</h2>
+                            <i class="fa-solid fa-circle-arrow-down"></i>
+                        </div>
+
+                        <div class="comment">
+                            <div class="profile">
+                                <img id="profilePic" src="./images/607426-200.png">
+                                <h2 id="username">username</h2>
+                            </div>
+                            <p class="commentText">this is my comment</p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="pageNumContainer">
+        <button class="noBtn" id="minusPageNum"><i class="fa-solid fa-circle-arrow-left"></i></button>
+        <h3 id="pageNum">1</h3>
+        <button class="noBtn" id="plusPageNum"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    </div>
+
+    <script src="code.js"></script>
+</body>
+</html>
