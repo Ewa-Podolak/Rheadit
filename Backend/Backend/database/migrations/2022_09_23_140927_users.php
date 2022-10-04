@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('profilepic')->nullable()->default(Null);
             $table->string('bio')->nullable()->default(Null);
-            $table->string('resetpasswordtoken', 255)->nullable()->default(NULL);
         });
     }
 
