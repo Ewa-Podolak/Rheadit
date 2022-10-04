@@ -130,7 +130,7 @@ class post extends Model
             return ['created'=>false];
         else
         {
-            $this::insert(['userid'=>$userid, 'title'=>$head, 'body'=>$body, 'picture'=>$picture, 'community'=>$community]);
+            $this::insert(['userid'=>$userid, 'head'=>$head, 'body'=>$body, 'picture'=>$picture, 'community'=>$community]);
             return ['created' => true];
         }
     }
@@ -177,6 +177,7 @@ class post extends Model
                     ['postid' => $posts[$x]->postid, 
                     'head' => $posts[$x]->head, 
                     'body' => $posts[$x]->body, 
+                    'picture' => $posts[$x]->picture,
                     'votes' => $votes, 
                     'created_at'=>$posts[$x]->created_at, 
                     'username'=>$username, 

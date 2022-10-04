@@ -12,7 +12,7 @@ return new class extends Migration
         {
             $table->increments('postid');
             $table->integer('userid');
-            $table->string('title', 75);
+            $table->string('head', 75);
             $table->string('body', 255)->nullable()->default(NULL);
             $table->string('picture', 255)->nullable()->default(NULL);
             $table->string('community', 30)->nullable()->default(NULL);
