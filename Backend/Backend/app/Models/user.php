@@ -40,18 +40,6 @@ class user extends Model
         return ['username'=>$user[0]->username, 'bio'=>$user[0]->bio, 'profilepic'=>$user[0]->profilepic, 'followers'=>$followers, 'following'=>$following, 'followed'=>$followed];
     }
 
-    public function UpdatePicture($userid, $newpicture)
-    {
-        $this::where('userid', $userid)->update(['profilepic'=>$newpicture]);
-        return ['updated'=>true];
-    }
-
-    public function UpdateBio($userid, $newbio)
-    {
-        $this::where('userid', $userid)->update(['bio'=>$newbio]);
-        return ['updated'=>true];
-    }
-
     public function DeleteUser($userid)
     {
         $community = new community;
