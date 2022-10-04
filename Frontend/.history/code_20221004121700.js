@@ -160,9 +160,6 @@ if (!window.location.href.includes("index.html")){
 
         getPosts(pagenumber, groupname);
 
-        //if join innerhtml != join
-        // newpost();
-
         if(joinGroup.innerHTML != join){
             newpost();
         }
@@ -1017,7 +1014,6 @@ function newpost(){
         .then((response) => response.json())
         .then((data) => {
                 console.log(data);
-                getPosts(1);
         }); 
     })
 }
@@ -1079,4 +1075,3 @@ function togglemenu(){
         }
     })
 }
-
