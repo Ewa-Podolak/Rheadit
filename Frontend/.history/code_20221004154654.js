@@ -219,9 +219,7 @@ function setupgroupPage(){
 }
 
 function ownerpriviledges(){
-    var editgroupProfile = document.getElementById("groupeditProfile");
-    editgroupProfile.style.display = "block";
-    //editgroupprofilepic(); /// not made yet
+    
 }
 
 function givePersonalControl(){
