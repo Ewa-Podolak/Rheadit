@@ -163,7 +163,7 @@ if (!window.location.href.includes("index.html")){
         //if join innerhtml != join
         // newpost();
 
-        if(joinGroup.innerHTML != "join"){
+        if(joinGroup.innerHTML != join){
             newpost();
         }
         
@@ -442,22 +442,7 @@ function getPosts(pagenumber, groupname){
     }
     else if (postsContainer.id == "profilePage"){
         if(recent){
-            fetch(`http://localhost:8000/api/posts/userposts/newest/${userid}/${pagenumber}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-
-                if(data.length == 0){
-                    populatePosts(data, pagenumber);
-                    postsContainer.innerHTML = "no more posts to show";
-                    
-                    plusPageNum.disabled = true;
-                }
-                else{
-                    plusPageNum.disabled = false;
-                    populatePosts(data, pagenumber);
-                }
-            });
+            recentuserposts();
         }
         else{
             fetch(`http://localhost:8000/api/posts/userposts/liked/${userid}/${pagenumber}`)
@@ -480,6 +465,8 @@ function getPosts(pagenumber, groupname){
     }
     else if (postsContainer.id == "groupPage"){
         if(recent){
+            // show recent group posts
+            // /posts/{community}/newest/{userid}/{page}
             fetch(`http://localhost:8000/api/posts/${groupname}/newest/${userid}/${pagenumber}`) ///// community name not got
             .then(response => response.json())
             .then(data => {
@@ -542,6 +529,25 @@ function homepageposts(){
                 populatePosts(data, pagenumber);
             }
         });
+}
+
+function recentuserposts(){
+    fetch(`http://localhost:8000/api/posts/userposts/newest/${userid}/${pagenumber}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                if(data.length == 0){
+                    populatePosts(data, pagenumber);
+                    postsContainer.innerHTML = "no more posts to show";
+                    
+                    plusPageNum.disabled = true;
+                }
+                else{
+                    plusPageNum.disabled = false;
+                    populatePosts(data, pagenumber);
+                }
+            });
 }
 
 function populatePosts(data, pagenumber){
