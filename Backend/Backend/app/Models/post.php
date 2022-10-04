@@ -21,7 +21,8 @@ class post extends Model
         $numberofpostsmax = $allposts->count();
         $postsarray = [];
         if($numberofpostsmax + 1 == $page * 10)
-            return ['postid' => null, 'head' => null, 'body' => null];
+            return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
+            'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null];
         else
             for($x = (($page - 1) * 10); $x < $page * 10; $x++)
             {
@@ -40,8 +41,8 @@ class post extends Model
                     else
                         $voted = null;
                     $votes = $this->Votes($allposts[$x]->postid);
-                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body,'username'=>$username,
-                    'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body, 'picture'=>$allposts[$x]->picture,
+                    'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
                 }
             }
         return($postsarray);
@@ -75,7 +76,8 @@ class post extends Model
         }
 
         if($numberofpostsmax + 1 == $page * 10)
-            return ['postid' => null, 'head' => null, 'body' => null];
+            return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
+            'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null];
         else
             for($x = (($page - 1) * 10); $x < $page * 10; $x++)
             {
@@ -94,8 +96,8 @@ class post extends Model
                     else
                         $voted = null;
                     $votes = $this->Votes($allposts[$x]->postid);
-                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body,'username'=>$username, 
-                    'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body,'username'=>$username, 'profilepic'=>$profilepic,
+                    'picture'=>$allposts[$x]->picture,'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
                 }
             }
         return($postsarray);
@@ -119,16 +121,16 @@ class post extends Model
                     else
                         $voted = null;
 
-        return ['postid'=>$post->postid, 'head'=>$post->head, 'body'=>$post->body, 'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at];
+        return ['postid'=>$post->postid, 'head'=>$post->head, 'body'=>$post->body, 'picture'=>$post->picture, 'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at];
     }
 
-    public function PostInCommunity($community, $userid, $head, $body)
+    public function PostInCommunity($community, $userid, $head, $body, $picture)
     {
         if(community::where('userid', $userid)->where('community', $community)->get()->IsEmpty())
             return ['created'=>false];
         else
         {
-            $this::insert(['userid'=>$userid, 'head'=>$head, 'body'=>$body, 'community'=>$community]);
+            $this::insert(['userid'=>$userid, 'title'=>$head, 'body'=>$body, 'picture'=>$picture, 'community'=>$community]);
             return ['created' => true];
         }
     }
@@ -147,7 +149,7 @@ class post extends Model
 
         if($posts->count() + 1 == $page * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
+            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
         }
         else
         {
