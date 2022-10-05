@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/4504875609.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="desktop.css" media="screen and (min-width: 500px)">
+
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="logo">
+            <img id="logo" src="./images/Screenshot_2022-09-23_at_14.46.15-removebg-preview.png" alt="logo">
+        </div>
+        <div class="searchBar">
+            <input type="text" placeholder="Search Rheadit...">
+        </div>
+        <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+        
+        <div class="dropDown">
+            <div class="triangle"></div>
+            <ul>
+                <li id="goProfile">        
+                    <div class="profile">
+                        <img id="profilePic" src="./images/607426-200.png">
+                        <h2 id="username" class="dropUsername">username</h2>
+                    </div>
+                </li>
+                <li id="newpost"><i class="fa-solid fa-circle-plus"></i></li>
+                <li id="notification"><i class="fa-solid fa-bell"></i></li>
+                <li id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="wholeProfile">
+        <div class="profileBox">
+            <img id="groupProfilePic" src="./images/607426-200.png">
+            <button id="groupeditProfile">edit profile picture</button>
+            <div id="groupUsername">username</div>
+        </div>
+
+        <div class="membersAndJoin">
+            <div class="members">Members: <span id="numgroupmembers">125</span></div>
+            <button id="joinGroup" disabled style="text-transform: uppercase; font-weight:700;"></button>
+        </div>
+    </div>
+
+    <div class="bio">
+        <i class="fa-solid fa-pen"></i>
+        <button id="groupeditBio">edit bio</button>
+        <div class="inputAndButton">
+            <input type="text" placeholder="new bio" id="newBio">
+            <button id="newBioBtn" type="submit">Submit</button>
+        </div>
+        <p id="groupbioText"></p>
+    </div>
+
+    <div class="createnewPost">
+        <div class="initialbox">
+            <img id="profilePic" src="./images/607426-200.png">
+            <input class="newposttxt" type="text" placeholder="New head">
+            <i class="fa-regular fa-image imgbtn"></i>
+            <i class="fa-solid fa-circle-chevron-right newpostbtn"></i>
+        </div>
+        <div class="secondbox">
+            <input class="newbodytxt" type="text" placeholder="New body">
+        </div>
+        <div class="thirdbox">
+            <input class="newbodyimg" type="text" placeholder="paste img url here">
+        </div>
+    </div>
+
+    <div class="popularOrRecent">
+        <button id="mostRecent">Most Recent</button>
+        <button id="mostPopular">Most Popular</button>
+    </div>
+
+    <div class="postsContainer" id="groupPage">
+
+    </div>
+
+    <div class="pageNumContainer">
+        <button class="noBtn" id="minusPageNum"><i class="fa-solid fa-circle-arrow-left"></i></button>
+        <h3 id="pageNum">1</h3>
+        <button class="noBtn" id="plusPageNum"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    </div>
+    
+    <script src="code.js"></script>
+</body>
+</html>

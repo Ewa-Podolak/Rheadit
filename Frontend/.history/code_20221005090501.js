@@ -209,7 +209,7 @@ function setupgroupPage(){
 
             if (joinGroup.innerHTML == "owner"){
                 console.log("owner")
-                ownerpriviledges(data.communityname);
+                ownerpriviledges();
             }
 
             if (joinGroup.innerHTML == "mod"){
@@ -218,49 +218,22 @@ function setupgroupPage(){
         });
 }
 
-function ownerpriviledges(communityname){
+function ownerpriviledges(){
     var editgroupProfile = document.getElementById("groupeditProfile");
     var groupeditBio = document.getElementById("groupeditBio");
     
     editgroupProfile.style.display = "block";
     groupeditBio.style.display = "block";
 
-    newgroupbio(communityname);
-    newgroupprofile();
+    newgroupbio();
 }
 
-function newgroupprofile(){
-    
-}
+function newgroupbio(){
+    // /community/updatebio/{communityname}/{userid}
 
-function newgroupbio(communityname){
     var groupbioText = document.getElementById("groupbioText");
-    var newBio = document.getElementById("newBio");
-    var newBioBtn = document.getElementById("newBioBtn");
 
-    groupeditBio.addEventListener("click", ()=> {
-        newBio.style.display = "block";
-        newBioBtn.style.display = "block";
-
-        newBioBtn.addEventListener("click", function(){
-            groupbioText.innerHTML = newBio.value;
-            var data = { bio: newBio.value};
-            newBio.style.display = "none";
-            newBioBtn.style.display = "none";
-
-            fetch(`http://localhost:8000/api/community/updatebio/${communityname}/${userid}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-            });
-        })
-    })
+    
 }
 
 function givePersonalControl(){
@@ -326,8 +299,6 @@ function newbio(){
             bioText.innerHTML = newBio.value;
             var data = { bio: newBio.value};
 
-            newBio.style.display = "none";
-            newBioBtn.style.display = "none";
             fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}`, {
                 method: 'PATCH',
                 headers: {

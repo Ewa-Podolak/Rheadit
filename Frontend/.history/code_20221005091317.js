@@ -226,14 +226,11 @@ function ownerpriviledges(communityname){
     groupeditBio.style.display = "block";
 
     newgroupbio(communityname);
-    newgroupprofile();
-}
-
-function newgroupprofile(){
-    
 }
 
 function newgroupbio(communityname){
+    // /community/updatebio/{communityname}/{userid}
+
     var groupbioText = document.getElementById("groupbioText");
     var newBio = document.getElementById("newBio");
     var newBioBtn = document.getElementById("newBioBtn");
@@ -245,8 +242,6 @@ function newgroupbio(communityname){
         newBioBtn.addEventListener("click", function(){
             groupbioText.innerHTML = newBio.value;
             var data = { bio: newBio.value};
-            newBio.style.display = "none";
-            newBioBtn.style.display = "none";
 
             fetch(`http://localhost:8000/api/community/updatebio/${communityname}/${userid}`, {
                 method: 'PATCH',
@@ -326,8 +321,6 @@ function newbio(){
             bioText.innerHTML = newBio.value;
             var data = { bio: newBio.value};
 
-            newBio.style.display = "none";
-            newBioBtn.style.display = "none";
             fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}`, {
                 method: 'PATCH',
                 headers: {

@@ -226,11 +226,6 @@ function ownerpriviledges(communityname){
     groupeditBio.style.display = "block";
 
     newgroupbio(communityname);
-    newgroupprofile();
-}
-
-function newgroupprofile(){
-    
 }
 
 function newgroupbio(communityname){
