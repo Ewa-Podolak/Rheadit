@@ -77,4 +77,31 @@ class communityController extends Controller
         }
         return ['updated'=>false];
     }
+
+    public function OwnerRequestNotifications($userid)
+    {
+       $communities = community::where('userid', $userid)->where('authority', 'owner')->get();
+
+       $requests = community::where('requestmod', true)->get();
+
+       $requestsarray = [];
+
+        if($requests->IsEmpty())
+            return ['username'=>null, 'community'=>null];
+        else
+        {
+            foreach($communities as $community)
+            {
+                foreach($requests as $request)
+                {
+                    if($request->community == $community->community)
+                    {
+                        $username = user::where('userid', $request->userid)->first()->username;
+                        array_push($requestsarray, ['username'=>$username, 'community'=>$community->community]);
+                    }
+                }
+            }
+        }
+        return $requestsarray;
+    }
 }
