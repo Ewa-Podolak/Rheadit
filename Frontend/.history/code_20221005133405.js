@@ -696,7 +696,6 @@ function homepageposts(){
 function populatePosts(data, pagenumber){
     var postarray = [];
     var commentarray = [];
-    var commentcounter = 0;
 
     postsContainer.innerHTML = "";
     for (let x = 0; x < data.length; x++){
@@ -921,8 +920,17 @@ function populatePosts(data, pagenumber){
         .then(response => response.json())
         .then(data => {
 
-            for (let y = 0; y < data.length; y++){
+            //console.log(data);
+
+            for (let y = 0; y < data.length + 1; y++){
+                console.log("y: " + y)
+                //console.log(data[y])
+
+                commentarray.push(data[y].commentid);
+                console.log("commentarray")
+                console.log(commentarray)
                 
+
                 const li = document.createElement("li")
 
                 ul.appendChild(li);
@@ -935,7 +943,6 @@ function populatePosts(data, pagenumber){
 
                 const commentarrowupBtn = document.createElement("button");
                 commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
-                commentarrowupBtn.id = "upvotecom";
     
                 const commentarrowup = document.createElement("i");
                 commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
@@ -945,7 +952,6 @@ function populatePosts(data, pagenumber){
     
                 const commentarrowdownBtn = document.createElement("button");
                 commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
-                commentarrowdownBtn.id = "downvotcom";
     
                 const commentarrowdown = document.createElement("i");
                 commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
@@ -1000,6 +1006,49 @@ function populatePosts(data, pagenumber){
     
                 var userid = window.localStorage.getItem("userid");
 
+                console.log("commentarray[y]")
+                console.log(commentarray[y])
+
+                commentarrowupBtn.addEventListener("click", function(){
+                    fetch(`http://localhost:8000/api/interactions/upvotecomment/${commentarray[y]}/${userid}`, { 
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+    
+                        if (data.upvoted == true){
+                            commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
+                            commentarrowupBtn.style.backgroundColor = "#FAB3A9";
+                            // console.log("vote num")
+                            // console.log((data[y]))
+                            // commentnumVotes.innerHTML = (parseInt(data[y].votes) + 1)
+                        }
+                    });
+                })
+    
+                commentarrowdownBtn.addEventListener("click", function(){
+
+                    fetch(`http://localhost:8000/api/interactions/downvotecomment/${commentarray[y]}/${userid}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then((data) => {
+                        console.log(data);
+
+                        if (data.downvote == true){
+                            commentarrowupBtn.style.backgroundColor = "#F6F6F2"
+                            commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
+                            commentnumVotes.innerHTML = (parseInt(data[y].votes) -1)
+                        }
+                    });
+                })
+
             }
 
 
@@ -1011,60 +1060,7 @@ function populatePosts(data, pagenumber){
 
             comments.appendChild(seeMore);
         });
-        
     }
-
-    //////////////////////////////////////
-    var cbtns = document.querySelectorAll("#upvotecom");
-    console.log("commentarrowupbtns: " + cbtns)
-    console.log("number of comments: " + cbtns.length);
-
-    // commentarrowupBtn.addEventListener("click", function(){
-
-    //     console.log("arrowup for comment no.: " + commentarray[commentarrowup])
-
-    //     fetch(`http://localhost:8000/api/interactions/upvotecomment/${}/${userid}`, { // commentarray[y] is 0, 1 and then 0
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-
-    //         if (data.upvoted == true){
-    //             commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
-    //             commentarrowupBtn.style.backgroundColor = "#FAB3A9";
-    //             // console.log("vote num")
-    //             // console.log((data[y]))
-    //             // commentnumVotes.innerHTML = (parseInt(data[y].votes) + 1)
-    //         }
-    //     });
-    // })
-
-    // commentarrowdownBtn.addEventListener("click", function(){
-
-    //     console.log("arrowup for comment no.: " + commentarray[commentarrowup])
-
-    //     fetch(`http://localhost:8000/api/interactions/downvotecomment/${}/${userid}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //     .then(response => response.json())
-    //     .then((data) => {
-    //         console.log(data);
-
-    //         if (data.downvote == true){
-    //             commentarrowupBtn.style.backgroundColor = "#F6F6F2"
-    //             commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
-    //             commentnumVotes.innerHTML = (parseInt(data[y].votes) -1)
-    //         }
-    //     });
-    // })
-
-    /////////////////////////////////////
 
     //display comments on button click
 

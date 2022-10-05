@@ -921,8 +921,11 @@ function populatePosts(data, pagenumber){
         .then(response => response.json())
         .then(data => {
 
+
             for (let y = 0; y < data.length; y++){
                 
+                
+
                 const li = document.createElement("li")
 
                 ul.appendChild(li);
@@ -1015,9 +1018,9 @@ function populatePosts(data, pagenumber){
     }
 
     //////////////////////////////////////
-    var cbtns = document.querySelectorAll("#upvotecom");
-    console.log("commentarrowupbtns: " + cbtns)
-    console.log("number of comments: " + cbtns.length);
+    var commentarrowupbtns = document.querySelectorAll("#upvotecom");
+    console.log("commentarrowupbtns: " + commentarrowupbtns)
+    console.log("number of comments: " + commentarrowupbtns.length);
 
     // commentarrowupBtn.addEventListener("click", function(){
 

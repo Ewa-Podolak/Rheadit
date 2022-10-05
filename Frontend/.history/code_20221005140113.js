@@ -921,8 +921,23 @@ function populatePosts(data, pagenumber){
         .then(response => response.json())
         .then(data => {
 
+
+            console.log(data);
+
             for (let y = 0; y < data.length; y++){
+                commentcounter ++;
+                console.log("new loop")
+                console.log("y: " + y)
+                console.log(commentcounter);
                 
+                
+                console.log("comment: " + data)
+                console.log("comment id: " + data[y].commentid)
+
+                commentarray.push(data[y].commentid);
+                console.log("commentarray: " + commentarray)
+                
+
                 const li = document.createElement("li")
 
                 ul.appendChild(li);
@@ -935,7 +950,6 @@ function populatePosts(data, pagenumber){
 
                 const commentarrowupBtn = document.createElement("button");
                 commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
-                commentarrowupBtn.id = "upvotecom";
     
                 const commentarrowup = document.createElement("i");
                 commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
@@ -945,7 +959,6 @@ function populatePosts(data, pagenumber){
     
                 const commentarrowdownBtn = document.createElement("button");
                 commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
-                commentarrowdownBtn.id = "downvotcom";
     
                 const commentarrowdown = document.createElement("i");
                 commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
@@ -1011,58 +1024,56 @@ function populatePosts(data, pagenumber){
 
             comments.appendChild(seeMore);
         });
-        
     }
 
     //////////////////////////////////////
-    var cbtns = document.querySelectorAll("#upvotecom");
-    console.log("commentarrowupbtns: " + cbtns)
-    console.log("number of comments: " + cbtns.length);
+    var commentarrowupbtns = document.querySelector(commentarrowupBtn);
+    console.log("number of comments" + commentarrowupbtns.length);
 
-    // commentarrowupBtn.addEventListener("click", function(){
+    commentarrowupBtn.addEventListener("click", function(){
 
-    //     console.log("arrowup for comment no.: " + commentarray[commentarrowup])
+        console.log("arrowup for comment no.: " + commentarray[commentarrowup])
 
-    //     fetch(`http://localhost:8000/api/interactions/upvotecomment/${}/${userid}`, { // commentarray[y] is 0, 1 and then 0
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //     .then((response) => response.json())
-    //     .then((data) => {
+        fetch(`http://localhost:8000/api/interactions/upvotecomment/${}/${userid}`, { // commentarray[y] is 0, 1 and then 0
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
 
-    //         if (data.upvoted == true){
-    //             commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
-    //             commentarrowupBtn.style.backgroundColor = "#FAB3A9";
-    //             // console.log("vote num")
-    //             // console.log((data[y]))
-    //             // commentnumVotes.innerHTML = (parseInt(data[y].votes) + 1)
-    //         }
-    //     });
-    // })
+            if (data.upvoted == true){
+                commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
+                commentarrowupBtn.style.backgroundColor = "#FAB3A9";
+                // console.log("vote num")
+                // console.log((data[y]))
+                // commentnumVotes.innerHTML = (parseInt(data[y].votes) + 1)
+            }
+        });
+    })
 
-    // commentarrowdownBtn.addEventListener("click", function(){
+    commentarrowdownBtn.addEventListener("click", function(){
 
-    //     console.log("arrowup for comment no.: " + commentarray[commentarrowup])
+        console.log("arrowup for comment no.: " + commentarray[commentarrowup])
 
-    //     fetch(`http://localhost:8000/api/interactions/downvotecomment/${}/${userid}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //     .then(response => response.json())
-    //     .then((data) => {
-    //         console.log(data);
+        fetch(`http://localhost:8000/api/interactions/downvotecomment/${}/${userid}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then((data) => {
+            console.log(data);
 
-    //         if (data.downvote == true){
-    //             commentarrowupBtn.style.backgroundColor = "#F6F6F2"
-    //             commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
-    //             commentnumVotes.innerHTML = (parseInt(data[y].votes) -1)
-    //         }
-    //     });
-    // })
+            if (data.downvote == true){
+                commentarrowupBtn.style.backgroundColor = "#F6F6F2"
+                commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
+                commentnumVotes.innerHTML = (parseInt(data[y].votes) -1)
+            }
+        });
+    })
 
     /////////////////////////////////////
 

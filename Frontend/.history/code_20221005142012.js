@@ -1015,9 +1015,9 @@ function populatePosts(data, pagenumber){
     }
 
     //////////////////////////////////////
-    var cbtns = document.querySelectorAll("#upvotecom");
-    console.log("commentarrowupbtns: " + cbtns)
-    console.log("number of comments: " + cbtns.length);
+    var commentarrowupbtns = document.querySelectorAll("#upvotecom");
+    console.log("commentarrowupbtns: " + commentarrowupbtns)
+    console.log("number of comments: " + commentarrowupbtns.length);
 
     // commentarrowupBtn.addEventListener("click", function(){
 

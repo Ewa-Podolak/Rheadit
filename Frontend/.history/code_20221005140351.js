@@ -921,8 +921,23 @@ function populatePosts(data, pagenumber){
         .then(response => response.json())
         .then(data => {
 
+
+            console.log(data);
+
             for (let y = 0; y < data.length; y++){
+                commentcounter ++;
+                console.log("new loop")
+                console.log("y: " + y)
+                console.log(commentcounter);
                 
+                
+                console.log("comment: " + data)
+                console.log("comment id: " + data[y].commentid)
+
+                commentarray.push(data[y].commentid);
+                console.log("commentarray: " + commentarray)
+                
+
                 const li = document.createElement("li")
 
                 ul.appendChild(li);
@@ -934,8 +949,7 @@ function populatePosts(data, pagenumber){
 
 
                 const commentarrowupBtn = document.createElement("button");
-                commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
-                commentarrowupBtn.id = "upvotecom";
+                commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn", "commentarrowupBtn");
     
                 const commentarrowup = document.createElement("i");
                 commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
@@ -944,8 +958,7 @@ function populatePosts(data, pagenumber){
                 commentnumVotes.innerHTML = data[y].votes
     
                 const commentarrowdownBtn = document.createElement("button");
-                commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
-                commentarrowdownBtn.id = "downvotcom";
+                commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn", "commentarrowdownBtn");
     
                 const commentarrowdown = document.createElement("i");
                 commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
@@ -1011,13 +1024,15 @@ function populatePosts(data, pagenumber){
 
             comments.appendChild(seeMore);
         });
-        
+
+        var commentarrowupbtns = document.querySelector(".commentarrowupBtn");
+        console.log("commentarrowupbtns: " + commentarrowupbtns)
     }
 
     //////////////////////////////////////
-    var cbtns = document.querySelectorAll("#upvotecom");
-    console.log("commentarrowupbtns: " + cbtns)
-    console.log("number of comments: " + cbtns.length);
+    //var commentarrowupbtns = document.querySelector(".commentarrowupBtn");
+    //console.log("commentarrowupbtns: " + commentarrowupbtns)
+    //console.log("number of comments" + commentarrowupbtns.length);
 
     // commentarrowupBtn.addEventListener("click", function(){
 
