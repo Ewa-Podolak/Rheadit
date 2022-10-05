@@ -34,7 +34,7 @@ class communityController extends Controller
         return ['transfered'=>false];
     }
 
-    public function DeleteComunity($communityname, $userid)
+    public function DeleteCommunity($communityname, $userid)
     {
         $community = new community;
         return $community->DeleteCommunity($communityname, $userid);
