@@ -769,13 +769,9 @@ function populatePosts(data, pagenumber){
         groupname.id = "groupname";
         groupname.innerHTML = data[x].community; 
 
-        const deletepostbtn = document.createElement("button");
-        deletepostbtn.classList.add("deletepost", "fa-solid", "fa-eraser");
-
         profile.appendChild(profilePic);
         profile.appendChild(usernameEl);
         profile.appendChild(groupname);
-        profile.appendChild(deletepostbtn);
 
         const postImgTxt = document.createElement("div");
         postImgTxt.classList.add("postImgTxt");
@@ -820,30 +816,6 @@ function populatePosts(data, pagenumber){
         }
 
         var userid = window.localStorage.getItem("userid");
-
-        deletepostbtn.addEventListener("click", ()=>{
-
-            // /posts/delete/{postid}/{userid}
-            console.log(postarray[x])
-
-            fetch(`http://localhost:8000/api/posts/delete/${postarray[x]}/${userid}`, { 
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-
-                if (data.Deleted == false){
-                    console.log("cannot delete");
-                }
-                else{
-                    postAndComments.removeChild(post);
-                }
-            });
-        })
 
         groupname.addEventListener("click", function(){
             window.location.href = "group.html";
@@ -1055,6 +1027,7 @@ function populatePosts(data, pagenumber){
 
     //cbtns = document.querySelectorAll("#upvotecom");
 
+    
     // console.log("commentarrowupbtns: " + cbtns)
     // console.log("number of comments: " + cbtns.length);
 

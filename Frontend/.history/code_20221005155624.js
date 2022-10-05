@@ -836,7 +836,7 @@ function populatePosts(data, pagenumber){
             .then((data) => {
                 console.log(data);
 
-                if (data.Deleted == false){
+                if (data.deleted == false){
                     console.log("cannot delete");
                 }
                 else{

@@ -836,11 +836,11 @@ function populatePosts(data, pagenumber){
             .then((data) => {
                 console.log(data);
 
-                if (data.Deleted == false){
-                    console.log("cannot delete");
+                if (data.deleted == true){
+                    postAndComments.removeChild(post);
                 }
                 else{
-                    postAndComments.removeChild(post);
+                    console.log("cannot delete");
                 }
             });
         })
