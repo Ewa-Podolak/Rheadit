@@ -340,7 +340,6 @@ class post extends Model
 
             //Delete Likes
             $interactions->DeleteLikesPost($postid);
-            dd($postid);
 
             return ['Deleted'=>true];
         }
