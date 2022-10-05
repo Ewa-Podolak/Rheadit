@@ -28,6 +28,10 @@
   opacity: 0.8;
 }
 
+#deletegroup {
+  display: none;
+}
+
 #editBio, #editProfile, #groupeditBio, #groupeditProfile {
   display: none;
 }

@@ -188,31 +188,12 @@ function jointheGroup(){
         })
 }
 
-function leave(leavegroup, communityname){
-    leavegroup.addEventListener("click", ()=>{
-        fetch(`http://localhost:8000/api/community/${communityname}/leave/${userid}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-                console.log(data);
-                console.log("left");
-                window.location.href = "home.html";
-        });
-    })
-}
-
 function setupgroupPage(){
+    var leavegroup = document.getElementById("leavegroup");
     fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
-
-            var leavegroup = document.getElementById("leavegroup");
-            leave(leavegroup, data.communityname);
 
             if(data.userrole != null){
                 newpost(groupname);
@@ -286,7 +267,6 @@ function deletegroup(communityname){
         .then((data) => {
                 console.log(data);
                 console.log("deleted");
-                window.location.href = "home.html";
         });
     })
 }
@@ -456,7 +436,6 @@ function deleteuser(){
         .then((data) => {
                 console.log(data);
                 console.log("deleted");
-                window.location.href = "index.html";
         });
     })
 }

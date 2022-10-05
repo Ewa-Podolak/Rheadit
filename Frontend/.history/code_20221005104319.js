@@ -199,8 +199,7 @@ function leave(leavegroup, communityname){
         .then((response) => response.json())
         .then((data) => {
                 console.log(data);
-                console.log("left");
-                window.location.href = "home.html";
+                console.log("deleted");
         });
     })
 }
@@ -286,7 +285,6 @@ function deletegroup(communityname){
         .then((data) => {
                 console.log(data);
                 console.log("deleted");
-                window.location.href = "home.html";
         });
     })
 }
@@ -456,7 +454,6 @@ function deleteuser(){
         .then((data) => {
                 console.log(data);
                 console.log("deleted");
-                window.location.href = "index.html";
         });
     })
 }
