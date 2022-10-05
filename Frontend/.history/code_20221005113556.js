@@ -170,19 +170,6 @@ if (!window.location.href.includes("index.html")){
     }
 }
 
-function follow(username){
-    var followBtn = document.getElementById("followBtn");
-    followBtn.addEventListener("click", ()=>{
-        followBtn.innerHTML = "Following";
-        
-        fetch(`http://localhost:8000/api/followers/follow/${userid}/${username}`)
-        .then(response => response.json())
-        .then(data => {
-
-        });
-    })
-}
-
 function jointheGroup(){
         joinGroup.addEventListener("click", function(){
             joinGroup.innerHTML = "Requested";
@@ -484,8 +471,6 @@ function setupgeneralProfile(){
     var following = document.getElementById("numOfFollowing");
     var bioText = document.getElementById("bioText");
     var profilePicture = document.querySelector(".profilepagePic");
-
-    follow(usernameProfile);
 
     fetch(`http://localhost:8000/api/users/${loggedinUsername}/${usernameProfile}`)
     .then(response => response.json())
@@ -807,6 +792,7 @@ function populatePosts(data, pagenumber){
         BodytextEl.id = "body" 
         BodytextEl.innerHTML = data[x].body; 
 
+        console.log(data[x].picture)
         if (data[x].picture != null){
             console.log("picture")
             const postImg = document.createElement("img"); 

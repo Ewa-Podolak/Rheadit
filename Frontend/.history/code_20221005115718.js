@@ -173,8 +173,8 @@ if (!window.location.href.includes("index.html")){
 function follow(username){
     var followBtn = document.getElementById("followBtn");
     followBtn.addEventListener("click", ()=>{
-        followBtn.innerHTML = "Following";
-        
+        followBtn.innerHTML("following");
+        // /followers/follow/{userid}/{username}
         fetch(`http://localhost:8000/api/followers/follow/${userid}/${username}`)
         .then(response => response.json())
         .then(data => {

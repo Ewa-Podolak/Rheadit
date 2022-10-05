@@ -143,6 +143,7 @@ if (!window.location.href.includes("index.html")){
         var personal = window.localStorage.getItem("personal");
         getPosts(pagenumber, null);
         setupgeneralProfile();
+        
 
         if (personal == "true"){
             givePersonalControl();
@@ -170,12 +171,12 @@ if (!window.location.href.includes("index.html")){
     }
 }
 
-function follow(username){
+function follow(){
     var followBtn = document.getElementById("followBtn");
     followBtn.addEventListener("click", ()=>{
-        followBtn.innerHTML = "Following";
-        
-        fetch(`http://localhost:8000/api/followers/follow/${userid}/${username}`)
+        followBtn.innerHTML("following");
+        // /followers/follow/{userid}/{username}
+        fetch(`http://localhost:8000/api/followers/follow/${userid}/{username}`)
         .then(response => response.json())
         .then(data => {
 
