@@ -1007,6 +1007,9 @@ function populatePosts(data, pagenumber){
 
                 }
 
+
+
+                // if data.length > (what number is a page of comments (ewa))
                 var seeMore = document.createElement("button");
                 seeMore.classList.add("seeMore");
                 seeMore.innerHTML = "see more..."
@@ -1015,9 +1018,7 @@ function populatePosts(data, pagenumber){
 
                 seeMore.addEventListener("click", ()=>{
                     commentpagenumber++;
-                    comments.removeChild(seeMore);
                     getcomments();
-                   
                 })
             });
         }

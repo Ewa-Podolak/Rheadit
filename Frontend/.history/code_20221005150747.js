@@ -1015,9 +1015,7 @@ function populatePosts(data, pagenumber){
 
                 seeMore.addEventListener("click", ()=>{
                     commentpagenumber++;
-                    comments.removeChild(seeMore);
                     getcomments();
-                   
                 })
             });
         }

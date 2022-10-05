@@ -120,7 +120,6 @@ if (window.location.href.includes("index.html")){
 if (!window.location.href.includes("index.html")){
 
     var pagenumber = 1;
-    var commentpagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
     var goToOwnProfileBtn = document.getElementById("goProfile");
     var userid = window.localStorage.getItem("userid");
@@ -882,7 +881,7 @@ function populatePosts(data, pagenumber){
         commentBar.appendChild(commentInput);
 
         const makeComment = document.createElement("i");
-        makeComment.classList.add("fa-solid", "fa-circle-chevron-right");
+        makeComment.classList.add("fa-solid", "fa-circle-chevron-right", "makecommentBtn");
 
         commentBar.appendChild(makeComment);
 
@@ -890,139 +889,134 @@ function populatePosts(data, pagenumber){
 
         comments.appendChild(ul);
 
-        makeComment.addEventListener("click", function(){ //////// sets for every comment // get out of loop // should really change
-            var commentmade = commentInput.value;
-
-            console.log(x+1);
-            console.log(commentmade);
-            console.log(userid);
-
-            if (commentmade != ""){
-                console.log(commentmade)
-                var data = {comment: commentmade}
-                fetch(`http://localhost:8000/api/comments/create/${postarray[x]}/${userid}`, { 
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then((data) => {
-                        console.log(data);
-                        window.location.href = "home.html"
-                });
-            }
-            else{
-                alert("comment something");
-            }
-        })
-
         // fetch comments
-        getcomments();
-
-        function getcomments(){
-            fetch(`http://localhost:8000/api/comments/${postarray[x]}/${commentpagenumber}/${userid}`)
-            .then(response => response.json())
-            .then(data => {
-
-                for (let y = 0; y < data.length; y++){
-                    
-                    const li = document.createElement("li")
-
-                    ul.appendChild(li);
-
-                    const commentVotes = document.createElement("div");
-                    commentVotes.classList.add("votes");
-
-                    li.appendChild(commentVotes);
 
 
-                    const commentarrowupBtn = document.createElement("button");
-                    commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
-                    commentarrowupBtn.id = "upvotecom";
-        
-                    const commentarrowup = document.createElement("i");
-                    commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
-        
-                    const commentnumVotes = document.createElement("h2");
-                    commentnumVotes.innerHTML = data[y].votes
-        
-                    const commentarrowdownBtn = document.createElement("button");
-                    commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
-                    commentarrowdownBtn.id = "downvotcom";
-        
-                    const commentarrowdown = document.createElement("i");
-                    commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
-        
-                    commentarrowupBtn.appendChild(commentarrowup);
-                    commentVotes.appendChild(commentarrowupBtn);
-                    commentVotes.appendChild(commentnumVotes);
-                    commentarrowdownBtn.appendChild(commentarrowdown);
-                    commentVotes.appendChild(commentarrowdownBtn);
+        fetch(`http://localhost:8000/api/comments/${postarray[x]}/${pagenumber}/${userid}`)
+        .then(response => response.json())
+        .then(data => {
 
-                    const comment = document.createElement("div");
-                    comment.classList.add("comment");
+            for (let y = 0; y < data.length; y++){
+                
+                const li = document.createElement("li")
 
-                    li.appendChild(comment);
+                ul.appendChild(li);
 
-                    const commentProfile = document.createElement("div");
-                    commentProfile.classList.add("profile");
+                const commentVotes = document.createElement("div");
+                commentVotes.classList.add("votes");
 
-                    comment.appendChild(commentProfile);
+                li.appendChild(commentVotes);
 
-                    const commentProfilePic = document.createElement("img");
-                    if (!commentProfilePic.src){
-                        commentProfilePic.src = "./images/607426-200.png";
-                    }
-                    else{
-                        commentProfilePic.src = data[y].profilepic;
-                    }
 
-                    commentProfilePic.id = "profilePic";
+                const commentarrowupBtn = document.createElement("button");
+                commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
+                commentarrowupBtn.id = "upvotecom";
+    
+                const commentarrowup = document.createElement("i");
+                commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
+    
+                const commentnumVotes = document.createElement("h2");
+                commentnumVotes.innerHTML = data[y].votes
+    
+                const commentarrowdownBtn = document.createElement("button");
+                commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
+                commentarrowdownBtn.id = "downvotcom";
+    
+                const commentarrowdown = document.createElement("i");
+                commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
+    
+                commentarrowupBtn.appendChild(commentarrowup);
+                commentVotes.appendChild(commentarrowupBtn);
+                commentVotes.appendChild(commentnumVotes);
+                commentarrowdownBtn.appendChild(commentarrowdown);
+                commentVotes.appendChild(commentarrowdownBtn);
 
-                    commentProfile.appendChild(commentProfilePic);
+                const comment = document.createElement("div");
+                comment.classList.add("comment");
 
-                    const commentUsername = document.createElement("h2");
-                    commentUsername.id = "username";
-                    commentUsername.innerHTML = data[y].username
+                li.appendChild(comment);
 
-                    commentProfile.appendChild(commentUsername);
+                const commentProfile = document.createElement("div");
+                commentProfile.classList.add("profile");
 
-                    const commentDate = document.createElement("p");
-                    commentDate.innerHTML = data[y].created_at;
-                    commentDate.id = "commentDate";
+                comment.appendChild(commentProfile);
 
-                    commentProfile.appendChild(commentDate);
-
-                    const commentText = document.createElement("p");
-                    commentText.classList.add("commentText");
-                    commentText.innerHTML = data[y].comment;
-
-                    comment.appendChild(commentText);
-
-                    commentbtnEl.innerHTML = `Tails: ${data.length}`;
-        
-                    var userid = window.localStorage.getItem("userid");
-
+                const commentProfilePic = document.createElement("img");
+                if (!commentProfilePic.src){
+                    commentProfilePic.src = "./images/607426-200.png";
+                }
+                else{
+                    commentProfilePic.src = data[y].profilepic;
                 }
 
-                var seeMore = document.createElement("button");
-                seeMore.classList.add("seeMore");
-                seeMore.innerHTML = "see more..."
+                commentProfilePic.id = "profilePic";
 
-                comments.appendChild(seeMore);
+                commentProfile.appendChild(commentProfilePic);
 
-                seeMore.addEventListener("click", ()=>{
-                    commentpagenumber++;
-                    comments.removeChild(seeMore);
-                    getcomments();
-                   
-                })
-            });
-        }
+                const commentUsername = document.createElement("h2");
+                commentUsername.id = "username";
+                commentUsername.innerHTML = data[y].username
+
+                commentProfile.appendChild(commentUsername);
+
+                const commentDate = document.createElement("p");
+                commentDate.innerHTML = data[y].created_at;
+                commentDate.id = "commentDate";
+
+                commentProfile.appendChild(commentDate);
+
+                const commentText = document.createElement("p");
+                commentText.classList.add("commentText");
+                commentText.innerHTML = data[y].comment;
+
+                comment.appendChild(commentText);
+
+                commentbtnEl.innerHTML = `Tails: ${data.length}`;
+    
+                var userid = window.localStorage.getItem("userid");
+
+            }
+
+
+
+            // if data.length > (what number is a page of comments (ewa))
+            var seeMore = document.createElement("button");
+            seeMore.classList.add("seeMore");
+            seeMore.innerHTML = "see more..."
+
+            comments.appendChild(seeMore);
+        });
         
     }
+
+    var makeComment = document.querySelector(".makecommentBtn");
+
+    makeComment.addEventListener("click", function(){ //////// sets for every comment // get out of loop
+        // var commentmade = commentInput.value;
+
+        // console.log(x+1);
+        // console.log(commentmade);
+        // console.log(userid);
+
+        // if (commentmade != ""){
+        //     console.log(commentmade)
+        //     var data = {comment: commentmade}
+        //     fetch(`http://localhost:8000/api/comments/create/${postarray[x]}/${userid}`, { /// dont think works
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(data),
+        //     })
+        //     .then(response => response.json())
+        //     .then((data) => {
+        //             console.log(data);
+        //     });
+        // }
+        // else{
+        //     alert("comment something");
+        // }
+    })
 
     //////////////////////////////////////
     var cbtns = document.querySelectorAll("#upvotecom");
