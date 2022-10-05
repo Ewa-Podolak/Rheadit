@@ -105,3 +105,5 @@ Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [commu
 Route::patch('/community/updatebio/{communityname}/{userid}', [communityController::class, 'UpdateCommunityBio']); //returns community information
 
 Route::patch('/community/updateprofilepic/{communityname}/{userid}', [communityController::class, 'UpdateCommunityPic']); //returns community information
+
+Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //returns community information
