@@ -889,7 +889,7 @@ function populatePosts(data, pagenumber){
 
         comments.appendChild(ul);
 
-        makeComment.addEventListener("click", function(){ //////// sets for every comment // get out of loop
+        makeComment.addEventListener("click", function(){
             var commentmade = commentInput.value;
 
             console.log(x+1);
@@ -897,14 +897,12 @@ function populatePosts(data, pagenumber){
             console.log(userid);
 
             if (commentmade != ""){
-                console.log(commentmade)
                 var data = {comment: commentmade}
                 fetch(`http://localhost:8000/api/comments/create/${postarray[x]}/${userid}`, { /// dont think works
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data),
                 })
                 .then(response => response.json())
                 .then((data) => {

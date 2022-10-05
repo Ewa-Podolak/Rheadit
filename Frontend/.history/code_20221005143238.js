@@ -889,7 +889,7 @@ function populatePosts(data, pagenumber){
 
         comments.appendChild(ul);
 
-        makeComment.addEventListener("click", function(){ //////// sets for every comment // get out of loop
+        makeComment.addEventListener("click", function(){
             var commentmade = commentInput.value;
 
             console.log(x+1);
