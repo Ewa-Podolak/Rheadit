@@ -822,9 +822,9 @@ function populatePosts(data, pagenumber){
         var userid = window.localStorage.getItem("userid");
 
         deletepostbtn.addEventListener("click", ()=>{
+            postAndComments.removeChild(post);
 
             // /posts/delete/{postid}/{userid}
-            console.log(postarray[x])
 
             fetch(`http://localhost:8000/api/posts/delete/${postarray[x]}/${userid}`, { 
                 method: 'DELETE',
@@ -836,11 +836,10 @@ function populatePosts(data, pagenumber){
             .then((data) => {
                 console.log(data);
 
-                if (data.Deleted == false){
-                    console.log("cannot delete");
-                }
-                else{
-                    postAndComments.removeChild(post);
+                if (data.upvoted == true){
+                    arrowdownBtn.style.backgroundColor = "#F6F6F2"
+                    arrowupBtn.style.backgroundColor = "#FAB3A9";
+                    getPosts(1);
                 }
             });
         })

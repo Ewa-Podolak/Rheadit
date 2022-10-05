@@ -822,27 +822,7 @@ function populatePosts(data, pagenumber){
         var userid = window.localStorage.getItem("userid");
 
         deletepostbtn.addEventListener("click", ()=>{
-
-            // /posts/delete/{postid}/{userid}
-            console.log(postarray[x])
-
-            fetch(`http://localhost:8000/api/posts/delete/${postarray[x]}/${userid}`, { 
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-
-                if (data.Deleted == false){
-                    console.log("cannot delete");
-                }
-                else{
-                    postAndComments.removeChild(post);
-                }
-            });
+            postAndComments.removeChild(post);
         })
 
         groupname.addEventListener("click", function(){

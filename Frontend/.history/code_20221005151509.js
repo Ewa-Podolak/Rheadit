@@ -769,13 +769,9 @@ function populatePosts(data, pagenumber){
         groupname.id = "groupname";
         groupname.innerHTML = data[x].community; 
 
-        const deletepostbtn = document.createElement("button");
-        deletepostbtn.classList.add("deletepost", "fa-solid", "fa-eraser");
-
         profile.appendChild(profilePic);
         profile.appendChild(usernameEl);
         profile.appendChild(groupname);
-        profile.appendChild(deletepostbtn);
 
         const postImgTxt = document.createElement("div");
         postImgTxt.classList.add("postImgTxt");
@@ -809,7 +805,6 @@ function populatePosts(data, pagenumber){
         commentbtnEl.innerHTML = "Tails: 0";
 
         interactions.appendChild(commentbtnEl);
-        
 
         if(data[x].voted == "upvote"){
             arrowupBtn.style.backgroundColor = "#FAB3A9";
@@ -820,30 +815,6 @@ function populatePosts(data, pagenumber){
         }
 
         var userid = window.localStorage.getItem("userid");
-
-        deletepostbtn.addEventListener("click", ()=>{
-
-            // /posts/delete/{postid}/{userid}
-            console.log(postarray[x])
-
-            fetch(`http://localhost:8000/api/posts/delete/${postarray[x]}/${userid}`, { 
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-
-                if (data.Deleted == false){
-                    console.log("cannot delete");
-                }
-                else{
-                    postAndComments.removeChild(post);
-                }
-            });
-        })
 
         groupname.addEventListener("click", function(){
             window.location.href = "group.html";
@@ -889,6 +860,7 @@ function populatePosts(data, pagenumber){
                     }
                 });
         })
+
 
         // comments
 
@@ -969,8 +941,6 @@ function populatePosts(data, pagenumber){
                     const commentarrowupBtn = document.createElement("button");
                     commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
                     commentarrowupBtn.id = "upvotecom";
-
-                    cbtns = document.querySelectorAll("#upvotecom");
         
                     const commentarrowup = document.createElement("i");
                     commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
@@ -1051,12 +1021,10 @@ function populatePosts(data, pagenumber){
                 })
             });
         }
+        var cbtns = document.querySelectorAll("#upvotecom");
+        console.log("commentarrowupbtns: " + cbtns)
+        console.log("number of comments: " + cbtns.length);
     }
-
-    //cbtns = document.querySelectorAll("#upvotecom");
-
-    // console.log("commentarrowupbtns: " + cbtns)
-    // console.log("number of comments: " + cbtns.length);
 
     //////////////////////////////////////
     // var cbtns = document.querySelectorAll("#upvotecom");

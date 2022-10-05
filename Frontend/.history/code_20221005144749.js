@@ -769,13 +769,9 @@ function populatePosts(data, pagenumber){
         groupname.id = "groupname";
         groupname.innerHTML = data[x].community; 
 
-        const deletepostbtn = document.createElement("button");
-        deletepostbtn.classList.add("deletepost", "fa-solid", "fa-eraser");
-
         profile.appendChild(profilePic);
         profile.appendChild(usernameEl);
         profile.appendChild(groupname);
-        profile.appendChild(deletepostbtn);
 
         const postImgTxt = document.createElement("div");
         postImgTxt.classList.add("postImgTxt");
@@ -809,7 +805,6 @@ function populatePosts(data, pagenumber){
         commentbtnEl.innerHTML = "Tails: 0";
 
         interactions.appendChild(commentbtnEl);
-        
 
         if(data[x].voted == "upvote"){
             arrowupBtn.style.backgroundColor = "#FAB3A9";
@@ -820,30 +815,6 @@ function populatePosts(data, pagenumber){
         }
 
         var userid = window.localStorage.getItem("userid");
-
-        deletepostbtn.addEventListener("click", ()=>{
-
-            // /posts/delete/{postid}/{userid}
-            console.log(postarray[x])
-
-            fetch(`http://localhost:8000/api/posts/delete/${postarray[x]}/${userid}`, { 
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-
-                if (data.Deleted == false){
-                    console.log("cannot delete");
-                }
-                else{
-                    postAndComments.removeChild(post);
-                }
-            });
-        })
 
         groupname.addEventListener("click", function(){
             window.location.href = "group.html";
@@ -889,6 +860,7 @@ function populatePosts(data, pagenumber){
                     }
                 });
         })
+
 
         // comments
 
@@ -947,121 +919,113 @@ function populatePosts(data, pagenumber){
         })
 
         // fetch comments
-        getcomments();
-
-        function getcomments(){
-            fetch(`http://localhost:8000/api/comments/${postarray[x]}/${commentpagenumber}/${userid}`)
-            .then(response => response.json())
-            .then(data => {
-
-                for (let y = 0; y < data.length; y++){
-                    
-                    const li = document.createElement("li")
-
-                    ul.appendChild(li);
-
-                    const commentVotes = document.createElement("div");
-                    commentVotes.classList.add("votes");
-
-                    li.appendChild(commentVotes);
 
 
-                    const commentarrowupBtn = document.createElement("button");
-                    commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
-                    commentarrowupBtn.id = "upvotecom";
+        fetch(`http://localhost:8000/api/comments/${postarray[x]}/${commentpagenumber}/${userid}`)
+        .then(response => response.json())
+        .then(data => {
 
-                    cbtns = document.querySelectorAll("#upvotecom");
-        
-                    const commentarrowup = document.createElement("i");
-                    commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
-        
-                    const commentnumVotes = document.createElement("h2");
-                    commentnumVotes.innerHTML = data[y].votes
-        
-                    const commentarrowdownBtn = document.createElement("button");
-                    commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
-                    commentarrowdownBtn.id = "downvotcom";
-        
-                    const commentarrowdown = document.createElement("i");
-                    commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
-        
-                    commentarrowupBtn.appendChild(commentarrowup);
-                    commentVotes.appendChild(commentarrowupBtn);
-                    commentVotes.appendChild(commentnumVotes);
-                    commentarrowdownBtn.appendChild(commentarrowdown);
-                    commentVotes.appendChild(commentarrowdownBtn);
+            for (let y = 0; y < data.length; y++){
+                
+                const li = document.createElement("li")
 
-                    const comment = document.createElement("div");
-                    comment.classList.add("comment");
+                ul.appendChild(li);
 
-                    li.appendChild(comment);
+                const commentVotes = document.createElement("div");
+                commentVotes.classList.add("votes");
 
-                    const commentProfile = document.createElement("div");
-                    commentProfile.classList.add("profile");
+                li.appendChild(commentVotes);
 
-                    comment.appendChild(commentProfile);
 
-                    const commentProfilePic = document.createElement("img");
-                    if (!commentProfilePic.src){
-                        commentProfilePic.src = "./images/607426-200.png";
-                    }
-                    else{
-                        commentProfilePic.src = data[y].profilepic;
-                    }
+                const commentarrowupBtn = document.createElement("button");
+                commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
+                commentarrowupBtn.id = "upvotecom";
+    
+                const commentarrowup = document.createElement("i");
+                commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
+    
+                const commentnumVotes = document.createElement("h2");
+                commentnumVotes.innerHTML = data[y].votes
+    
+                const commentarrowdownBtn = document.createElement("button");
+                commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
+                commentarrowdownBtn.id = "downvotcom";
+    
+                const commentarrowdown = document.createElement("i");
+                commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
+    
+                commentarrowupBtn.appendChild(commentarrowup);
+                commentVotes.appendChild(commentarrowupBtn);
+                commentVotes.appendChild(commentnumVotes);
+                commentarrowdownBtn.appendChild(commentarrowdown);
+                commentVotes.appendChild(commentarrowdownBtn);
 
-                    commentProfilePic.id = "profilePic";
+                const comment = document.createElement("div");
+                comment.classList.add("comment");
 
-                    commentProfile.appendChild(commentProfilePic);
+                li.appendChild(comment);
 
-                    const commentUsername = document.createElement("h2");
-                    commentUsername.id = "username";
-                    commentUsername.innerHTML = data[y].username
+                const commentProfile = document.createElement("div");
+                commentProfile.classList.add("profile");
 
-                    commentProfile.appendChild(commentUsername);
+                comment.appendChild(commentProfile);
 
-                    const commentDate = document.createElement("p");
-                    commentDate.innerHTML = data[y].created_at;
-                    commentDate.id = "commentDate";
-
-                    commentProfile.appendChild(commentDate);
-
-                    const commentText = document.createElement("p");
-                    commentText.classList.add("commentText");
-                    commentText.innerHTML = data[y].comment;
-
-                    comment.appendChild(commentText);
-
-                    commentbtnEl.innerHTML = `Tails: ${data.length}`;
-        
-                    var userid = window.localStorage.getItem("userid");
-
+                const commentProfilePic = document.createElement("img");
+                if (!commentProfilePic.src){
+                    commentProfilePic.src = "./images/607426-200.png";
+                }
+                else{
+                    commentProfilePic.src = data[y].profilepic;
                 }
 
-                var seeMore = document.createElement("button");
-                seeMore.classList.add("seeMore");
-                seeMore.innerHTML = "see more..."
+                commentProfilePic.id = "profilePic";
 
-                comments.appendChild(seeMore);
+                commentProfile.appendChild(commentProfilePic);
 
-                seeMore.addEventListener("click", ()=>{
-                    commentpagenumber++;
-                    comments.removeChild(seeMore);
-                    getcomments();
-                   
-                })
-            });
-        }
+                const commentUsername = document.createElement("h2");
+                commentUsername.id = "username";
+                commentUsername.innerHTML = data[y].username
+
+                commentProfile.appendChild(commentUsername);
+
+                const commentDate = document.createElement("p");
+                commentDate.innerHTML = data[y].created_at;
+                commentDate.id = "commentDate";
+
+                commentProfile.appendChild(commentDate);
+
+                const commentText = document.createElement("p");
+                commentText.classList.add("commentText");
+                commentText.innerHTML = data[y].comment;
+
+                comment.appendChild(commentText);
+
+                commentbtnEl.innerHTML = `Tails: ${data.length}`;
+    
+                var userid = window.localStorage.getItem("userid");
+
+            }
+
+
+
+            // if data.length > (what number is a page of comments (ewa))
+            var seeMore = document.createElement("button");
+            seeMore.classList.add("seeMore");
+            seeMore.innerHTML = "see more..."
+
+            comments.appendChild(seeMore);
+
+            seeMore.addEventListener("click", ()=>{
+                commentpagenumber++;
+            })
+        });
+        
     }
 
-    //cbtns = document.querySelectorAll("#upvotecom");
-
-    // console.log("commentarrowupbtns: " + cbtns)
-    // console.log("number of comments: " + cbtns.length);
-
     //////////////////////////////////////
-    // var cbtns = document.querySelectorAll("#upvotecom");
-    // console.log("commentarrowupbtns: " + cbtns)
-    // console.log("number of comments: " + cbtns.length);
+    var cbtns = document.querySelectorAll("#upvotecom");
+    console.log("commentarrowupbtns: " + cbtns)
+    console.log("number of comments: " + cbtns.length);
 
     // commentarrowupBtn.addEventListener("click", function(){
 
