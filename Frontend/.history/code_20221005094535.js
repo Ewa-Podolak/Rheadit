@@ -197,13 +197,6 @@ function setupgroupPage(){
             if(data.userrole != null){
                 newpost(groupname);
             }
-            else{
-                var createnewPost = document.querySelector(".createnewPost")
-                var newposttxt = document.querySelector(".newposttxt")
-                createnewPost.id = "grey";
-
-                newposttxt.disabled = true;
-            }
 
             showgroupname.innerHTML = data.communityname;
             showgroupbio.innerHTML = data.bio

@@ -155,14 +155,16 @@ if (!window.location.href.includes("index.html")){
         postSort();
 
         var groupname = window.localStorage.getItem("groupname");
-
         var joinGroup = document.getElementById("joinGroup");
         var showgroupname = document.getElementById("groupUsername");
-        var groupPic = document.getElementById("groupProfilePic");
 
         getPosts(pagenumber, groupname);
-            
-        var showgroupbio = document.getElementById("groupbioText");
+
+       
+        newpost(groupname); // if not a member dont do this
+        
+        
+        var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
 
         setupgroupPage();
@@ -194,27 +196,9 @@ function setupgroupPage(){
         .then(data => {
             console.log(data);
 
-            if(data.userrole != null){
-                newpost(groupname);
-            }
-            else{
-                var createnewPost = document.querySelector(".createnewPost")
-                var newposttxt = document.querySelector(".newposttxt")
-                createnewPost.id = "grey";
-
-                newposttxt.disabled = true;
-            }
-
             showgroupname.innerHTML = data.communityname;
             showgroupbio.innerHTML = data.bio
             numgroupmembers.innerHTML = data.memebernumber;
-            if(data.profilepic == null){
-                groupPic.src = "./images/607426-200.png";
-            }
-            else{
-                groupPic.src = data.profilepic;
-            }
-
             if (data.userrole == null){
                 joinGroup.innerHTML = "join"
                 joinGroup.disabled = false;
@@ -225,7 +209,7 @@ function setupgroupPage(){
 
             if (joinGroup.innerHTML == "owner"){
                 console.log("owner")
-                ownerpriviledges(data.communityname);
+                ownerpriviledges();
             }
 
             if (joinGroup.innerHTML == "mod"){
@@ -234,83 +218,18 @@ function setupgroupPage(){
         });
 }
 
-function ownerpriviledges(communityname){
-    var editgroupProfile = document.getElementById("groupeditProfile");
-    var groupeditBio = document.getElementById("groupeditBio");
-    
-    editgroupProfile.style.display = "block";
-    groupeditBio.style.display = "block";
+function ownerpriviledges(){
+    var editBio = document.getElementById("editBio");
+    var editProfile = document.getElementById("editProfile");
+    var followBtn = document.getElementById("followBtn");
 
-    newgroupbio(communityname);
-    newgroupprofile(editgroupProfile, communityname);
-}
+    followBtn.style.display = "none";
+    editBio.style.display = "block";
+    editProfile.style.display = "block";
 
-function newgroupprofile(editgroupProfile, communityname){
-    editgroupProfile.addEventListener("click", function(){
-        var profilePicEditorContainer = document.querySelector(".profilePicEditorContainer");
-        profilePicEditorContainer.style.display = "flex"
-        var close = document.querySelector(".close");
-        var submitNewProfilePic = document.querySelector("#submitNewProfilePic");
-        var submitNewProfilePicBox = document.getElementById("submitNewProfilePicBox");
-        var newProfilePic = document.querySelector(".grouppagePic");
-
-        close.addEventListener("click", function(){
-            profilePicEditorContainer.style.display = "none"
-        })
-
-        submitNewProfilePic.addEventListener("click", function(){ 
-
-            var data = { profilepic: submitNewProfilePicBox.value};
-            var userid = window.localStorage.getItem("userid");
-
-            fetch(`http://localhost:8000/api/community/updateprofilepic/${communityname}/${userid}`, { 
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-
-                profilePicEditorContainer.style.display = "none"     
-            });
-
-            newProfilePic.src = submitNewProfilePicBox.value;
-
-        })
-    })
-}
-
-function newgroupbio(communityname){
-    var groupbioText = document.getElementById("groupbioText");
-    var newBio = document.getElementById("newBio");
-    var newBioBtn = document.getElementById("newBioBtn");
-
-    groupeditBio.addEventListener("click", ()=> {
-        newBio.style.display = "block";
-        newBioBtn.style.display = "block";
-
-        newBioBtn.addEventListener("click", function(){
-            groupbioText.innerHTML = newBio.value;
-            var data = { bio: newBio.value};
-            newBio.style.display = "none";
-            newBioBtn.style.display = "none";
-
-            fetch(`http://localhost:8000/api/community/updatebio/${communityname}/${userid}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-            });
-        })
-    })
+    newbio();
+    deleteuser();
+    editprofilepic();
 }
 
 function givePersonalControl(){
@@ -376,8 +295,6 @@ function newbio(){
             bioText.innerHTML = newBio.value;
             var data = { bio: newBio.value};
 
-            newBio.style.display = "none";
-            newBioBtn.style.display = "none";
             fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}`, {
                 method: 'PATCH',
                 headers: {

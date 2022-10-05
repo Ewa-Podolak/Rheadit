@@ -34,6 +34,7 @@
                 <li id="newpost"><i class="fa-solid fa-circle-plus"></i></li>
                 <li id="notification"><i class="fa-solid fa-bell"></i></li>
                 <li id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
+                <li id="deleteuser"><i class="fa-solid fa-user-xmark"></i></li>
             </ul>
         </div>
     </div>
@@ -51,27 +52,46 @@
         </div>
     </div>  
 
-    <div class="wholeProfile">
-        <div class="profileBox">
-            <img id="groupProfilePic" class="grouppagePic">
-            <button id="groupeditProfile">edit profile picture</button>
-            <div id="groupUsername">username</div>
-        </div>
-
-        <div class="membersAndJoin">
-            <div class="members">Members: <span id="numgroupmembers">125</span></div>
-            <button id="joinGroup" disabled style="text-transform: uppercase; font-weight:700;"></button>
+    <div class="followersOrFollowingListContainer">
+        <div class="followersOrFollowingList">
+            <div class="boxBasics">
+                <h1 class="followersOrFollowing"></h1>
+                <i class="fa-solid fa-xmark" id="closeBtn"></i>
+            </div>
+            <div class="boxContents">
+                
+            </div>
         </div>
     </div>
 
+    <div class="wholeProfile">
+        <div class="profileBox">
+            <img id="profilePic" class="profilepagePic">
+            <button id="editProfile">edit profile picture</button>
+            <h1 id="usernameText"></h1>
+        </div>
+
+        <div class="follow">
+            <div class="followers">Followers: <span id="numOfFollowers">125</span></div>
+            <div class="following">Following: <span id="numOfFollowing">293</span></div>
+        </div>
+    </div>
+
+    <button id="followBtn">Follow</button>
+
     <div class="bio">
         <i class="fa-solid fa-pen"></i>
-        <button id="groupeditBio">edit bio</button>
+        <button id="editBio">edit bio</button>
         <div class="inputAndButton">
             <input type="text" placeholder="new bio" id="newBio">
             <button id="newBioBtn" type="submit">Submit</button>
         </div>
-        <p id="groupbioText"></p>
+        <p id="bioText"></p>
+    </div>
+
+    <div class="popularOrRecent">
+        <button id="mostRecent">Most Recent</button>
+        <button id="mostPopular">Most Popular</button>
     </div>
 
     <div class="createnewPost">
@@ -89,12 +109,7 @@
         </div>
     </div>
 
-    <div class="popularOrRecent">
-        <button id="mostRecent">Most Recent</button>
-        <button id="mostPopular">Most Popular</button>
-    </div>
-
-    <div class="postsContainer" id="groupPage">
+    <div class="postsContainer" id="profilePage">
 
     </div>
 
@@ -103,6 +118,7 @@
         <h3 id="pageNum">1</h3>
         <button class="noBtn" id="plusPageNum"><i class="fa-solid fa-circle-arrow-right"></i></button>
     </div>
+
     
     <script src="code.js"></script>
 </body>

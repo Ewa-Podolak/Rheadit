@@ -24,11 +24,15 @@
   width: 18px;
 }
 
-#editBio, #editProfile {
+#grey {
+  opacity: 0.8;
+}
+
+#editBio, #editProfile, #groupeditBio, #groupeditProfile {
   display: none;
 }
 
-.profilepagePic {
+.profilepagePic, .grouppagePic {
   width: 169px !important;
   height: 169px !important;
   border-radius: 50%;
@@ -144,8 +148,8 @@ input {
 
 #profilePic {
   border-radius: 100%;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }
 
 #groupname {
@@ -278,9 +282,6 @@ input:-webkit-autofill:active {
 .navbar .dropDown ul li #username {
   padding: 5%;
 }
-.navbar #profilePic {
-  border: #373F47 1px solid;
-}
 
 .popularOrRecent {
   display: flex;
@@ -318,6 +319,10 @@ input:-webkit-autofill:active {
 
 #deleteuser {
   display: none;
+}
+
+.postImgTxt {
+  padding: 5%;
 }
 
 .createnewPost {
