@@ -164,7 +164,7 @@ if (!window.location.href.includes("index.html")){
         newpost(groupname); // if not a member dont do this
         
         
-        var showgroupbio = document.getElementById("groupbioText");
+        var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
 
         setupgroupPage();
@@ -220,12 +220,8 @@ function setupgroupPage(){
 
 function ownerpriviledges(){
     var editgroupProfile = document.getElementById("groupeditProfile");
-    var groupeditBio = document.getElementById("groupeditBio");
-    
     editgroupProfile.style.display = "block";
-    groupeditBio.style.display = "block";
-
-    newgroupbio();
+    //editgroupprofilepic(); /// not made yet
 }
 
 function givePersonalControl(){
@@ -688,12 +684,12 @@ function populatePosts(data, pagenumber){
 
         var userid = window.localStorage.getItem("userid");
 
-        groupname.addEventListener("click", function(){
+        groupname.addEventListener("click", function(){ /////////////////////////////////////////////////////////
             window.location.href = "group.html";
             window.localStorage.setItem("groupname", groupname.innerHTML)
         })
 
-        arrowupBtn.addEventListener("click", function(){ ///////////////////////// dont work
+        arrowupBtn.addEventListener("click", function(){
 
             fetch(`http://localhost:8000/api/interactions/upvotepost/${x+1}/${userid}`, { 
                 method: 'POST',
@@ -713,7 +709,7 @@ function populatePosts(data, pagenumber){
             });
         })
 
-        arrowdownBtn.addEventListener("click", function(){ /////////////////////// dont work
+        arrowdownBtn.addEventListener("click", function(){
 
                 fetch(`http://localhost:8000/api/interactions/downvotepost/${x+1}/${userid}`, {
                     method: 'POST',
@@ -771,8 +767,7 @@ function populatePosts(data, pagenumber){
             console.log(userid);
 
             if (comment != ""){
-                var data = 
-                fetch(`http://localhost:8000/api/comments/create/${x+1}/${userid}`, { /// dont think works
+                fetch(`http://localhost:8000/api/comments/create/${x+1}/${comment}/${userid}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1033,28 +1028,22 @@ function newpost(group){
     newpostbtn.addEventListener("click", ()=>{
         secondbox.style.display = "none";
         thirdbox.style.display = "none";
-        console.log(newposttxt.value == "");
+        console.log(newbodytxt.value);
 
-        if (newposttxt.value != ""){
-            data = {head: newposttxt.value, body: newbodytxt.value, picture: newbodyimg.value};
+        data = {head: newbodytxt.value, body: newposttxt.value, picture: newbodyimg.value};
 
-            fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-                    getPosts(1);
-            }); 
-        }
-        else{
-            alert("enter a title")
-        }
-
+        fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+                console.log(data);
+                getPosts(1);
+        }); 
     })
 }
 

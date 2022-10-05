@@ -225,7 +225,6 @@ function ownerpriviledges(){
     editgroupProfile.style.display = "block";
     groupeditBio.style.display = "block";
 
-    newgroupbio();
 }
 
 function givePersonalControl(){

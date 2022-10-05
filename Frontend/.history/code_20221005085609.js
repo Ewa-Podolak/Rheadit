@@ -225,7 +225,18 @@ function ownerpriviledges(){
     editgroupProfile.style.display = "block";
     groupeditBio.style.display = "block";
 
-    newgroupbio();
+    // var editBio = document.getElementById("editBio");
+    // var editProfile = document.getElementById("editProfile");
+    // var followBtn = document.getElementById("followBtn");
+
+    // followBtn.style.display = "none";
+    // editBio.style.display = "block";
+    // editProfile.style.display = "block";
+
+    // newbio();
+    // deleteuser();
+    // editprofilepic();
+
 }
 
 function givePersonalControl(){

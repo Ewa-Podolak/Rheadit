@@ -32,7 +32,7 @@ $light: #F6F6F2;
     width: 18px;
 }
 
-#editBio, #editProfile, #groupeditBio, #groupeditProfile{
+#editBio, #editProfile{
     display: none;
 }
 
@@ -535,6 +535,10 @@ input:-webkit-autofill:active{
         font-size: 30px;
         font-weight: 700;
     }
+}
+
+#groupeditBio{
+    display: none;
 }
 
 .bio{

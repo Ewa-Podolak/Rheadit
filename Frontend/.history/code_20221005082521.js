@@ -164,7 +164,7 @@ if (!window.location.href.includes("index.html")){
         newpost(groupname); // if not a member dont do this
         
         
-        var showgroupbio = document.getElementById("groupbioText");
+        var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
 
         setupgroupPage();
@@ -220,12 +220,8 @@ function setupgroupPage(){
 
 function ownerpriviledges(){
     var editgroupProfile = document.getElementById("groupeditProfile");
-    var groupeditBio = document.getElementById("groupeditBio");
-    
     editgroupProfile.style.display = "block";
-    groupeditBio.style.display = "block";
-
-    newgroupbio();
+    //editgroupprofilepic(); /// not made yet
 }
 
 function givePersonalControl(){

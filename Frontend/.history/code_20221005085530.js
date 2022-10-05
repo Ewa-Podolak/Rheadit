@@ -164,7 +164,7 @@ if (!window.location.href.includes("index.html")){
         newpost(groupname); // if not a member dont do this
         
         
-        var showgroupbio = document.getElementById("groupbioText");
+        var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
 
         setupgroupPage();
@@ -225,7 +225,18 @@ function ownerpriviledges(){
     editgroupProfile.style.display = "block";
     groupeditBio.style.display = "block";
 
-    newgroupbio();
+    // var editBio = document.getElementById("editBio");
+    // var editProfile = document.getElementById("editProfile");
+    // var followBtn = document.getElementById("followBtn");
+
+    // followBtn.style.display = "none";
+    // editBio.style.display = "block";
+    // editProfile.style.display = "block";
+
+    // newbio();
+    // deleteuser();
+    // editprofilepic();
+
 }
 
 function givePersonalControl(){

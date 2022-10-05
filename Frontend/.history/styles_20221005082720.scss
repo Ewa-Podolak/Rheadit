@@ -32,7 +32,7 @@ $light: #F6F6F2;
     width: 18px;
 }
 
-#editBio, #editProfile, #groupeditBio, #groupeditProfile{
+#editBio, #editProfile{
     display: none;
 }
 
@@ -153,8 +153,8 @@ input{
 
 #profilePic{
     border-radius: 100%;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 }
 
 #groupname{
@@ -339,6 +339,12 @@ input:-webkit-autofill:active{
     align-items: center;
     margin-left: 5%;
 
+    
+
+    // #profilePic{
+    //     height: 5vh;
+    // }
+
     h2{
         font-size: 12px;
         padding: 2%;
@@ -347,10 +353,6 @@ input:-webkit-autofill:active{
 
 #deleteuser{
     display: none;
-}
-
-.postImgTxt{
-    padding: 5%;
 }
 
 .createnewPost{

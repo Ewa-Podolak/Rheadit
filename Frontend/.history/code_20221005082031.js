@@ -164,7 +164,7 @@ if (!window.location.href.includes("index.html")){
         newpost(groupname); // if not a member dont do this
         
         
-        var showgroupbio = document.getElementById("groupbioText");
+        var showgroupbio = document.getElementById("groupBio");
         var numgroupmembers = document.getElementById("numgroupmembers");
 
         setupgroupPage();
@@ -220,12 +220,8 @@ function setupgroupPage(){
 
 function ownerpriviledges(){
     var editgroupProfile = document.getElementById("groupeditProfile");
-    var groupeditBio = document.getElementById("groupeditBio");
-    
     editgroupProfile.style.display = "block";
-    groupeditBio.style.display = "block";
-
-    newgroupbio();
+    //editgroupprofilepic(); /// not made yet
 }
 
 function givePersonalControl(){
@@ -1033,26 +1029,28 @@ function newpost(group){
     newpostbtn.addEventListener("click", ()=>{
         secondbox.style.display = "none";
         thirdbox.style.display = "none";
+        console.log(newbodytxt.value == "");
         console.log(newposttxt.value == "");
 
-        if (newposttxt.value != ""){
-            data = {head: newposttxt.value, body: newbodytxt.value, picture: newbodyimg.value};
+        if (newposttxt != ""){
+            console.log("something")
+            // data = {head: newposttxt.value, body: newbodytxt.value, picture: newbodyimg.value};
 
-            fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                    console.log(data);
-                    getPosts(1);
-            }); 
+            // fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(data)
+            // })
+            // .then((response) => response.json())
+            // .then((data) => {
+            //         console.log(data);
+            //         getPosts(1);
+            // }); 
         }
         else{
-            alert("enter a title")
+            alert("empty")
         }
 
     })
