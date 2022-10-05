@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\follower;
+use App\Models\user;
 
 class followerController extends Controller
 {
