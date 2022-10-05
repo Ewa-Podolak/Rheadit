@@ -178,9 +178,7 @@ function follow(username){
         fetch(`http://localhost:8000/api/followers/follow/${userid}/${username}`)
         .then(response => response.json())
         .then(data => {
-            window.location.href = "profile.html";
-            window.localStorage.setItem("personal", false);
-            window.localStorage.setItem("usernameToGet", username)
+
         });
     })
 }
@@ -535,6 +533,9 @@ function checkiffollowing(usernameProfile){
                     followBtn.innerHTML = "Unfollow";
                 }
             }
+        }
+        else{
+            boxContents.innerHTML = "Followers: 0"
         }
     });
 }

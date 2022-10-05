@@ -170,21 +170,6 @@ if (!window.location.href.includes("index.html")){
     }
 }
 
-function follow(username){
-    var followBtn = document.getElementById("followBtn");
-    followBtn.addEventListener("click", ()=>{
-        followBtn.innerHTML = "Unfollow";
-        
-        fetch(`http://localhost:8000/api/followers/follow/${userid}/${username}`)
-        .then(response => response.json())
-        .then(data => {
-            window.location.href = "profile.html";
-            window.localStorage.setItem("personal", false);
-            window.localStorage.setItem("usernameToGet", username)
-        });
-    })
-}
-
 function jointheGroup(){
         joinGroup.addEventListener("click", function(){
             joinGroup.innerHTML = "Requested";
@@ -487,8 +472,6 @@ function setupgeneralProfile(){
     var bioText = document.getElementById("bioText");
     var profilePicture = document.querySelector(".profilepagePic");
 
-    follow(usernameProfile);
-
     fetch(`http://localhost:8000/api/users/${loggedinUsername}/${usernameProfile}`)
     .then(response => response.json())
     .then(data => {
@@ -514,29 +497,9 @@ function setupgeneralProfile(){
     var followersOrFollowingListContainer = document.querySelector(".followersOrFollowingListContainer");
     var boxContents = document.querySelector(".boxContents");
 
-    checkiffollowing(usernameProfile);
     getfollowers(followersOrFollowingListContainer, usernameProfile, boxContents);
     getfollowing(followersOrFollowingListContainer, usernameProfile, boxContents);
     
-}
-
-function checkiffollowing(usernameProfile){
-    fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) 
-    .then(response => response.json())
-    .then(data => {
-
-        if (data.length > 0){
-            for (let x = 0; x < data.length; x++){
-                var followBtn = document.getElementById("followBtn");
-                var loggedin = window.localStorage.getItem("username")
-                console.log("follow?")
-                if (data[x].username == loggedin){
-                    console.log("following")
-                    followBtn.innerHTML = "Unfollow";
-                }
-            }
-        }
-    });
 }
 
 function getfollowing(followersOrFollowingListContainer, usernameProfile, boxContents){
@@ -586,7 +549,7 @@ function getfollowers(followersOrFollowingListContainer, usernameProfile, boxCon
                 console.log(data[0].username)
                 for (let x = 0; x < data.length; x++){
                     boxContents.innerHTML += `<br>`;
-                    boxContents.innerHTML += data[x].username;
+                    boxContents.innerHTML += data[0].username;
                 }
             }
             else{
