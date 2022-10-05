@@ -34,6 +34,9 @@ $light: #F6F6F2;
 
 #grey{
     opacity: 0.8;
+
+    input:disabled{
+    }
 }
 
 #editBio, #editProfile, #groupeditBio, #groupeditProfile{

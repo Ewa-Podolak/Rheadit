@@ -199,10 +199,7 @@ function setupgroupPage(){
             }
             else{
                 var createnewPost = document.querySelector(".createnewPost")
-                var newposttxt = document.querySelector(".newposttxt")
                 createnewPost.id = "grey";
-
-                newposttxt.disabled = true;
             }
 
             showgroupname.innerHTML = data.communityname;
