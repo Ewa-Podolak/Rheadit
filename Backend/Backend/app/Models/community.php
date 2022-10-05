@@ -16,18 +16,23 @@ class community extends Model
     {
         $post = new post;
         $comment = new comment;
-
         $user = $this::where('community', $community)->where('userid', $userid);
 
         if(!$user->get()->IsEmpty())
         {
-            $allposts = post::where('userid', $userid)->where('community', $community)->get();
-
-            foreach($allposts as $posts)
-                $post->DeletePosts($posts->postid);
+            if($user->get()[0]->authority != 'owner')
+            {
+                $allposts = post::where('userid', $userid)->where('community', $community)->get();
+                foreach($allposts as $posts)
+                    $post->DeletePosts($posts->postid);
             
-            $user->delete();
-            return ['left'=>true];
+                $allcomments = comment::where('userid', $userid)->get();
+                foreach($allcomments as $comment)
+                    $comment->DeletedComment($comment->commentid, $userid);
+
+                $user->delete();
+                return ['left'=>true];
+            }
         }
         return ['left'=>false];
     }
