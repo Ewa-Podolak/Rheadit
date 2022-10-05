@@ -188,20 +188,9 @@ function jointheGroup(){
         })
 }
 
-function leave(leavegroup, communityname){
+function leave(leavegroup){
     leavegroup.addEventListener("click", ()=>{
-        fetch(`http://localhost:8000/api/community/${communityname}/leave/${userid}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-                console.log(data);
-                console.log("left");
-                window.location.href = "home.html";
-        });
+        ///community/{communityname}/leave/{userid}
     })
 }
 
@@ -286,7 +275,6 @@ function deletegroup(communityname){
         .then((data) => {
                 console.log(data);
                 console.log("deleted");
-                window.location.href = "home.html";
         });
     })
 }
@@ -456,7 +444,6 @@ function deleteuser(){
         .then((data) => {
                 console.log(data);
                 console.log("deleted");
-                window.location.href = "index.html";
         });
     })
 }

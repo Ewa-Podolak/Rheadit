@@ -188,31 +188,11 @@ function jointheGroup(){
         })
 }
 
-function leave(leavegroup, communityname){
-    leavegroup.addEventListener("click", ()=>{
-        fetch(`http://localhost:8000/api/community/${communityname}/leave/${userid}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-                console.log(data);
-                console.log("left");
-                window.location.href = "home.html";
-        });
-    })
-}
-
 function setupgroupPage(){
     fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
-
-            var leavegroup = document.getElementById("leavegroup");
-            leave(leavegroup, data.communityname);
 
             if(data.userrole != null){
                 newpost(groupname);
@@ -221,8 +201,8 @@ function setupgroupPage(){
                 var createnewPost = document.querySelector(".createnewPost")
                 var newposttxt = document.querySelector(".newposttxt")
                 createnewPost.id = "grey";
+
                 newposttxt.disabled = true;
-                leavegroup.style.display = "none";
             }
 
             showgroupname.innerHTML = data.communityname;
@@ -238,14 +218,12 @@ function setupgroupPage(){
             if (data.userrole == null){
                 joinGroup.innerHTML = "join"
                 joinGroup.disabled = false;
-
             }
             else{
                 joinGroup.innerHTML = data.userrole;
             }
 
             if (joinGroup.innerHTML == "owner"){
-                leavegroup.style.display = "none";
                 console.log("owner")
                 ownerpriviledges(data.communityname);
             }
@@ -270,6 +248,7 @@ function ownerpriviledges(communityname){
 
 function deletegroup(communityname){
     var deletegroup = document.getElementById("deletegroup");
+    console.log(deletegroup);
     deletegroup.style.display = "block";
     deletegroup.addEventListener("click", ()=>{
         userid = window.localStorage.getItem("userid");
@@ -286,7 +265,6 @@ function deletegroup(communityname){
         .then((data) => {
                 console.log(data);
                 console.log("deleted");
-                window.location.href = "home.html";
         });
     })
 }
@@ -456,7 +434,6 @@ function deleteuser(){
         .then((data) => {
                 console.log(data);
                 console.log("deleted");
-                window.location.href = "index.html";
         });
     })
 }
