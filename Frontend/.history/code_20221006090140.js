@@ -1041,7 +1041,7 @@ function populatePosts(data, pagenumber){
                     deletecommentBtn.addEventListener("click", ()=>{
                         // /comments/delete/{commentid}/{userid}
 
-                        fetch(`http://localhost:8000/api/comments/delete/${commentarray[x]}/${userid}`, { /// comment id doesnt work
+                        fetch(`http://localhost:8000/api/comments/delete/${commentarray[x]}/${userid}`, { 
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json',

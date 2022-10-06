@@ -258,6 +258,7 @@ function setupgroupPage(){
 
             if (joinGroup.innerHTML == "mod"){
                 console.log("mod")
+                moddelete();
             }
         });
 }
@@ -1033,33 +1034,8 @@ function populatePosts(data, pagenumber){
 
                     commentbtnEl.innerHTML = `Tails: ${data.length}`;
         
-                    const deletecommentBtn = document.createElement("button");
-                    deletecommentBtn.classList.add("deletecomment", "fa-solid", "fa-eraser");
+                    var userid = window.localStorage.getItem("userid");
 
-                    comment.appendChild(deletecommentBtn);
-
-                    deletecommentBtn.addEventListener("click", ()=>{
-                        // /comments/delete/{commentid}/{userid}
-
-                        fetch(`http://localhost:8000/api/comments/delete/${commentarray[x]}/${userid}`, { /// comment id doesnt work
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            console.log(data);
-            
-                            if (data.Deleted == false){
-                                console.log("cannot delete");
-                            }
-                            else{
-                                postAndComments.removeChild(post);
-                            }
-                        });
-
-                    })
                 }
 
                 var seeMore = document.createElement("button");
