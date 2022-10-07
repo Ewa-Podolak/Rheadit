@@ -77,9 +77,9 @@ class post extends Model
             }
         }
         $numberofpostsmax = $allposts->count();
+        $postsarray = [];
         if($numberofpostsmax == 0)
         {
-            $postsarray = [];
             $x = 0;
             $tempallposts = $allposts;
             foreach($tempallposts as $post)
@@ -119,7 +119,7 @@ class post extends Model
             }
             return($postsarray);
         }
-        return [];
+        return $postsarray;
     }
 
     public function ReturnPost($postid, $userid)
