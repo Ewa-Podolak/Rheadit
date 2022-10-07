@@ -75,7 +75,7 @@ class comment extends Model
         $commentsarray = array_merge($favouritecommentarray, $notfavouritecommentarray);
 
 
-        if(count($commentsarray) + 1 == $page * 5)
+        if(count($commentsarray) == ($page - 1) * 5)
         {
             return ['commentid' => null, 'comment' => null, 'votes' => null, 'favourited'=>null, 'created_at'=>null, 'usesrname'=>null, 'profilepic'=>null, 'voted'=>null];
         }

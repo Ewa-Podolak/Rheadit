@@ -33,7 +33,7 @@ Route::get('/users/{userid}/{username}', [userController::class, 'GetProfile']);
 
 
 //Posts Routes //All works
-Route::get('/posts/{postid}/{userid}', [postController::class, 'ReturnPost']); //Gets Post //Works
+Route::get('/posts/{postid}/{userid}', [postController::class, 'ReturnPost']); //Gets Post
 
 Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage
 
@@ -62,7 +62,7 @@ Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentContro
 
 Route::post('/comments/create/{postid}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment
 
-Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'GetComments']); //Allows user or mod/owner to delete a comment
+Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'DeleteComment']); //Allows user or mod/owner to delete a comment
 
 
 
@@ -107,3 +107,5 @@ Route::patch('/community/updatebio/{communityname}/{userid}', [communityControll
 Route::patch('/community/updateprofilepic/{communityname}/{userid}', [communityController::class, 'UpdateCommunityPic']); //returns community information
 
 Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //returns community information  //// fe not used
+
+Route::get('/community/joinable/{userid}', [communityController::class, 'JoinableComunity']); //Returns the list of all joinable communities //notworking yet
