@@ -110,4 +110,29 @@ class community extends Model
         }
         return ['approved'=>false];
     }
+
+    public function JoinableComunity($userid)
+    {
+        $joinedcommunities = $this::where('userid', $userid)->get();
+        $allcommunities = $this::where('authority', 'owner')->wherenot('userid', $userid)->get();
+        $joinablecommunities = [];
+
+        foreach($joinedcommunities as $joinedcommunity)
+        {
+            foreach($allcommunities as $community)
+            {
+                if($joinedcommunity->community != $community->community)
+                {
+                    $membernumber = $this::where('community', $community->community)->get()->count();
+                    array_push($joinablecommunities, ['communityname'=>$community->community, 'membersnumber'=>$membernumber]);
+                }
+            }
+        }
+        if($joinablecommunities == [])
+        {
+            $joinablecommunities = ['communityname'=>null, 'membersnumber'=>null];
+        }
+
+        return $joinablecommunities;
+    }
 }

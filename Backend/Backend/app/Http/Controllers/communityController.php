@@ -104,4 +104,10 @@ class communityController extends Controller
         }
         return $requestsarray;
     }
+
+    public function JoinableComunity($userid)
+    {
+        $community = new community;
+        return $community->JoinableComunity($userid);
+    }
 }
