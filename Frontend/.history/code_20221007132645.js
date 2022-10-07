@@ -770,12 +770,8 @@ function setupgroupPage(){
             if (data.userrole == "member"){
                 var requestmodbtn = document.querySelector(".requestmod")
                 requestmodbtn.style.display = "flex";
-                // check if already requested 
-                
                 requestmodbtn.addEventListener("click", ()=>{
                     requestmod(groupname);
-                    // if has - requestmodbtn.innerHTML = "Cancel request";
-                    // if not - requestmodbtn.innerHTML = "Request mod";
                     requestmodbtn.innerHTML = "Requested";
                 })
             }

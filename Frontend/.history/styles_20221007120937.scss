@@ -542,9 +542,8 @@ input:-webkit-autofill:active{
 
                     .commentText{
                         font-size: 15px;
-                        padding-left: 2%;
+                        padding-left: 5%;
                         width: 100%;
-                        margin: 5% 0;
                     }
                 }
 
@@ -554,14 +553,6 @@ input:-webkit-autofill:active{
             }
         }
     }
-}
-
-.requestmod{
-    height: 8vh;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5%;
 }
 
 .profileBox{

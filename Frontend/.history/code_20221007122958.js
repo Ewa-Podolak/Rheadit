@@ -119,8 +119,6 @@ if (window.location.href.includes("index.html")){
 
 if (!window.location.href.includes("index.html")){
 
-    getnotifications();
-
     var pagenumber = 1;
     var commentpagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
@@ -513,12 +511,11 @@ if (!window.location.href.includes("index.html")){
 
                         const favouriteComment = document.createElement("i");
 
-                        if (data[y].favourited == true){
-                            favouriteComment.classList.add("fa-solid", "fa-star", "favouriteComment");
-                        }
-                        else{
-                            favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
-                        }
+                        console.log("data");
+                        console.log(data);
+                        favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
+
+                        
 
                         commentProfile.appendChild(favouriteComment);
 
@@ -664,15 +661,6 @@ if (!window.location.href.includes("index.html")){
     }
 }
 
-function getnotifications(){
-    fetch(`http://localhost:8000/api/community/notification/${userid}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        /////// do something to indicate notification 
-    });
-}
-
 function explore(){
     var explorebtn = document.querySelector(".explore");
 
@@ -767,41 +755,15 @@ function setupgroupPage(){
                 joinGroup.innerHTML = data.userrole;
             }
 
-            if (data.userrole == "member"){
-                var requestmodbtn = document.querySelector(".requestmod")
-                requestmodbtn.style.display = "flex";
-                // check if already requested 
-                
-                requestmodbtn.addEventListener("click", ()=>{
-                    requestmod(groupname);
-                    // if has - requestmodbtn.innerHTML = "Cancel request";
-                    // if not - requestmodbtn.innerHTML = "Request mod";
-                    requestmodbtn.innerHTML = "Requested";
-                })
-            }
-
-            if (data.userrole == "owner"){
+            if (joinGroup.innerHTML == "owner"){
                 leavegroup.style.display = "none";
                 ownerpriviledges(data.communityname);
             }
 
-            if (data.userrole == "mod"){
+            if (joinGroup.innerHTML == "mod"){
                 console.log("mod")
             }
         });
-}
-
-function requestmod(groupname){
-    fetch(`http://localhost:8000/api/community/requestmod/${groupname}/${userid}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-    });
 }
 
 function ownerpriviledges(communityname){
