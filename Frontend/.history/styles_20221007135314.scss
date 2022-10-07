@@ -334,24 +334,11 @@ input:-webkit-autofill:active{
     }
 
     .notifdropDown{
-        width: 50%;
         top: 20%;
         right: 45%;
-        display: none;
-        background-color: #F6F6F2;
-        padding: 5%;
+        display: flex;
     }
 }
-
-.notifBtns, .notiftext{
-    width: 50%;
-    font-size: 13px;
-
-    button{
-        width: 100%;
-    }
-}
-
 
 .popularOrRecent{
     display: flex;

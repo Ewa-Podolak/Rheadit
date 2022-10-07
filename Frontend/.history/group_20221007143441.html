@@ -31,25 +31,25 @@
                         <h2 id="username" class="dropUsername">username</h2>
                     </div>
                 </li>
-                <li id="notification"><i class="fa-solid fa-bell"></i><p class="notif"></p></li>
-                <li id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
-                <li id="deleteuser"><i class="fa-solid fa-user-xmark"></i></li>
-            </ul>
-        </div>
-
-        <div class="notifdropDown">
-            <ul class="notificationsList">
-                <!-- <li>
-                    <div class="notiftext"></div>
-                    <div class="notifBtns">
-                        <button></button>
-                        <button></button>
-                    </div>
-                </li> -->
+                <li id="notification"><i class="fa-solid fa-bell"></i></li>
+                <li id="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i><p class="notif"></p></li>
+                <li id="deletegroup"><i class="fa-solid fa-user-xmark"></i></li>
+                <li id="leavegroup"><i class="fa-solid fa-users-rays"></i></li>
             </ul>
         </div>
     </div>
 
+    <div class="notifdropDown">
+        <ul class="notificationsList">
+            <!-- <li>
+                <div class="notiftext"></div>
+                <div class="notifBtns">
+                    <button></button>
+                    <button></button>
+                </div>
+            </li> -->
+        </ul>
+    </div>
 
     <div class="profilePicEditorContainer">
         <div class="profilePicEditor">
@@ -64,46 +64,29 @@
         </div>
     </div>  
 
-    <div class="followersOrFollowingListContainer">
-        <div class="followersOrFollowingList">
-            <div class="boxBasics">
-                <h1 class="followersOrFollowing"></h1>
-                <i class="fa-solid fa-xmark" id="closeBtn"></i>
-            </div>
-            <div class="boxContents">
-                
-            </div>
-        </div>
-    </div>
-
     <div class="wholeProfile">
         <div class="profileBox">
-            <img id="profilePic" class="profilepagePic">
-            <button id="editProfile">edit profile picture</button>
-            <h1 id="usernameText"></h1>
+            <img id="groupProfilePic" class="grouppagePic">
+            <button id="groupeditProfile">edit profile picture</button>
+            <div id="groupUsername">username</div>
         </div>
 
-        <div class="follow">
-            <div class="followers">Followers: <span id="numOfFollowers">125</span></div>
-            <div class="following">Following: <span id="numOfFollowing">293</span></div>
+        <div class="membersAndJoin">
+            <div class="members">Members: <span id="numgroupmembers">125</span></div>
+            <button id="joinGroup" disabled style="text-transform: uppercase; font-weight:700;"></button>
         </div>
     </div>
 
-    <button id="followBtn">Follow</button>
+    <button class="requestmod">Request Mod</button>
 
     <div class="bio">
         <i class="fa-solid fa-pen"></i>
-        <button id="editBio">edit bio</button>
+        <button id="groupeditBio">edit bio</button>
         <div class="inputAndButton">
             <input type="text" placeholder="new bio" id="newBio">
             <button id="newBioBtn" type="submit">Submit</button>
         </div>
-        <p id="bioText"></p>
-    </div>
-
-    <div class="popularOrRecent">
-        <button id="mostRecent">Most Recent</button>
-        <button id="mostPopular">Most Popular</button>
+        <p id="groupbioText"></p>
     </div>
 
     <div class="createnewPost">
@@ -121,7 +104,12 @@
         </div>
     </div>
 
-    <div class="postsContainer" id="profilePage">
+    <div class="popularOrRecent">
+        <button id="mostRecent">Most Recent</button>
+        <button id="mostPopular">Most Popular</button>
+    </div>
+
+    <div class="postsContainer" id="groupPage">
 
     </div>
 
@@ -130,7 +118,6 @@
         <h3 id="pageNum">1</h3>
         <button class="noBtn" id="plusPageNum"><i class="fa-solid fa-circle-arrow-right"></i></button>
     </div>
-
     
     <script src="code.js"></script>
 </body>

@@ -175,496 +175,492 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("post.html")){
 
-        updatepost();
+        var postids = window.localStorage.getItem("postid");
+        console.log(postids);
+        var userid = window.localStorage.getItem("userid");
 
-        function updatepost(){
-            var postids = window.localStorage.getItem("postid");
-            console.log(postids);
-            var userid = window.localStorage.getItem("userid");
+        var postsContainer = document.querySelector(".postpostsContainer");
+        console.log(postsContainer);
+
+        // /posts/{postid}/{userid}
+        fetch(`http://localhost:8000/api/posts/${postids}/${userid}`)
+        .then(response => response.json())
+        .then(data => { 
+
+            console.log(data);
+
+            postsContainer.innerHTML = "";
+            const postAndComments = document.createElement("div");
+            postAndComments.classList.add("postAndComments");
+            
+            postsContainer.appendChild(postAndComments);
+            
+            const post = document.createElement("div");
+            post.classList.add("post");
+            post.style.borderBottomLeftRadius = "0";
+            post.style.borderBottomRightRadius = "0";
     
-            var postsContainer = document.querySelector(".postpostsContainer");
-            console.log(postsContainer);
-            // /posts/{postid}/{userid}
-            fetch(`http://localhost:8000/api/posts/${postids}/${userid}`)
-            .then(response => response.json())
-            .then(data => { 
+            postAndComments.appendChild(post);
+    
+            const votes = document.createElement("div");
+            votes.classList.add("votes");
+    
+            post.appendChild(votes);
 
-                console.log(data);
+            const arrowupBtn = document.createElement("button");
+            arrowupBtn.classList.add("arrowupBtn", "arrowBtn");
+    
+            const arrowup = document.createElement("i");
+            arrowup.classList.add("fa-solid", "fa-circle-arrow-up");
+    
+            const numVotes = document.createElement("h2");
+            numVotes.innerHTML = data.votes
+    
+            const arrowdownBtn = document.createElement("button");
+            arrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
+    
+            const arrowdown = document.createElement("i");
+            arrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
 
-                postsContainer.innerHTML = "";
-                const postAndComments = document.createElement("div");
-                postAndComments.classList.add("postAndComments");
-                
-                postsContainer.appendChild(postAndComments);
-                
-                const post = document.createElement("div");
-                post.classList.add("post");
-                post.style.borderBottomLeftRadius = "0";
-                post.style.borderBottomRightRadius = "0";
-        
-                postAndComments.appendChild(post);
-        
-                const votes = document.createElement("div");
-                votes.classList.add("votes");
-        
-                post.appendChild(votes);
+            arrowupBtn.appendChild(arrowup);
+            votes.appendChild(arrowupBtn);
+            votes.appendChild(numVotes);
+            arrowdownBtn.appendChild(arrowdown);
+            votes.appendChild(arrowdownBtn);
+    
+            const thePost = document.createElement("div");
+            thePost.classList.add("thePost");
+    
+            post.appendChild(thePost);
+    
+            const profile = document.createElement("div");
+            profile.classList.add("profile");
+    
+            thePost.appendChild(profile);
+    
+            const profilePic = document.createElement("img");
+            profilePic.id = "profilePic" 
+            profilePic.classList.add("postProfilePic");
+    
+            profilePic.src = "./images/607426-200.png";
+            
+            if (data.profilepic != null){
+                profilePic.src = data.profilepic;
+            }
 
-                const arrowupBtn = document.createElement("button");
-                arrowupBtn.classList.add("arrowupBtn", "arrowBtn");
-        
-                const arrowup = document.createElement("i");
-                arrowup.classList.add("fa-solid", "fa-circle-arrow-up");
-        
-                const numVotes = document.createElement("h2");
-                numVotes.innerHTML = data.votes
-        
-                const arrowdownBtn = document.createElement("button");
-                arrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
-        
-                const arrowdown = document.createElement("i");
-                arrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
+            const usernameEl = document.createElement("h2");
+            usernameEl.id = "username";
+            usernameEl.classList.add("postUsername");
+            usernameEl.innerHTML = data.username
+    
+            const groupname = document.createElement("h2");
+            groupname.id = "groupname";
+            groupname.innerHTML = data.community; 
+    
+            const deletepostbtn = document.createElement("button");
+            deletepostbtn.classList.add("deletepost", "fa-solid", "fa-eraser");
+    
+            profile.appendChild(profilePic);
+            profile.appendChild(usernameEl);
+            profile.appendChild(groupname);
+            profile.appendChild(deletepostbtn);
+    
+            const postImgTxt = document.createElement("div");
+            postImgTxt.classList.add("postImgTxt");
+            
+            thePost.appendChild(postImgTxt);
+    
+            const HeadtextEl = document.createElement("h2");
+            HeadtextEl.id = "text" 
+            HeadtextEl.innerHTML = data.head; 
+    
+            const BodytextEl = document.createElement("h3");
+            BodytextEl.id = "body" 
+            BodytextEl.innerHTML = data.body; 
+    
+            if (data.picture != null){
+                const postImg = document.createElement("img"); 
+                postImg.src = data.picture 
+                postImgTxt.appendChild(postImg); 
+            }
 
-                arrowupBtn.appendChild(arrowup);
-                votes.appendChild(arrowupBtn);
-                votes.appendChild(numVotes);
-                arrowdownBtn.appendChild(arrowdown);
-                votes.appendChild(arrowdownBtn);
-        
-                const thePost = document.createElement("div");
-                thePost.classList.add("thePost");
-        
-                post.appendChild(thePost);
-        
-                const profile = document.createElement("div");
-                profile.classList.add("profile");
-        
-                thePost.appendChild(profile);
-        
-                const profilePic = document.createElement("img");
-                profilePic.id = "profilePic" 
-                profilePic.classList.add("postProfilePic");
-        
-                profilePic.src = "./images/607426-200.png";
-                
-                if (data.profilepic != null){
-                    profilePic.src = data.profilepic;
-                }
+            postImgTxt.appendChild(HeadtextEl);
+            postImgTxt.appendChild(BodytextEl);
+    
+                    
+            if(data.voted == "upvote"){
+                arrowupBtn.style.backgroundColor = "#FAB3A9";
+            }
+    
+            if(data.voted == "downvoted"){
+                arrowdownBtn.style.backgroundColor = "#FAB3A9";
+            }
 
-                const usernameEl = document.createElement("h2");
-                usernameEl.id = "username";
-                usernameEl.classList.add("postUsername");
-                usernameEl.innerHTML = data.username
-        
-                const groupname = document.createElement("h2");
-                groupname.id = "groupname";
-                groupname.innerHTML = data.community; 
-        
-                const deletepostbtn = document.createElement("button");
-                deletepostbtn.classList.add("deletepost", "fa-solid", "fa-eraser");
-        
-                profile.appendChild(profilePic);
-                profile.appendChild(usernameEl);
-                profile.appendChild(groupname);
-                profile.appendChild(deletepostbtn);
-        
-                const postImgTxt = document.createElement("div");
-                postImgTxt.classList.add("postImgTxt");
-                
-                thePost.appendChild(postImgTxt);
-        
-                const HeadtextEl = document.createElement("h2");
-                HeadtextEl.id = "text" 
-                HeadtextEl.innerHTML = data.head; 
-        
-                const BodytextEl = document.createElement("h3");
-                BodytextEl.id = "body" 
-                BodytextEl.innerHTML = data.body; 
-        
-                if (data.picture != null){
-                    const postImg = document.createElement("img"); 
-                    postImg.src = data.picture 
-                    postImgTxt.appendChild(postImg); 
-                }
+            var userid = window.localStorage.getItem("userid");
 
-                postImgTxt.appendChild(HeadtextEl);
-                postImgTxt.appendChild(BodytextEl);
-        
-                        
-                if(data.voted == "upvote"){
-                    arrowupBtn.style.backgroundColor = "#FAB3A9";
-                }
-        
-                if(data.voted == "downvoted"){
-                    arrowdownBtn.style.backgroundColor = "#FAB3A9";
-                }
-
-                var userid = window.localStorage.getItem("userid");
-
-                deletepostbtn.addEventListener("click", ()=>{
-                    console.log("normal delete button");
-                    console.log(postarray[x])
-        
-                    fetch(`http://localhost:8000/api/posts/delete/${postids}/${userid}`, { 
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-        
-                        if (data.Deleted == false){
-                            console.log("cannot delete");
-                        }
-                        else{
-                            postAndComments.removeChild(post);
-                        }
-                    });
+            deletepostbtn.addEventListener("click", ()=>{
+                console.log("normal delete button");
+                console.log(postarray[x])
+    
+                fetch(`http://localhost:8000/api/posts/delete/${postids}/${userid}`, { 
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 })
-
-                groupname.addEventListener("click", function(){
-                    window.location.href = "group.html";
-                    window.localStorage.setItem("groupname", groupname.innerHTML)
-                })
-
-                arrowupBtn.addEventListener("click", function(){
-
-                    fetch(`http://localhost:8000/api/interactions/upvotepost/${postids}/${userid}`, { 
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-        
-                        if (data.upvoted == true){
-                            arrowdownBtn.style.backgroundColor = "#F6F6F2"
-                            arrowupBtn.style.backgroundColor = "#FAB3A9";
-                            window.location.href = "post.html";
-                        }
-                    });
-                })
-                
-                arrowdownBtn.addEventListener("click", function(){
-        
-                    fetch(`http://localhost:8000/api/interactions/downvotepost/${postids}/${userid}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-
-                        if (data.downvote == true){
-                            arrowupBtn.style.backgroundColor = "#F6F6F2"
-                            arrowdownBtn.style.backgroundColor = "#FAB3A9";
-                            window.location.href = "post.html";
-                        }
-                    });
-                })
-
-
-
-
-
-
-                const comments = document.createElement("div");
-                comments.classList.add("comments");
-                comments.style.display = "block";
-        
-                postAndComments.appendChild(comments);
-        
-                const commentBar = document.createElement("div");
-                commentBar.classList.add("commentBar");
-        
-                comments.appendChild(commentBar);
-        
-                const commentInput = document.createElement("input");
-                commentInput.classList.add("commentInput");
-                commentInput.type = "text";
-                commentInput.placeholder = "Comment something...";
-        
-                commentBar.appendChild(commentInput);
-        
-                const makeComment = document.createElement("i");
-                makeComment.classList.add("fa-solid", "fa-circle-chevron-right");
-        
-                commentBar.appendChild(makeComment);
-        
-                const ul = document.createElement("ul");
-        
-                comments.appendChild(ul);
-
-                makeComment.addEventListener("click", function(){
-                    console.log("make comment");
-                    var commentmade = commentInput.value;
-        
-                    if (commentmade != ""){
-                        console.log(commentmade)
-                        var data = {comment: commentmade}
-                        fetch(`http://localhost:8000/api/comments/create/${postids}/${userid}`, { 
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(data),
-                        })
-                        .then(response => response.json())
-                        .then((data) => {
-                                console.log(data);
-                                window.location.href = "post.html"
-                        });
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+    
+                    if (data.Deleted == false){
+                        console.log("cannot delete");
                     }
                     else{
-                        alert("comment something");
+                        postAndComments.removeChild(post);
                     }
+                });
+            })
+
+            groupname.addEventListener("click", function(){
+                window.location.href = "group.html";
+                window.localStorage.setItem("groupname", groupname.innerHTML)
+            })
+
+            arrowupBtn.addEventListener("click", function(){
+
+                fetch(`http://localhost:8000/api/interactions/upvotepost/${postids}/${userid}`, { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+    
+                    if (data.upvoted == true){
+                        arrowdownBtn.style.backgroundColor = "#F6F6F2"
+                        arrowupBtn.style.backgroundColor = "#FAB3A9";
+                        window.location.href = "post.html";
+                    }
+                });
+            })
+            
+            arrowdownBtn.addEventListener("click", function(){
+    
+                fetch(`http://localhost:8000/api/interactions/downvotepost/${postids}/${userid}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
 
-                var commentids = [];
-                getpostcomments();
+                    if (data.downvote == true){
+                        arrowupBtn.style.backgroundColor = "#F6F6F2"
+                        arrowdownBtn.style.backgroundColor = "#FAB3A9";
+                        window.location.href = "post.html";
+                    }
+                });
+            })
 
-                function getpostcomments(){
-                    console.log("getting comments")
-                    
 
 
-                    fetch(`http://localhost:8000/api/comments/${postids}/${commentpagenumber}/${userid}`)
+
+
+
+            const comments = document.createElement("div");
+            comments.classList.add("comments");
+            comments.style.display = "block";
+    
+            postAndComments.appendChild(comments);
+    
+            const commentBar = document.createElement("div");
+            commentBar.classList.add("commentBar");
+    
+            comments.appendChild(commentBar);
+    
+            const commentInput = document.createElement("input");
+            commentInput.classList.add("commentInput");
+            commentInput.type = "text";
+            commentInput.placeholder = "Comment something...";
+    
+            commentBar.appendChild(commentInput);
+    
+            const makeComment = document.createElement("i");
+            makeComment.classList.add("fa-solid", "fa-circle-chevron-right");
+    
+            commentBar.appendChild(makeComment);
+    
+            const ul = document.createElement("ul");
+    
+            comments.appendChild(ul);
+
+            makeComment.addEventListener("click", function(){
+                console.log("make comment");
+                var commentmade = commentInput.value;
+    
+                if (commentmade != ""){
+                    console.log(commentmade)
+                    var data = {comment: commentmade}
+                    fetch(`http://localhost:8000/api/comments/create/${postids}/${userid}`, { 
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
                     .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-
-                        for (let z = 0; z<data.length; z++){
-                            commentids.push(data[z].commentid);
-                            console.log(commentids);
-                        }
-
-                        for (let y = 0; y < data.length; y++){
-                            
-                            const li = document.createElement("li")
-                            ul.appendChild(li);
-
-                            const commentVotes = document.createElement("div");
-                            commentVotes.classList.add("votes");
-
-                            li.appendChild(commentVotes);
-
-                            const commentarrowupBtn = document.createElement("button");
-                            commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn", "commentarrowup");
-                            commentarrowupBtn.id = "upvotecom";
-
-                            cbtns = document.querySelectorAll("#upvotecom");
-                
-                            const commentarrowup = document.createElement("i");
-                            commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
-                
-                            const commentnumVotes = document.createElement("h2");
-                            commentnumVotes.classList.add("comvotes");
-                            commentnumVotes.innerHTML = data[y].votes
-                
-                            const commentarrowdownBtn = document.createElement("button");
-                            commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn", "commentarrowdown");
-                            commentarrowdownBtn.id = "downvotcom";
-                
-                            const commentarrowdown = document.createElement("i");
-                            commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
-                
-                            commentarrowupBtn.appendChild(commentarrowup);
-                            commentVotes.appendChild(commentarrowupBtn);
-                            commentVotes.appendChild(commentnumVotes);
-                            commentarrowdownBtn.appendChild(commentarrowdown);
-                            commentVotes.appendChild(commentarrowdownBtn);
-
-                            const comment = document.createElement("div");
-                            comment.classList.add("comment");
-
-                            li.appendChild(comment);
-
-                            const commentProfile = document.createElement("div");
-                            commentProfile.classList.add("profile");
-
-                            comment.appendChild(commentProfile);
-
-                            const commentProfilePic = document.createElement("img");
-                            if (!commentProfilePic.src){
-                                commentProfilePic.src = "./images/607426-200.png";
-                            }
-                            else{
-                                commentProfilePic.src = data[y].profilepic;
-                            }
-
-                            commentProfilePic.id = "profilePic";
-                            //commentProfilePic.src = data.profilepic; ////////////////////////////////////////////////////////////////////////////////////////
-
-                            commentProfile.appendChild(commentProfilePic);
-
-                            const commentUsername = document.createElement("h2");
-                            commentUsername.id = "username";
-                            commentUsername.innerHTML = data[y].username
-
-                            commentProfile.appendChild(commentUsername);
-
-                            const commentDate = document.createElement("p");
-                            commentDate.innerHTML = data[y].created_at;
-                            commentDate.id = "commentDate";
-
-                            commentProfile.appendChild(commentDate);
-
-                            const favouriteComment = document.createElement("i");
-
-                            if (data[y].favourited == true){
-                                favouriteComment.classList.add("fa-solid", "fa-star", "favouriteComment");
-                            }
-                            else{
-                                favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
-                            }
-
-                            commentProfile.appendChild(favouriteComment);
-
-                            const commentText = document.createElement("p");
-                            commentText.classList.add("commentText");
-                            commentText.innerHTML = data[y].comment;
-
-                            comment.appendChild(commentText);
-                
-                            const deletecommentBtn = document.createElement("button");
-                            deletecommentBtn.classList.add("deletecomment", "fa-solid", "fa-eraser");
-
-                            comment.appendChild(deletecommentBtn);
-
-                            if (data[y].voted == "upvote"){
-                                commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
-                                commentarrowupBtn.style.backgroundColor = "#FAB3A9";
-                            }
-
-                            if (data[y].voted == "downvoted"){
-                                commentarrowdownBtn.style.backgroundColor = "#FAB3A9"
-                                commentarrowupBtn.style.backgroundColor = "#F6F6F2";
-                            }
-                        }
-
-                        if (commentids.length > 4){
-                            var seeMore = document.createElement("button");
-                            seeMore.classList.add("seeMore");
-                            seeMore.innerHTML = "see more..."
-
-                            comments.appendChild(seeMore);
-
-                            seeMore.addEventListener("click", ()=>{
-                                commentpagenumber++;
-                                comments.removeChild(seeMore);
-                                getpostcomments();
-                            })
-                        }
-
-                        var favouriteComment = document.querySelectorAll(".favouriteComment");
-                        
-                        for (let m = 0; m < favouriteComment.length; m++){
-                            favouriteComment[m].addEventListener("click", ()=>{
-
-                                fetch(`http://localhost:8000/api/comments/favourite/${postids}/${commentids[m]}/${userid}`, {
-                                    method: 'PATCH',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    console.log(data);
-                                    window.location.href = "post.html";
-                                });
-                            
-                            })
-                        }
-
-                        var deletecommentBtns = document.querySelectorAll(".deletecomment");
-                        console.log(deletecommentBtns);
-
-                        for (let m = 0; m<deletecommentBtns.length; m++){
-                            deletecommentBtns[m].addEventListener("click", ()=>{
-                                fetch(`http://localhost:8000/api/comments/delete/${commentids[m]}/${userid}`, { 
-                                    method: 'DELETE',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                })
-                                .then((response) => response.json())
-                                .then((data) => {
-                                    console.log(data);
-                    
-                                    if (data.Deleted == false){
-                                        console.log("cannot delete");
-                                    }
-                                    else{
-                                        postAndComments.removeChild(post);
-                                    }
-                                });
-                            })
-                        }
-
-                        cupbtns = document.querySelectorAll(".commentarrowup");
-                        console.log("commentarrowupbtns: " + cupbtns.length)
-
-                        cvotenums = document.querySelectorAll(".comvotes");
-
-                        cdownbtns = document.querySelectorAll(".commentarrowdown");
-                        console.log("commentarrowdownbtns: " + cdownbtns.length)
-
-                        for (let m = 0; m<cupbtns.length; m++){
-                            cupbtns[m].addEventListener("click", function(){
-                                console.log(commentids[m]);
-
-                                fetch(`http://localhost:8000/api/interactions/upvotecomment/${commentids[m]}/${userid}`, { 
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                })
-                                .then((response) => response.json())
-                                .then((data) => {
-
-                                    console.log(data);
-                                    if (data.upvoted == true){
-                                        cdownbtns[m].style.backgroundColor = "#F6F6F2"
-                                        cupbtns[m].style.backgroundColor = "#FAB3A9";
-                                        updatepost();
-                                    }
-                                });
-                            })
-                        }
-
-                        for (let m = 0; m < cdownbtns.length; m++){
-                            cdownbtns[m].addEventListener("click", function(){
-                                console.log(commentids[m]);
-
-                                fetch(`http://localhost:8000/api/interactions/downvotecomment/${commentids[m]}/${userid}`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                })
-                                .then(response => response.json())
-                                .then((data) => {
-
-                                    console.log(data);
-                                    if (data.downvote == true){
-                                        cupbtns[m].style.backgroundColor = "#F6F6F2"
-                                        cdownbtns[m].style.backgroundColor = "#FAB3A9";
-                                        updatepost();
-                                    }
-                                });
-                            })
-                        }
-
+                    .then((data) => {
+                            console.log(data);
+                            window.location.href = "post.html"
                     });
                 }
+                else{
+                    alert("comment something");
+                }
+            })
 
-            });
-        }
+            getpostcomments();
+
+            function getpostcomments(){
+                console.log("getting comments")
+                var commentids = [];
+
+
+                fetch(`http://localhost:8000/api/comments/${postids}/${commentpagenumber}/${userid}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+
+                    for (let z = 0; z<data.length; z++){
+                        commentids.push(data[z].commentid);
+                        console.log(commentids);
+                    }
+
+                    for (let y = 0; y < data.length; y++){
+                        
+                        const li = document.createElement("li")
+                        ul.appendChild(li);
+
+                        const commentVotes = document.createElement("div");
+                        commentVotes.classList.add("votes");
+
+                        li.appendChild(commentVotes);
+
+                        const commentarrowupBtn = document.createElement("button");
+                        commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn", "commentarrowup");
+                        commentarrowupBtn.id = "upvotecom";
+
+                        cbtns = document.querySelectorAll("#upvotecom");
+            
+                        const commentarrowup = document.createElement("i");
+                        commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
+            
+                        const commentnumVotes = document.createElement("h2");
+                        commentnumVotes.classList.add("comvotes");
+                        commentnumVotes.innerHTML = data[y].votes
+            
+                        const commentarrowdownBtn = document.createElement("button");
+                        commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn", "commentarrowdown");
+                        commentarrowdownBtn.id = "downvotcom";
+            
+                        const commentarrowdown = document.createElement("i");
+                        commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
+            
+                        commentarrowupBtn.appendChild(commentarrowup);
+                        commentVotes.appendChild(commentarrowupBtn);
+                        commentVotes.appendChild(commentnumVotes);
+                        commentarrowdownBtn.appendChild(commentarrowdown);
+                        commentVotes.appendChild(commentarrowdownBtn);
+
+                        const comment = document.createElement("div");
+                        comment.classList.add("comment");
+
+                        li.appendChild(comment);
+
+                        const commentProfile = document.createElement("div");
+                        commentProfile.classList.add("profile");
+
+                        comment.appendChild(commentProfile);
+
+                        const commentProfilePic = document.createElement("img");
+                        if (!commentProfilePic.src){
+                            commentProfilePic.src = "./images/607426-200.png";
+                        }
+                        else{
+                            commentProfilePic.src = data[y].profilepic;
+                        }
+
+                        commentProfilePic.id = "profilePic";
+                        //commentProfilePic.src = data.profilepic; ////////////////////////////////////////////////////////////////////////////////////////
+
+                        commentProfile.appendChild(commentProfilePic);
+
+                        const commentUsername = document.createElement("h2");
+                        commentUsername.id = "username";
+                        commentUsername.innerHTML = data[y].username
+
+                        commentProfile.appendChild(commentUsername);
+
+                        const commentDate = document.createElement("p");
+                        commentDate.innerHTML = data[y].created_at;
+                        commentDate.id = "commentDate";
+
+                        commentProfile.appendChild(commentDate);
+
+                        const favouriteComment = document.createElement("i");
+
+                        if (data[y].favourited == true){
+                            favouriteComment.classList.add("fa-solid", "fa-star", "favouriteComment");
+                        }
+                        else{
+                            favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
+                        }
+
+                        commentProfile.appendChild(favouriteComment);
+
+                        const commentText = document.createElement("p");
+                        commentText.classList.add("commentText");
+                        commentText.innerHTML = data[y].comment;
+
+                        comment.appendChild(commentText);
+            
+                        const deletecommentBtn = document.createElement("button");
+                        deletecommentBtn.classList.add("deletecomment", "fa-solid", "fa-eraser");
+
+                        comment.appendChild(deletecommentBtn);
+
+                        if (data[y].voted == "upvote"){
+                            commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
+                            commentarrowupBtn.style.backgroundColor = "#FAB3A9";
+                        }
+
+                        if (data[y].voted == "downvoted"){
+                            commentarrowdownBtn.style.backgroundColor = "#FAB3A9"
+                            commentarrowupBtn.style.backgroundColor = "#F6F6F2";
+                        }
+                    }
+
+                    var seeMore = document.createElement("button");
+                    seeMore.classList.add("seeMore");
+                    seeMore.innerHTML = "see more..."
+
+                    comments.appendChild(seeMore);
+
+                    seeMore.addEventListener("click", ()=>{
+                        commentpagenumber++;
+                        comments.removeChild(seeMore);
+                        getpostcomments();
+                    })
+
+                    var favouriteComment = document.querySelectorAll(".favouriteComment");
+                    
+                    for (let m = 0; m < favouriteComment.length; m++){
+                        favouriteComment[m].addEventListener("click", ()=>{
+
+                            fetch(`http://localhost:8000/api/comments/favourite/${postids}/${commentids[m]}/${userid}`, {
+                                method: 'PATCH',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                window.location.href = "post.html";
+                            });
+                        
+                        })
+                    }
+
+                    var deletecommentBtns = document.querySelectorAll(".deletecomment");
+                    console.log(deletecommentBtns);
+
+                    for (let m = 0; m<deletecommentBtns.length; m++){
+                        deletecommentBtns[m].addEventListener("click", ()=>{
+                            fetch(`http://localhost:8000/api/comments/delete/${commentids[m]}/${userid}`, { 
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log(data);
+                
+                                if (data.Deleted == false){
+                                    console.log("cannot delete");
+                                }
+                                else{
+                                    postAndComments.removeChild(post);
+                                }
+                            });
+                        })
+                    }
+
+                    cupbtns = document.querySelectorAll(".commentarrowup");
+                    console.log("commentarrowupbtns: " + cupbtns.length)
+
+                    cvotenums = document.querySelectorAll(".comvotes");
+
+                    cdownbtns = document.querySelectorAll(".commentarrowdown");
+                    console.log("commentarrowdownbtns: " + cdownbtns.length)
+
+                    for (let m = 0; m<cupbtns.length; m++){
+                        cupbtns[m].addEventListener("click", function(){
+                            console.log(commentids[m]);
+
+                            fetch(`http://localhost:8000/api/interactions/upvotecomment/${commentids[m]}/${userid}`, { 
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                            .then((response) => response.json())
+                            .then((data) => {
+
+                                console.log(data);
+                                if (data.upvoted == true){
+                                    cdownbtns[m].style.backgroundColor = "#F6F6F2"
+                                    cupbtns[m].style.backgroundColor = "#FAB3A9";
+                                    cvotenums[m].innerHTML = (parseInt(cvotenums[m].innerHTML) + 1)
+                                    window.location.href = "post.html";
+                                }
+                            });
+                        })
+                    }
+
+                    for (let m = 0; m < cdownbtns.length; m++){
+                        cdownbtns[m].addEventListener("click", function(){
+                            console.log(commentids[m]);
+
+                            fetch(`http://localhost:8000/api/interactions/downvotecomment/${commentids[m]}/${userid}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                            .then(response => response.json())
+                            .then((data) => {
+
+                                console.log(data);
+                                if (data.downvote == true){
+                                    cupbtns[m].style.backgroundColor = "#F6F6F2"
+                                    cdownbtns[m].style.backgroundColor = "#FAB3A9";
+                                    cvotenums[m].innerHTML = (parseInt(cvotenums[m].innerHTML) -1)
+                                    window.location.href = "post.html"
+                                }
+                            });
+                        })
+                    }
+
+                });
+            }
+
+        });
     }
 }
 
@@ -678,13 +674,15 @@ function getnotifications(){
     .then(data => {
         console.log("notifications: ")
         console.log(data);
-        notifbell.innerHTML = data.length ? data.length:0;
+        /////// do something to indicate notification 
+        
+        notifbell.innerHTML = data.length;
 
         notifbell.addEventListener("click", ()=>{
             var notifdropDown = document.querySelector(".notifdropDown");
             notifdropDown.style.display = "block";
             var notificationsList = document.querySelector(".notificationsList")
-            notificationsList.innerHTML = "Notifications: ";
+            notificationsList.innerHTML = "";
 
             for (var x = 0; x < data.length; x++){
 
@@ -710,39 +708,14 @@ function getnotifications(){
                 notifBtns.appendChild(accept);
                 notifBtns.appendChild(reject);
 
-                var comunity = data[x].community;
-                var un = data[x].username;
-
                 accept.addEventListener("click", ()=>{
                     notificationsList.removeChild(li);
-                    console.log(comunity);
-                    console.log(un);
-                    fetch(`http://localhost:8000/api/community/approvemod/${comunity}/${userid}/${un}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                            console.log(data);
-                    });
-                    getnotifications();
+
+                    
                 })
 
                 reject.addEventListener("click", ()=>{
                     notificationsList.removeChild(li);
-                    fetch(`http://localhost:8000/api/community/rejectmod/${comunity}/${userid}/${un}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                            console.log(data);
-                    });
-                    getnotifications();
                 })
             }
         })

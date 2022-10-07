@@ -175,15 +175,16 @@ if (!window.location.href.includes("index.html")){
 
     if (window.location.href.includes("post.html")){
 
+        var postids = window.localStorage.getItem("postid");
+        console.log(postids);
+        var userid = window.localStorage.getItem("userid");
+
+        var postsContainer = document.querySelector(".postpostsContainer");
+        console.log(postsContainer);
+
         updatepost();
 
         function updatepost(){
-            var postids = window.localStorage.getItem("postid");
-            console.log(postids);
-            var userid = window.localStorage.getItem("userid");
-    
-            var postsContainer = document.querySelector(".postpostsContainer");
-            console.log(postsContainer);
             // /posts/{postid}/{userid}
             fetch(`http://localhost:8000/api/posts/${postids}/${userid}`)
             .then(response => response.json())
@@ -425,12 +426,11 @@ if (!window.location.href.includes("index.html")){
                     }
                 })
 
-                var commentids = [];
                 getpostcomments();
 
                 function getpostcomments(){
                     console.log("getting comments")
-                    
+                    var commentids = [];
 
 
                     fetch(`http://localhost:8000/api/comments/${postids}/${commentpagenumber}/${userid}`)
@@ -547,19 +547,17 @@ if (!window.location.href.includes("index.html")){
                             }
                         }
 
-                        if (commentids.length > 4){
-                            var seeMore = document.createElement("button");
-                            seeMore.classList.add("seeMore");
-                            seeMore.innerHTML = "see more..."
+                        var seeMore = document.createElement("button");
+                        seeMore.classList.add("seeMore");
+                        seeMore.innerHTML = "see more..."
 
-                            comments.appendChild(seeMore);
+                        comments.appendChild(seeMore);
 
-                            seeMore.addEventListener("click", ()=>{
-                                commentpagenumber++;
-                                comments.removeChild(seeMore);
-                                getpostcomments();
-                            })
-                        }
+                        seeMore.addEventListener("click", ()=>{
+                            commentpagenumber++;
+                            comments.removeChild(seeMore);
+                            getpostcomments();
+                        })
 
                         var favouriteComment = document.querySelectorAll(".favouriteComment");
                         
@@ -631,7 +629,7 @@ if (!window.location.href.includes("index.html")){
                                     if (data.upvoted == true){
                                         cdownbtns[m].style.backgroundColor = "#F6F6F2"
                                         cupbtns[m].style.backgroundColor = "#FAB3A9";
-                                        updatepost();
+                                        getpostcomments();
                                     }
                                 });
                             })
@@ -654,7 +652,7 @@ if (!window.location.href.includes("index.html")){
                                     if (data.downvote == true){
                                         cupbtns[m].style.backgroundColor = "#F6F6F2"
                                         cdownbtns[m].style.backgroundColor = "#FAB3A9";
-                                        updatepost();
+                                        getpostcomments();
                                     }
                                 });
                             })
@@ -727,7 +725,7 @@ function getnotifications(){
                     .then((data) => {
                             console.log(data);
                     });
-                    getnotifications();
+                    updatepost();
                 })
 
                 reject.addEventListener("click", ()=>{
@@ -742,7 +740,7 @@ function getnotifications(){
                     .then((data) => {
                             console.log(data);
                     });
-                    getnotifications();
+                    updatepost();
                 })
             }
         })

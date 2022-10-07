@@ -99,10 +99,10 @@ Route::get('/community/getinfo/{communityname}/{userid}', [communityController::
 
 Route::patch('/community/requestmod/{communityname}/{userid}', [communityController::class, 'RequestMod']); //Allows user to request to eb a mod
 
-Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //Allows owner to accept mod request ///// fe not used
+Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //Allows owner to accept mod request ]
 //userid is currently logged in oerson, username is the person they want to approve
 
-Route::patch('/community/rejectmod/{communityname}/{userid}/{username}', [communityController::class, 'RejectMod']); //Allows owner to reject mod request ///// fe not used
+Route::patch('/community/rejectmod/{communityname}/{userid}/{username}', [communityController::class, 'RejectMod']); //Allows owner to reject mod request 
 
 Route::patch('/community/updatebio/{communityname}/{userid}', [communityController::class, 'UpdateCommunityBio']); //Allows owner to update bio for community
 
