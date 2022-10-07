@@ -37,7 +37,7 @@ Route::get('/posts/{postid}/{userid}', [postController::class, 'ReturnPost']); /
 
 Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage
 
-Route::get('/posts/explorehomepage/{pagenumber}/{userid}', [postController::class, 'GetExploreHomePage']); //Returns the newest posts for Explore Homepage   ////// fe what to do
+Route::get('/posts/explorehomepage/{pagenumber}/{userid}', [postController::class, 'GetExploreHomePage']); //Returns the newest posts for Explore Homepage
 
 Route::get('/posts/userposts/newest/{userid}/{page}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
 
