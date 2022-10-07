@@ -15,6 +15,7 @@ class post extends Model
     public function GetHomePage($page, $userid)
     {
         $allposts = $this::orderby('created_at')->get();
+        $allcommunites = community::where('userid', $userid)->get();
 
         $numberofpostsmax = $allposts->count();
         $postsarray = [];
@@ -26,23 +27,33 @@ class post extends Model
             {
                 if($x < $numberofpostsmax)
                 {
-                    $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
-                    $profilepic = user::where('userid', $allposts[$x]->userid)->first()->profilepic;
-                    $voted = interaction::where('userid', $userid)->where('postid', $allposts[$x]->postid)->get();
-                    $commentnumber = comment::where('postid', $allposts[$x]->postid)->get()->count();
-                    if(!$voted->IsEmpty())
+                    $partofcommunity = false;
+                    foreach($allcommunites as $community)
                     {
-                        if($voted[0]->liked == 1)
-                            $voted = 'upvote';
-                        else
-                            $voted = 'downvoted';
+                        if($allposts[$x]->community == $community->community)
+                            $partofcommunity = true;
                     }
-                    else
-                        $voted = null;
-                    $votes = $this->Votes($allposts[$x]->postid);
-                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body, 'picture'=>$allposts[$x]->picture,
-                    'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community,
-                    'created_at'=>$allposts[$x]->created_at, 'commentsnumber'=>$commentnumber]);
+                    
+                    if($partofcommunity)
+                    {
+                        $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
+                        $profilepic = user::where('userid', $allposts[$x]->userid)->first()->profilepic;
+                        $voted = interaction::where('userid', $userid)->where('postid', $allposts[$x]->postid)->get();
+                        $commentnumber = comment::where('postid', $allposts[$x]->postid)->get()->count();
+                        if(!$voted->IsEmpty())
+                        {
+                            if($voted[0]->liked == 1)
+                                $voted = 'upvote';
+                            else
+                                $voted = 'downvoted';
+                        }
+                        else
+                            $voted = null;
+                        $votes = $this->Votes($allposts[$x]->postid);
+                        array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body, 'picture'=>$allposts[$x]->picture,
+                        'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community,
+                        'created_at'=>$allposts[$x]->created_at, 'commentsnumber'=>$commentnumber]);
+                    }
                 }
             }
         return($postsarray);
