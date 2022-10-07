@@ -20,9 +20,9 @@ Route::patch('/users/profilepicture/{userid}', [userController::class, 'UpdatePi
 //Sent in body
 Route::patch('/users/bio/{userid}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
 
-Route::get('/users/sendemail', [userController::class, 'SendEmail']); //Sends email for resetting password //welp
+Route::get('/users/sendemail', [userController::class, 'SendEmail']); //Sends email for resetting password //welp ///////// fe not done
 
-Route::patch('/users/resetpassword/{userid}', [userController::class, 'ResetPassword']); //Updates password //welp
+Route::patch('/users/resetpassword/{userid}', [userController::class, 'ResetPassword']); //Updates password //welp ///////// fe not done
 //Send password in body of api call
 
 Route::delete('/users/delete/{userid}', [userController::class, 'DeleteUser']); //Allows user to delete their account //works
@@ -37,7 +37,7 @@ Route::get('/posts/{postid}/{userid}', [postController::class, 'ReturnPost']); /
 
 Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage
 
-Route::get('/posts/explorehomepage/{pagenumber}/{userid}', [postController::class, 'GetExploreHomePage']); //Returns the newest posts for Explore Homepage
+Route::get('/posts/explorehomepage/{pagenumber}/{userid}', [postController::class, 'GetExploreHomePage']); //Returns the newest posts for Explore Homepage   ////// fe what to do
 
 Route::get('/posts/userposts/newest/{userid}/{page}', [postController::class, 'GetUserNewestPosts']); //Returns the most recenet posts of the user
 
@@ -58,7 +58,7 @@ Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'Delete
 Route::get('/comments/{postid}/{page}/{userid}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes
 //and whether they are favourited by the creater
 
-Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment
+Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment ////////// fe not done
 
 Route::post('/comments/create/{postid}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment
 
@@ -91,19 +91,19 @@ Route::post('/community/{communityname}/join/{userid}', [communityController::cl
 
 Route::delete('/community/{communityname}/leave/{userid}', [communityController::class, 'LeaveCommunity']); //Allows user to leave
 
-Route::patch('/community/{communityname}/transferownership/{userid}/{newonwerid}', [communityController::class, 'TransferOwnership']); //Allows for community ownership transfer
+Route::patch('/community/{communityname}/transferownership/{userid}/{newonwerid}', [communityController::class, 'TransferOwnership']); //Allows for community ownership transfer //// fe not used
 
 Route::delete('/community/delete/{communityname}/{userid}', [communityController::class, 'DeleteCommunity']); //Allows owner to delete a community
 
 Route::get('/community/getinfo/{communityname}/{userid}', [communityController::class, 'GetCommunity']); //returns community information
 
-Route::patch('/community/requestmod/{communityname}/{userid}', [communityController::class, 'RequestMod']); //returns community information
+Route::patch('/community/requestmod/{communityname}/{userid}', [communityController::class, 'RequestMod']); //returns community information ///// fe not used
 
-Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //returns community information
+Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //returns community information ///// fe not used
 //userid is currently logged in oerson, username is the person they want to approve
 
 Route::patch('/community/updatebio/{communityname}/{userid}', [communityController::class, 'UpdateCommunityBio']); //returns community information
 
 Route::patch('/community/updateprofilepic/{communityname}/{userid}', [communityController::class, 'UpdateCommunityPic']); //returns community information
 
-Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //returns community information
+Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //returns community information  //// fe not used
