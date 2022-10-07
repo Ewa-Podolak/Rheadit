@@ -341,6 +341,9 @@ class post extends Model
             //Delete Likes
             $interactions->DeleteLikesPost($postid);
 
+            //Delete Post
+            $this::where('postid', $postid)->delete();
+
             return ['Deleted'=>true];
         }
 
