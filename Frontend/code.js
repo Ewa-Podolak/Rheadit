@@ -490,7 +490,8 @@ if (!window.location.href.includes("index.html")){
                             comment.appendChild(commentProfile);
 
                             const commentProfilePic = document.createElement("img");
-                            if (!commentProfilePic.src){
+                            console.log(data[y].profilepic);
+                            if (!data[y].profilepic){
                                 commentProfilePic.src = "./images/607426-200.png";
                             }
                             else{
@@ -498,8 +499,7 @@ if (!window.location.href.includes("index.html")){
                             }
 
                             commentProfilePic.id = "profilePic";
-                            //commentProfilePic.src = data.profilepic; ////////////////////////////////////////////////////////////////////////////////////////
-
+                            
                             commentProfile.appendChild(commentProfilePic);
 
                             const commentUsername = document.createElement("h2");
@@ -605,6 +605,7 @@ if (!window.location.href.includes("index.html")){
                                 });
                             })
                         }
+
 
                         cupbtns = document.querySelectorAll(".commentarrowup");
                         console.log("commentarrowupbtns: " + cupbtns.length)
