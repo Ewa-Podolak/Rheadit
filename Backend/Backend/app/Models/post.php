@@ -20,7 +20,7 @@ class post extends Model
         $postsarray = [];
         if($numberofpostsmax == ($page - 1) * 10)
             return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
-            'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null];
+            'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null, 'commentsnumber'=>null];
         else
             for($x = (($page - 1) * 10); $x < $page * 10; $x++)
             {
@@ -29,6 +29,7 @@ class post extends Model
                     $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
                     $profilepic = user::where('userid', $allposts[$x]->userid)->first()->profilepic;
                     $voted = interaction::where('userid', $userid)->where('postid', $allposts[$x]->postid)->get();
+                    $commentnumber = comment::where('postid', $allposts[$x]->postid)->get()->count();
                     if(!$voted->IsEmpty())
                     {
                         if($voted[0]->liked == 1)
@@ -40,7 +41,8 @@ class post extends Model
                         $voted = null;
                     $votes = $this->Votes($allposts[$x]->postid);
                     array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body, 'picture'=>$allposts[$x]->picture,
-                    'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
+                    'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community,
+                    'created_at'=>$allposts[$x]->created_at, 'commentsnumber'=>$commentnumber]);
                 }
             }
         return($postsarray);
@@ -75,7 +77,7 @@ class post extends Model
 
         if($numberofpostsmax == ($page - 1) * 10)
             return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
-            'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null];
+            'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null, 'commentsnumber'=>null];
         else
             for($x = (($page - 1) * 10); $x < $page * 10; $x++)
             {
@@ -84,6 +86,7 @@ class post extends Model
                     $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
                     $profilepic = user::where('userid', $allposts[$x]->userid)->first()->profilepic; 
                     $voted = interaction::where('userid', $userid)->where('postid', $allposts[$x]->postid)->get();
+                    $commentnumber = comment::where('postid', $allposts[$x]->postid)->get()->count();
                     if(!$voted->IsEmpty())
                     {
                         if($voted[0]->liked == 1)
@@ -94,8 +97,9 @@ class post extends Model
                     else
                         $voted = null;
                     $votes = $this->Votes($allposts[$x]->postid);
-                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body,'username'=>$username, 'profilepic'=>$profilepic,
-                    'picture'=>$allposts[$x]->picture,'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community, 'created_at'=>$allposts[$x]->created_at]);
+                    array_push($postsarray, ['postid'=>$allposts[$x]->postid, 'head'=>$allposts[$x]->head, 'body'=>$allposts[$x]->body,'username'=>$username,
+                    'profilepic'=>$profilepic, 'picture'=>$allposts[$x]->picture,'votes'=>$votes, 'voted'=>$voted, 'community'=>$allposts[$x]->community,
+                    'created_at'=>$allposts[$x]->created_at, 'commentsnumber'=>$commentnumber]);
                 }
             }
         return($postsarray);
@@ -107,6 +111,7 @@ class post extends Model
         $votes = $this->Votes($postid);
         $username = user::where('userid', $post->userid)->first()->username; 
         $profilepic = user::where('userid', $post->userid)->first()->profilepic;
+        $commentnumber = comment::where('postid', $post->postid)->get()->count();
 
         $voted = interaction::where('userid', $userid)->where('postid', $postid)->get();
                     if(!$voted->IsEmpty())
@@ -119,7 +124,8 @@ class post extends Model
                     else
                         $voted = null;
 
-        return ['postid'=>$post->postid, 'head'=>$post->head, 'body'=>$post->body, 'picture'=>$post->picture, 'username'=>$username, 'profilepic'=>$profilepic, 'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at];
+        return ['postid'=>$post->postid, 'head'=>$post->head, 'body'=>$post->body,'picture'=>$post->picture, 'username'=>$username, 'profilepic'=>$profilepic,
+        'votes'=>$votes, 'voted'=>$voted, 'community'=>$post->community, 'created_at'=>$post->created_at, 'commentsnumber'=>$commentnumber];
     }
 
     public function Votes($postid)
@@ -135,7 +141,8 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
+            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null,
+            'username'=>null, 'voted'=>null, 'community'=>null, 'commentsnumber'=>null];
         }
         else
         {
@@ -149,6 +156,7 @@ class post extends Model
                     $username = user::where('userid', $postuserid)->first()->username;
                     $profilepic = user::where('userid', $postuserid)->first()->profilepic;
                     $voted = interaction::where('userid', $userid)->where('postid', $posts[$x]->commentid)->get();
+                    $commentnumber = comment::where('postid', $posts[$x]->postid)->get()->count();
                     if(!$voted->IsEmpty())
                     {
                         if($voted[0]->liked == 1)
@@ -169,7 +177,8 @@ class post extends Model
                     'username'=>$username, 
                     'profilepic'=>$profilepic,
                     'voted'=>$voted,
-                    'community'=>$posts[$x]->community]);
+                    'community'=>$posts[$x]->community,
+                    'commentsnumber'=>$commentnumber]);
                 }
             }
         }
@@ -183,7 +192,8 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
+            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null,
+            'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null, 'commentsnumber'=>null];
         }
         else
         {
@@ -196,6 +206,7 @@ class post extends Model
                 $username = user::where('userid', $postuserid)->first()->username;
                 $profilepic = user::where('userid', $postuserid)->first()->profilepic;
                 $voted = interaction::where('userid', $userid)->where('postid', $post->postid)->get();
+                $commentnumber = comment::where('postid', $post->postid)->get()->count();
                 if(!$voted->IsEmpty())
                 {
                     if($voted[0]->liked == 1)
@@ -216,7 +227,8 @@ class post extends Model
                 'username'=>$username, 
                 'profilepic'=>$profilepic,
                 'voted'=>$voted,
-                'community'=>$post->community]);
+                'community'=>$post->community,
+                'commentsnumber'=>$commentnumber]);
 
                 $votes = array_column($endarray, 'votes');
                 array_multisort($votes, SORT_DESC, $endarray);
@@ -232,7 +244,8 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 10)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=> null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
+            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=> null, 'votes' => null,
+            'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null, 'commentsnumber' => null];
         }
         else
         {
@@ -246,6 +259,7 @@ class post extends Model
                     $username = user::where('userid', $postuserid)->first()->username;
                     $profilepic = user::where('userid', $postuserid)->first()->profilepic;
                     $voted = interaction::where('userid', $userid)->where('postid', $posts[$x]->commentid)->get();
+                    $commentnumber = comment::where('postid', $posts[$x]->postid)->get()->count();
                     if(!$voted->IsEmpty())
                     {
                         if($voted[0]->liked == 1)
@@ -266,7 +280,8 @@ class post extends Model
                     'username'=>$username, 
                     'profilepic'=>$profilepic,
                     'voted'=>$voted,
-                    'community'=>$posts[$x]->community]);
+                    'community'=>$posts[$x]->community,
+                    'commentsnumber'=>$commentnumber]);
                 }
             }
         }
@@ -280,7 +295,8 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'picture' => null, 'votes' => null, 'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null];
+            return ['postid' => null, 'head' => null, 'body' => null, 'picture' => null, 'votes' => null,
+            'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null, 'commentsnumber'=>null];
         }
         else
         {
@@ -293,6 +309,7 @@ class post extends Model
                 $username = user::where('userid', $postuserid)->first()->username;
                 $profilepic = user::where('userid', $postuserid)->first()->profilepic;
                 $voted = interaction::where('userid', $userid)->where('postid', $post->postid)->get();
+                $commentnumber = comment::where('postid', $post->postid)->get()->count();
                 if(!$voted->IsEmpty())
                 {
                     if($voted[0]->liked == 1)
@@ -313,7 +330,8 @@ class post extends Model
                 'username'=>$username, 
                 'profilepic'=>$profilepic,
                 'voted'=>$voted,
-                'community'=>$post->community]);
+                'community'=>$post->community,
+                'commentsnumber'=>$commentnumber]);
 
                 $votes = array_column($endarray, 'votes');
                 array_multisort($votes, SORT_DESC, $endarray);
