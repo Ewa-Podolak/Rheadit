@@ -78,7 +78,7 @@ class post extends Model
         }
         $numberofpostsmax = $allposts->count();
         $postsarray = [];
-        if($numberofpostsmax == 0)
+        if($numberofpostsmax != 0)
         {
             $x = 0;
             $tempallposts = $allposts;
