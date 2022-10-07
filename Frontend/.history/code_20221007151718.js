@@ -857,7 +857,7 @@ function setupgroupPage(){
                 requestmodbtn.style.display = "flex";
                 
                 requestmodbtn.addEventListener("click", ()=>{
-                    requesttmod(groupname);
+                    requestmod(groupname);
                 })
             }
 
@@ -872,7 +872,7 @@ function setupgroupPage(){
         });
 }
 
-function requesttmod(groupname){
+function requestmod(groupname){
     fetch(`http://localhost:8000/api/community/requestmod/${groupname}/${userid}`, {
         method: 'PATCH',
         headers: {
@@ -1327,7 +1327,6 @@ function homepageposts(){
     fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}/${userid}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
 
             if(data.length == 0){
                 populatePosts(data, pagenumber);

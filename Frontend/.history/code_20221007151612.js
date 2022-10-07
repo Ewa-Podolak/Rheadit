@@ -855,9 +855,13 @@ function setupgroupPage(){
             if (data.userrole == "member"){
                 var requestmodbtn = document.querySelector(".requestmod")
                 requestmodbtn.style.display = "flex";
+                // check if already requested 
                 
                 requestmodbtn.addEventListener("click", ()=>{
-                    requesttmod(groupname);
+                    requestmod(groupname);
+                    // if has - requestmodbtn.innerHTML = "Cancel request";
+                    // if not - requestmodbtn.innerHTML = "Request mod";
+                    requestmodbtn.innerHTML = "Requested";
                 })
             }
 
@@ -872,7 +876,7 @@ function setupgroupPage(){
         });
 }
 
-function requesttmod(groupname){
+function requestmod(groupname){
     fetch(`http://localhost:8000/api/community/requestmod/${groupname}/${userid}`, {
         method: 'PATCH',
         headers: {
@@ -882,7 +886,6 @@ function requesttmod(groupname){
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
-        window.location.href = "group.html";
     });
 }
 
@@ -1327,7 +1330,6 @@ function homepageposts(){
     fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}/${userid}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
 
             if(data.length == 0){
                 populatePosts(data, pagenumber);

@@ -1327,7 +1327,6 @@ function homepageposts(){
     fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}/${userid}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
 
             if(data.length == 0){
                 populatePosts(data, pagenumber);
