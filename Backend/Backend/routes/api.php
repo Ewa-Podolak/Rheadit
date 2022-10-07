@@ -62,7 +62,7 @@ Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentContro
 
 Route::post('/comments/create/{postid}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment
 
-Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'GetComments']); //Allows user or mod/owner to delete a comment
+Route::delete('/comments/delete/{commentid}/{userid}', [commentController::class, 'DeleteComment']); //Allows user or mod/owner to delete a comment
 
 
 
