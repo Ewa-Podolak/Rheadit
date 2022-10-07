@@ -118,6 +118,18 @@ class community extends Model
         return ['approved'=>false];
     }
 
+    public function RejectMod($community, $userid, $username)
+    {
+        $authority = $this::where('community', $community)->where('userid', $userid)->first()->authority;
+        if($authority=='owner'||$authority=='mod')
+        {
+            $usernameid = user::where('username', $username)->first()->userid;
+            $this::where('community', $community)->where('userid', $usernameid)->update(['requestmod'=>0]);
+            return ['approved'=>true];
+        }
+        return ['approved'=>false];
+    }
+
     public function JoinableComunity($userid)
     {
         $joinedcommunities = $this::where('userid', $userid)->get();

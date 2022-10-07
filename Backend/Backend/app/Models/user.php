@@ -58,24 +58,6 @@ class user extends Model
         return ['deleted'=>true];
     }
 
-    public function SendEmail($email)
-    {
-        $userid = $this::where('email', $email)->get();
-
-        if($userid->IsEmpty())
-            return ['emailsent'=>false];
-
-        else
-        {
-            $userid = $userid[0]->userid;
-            
-            Mail::to($email)
-                ->send(new ResetPassword1());
-
-            return ['emailsent'=>true];
-        }
-    }
-
     public function ResertPassword($userid, $password)
     {
         $this::where('userid', $userid)->update(['password'=>$password]);

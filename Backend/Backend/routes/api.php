@@ -97,15 +97,17 @@ Route::delete('/community/delete/{communityname}/{userid}', [communityController
 
 Route::get('/community/getinfo/{communityname}/{userid}', [communityController::class, 'GetCommunity']); //returns community information
 
-Route::patch('/community/requestmod/{communityname}/{userid}', [communityController::class, 'RequestMod']); //returns community information
+Route::patch('/community/requestmod/{communityname}/{userid}', [communityController::class, 'RequestMod']); //Allows user to request to eb a mod
 
-Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //returns community information ///// fe not used
+Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //Allows owner to accept mod request ///// fe not used
 //userid is currently logged in oerson, username is the person they want to approve
 
-Route::patch('/community/updatebio/{communityname}/{userid}', [communityController::class, 'UpdateCommunityBio']); //returns community information
+Route::patch('/community/rejectmod/{communityname}/{userid}/{username}', [communityController::class, 'RejectMod']); //Allows owner to reject mod request ///// fe not used
 
-Route::patch('/community/updateprofilepic/{communityname}/{userid}', [communityController::class, 'UpdateCommunityPic']); //returns community information
+Route::patch('/community/updatebio/{communityname}/{userid}', [communityController::class, 'UpdateCommunityBio']); //Allows owner to update bio for community
 
-Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //returns community information
+Route::patch('/community/updateprofilepic/{communityname}/{userid}', [communityController::class, 'UpdateCommunityPic']); //Allows owner to update picture for community profile
+
+Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //Will show all notifications for owner of requests for mod
 
 Route::get('/community/joinable/{userid}', [communityController::class, 'JoinableComunity']); //Returns the list of all joinable communities //notworking yet

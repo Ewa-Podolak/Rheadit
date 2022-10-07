@@ -58,6 +58,12 @@ class communityController extends Controller
         return $community->ApproveMod($communityname, $userid, $username);
     }
 
+    public function RejectMod($communityname, $userid, $username)
+    {
+        $community = new community;
+        return $community->RejectMod($communityname, $userid, $username);
+    }
+
     public function UpdateCommunityBio($communityname, $userid)
     {
         if(community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner')

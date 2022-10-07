@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPassword1;
 use App\Models\user;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class userController extends Controller
 {
@@ -33,9 +35,23 @@ class userController extends Controller
 
     public function SendEmail()
     {
-        $user = new user;
-         
-        //return $user->SendEmail($email);
+        $email = request()->validate(['email' => 'required|email']); 
+
+        $userid = user::where('email', $email)->get();
+
+        if($userid->IsEmpty())
+            return ['emailsent'=>false];
+
+        else
+        {
+            $userid = $userid[0]->userid;
+            
+            ResetPassword1::to($email)
+                ->send(new ResetPassword1());
+
+            return ['emailsent'=>true];
+        }
+        
     }
 
     public function ResetPassword($userid)
