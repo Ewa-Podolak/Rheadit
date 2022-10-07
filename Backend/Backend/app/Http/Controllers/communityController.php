@@ -88,6 +88,8 @@ class communityController extends Controller
 
         if($requests->IsEmpty())
             return ['username'=>null, 'community'=>null];
+        else if($communities->IsEmpty())
+            return ['username'=>null, 'community'=>null];
         else
         {
             foreach($communities as $community)
