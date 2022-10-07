@@ -358,7 +358,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href={{$emaillink}} target="_blank">${{emaillink}}</a> </td>
+                                      <td> <a href={{$emaillink}} target="_blank">Reset Password</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -383,13 +383,13 @@
               <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
-                    <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
+                    <span class="apple-link">Company Nme, Parallax, Elbow Rooms</span>
+                    <br> Ty <3 
                   </td>
                 </tr>
                 <tr>
                   <td class="content-block powered-by">
-                    Powered by <a href="http://htmlemail.io">HTMLemail</a>.
+                    Powered by Rheadit.
                   </td>
                 </tr>
               </table>
