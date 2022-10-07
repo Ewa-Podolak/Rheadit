@@ -454,24 +454,23 @@ if (!window.location.href.includes("index.html")){
                         li.appendChild(commentVotes);
 
                         const commentarrowupBtn = document.createElement("button");
-                        commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn", "commentarrowup");
+                        commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
                         commentarrowupBtn.id = "upvotecom";
 
                         cbtns = document.querySelectorAll("#upvotecom");
             
                         const commentarrowup = document.createElement("i");
-                        commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
+                        commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up", "commentarrowup");
             
                         const commentnumVotes = document.createElement("h2");
-                        commentnumVotes.classList.add("comvotes");
                         commentnumVotes.innerHTML = data[y].votes
             
                         const commentarrowdownBtn = document.createElement("button");
-                        commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn", "commentarrowdown");
+                        commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
                         commentarrowdownBtn.id = "downvotcom";
             
                         const commentarrowdown = document.createElement("i");
-                        commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down"); 
+                        commentarrowdown.classList.add("fa-solid", "fa-circle-arrow-down", "commentarrowdown"); 
             
                         commentarrowupBtn.appendChild(commentarrowup);
                         commentVotes.appendChild(commentarrowupBtn);
@@ -525,15 +524,6 @@ if (!window.location.href.includes("index.html")){
 
                         comment.appendChild(deletecommentBtn);
 
-                        if (data[y].voted == "upvote"){
-                            commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
-                            commentarrowupBtn.style.backgroundColor = "#FAB3A9";
-                        }
-
-                        if (data[y].voted == "downvoted"){
-                            commentarrowdownBtn.style.backgroundColor = "#FAB3A9"
-                            commentarrowupBtn.style.backgroundColor = "#F6F6F2";
-                        }
                     }
 
                     var seeMore = document.createElement("button");
@@ -546,6 +536,7 @@ if (!window.location.href.includes("index.html")){
                         commentpagenumber++;
                         comments.removeChild(seeMore);
                         getpostcomments();
+                        
                     })
 
                     var deletecommentBtns = document.querySelectorAll(".deletecomment");
@@ -576,58 +567,59 @@ if (!window.location.href.includes("index.html")){
                     cupbtns = document.querySelectorAll(".commentarrowup");
                     console.log("commentarrowupbtns: " + cupbtns.length)
 
-                    cvotenums = document.querySelectorAll(".comvotes");
+                    //////////////////////////////////////
+                    // var cbtns = document.querySelectorAll("#upvotecom");
+                    // console.log("commentarrowupbtns: " + cbtns)
+                    // console.log("number of comments: " + cbtns.length);
 
-                    cdownbtns = document.querySelectorAll(".commentarrowdown");
-                    console.log("commentarrowdownbtns: " + cdownbtns.length)
+                    // commentarrowupBtn.addEventListener("click", function(){
 
-                    for (let m = 0; m<cupbtns.length; m++){
-                        cupbtns[m].addEventListener("click", function(){
-                            console.log(commentids[m]);
+                    //     console.log("arrowup for comment no.: " + commentarray[commentarrowup])
 
-                            fetch(`http://localhost:8000/api/interactions/upvotecomment/${commentids[m]}/${userid}`, { 
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                            .then((response) => response.json())
-                            .then((data) => {
+                    //     fetch(`http://localhost:8000/api/interactions/upvotecomment/${}/${userid}`, { // commentarray[y] is 0, 1 and then 0
+                    //         method: 'POST',
+                    //         headers: {
+                    //             'Content-Type': 'application/json',
+                    //         },
+                    //     })
+                    //     .then((response) => response.json())
+                    //     .then((data) => {
 
-                                console.log(data);
-                                if (data.upvoted == true){
-                                    cdownbtns[m].style.backgroundColor = "#F6F6F2"
-                                    cupbtns[m].style.backgroundColor = "#FAB3A9";
-                                    cvotenums[m].innerHTML = (parseInt(cvotenums[m].innerHTML) + 1)
-                                    window.location.href = "post.html";
-                                }
-                            });
-                        })
-                    }
+                    //         if (data.upvoted == true){
+                    //             commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
+                    //             commentarrowupBtn.style.backgroundColor = "#FAB3A9";
+                    //             // console.log("vote num")
+                    //             // console.log((data[y]))
+                    //             // commentnumVotes.innerHTML = (parseInt(data[y].votes) + 1)
+                    //         }
+                    //     });
+                    // })
 
-                    for (let m = 0; m < cdownbtns.length; m++){
-                        cdownbtns[m].addEventListener("click", function(){
-                            console.log(commentids[m]);
+                    // commentarrowdownBtn.addEventListener("click", function(){
 
-                            fetch(`http://localhost:8000/api/interactions/downvotecomment/${commentids[m]}/${userid}`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                            .then(response => response.json())
-                            .then((data) => {
+                    //     console.log("arrowup for comment no.: " + commentarray[commentarrowup])
 
-                                console.log(data);
-                                if (data.downvote == true){
-                                    cupbtns[m].style.backgroundColor = "#F6F6F2"
-                                    cdownbtns[m].style.backgroundColor = "#FAB3A9";
-                                    cvotenums[m].innerHTML = (parseInt(cvotenums[m].innerHTML) -1)
-                                    window.location.href = "post.html"
-                                }
-                            });
-                        })
-                    }
+                    //     fetch(`http://localhost:8000/api/interactions/downvotecomment/${}/${userid}`, {
+                    //         method: 'POST',
+                    //         headers: {
+                    //             'Content-Type': 'application/json',
+                    //         },
+                    //     })
+                    //     .then(response => response.json())
+                    //     .then((data) => {
+                    //         console.log(data);
+
+                    //         if (data.downvote == true){
+                    //             commentarrowupBtn.style.backgroundColor = "#F6F6F2"
+                    //             commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
+                    //             commentnumVotes.innerHTML = (parseInt(data[y].votes) -1)
+                    //         }
+                    //     });
+                    // })
+
+
+
+
 
                 });
             }

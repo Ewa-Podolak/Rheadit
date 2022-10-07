@@ -534,6 +534,7 @@ if (!window.location.href.includes("index.html")){
                             commentarrowdownBtn.style.backgroundColor = "#FAB3A9"
                             commentarrowupBtn.style.backgroundColor = "#F6F6F2";
                         }
+
                     }
 
                     var seeMore = document.createElement("button");
@@ -546,6 +547,7 @@ if (!window.location.href.includes("index.html")){
                         commentpagenumber++;
                         comments.removeChild(seeMore);
                         getpostcomments();
+                        
                     })
 
                     var deletecommentBtns = document.querySelectorAll(".deletecomment");
@@ -599,7 +601,6 @@ if (!window.location.href.includes("index.html")){
                                     cdownbtns[m].style.backgroundColor = "#F6F6F2"
                                     cupbtns[m].style.backgroundColor = "#FAB3A9";
                                     cvotenums[m].innerHTML = (parseInt(cvotenums[m].innerHTML) + 1)
-                                    window.location.href = "post.html";
                                 }
                             });
                         })
@@ -623,7 +624,6 @@ if (!window.location.href.includes("index.html")){
                                     cupbtns[m].style.backgroundColor = "#F6F6F2"
                                     cdownbtns[m].style.backgroundColor = "#FAB3A9";
                                     cvotenums[m].innerHTML = (parseInt(cvotenums[m].innerHTML) -1)
-                                    window.location.href = "post.html"
                                 }
                             });
                         })

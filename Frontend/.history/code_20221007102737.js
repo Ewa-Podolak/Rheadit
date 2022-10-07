@@ -200,8 +200,6 @@ if (!window.location.href.includes("index.html")){
             
             const post = document.createElement("div");
             post.classList.add("post");
-            post.style.borderBottomLeftRadius = "0";
-            post.style.borderBottomRightRadius = "0";
     
             postAndComments.appendChild(post);
     
@@ -248,7 +246,7 @@ if (!window.location.href.includes("index.html")){
             profilePic.src = "./images/607426-200.png";
             
             if (data.profilepic != null){
-                profilePic.src = data.profilepic;
+                profilePic.src = data[x].profilepic;
             }
 
             const usernameEl = document.createElement("h2");
@@ -351,27 +349,23 @@ if (!window.location.href.includes("index.html")){
             
             arrowdownBtn.addEventListener("click", function(){
     
-                fetch(`http://localhost:8000/api/interactions/downvotepost/${postids}/${userid}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data);
-
-                    if (data.downvote == true){
-                        arrowupBtn.style.backgroundColor = "#F6F6F2"
-                        arrowdownBtn.style.backgroundColor = "#FAB3A9";
-                        window.location.href = "post.html";
-                    }
-                });
+                    fetch(`http://localhost:8000/api/interactions/downvotepost/${postids}/${userid}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+    
+                        if (data.downvote == true){
+                            arrowupBtn.style.backgroundColor = "#F6F6F2"
+                            arrowdownBtn.style.backgroundColor = "#FAB3A9";
+                            window.location.href = "post.html";
+                        }
+                    });
             })
-
-
-
-
 
 
             const comments = document.createElement("div");
@@ -401,9 +395,13 @@ if (!window.location.href.includes("index.html")){
     
             comments.appendChild(ul);
 
-            makeComment.addEventListener("click", function(){
+            makeComment.addEventListener("click", function(){ //////// sets for every comment // get out of loop // should really change
                 console.log("make comment");
                 var commentmade = commentInput.value;
+    
+                console.log(x+1);
+                console.log(commentmade);
+                console.log(userid);
     
                 if (commentmade != ""){
                     console.log(commentmade)
@@ -418,7 +416,7 @@ if (!window.location.href.includes("index.html")){
                     .then(response => response.json())
                     .then((data) => {
                             console.log(data);
-                            window.location.href = "post.html"
+                            window.location.href = "home.html"
                     });
                 }
                 else{
@@ -429,23 +427,14 @@ if (!window.location.href.includes("index.html")){
             getpostcomments();
 
             function getpostcomments(){
-                console.log("getting comments")
-                var commentids = [];
-
-
                 fetch(`http://localhost:8000/api/comments/${postids}/${commentpagenumber}/${userid}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
-
-                    for (let z = 0; z<data.length; z++){
-                        commentids.push(data[z].commentid);
-                        console.log(commentids);
-                    }
 
                     for (let y = 0; y < data.length; y++){
                         
                         const li = document.createElement("li")
+
                         ul.appendChild(li);
 
                         const commentVotes = document.createElement("div");
@@ -453,8 +442,9 @@ if (!window.location.href.includes("index.html")){
 
                         li.appendChild(commentVotes);
 
+
                         const commentarrowupBtn = document.createElement("button");
-                        commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn", "commentarrowup");
+                        commentarrowupBtn.classList.add("arrowupBtn", "arrowBtn");
                         commentarrowupBtn.id = "upvotecom";
 
                         cbtns = document.querySelectorAll("#upvotecom");
@@ -463,11 +453,10 @@ if (!window.location.href.includes("index.html")){
                         commentarrowup.classList.add("fa-solid", "fa-circle-arrow-up");
             
                         const commentnumVotes = document.createElement("h2");
-                        commentnumVotes.classList.add("comvotes");
                         commentnumVotes.innerHTML = data[y].votes
             
                         const commentarrowdownBtn = document.createElement("button");
-                        commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn", "commentarrowdown");
+                        commentarrowdownBtn.classList.add("arrowdownBtn", "arrowBtn");
                         commentarrowdownBtn.id = "downvotcom";
             
                         const commentarrowdown = document.createElement("i");
@@ -498,7 +487,6 @@ if (!window.location.href.includes("index.html")){
                         }
 
                         commentProfilePic.id = "profilePic";
-                        //commentProfilePic.src = data.profilepic; ////////////////////////////////////////////////////////////////////////////////////////
 
                         commentProfile.appendChild(commentProfilePic);
 
@@ -525,15 +513,27 @@ if (!window.location.href.includes("index.html")){
 
                         comment.appendChild(deletecommentBtn);
 
-                        if (data[y].voted == "upvote"){
-                            commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
-                            commentarrowupBtn.style.backgroundColor = "#FAB3A9";
-                        }
+                        // deletecommentBtn.addEventListener("click", ()=>{
+                        //     fetch(`http://localhost:8000/api/comments/delete/${commentarray[x]}/${userid}`, { /// comment id doesnt work
+                        //         method: 'DELETE',
+                        //         headers: {
+                        //             'Content-Type': 'application/json',
+                        //         },
+                        //     })
+                        //     .then((response) => response.json())
+                        //     .then((data) => {
+                        //         console.log(data);
+                
+                        //         if (data.Deleted == false){
+                        //             console.log("cannot delete");
+                        //         }
+                        //         else{
+                        //             postAndComments.removeChild(post);
+                        //         }
+                        //     });
 
-                        if (data[y].voted == "downvoted"){
-                            commentarrowdownBtn.style.backgroundColor = "#FAB3A9"
-                            commentarrowupBtn.style.backgroundColor = "#F6F6F2";
-                        }
+                        // })
+
                     }
 
                     var seeMore = document.createElement("button");
@@ -546,88 +546,8 @@ if (!window.location.href.includes("index.html")){
                         commentpagenumber++;
                         comments.removeChild(seeMore);
                         getpostcomments();
+                        
                     })
-
-                    var deletecommentBtns = document.querySelectorAll(".deletecomment");
-                    console.log(deletecommentBtns);
-
-                    for (let m = 0; m<deletecommentBtns.length; m++){
-                        deletecommentBtns[m].addEventListener("click", ()=>{
-                            fetch(`http://localhost:8000/api/comments/delete/${commentids[m]}/${userid}`, { 
-                                method: 'DELETE',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                            .then((response) => response.json())
-                            .then((data) => {
-                                console.log(data);
-                
-                                if (data.Deleted == false){
-                                    console.log("cannot delete");
-                                }
-                                else{
-                                    postAndComments.removeChild(post);
-                                }
-                            });
-                        })
-                    }
-
-                    cupbtns = document.querySelectorAll(".commentarrowup");
-                    console.log("commentarrowupbtns: " + cupbtns.length)
-
-                    cvotenums = document.querySelectorAll(".comvotes");
-
-                    cdownbtns = document.querySelectorAll(".commentarrowdown");
-                    console.log("commentarrowdownbtns: " + cdownbtns.length)
-
-                    for (let m = 0; m<cupbtns.length; m++){
-                        cupbtns[m].addEventListener("click", function(){
-                            console.log(commentids[m]);
-
-                            fetch(`http://localhost:8000/api/interactions/upvotecomment/${commentids[m]}/${userid}`, { 
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                            .then((response) => response.json())
-                            .then((data) => {
-
-                                console.log(data);
-                                if (data.upvoted == true){
-                                    cdownbtns[m].style.backgroundColor = "#F6F6F2"
-                                    cupbtns[m].style.backgroundColor = "#FAB3A9";
-                                    cvotenums[m].innerHTML = (parseInt(cvotenums[m].innerHTML) + 1)
-                                    window.location.href = "post.html";
-                                }
-                            });
-                        })
-                    }
-
-                    for (let m = 0; m < cdownbtns.length; m++){
-                        cdownbtns[m].addEventListener("click", function(){
-                            console.log(commentids[m]);
-
-                            fetch(`http://localhost:8000/api/interactions/downvotecomment/${commentids[m]}/${userid}`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                            .then(response => response.json())
-                            .then((data) => {
-
-                                console.log(data);
-                                if (data.downvote == true){
-                                    cupbtns[m].style.backgroundColor = "#F6F6F2"
-                                    cdownbtns[m].style.backgroundColor = "#FAB3A9";
-                                    cvotenums[m].innerHTML = (parseInt(cvotenums[m].innerHTML) -1)
-                                    window.location.href = "post.html"
-                                }
-                            });
-                        })
-                    }
 
                 });
             }
@@ -1167,6 +1087,8 @@ function homepageposts(){
 
 function populatePosts(data, pagenumber){
     var postarray = [];
+    var commentarray = [];
+    var commentcounter = 0;
 
     postsContainer.innerHTML = "";
     for (let x = 0; x < data.length; x++){
@@ -1296,6 +1218,7 @@ function populatePosts(data, pagenumber){
 
         deletepostbtn.addEventListener("click", ()=>{
             console.log("normal delete button");
+            // /posts/delete/{postid}/{userid}
             console.log(postarray[x])
 
             fetch(`http://localhost:8000/api/posts/delete/${postarray[x]}/${userid}`, { 
@@ -1363,6 +1286,66 @@ function populatePosts(data, pagenumber){
         })
 
     }
+
+    //cbtns = document.querySelectorAll("#upvotecom");
+
+    // console.log("commentarrowupbtns: " + cbtns)
+    // console.log("number of comments: " + cbtns.length);
+
+    //////////////////////////////////////
+    // var cbtns = document.querySelectorAll("#upvotecom");
+    // console.log("commentarrowupbtns: " + cbtns)
+    // console.log("number of comments: " + cbtns.length);
+
+    // commentarrowupBtn.addEventListener("click", function(){
+
+    //     console.log("arrowup for comment no.: " + commentarray[commentarrowup])
+
+    //     fetch(`http://localhost:8000/api/interactions/upvotecomment/${}/${userid}`, { // commentarray[y] is 0, 1 and then 0
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+
+    //         if (data.upvoted == true){
+    //             commentarrowdownBtn.style.backgroundColor = "#F6F6F2"
+    //             commentarrowupBtn.style.backgroundColor = "#FAB3A9";
+    //             // console.log("vote num")
+    //             // console.log((data[y]))
+    //             // commentnumVotes.innerHTML = (parseInt(data[y].votes) + 1)
+    //         }
+    //     });
+    // })
+
+    // commentarrowdownBtn.addEventListener("click", function(){
+
+    //     console.log("arrowup for comment no.: " + commentarray[commentarrowup])
+
+    //     fetch(`http://localhost:8000/api/interactions/downvotecomment/${}/${userid}`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //     .then(response => response.json())
+    //     .then((data) => {
+    //         console.log(data);
+
+    //         if (data.downvote == true){
+    //             commentarrowupBtn.style.backgroundColor = "#F6F6F2"
+    //             commentarrowdownBtn.style.backgroundColor = "#FAB3A9";
+    //             commentnumVotes.innerHTML = (parseInt(data[y].votes) -1)
+    //         }
+    //     });
+    // })
+
+    /////////////////////////////////////
+
+
+
 
     // going to profile
 

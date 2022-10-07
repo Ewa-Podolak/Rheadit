@@ -14,14 +14,6 @@
   align-items: center;
 }
 
-.deletecomment {
-  width: 10%;
-  height: 5%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 #loginPage {
   justify-content: center;
 }
@@ -32,19 +24,11 @@
   width: 18px;
 }
 
-#grey {
-  opacity: 0.8;
-}
-
-#deletegroup {
+#editBio, #editProfile {
   display: none;
 }
 
-#editBio, #editProfile, #groupeditBio, #groupeditProfile {
-  display: none;
-}
-
-.profilepagePic, .grouppagePic {
+.profilepagePic {
   width: 169px !important;
   height: 169px !important;
   border-radius: 50%;
@@ -160,8 +144,8 @@ input {
 
 #profilePic {
   border-radius: 100%;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
 }
 
 #groupname {
@@ -294,6 +278,9 @@ input:-webkit-autofill:active {
 .navbar .dropDown ul li #username {
   padding: 5%;
 }
+.navbar #profilePic {
+  border: #373F47 1px solid;
+}
 
 .popularOrRecent {
   display: flex;
@@ -331,10 +318,6 @@ input:-webkit-autofill:active {
 
 #deleteuser {
   display: none;
-}
-
-.postImgTxt {
-  padding: 5%;
 }
 
 .createnewPost {
@@ -393,7 +376,7 @@ input:-webkit-autofill:active {
   background-color: #F6F6F2;
 }
 
-.postsContainer, .postpostsContainer {
+.postsContainer {
   margin-top: 5%;
   display: flex;
   flex-direction: column;
@@ -402,7 +385,7 @@ input:-webkit-autofill:active {
   width: 90%;
   padding-bottom: 5%;
 }
-.postsContainer .post, .postpostsContainer .post {
+.postsContainer .post {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -411,7 +394,7 @@ input:-webkit-autofill:active {
   background-color: #F6F6F2;
   border-radius: 15px;
 }
-.postsContainer .post .thePost, .postpostsContainer .post .thePost {
+.postsContainer .post .thePost {
   width: 80%;
   height: 100%;
   padding: 0 5%;
@@ -420,7 +403,7 @@ input:-webkit-autofill:active {
   justify-content: center;
   align-items: flex-start;
 }
-.postsContainer .post .thePost .commentbtn, .postpostsContainer .post .thePost .commentbtn {
+.postsContainer .post .thePost .commentbtn {
   font-size: 15px;
   padding: 20%;
   margin-top: 40%;
@@ -428,28 +411,22 @@ input:-webkit-autofill:active {
   width: -moz-max-content;
   width: max-content;
 }
-.postsContainer .post .thePost img, .postpostsContainer .post .thePost img {
+.postsContainer .post .thePost img {
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
   border-radius: 15px;
 }
-.postsContainer .post .thePost h2, .postpostsContainer .post .thePost h2 {
+.postsContainer .post .thePost h2 {
   font-weight: 200;
   padding-bottom: 2%;
 }
-.postsContainer .post .thePost h3, .postpostsContainer .post .thePost h3 {
+.postsContainer .post .thePost h3 {
   font-size: 15px;
   font-weight: 200;
 }
-.postsContainer .bottom, .postpostsContainer .bottom {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.postsContainer .comments, .postpostsContainer .comments {
+.postsContainer .comments {
   display: none;
-}
-.postsContainer .comments, .postsContainer .postcomments, .postpostsContainer .comments, .postpostsContainer .postcomments {
   background-color: #F6F6F2;
   width: 100%;
   padding-bottom: 5%;
@@ -458,34 +435,34 @@ input:-webkit-autofill:active {
   flex-direction: column;
   justify-content: center;
 }
-.postsContainer .comments .commentBar, .postsContainer .postcomments .commentBar, .postpostsContainer .comments .commentBar, .postpostsContainer .postcomments .commentBar {
+.postsContainer .comments .commentBar {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.postsContainer .comments .commentInput, .postsContainer .postcomments .commentInput, .postpostsContainer .comments .commentInput, .postpostsContainer .postcomments .commentInput {
+.postsContainer .comments .commentInput {
   width: 80%;
   margin: 5%;
 }
-.postsContainer .comments ul, .postsContainer .postcomments ul, .postpostsContainer .comments ul, .postpostsContainer .postcomments ul {
+.postsContainer .comments ul {
   list-style: none;
 }
-.postsContainer .comments ul li, .postsContainer .postcomments ul li, .postpostsContainer .comments ul li, .postpostsContainer .postcomments ul li {
+.postsContainer .comments ul li {
   display: flex;
   flex-direction: row;
   margin: 2%;
 }
-.postsContainer .comments ul li .comment, .postsContainer .postcomments ul li .comment, .postpostsContainer .comments ul li .comment, .postpostsContainer .postcomments ul li .comment {
+.postsContainer .comments ul li .comment {
   display: flex;
   flex-direction: column;
   width: 80%;
 }
-.postsContainer .comments ul li .comment .commentText, .postsContainer .postcomments ul li .comment .commentText, .postpostsContainer .comments ul li .comment .commentText, .postpostsContainer .postcomments ul li .comment .commentText {
+.postsContainer .comments ul li .comment .commentText {
   font-size: 15px;
   padding-left: 5%;
   width: 100%;
 }
-.postsContainer .comments ul li .profile, .postsContainer .postcomments ul li .profile, .postpostsContainer .comments ul li .profile, .postpostsContainer .postcomments ul li .profile {
+.postsContainer .comments ul li .profile {
   justify-content: space-between;
 }
 
@@ -597,4 +574,4 @@ span {
 }
 .pageNumContainer #pageNum {
   padding: 10%;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20221004151331.css.map */

@@ -431,7 +431,7 @@ input:-webkit-autofill:active{
     background-color: $light;
 }
 
-.postsContainer, .postpostsContainer{
+.postsContainer{
     margin-top: 5%;
     display: flex;
     flex-direction: column;
@@ -481,11 +481,6 @@ input:-webkit-autofill:active{
                 font-weight: 200;
             }
         }
-    }
-
-    .bottom{
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
     }
 
     .comments{
