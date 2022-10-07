@@ -680,7 +680,7 @@ function getnotifications(){
             var notifdropDown = document.querySelector(".notifdropDown");
             notifdropDown.style.display = "block";
             var notificationsList = document.querySelector(".notificationsList")
-            notificationsList.innerHTML = "Notifications: ";
+            notificationsList.innerHTML = "";
 
             for (var x = 0; x < data.length; x++){
 

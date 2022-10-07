@@ -674,13 +674,16 @@ function getnotifications(){
     .then(data => {
         console.log("notifications: ")
         console.log(data);
+        /////// do something to indicate notification 
+        
+
         notifbell.innerHTML = data.length ? data.length:0;
 
         notifbell.addEventListener("click", ()=>{
             var notifdropDown = document.querySelector(".notifdropDown");
             notifdropDown.style.display = "block";
             var notificationsList = document.querySelector(".notificationsList")
-            notificationsList.innerHTML = "Notifications: ";
+            notificationsList.innerHTML = "";
 
             for (var x = 0; x < data.length; x++){
 

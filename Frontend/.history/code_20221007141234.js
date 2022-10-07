@@ -674,13 +674,15 @@ function getnotifications(){
     .then(data => {
         console.log("notifications: ")
         console.log(data);
-        notifbell.innerHTML = data.length ? data.length:0;
+        /////// do something to indicate notification 
+        
+        notifbell.innerHTML = data.length;
 
         notifbell.addEventListener("click", ()=>{
             var notifdropDown = document.querySelector(".notifdropDown");
             notifdropDown.style.display = "block";
             var notificationsList = document.querySelector(".notificationsList")
-            notificationsList.innerHTML = "Notifications: ";
+            notificationsList.innerHTML = "";
 
             for (var x = 0; x < data.length; x++){
 
@@ -699,40 +701,13 @@ function getnotifications(){
                 li.appendChild(notifBtns);
 
                 const accept = document.createElement("button");
+                accept.classList.add("actBtn");
                 accept.innerHTML = "Accept";
                 const reject = document.createElement("button");
                 reject.innerHTML = "Reject";
 
                 notifBtns.appendChild(accept);
                 notifBtns.appendChild(reject);
-
-                var comunity = data[x].community;
-                var un = data[x].username;
-
-                accept.addEventListener("click", ()=>{
-                    notificationsList.removeChild(li);
-
-                    ///community/approvemod/{communityname}/{userid}/{username}
-                    console.log(comunity);
-                    console.log(un);
-                    fetch(`http://localhost:8000/api/community/approvemod/${comunity}/${userid}/${un}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                            console.log(data);
-                    });
-                    getnotifications();
-                })
-
-                reject.addEventListener("click", ()=>{
-                    notificationsList.removeChild(li);
-                    // send reject to ewa
-                    getnotifications();
-                })
             }
         })
     });
