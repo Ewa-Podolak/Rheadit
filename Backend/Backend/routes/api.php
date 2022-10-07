@@ -33,7 +33,7 @@ Route::get('/users/{userid}/{username}', [userController::class, 'GetProfile']);
 
 
 //Posts Routes //All works
-Route::get('/posts/{postid}/{userid}', [postController::class, 'ReturnPost']); //Gets Post //Works
+Route::get('/posts/{postid}/{userid}', [postController::class, 'ReturnPost']); //Gets Post
 
 Route::get('/posts/homepage/{pagenumber}/{userid}', [postController::class, 'GetHomepagePosts']); //Returns the newest posts for Homepage
 
