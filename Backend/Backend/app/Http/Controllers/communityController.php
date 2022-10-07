@@ -58,6 +58,12 @@ class communityController extends Controller
         return $community->ApproveMod($communityname, $userid, $username);
     }
 
+    public function RejectMod($communityname, $userid, $username)
+    {
+        $community = new community;
+        return $community->RejectMod($communityname, $userid, $username);
+    }
+
     public function UpdateCommunityBio($communityname, $userid)
     {
         if(community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner')
@@ -87,6 +93,8 @@ class communityController extends Controller
        $requestsarray = [];
 
         if($requests->IsEmpty())
+            return ['username'=>null, 'community'=>null];
+        else if($communities->IsEmpty())
             return ['username'=>null, 'community'=>null];
         else
         {
