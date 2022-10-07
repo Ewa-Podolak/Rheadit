@@ -425,12 +425,11 @@ if (!window.location.href.includes("index.html")){
                     }
                 })
 
-                var commentids = [];
                 getpostcomments();
 
                 function getpostcomments(){
                     console.log("getting comments")
-                    
+                    var commentids = [];
 
 
                     fetch(`http://localhost:8000/api/comments/${postids}/${commentpagenumber}/${userid}`)
@@ -547,19 +546,17 @@ if (!window.location.href.includes("index.html")){
                             }
                         }
 
-                        if (commentids.length > 4){
-                            var seeMore = document.createElement("button");
-                            seeMore.classList.add("seeMore");
-                            seeMore.innerHTML = "see more..."
+                        var seeMore = document.createElement("button");
+                        seeMore.classList.add("seeMore");
+                        seeMore.innerHTML = "see more..."
 
-                            comments.appendChild(seeMore);
+                        comments.appendChild(seeMore);
 
-                            seeMore.addEventListener("click", ()=>{
-                                commentpagenumber++;
-                                comments.removeChild(seeMore);
-                                getpostcomments();
-                            })
-                        }
+                        seeMore.addEventListener("click", ()=>{
+                            commentpagenumber++;
+                            comments.removeChild(seeMore);
+                            getpostcomments();
+                        })
 
                         var favouriteComment = document.querySelectorAll(".favouriteComment");
                         

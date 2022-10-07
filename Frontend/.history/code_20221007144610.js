@@ -425,12 +425,11 @@ if (!window.location.href.includes("index.html")){
                     }
                 })
 
-                var commentids = [];
                 getpostcomments();
 
                 function getpostcomments(){
                     console.log("getting comments")
-                    
+                    var commentids = [];
 
 
                     fetch(`http://localhost:8000/api/comments/${postids}/${commentpagenumber}/${userid}`)
@@ -547,7 +546,7 @@ if (!window.location.href.includes("index.html")){
                             }
                         }
 
-                        if (commentids.length > 4){
+                        if (commentids.length > 5){
                             var seeMore = document.createElement("button");
                             seeMore.classList.add("seeMore");
                             seeMore.innerHTML = "see more..."

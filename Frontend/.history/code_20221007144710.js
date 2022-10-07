@@ -425,12 +425,11 @@ if (!window.location.href.includes("index.html")){
                     }
                 })
 
-                var commentids = [];
                 getpostcomments();
 
                 function getpostcomments(){
                     console.log("getting comments")
-                    
+                    var commentids = [];
 
 
                     fetch(`http://localhost:8000/api/comments/${postids}/${commentpagenumber}/${userid}`)
