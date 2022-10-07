@@ -503,6 +503,14 @@ input:-webkit-autofill:active {
   justify-content: space-between;
 }
 
+.requestmod {
+  height: 8vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+}
+
 .profileBox {
   display: flex;
   flex-direction: column;

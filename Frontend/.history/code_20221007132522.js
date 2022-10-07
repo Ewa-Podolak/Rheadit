@@ -770,12 +770,8 @@ function setupgroupPage(){
             if (data.userrole == "member"){
                 var requestmodbtn = document.querySelector(".requestmod")
                 requestmodbtn.style.display = "flex";
-                // check if already requested 
-                
                 requestmodbtn.addEventListener("click", ()=>{
-                    requestmod(groupname);
-                    // if has - requestmodbtn.innerHTML = "Cancel request";
-                    // if not - requestmodbtn.innerHTML = "Request mod";
+                    requestmod();
                     requestmodbtn.innerHTML = "Requested";
                 })
             }
@@ -791,8 +787,8 @@ function setupgroupPage(){
         });
 }
 
-function requestmod(groupname){
-    fetch(`http://localhost:8000/api/community/requestmod/${groupname}/${userid}`, {
+function requestmod(){
+    fetch(`http://localhost:8000/api/community/delete/${communityname}/${userid}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',

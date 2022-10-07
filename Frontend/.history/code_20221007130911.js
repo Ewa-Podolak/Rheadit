@@ -767,18 +767,7 @@ function setupgroupPage(){
                 joinGroup.innerHTML = data.userrole;
             }
 
-            if (data.userrole == "member"){
-                var requestmodbtn = document.querySelector(".requestmod")
-                requestmodbtn.style.display = "flex";
-                // check if already requested 
-                
-                requestmodbtn.addEventListener("click", ()=>{
-                    requestmod(groupname);
-                    // if has - requestmodbtn.innerHTML = "Cancel request";
-                    // if not - requestmodbtn.innerHTML = "Request mod";
-                    requestmodbtn.innerHTML = "Requested";
-                })
-            }
+            //if ()
 
             if (data.userrole == "owner"){
                 leavegroup.style.display = "none";
@@ -789,19 +778,6 @@ function setupgroupPage(){
                 console.log("mod")
             }
         });
-}
-
-function requestmod(groupname){
-    fetch(`http://localhost:8000/api/community/requestmod/${groupname}/${userid}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-    });
 }
 
 function ownerpriviledges(communityname){

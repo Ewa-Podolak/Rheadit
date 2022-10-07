@@ -58,7 +58,7 @@ Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'Delete
 Route::get('/comments/{postid}/{page}/{userid}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes
 //and whether they are favourited by the creater
 
-Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment ////////// fe not done
+Route::patch('/comments/favourite/{postid}/{commentid}/{userid}', [commentController::class, 'FavouriteComment']); //Allows owner of post to favoruite comment
 
 Route::post('/comments/create/{postid}/{userid}', [commentController::class, 'CreateComment']); //Allows user to create comment
 
@@ -97,7 +97,7 @@ Route::delete('/community/delete/{communityname}/{userid}', [communityController
 
 Route::get('/community/getinfo/{communityname}/{userid}', [communityController::class, 'GetCommunity']); //returns community information
 
-Route::patch('/community/requestmod/{communityname}/{userid}', [communityController::class, 'RequestMod']); //returns community information ///// fe not used
+Route::patch('/community/requestmod/{communityname}/{userid}', [communityController::class, 'RequestMod']); //returns community information
 
 Route::patch('/community/approvemod/{communityname}/{userid}/{username}', [communityController::class, 'ApproveMod']); //returns community information ///// fe not used
 //userid is currently logged in oerson, username is the person they want to approve
@@ -106,6 +106,6 @@ Route::patch('/community/updatebio/{communityname}/{userid}', [communityControll
 
 Route::patch('/community/updateprofilepic/{communityname}/{userid}', [communityController::class, 'UpdateCommunityPic']); //returns community information
 
-Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //returns community information  //// fe not used
+Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //returns community information
 
 Route::get('/community/joinable/{userid}', [communityController::class, 'JoinableComunity']); //Returns the list of all joinable communities //notworking yet
