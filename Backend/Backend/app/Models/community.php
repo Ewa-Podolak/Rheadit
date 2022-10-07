@@ -62,11 +62,18 @@ class community extends Model
         $modnumber = $this::where('community', $communityname)->where('authority', 'mod')->get()->count();
         $membernumber = $this::where('community', $communityname)->get()->count();
 
-        $requestedmod = $this::where('community', $communityname)->where('userid', $userid)->first()->requestmod;
-        if($requestedmod == 1)
-            $requestedmod = true;
-        else
+        $requestedmod = $this::where('community', $communityname)->where('userid', $userid)->get();
+        if($requestedmod->IsEmpty())
+        {
             $requestedmod = false;
+        }
+        else
+        {
+            if($requestedmod == 1)
+                $requestedmod = true;
+            else
+                $requestedmod = false;
+        }
 
         $userrole = $this::where('community', $communityname)->where('userid', $userid)->get();
         if($userrole->IsEmpty())

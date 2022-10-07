@@ -46,8 +46,8 @@ class userController extends Controller
         {
             $userid = $userid[0]->userid;
             
-            ResetPassword1::to($email)
-                ->send(new ResetPassword1());
+            Mail::to($email)
+                ->send(new ResetPassword1($userid));
 
             return ['emailsent'=>true];
         }

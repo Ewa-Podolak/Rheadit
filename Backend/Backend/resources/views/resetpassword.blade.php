@@ -358,7 +358,7 @@
                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td> <a href=$emaillink target="_blank">ResetPassword</a> </td>
+                                      <td> <a href={{$emaillink}} target="_blank">${{emaillink}}</a> </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -366,8 +366,8 @@
                             </tr>
                           </tbody>
                         </table>
-                        <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                        <p>Good luck! Hope it works.</p>
+                        <p>If this not something you requested ignore.</p>
+                        <p>Thank you for being part of Rheadit.</p>
                       </td>
                     </tr>
                   </table>

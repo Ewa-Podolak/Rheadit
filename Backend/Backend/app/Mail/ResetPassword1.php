@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\Mail;
 class ResetPassword1 extends Mailable
 {
     use Queueable, SerializesModels;
+    public $emaillink;
 
-    public function __construct()
+    public function __construct($_userid)
     {
-
+        $this->emaillink = "http://localhost:8000/api/users/resetpassword/" . $_userid;
     }
 
     public function build()
     {
-        $userid = 1;
-        $emaillink = "http://localhost:8000/api/users/resetpassword/" . $userid;
-        return $this->view('resetpassword', ['emaillink' => $emaillink]);
+        return $this->view('resetpassword')
+            ->subject('Reset Password');
     }
 }
