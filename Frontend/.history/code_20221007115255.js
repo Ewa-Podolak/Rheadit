@@ -1060,12 +1060,7 @@ function getPosts(pagenumber, groupname){
     var userid = window.localStorage.getItem("userid");
 
     if(postsContainer.id == "homePage"){
-        if(explorehome){
-            explorehomepageposts();
-        }
-        else{
-            homepageposts();
-        }
+        homepageposts();
     }
     else if (postsContainer.id == "profilePage"){
         if(recent){
@@ -1155,24 +1150,6 @@ function recentprofileposts(){
     });
 }
 
-function explorehomepageposts(){
-    fetch(`http://localhost:8000/api/posts/explorehomepage/${pagenumber}/${userid}`)
-        .then(response => response.json())
-        .then(data => {
-
-            if(data.length == 0){
-                populatePosts(data, pagenumber);
-                postsContainer.innerHTML = "no more posts to show";
-                
-                plusPageNum.disabled = true;
-            }
-            else{
-                plusPageNum.disabled = false;
-                populatePosts(data, pagenumber);
-            }
-    });
-}
-
 function homepageposts(){
     fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}/${userid}`)
         .then(response => response.json())
@@ -1188,7 +1165,7 @@ function homepageposts(){
                 plusPageNum.disabled = false;
                 populatePosts(data, pagenumber);
             }
-    });
+        });
 }
 
 function populatePosts(data, pagenumber){
