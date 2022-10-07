@@ -324,11 +324,18 @@ input:-webkit-autofill:active {
   padding: 5% 0;
 }
 
+.comment {
+  margin-left: 2%;
+}
+
 .profile {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 5%;
+  margin-left: 0;
+}
+.profile img {
+  margin-left: 0;
 }
 .profile h2 {
   font-size: 12px;
@@ -488,8 +495,9 @@ input:-webkit-autofill:active {
 }
 .postsContainer .comments ul li .comment .commentText, .postsContainer .postcomments ul li .comment .commentText, .postpostsContainer .comments ul li .comment .commentText, .postpostsContainer .postcomments ul li .comment .commentText {
   font-size: 15px;
-  padding-left: 5%;
+  padding-left: 2%;
   width: 100%;
+  margin: 5% 0;
 }
 .postsContainer .comments ul li .profile, .postsContainer .postcomments ul li .profile, .postpostsContainer .comments ul li .profile, .postpostsContainer .postcomments ul li .profile {
   justify-content: space-between;

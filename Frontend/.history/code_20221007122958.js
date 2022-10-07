@@ -511,12 +511,11 @@ if (!window.location.href.includes("index.html")){
 
                         const favouriteComment = document.createElement("i");
 
-                        if (data[y].favourited == true){
-                            favouriteComment.classList.add("fa-solid", "fa-star", "favouriteComment");
-                        }
-                        else{
-                            favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
-                        }
+                        console.log("data");
+                        console.log(data);
+                        favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
+
+                        
 
                         commentProfile.appendChild(favouriteComment);
 

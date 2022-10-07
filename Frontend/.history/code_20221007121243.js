@@ -510,13 +510,7 @@ if (!window.location.href.includes("index.html")){
                         commentProfile.appendChild(commentDate);
 
                         const favouriteComment = document.createElement("i");
-
-                        if (data[y].favourited == true){
-                            favouriteComment.classList.add("fa-solid", "fa-star", "favouriteComment");
-                        }
-                        else{
-                            favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
-                        }
+                        favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
 
                         commentProfile.appendChild(favouriteComment);
 
@@ -553,26 +547,6 @@ if (!window.location.href.includes("index.html")){
                         comments.removeChild(seeMore);
                         getpostcomments();
                     })
-
-                    var favouriteComment = document.querySelectorAll(".favouriteComment");
-                    
-                    for (let m = 0; m < favouriteComment.length; m++){
-                        favouriteComment[m].addEventListener("click", ()=>{
-
-                            fetch(`http://localhost:8000/api/comments/favourite/${postids}/${commentids[m]}/${userid}`, {
-                                method: 'PATCH',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log(data);
-                                window.location.href = "post.html";
-                            });
-                        
-                        })
-                    }
 
                     var deletecommentBtns = document.querySelectorAll(".deletecomment");
                     console.log(deletecommentBtns);

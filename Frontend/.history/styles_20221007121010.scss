@@ -357,6 +357,10 @@ input:-webkit-autofill:active{
 
 .comment{
     margin-left: 2%;
+
+    .commentText{
+        padding-left: 0;
+    }
 }
 
 .profile{
@@ -542,9 +546,8 @@ input:-webkit-autofill:active{
 
                     .commentText{
                         font-size: 15px;
-                        padding-left: 2%;
+                        padding-left: 5%;
                         width: 100%;
-                        margin: 5% 0;
                     }
                 }
 

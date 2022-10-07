@@ -294,6 +294,10 @@ if (!window.location.href.includes("index.html")){
                 arrowdownBtn.style.backgroundColor = "#FAB3A9";
             }
 
+            if(data.favourited == true){
+                favouritedcomm = true;
+            }
+
             var userid = window.localStorage.getItem("userid");
 
             deletepostbtn.addEventListener("click", ()=>{
@@ -510,13 +514,9 @@ if (!window.location.href.includes("index.html")){
                         commentProfile.appendChild(commentDate);
 
                         const favouriteComment = document.createElement("i");
+                        favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
 
-                        if (data[y].favourited == true){
-                            favouriteComment.classList.add("fa-solid", "fa-star", "favouriteComment");
-                        }
-                        else{
-                            favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
-                        }
+                        
 
                         commentProfile.appendChild(favouriteComment);
 

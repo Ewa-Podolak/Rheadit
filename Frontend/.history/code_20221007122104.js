@@ -510,13 +510,7 @@ if (!window.location.href.includes("index.html")){
                         commentProfile.appendChild(commentDate);
 
                         const favouriteComment = document.createElement("i");
-
-                        if (data[y].favourited == true){
-                            favouriteComment.classList.add("fa-solid", "fa-star", "favouriteComment");
-                        }
-                        else{
-                            favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
-                        }
+                        favouriteComment.classList.add("fa-regular", "fa-star", "favouriteComment");
 
                         commentProfile.appendChild(favouriteComment);
 
@@ -567,7 +561,6 @@ if (!window.location.href.includes("index.html")){
                             })
                             .then(response => response.json())
                             .then(data => {
-                                console.log(data);
                                 window.location.href = "post.html";
                             });
                         
