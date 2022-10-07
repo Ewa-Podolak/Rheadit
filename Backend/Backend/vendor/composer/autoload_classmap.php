@@ -147,6 +147,8 @@ return array(
     'Database\\Factories\\interactionsFactory' => $baseDir . '/database/factories/interactionsFactory.php',
     'Database\\Factories\\postFactory' => $baseDir . '/database/factories/postFactory.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
+    'Database\\Seeders\\commentsSeeder' => $baseDir . '/database/seeders/commentsSeeder.php',
+    'Database\\Seeders\\communitySeeder' => $baseDir . '/database/seeders/communitySeeder.php',
     'Database\\Seeders\\followersSeeder' => $baseDir . '/database/seeders/followersSeeder.php',
     'Database\\Seeders\\interactionsSeeder' => $baseDir . '/database/seeders/interactionsSeeder.php',
     'Database\\Seeders\\postsSeeder' => $baseDir . '/database/seeders/postsSeeder.php',

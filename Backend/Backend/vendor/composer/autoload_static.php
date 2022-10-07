@@ -647,6 +647,8 @@ class ComposerStaticInit3dbd498186daf2a79ae04c4b99f66e7d
         'Database\\Factories\\interactionsFactory' => __DIR__ . '/../..' . '/database/factories/interactionsFactory.php',
         'Database\\Factories\\postFactory' => __DIR__ . '/../..' . '/database/factories/postFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\commentsSeeder' => __DIR__ . '/../..' . '/database/seeders/commentsSeeder.php',
+        'Database\\Seeders\\communitySeeder' => __DIR__ . '/../..' . '/database/seeders/communitySeeder.php',
         'Database\\Seeders\\followersSeeder' => __DIR__ . '/../..' . '/database/seeders/followersSeeder.php',
         'Database\\Seeders\\interactionsSeeder' => __DIR__ . '/../..' . '/database/seeders/interactionsSeeder.php',
         'Database\\Seeders\\postsSeeder' => __DIR__ . '/../..' . '/database/seeders/postsSeeder.php',
