@@ -69,7 +69,7 @@ class community extends Model
         }
         else
         {
-            if($requestedmod == 1)
+            if($requestedmod[0]->requestmod == 1)
                 $requestedmod = true;
             else
                 $requestedmod = false;
