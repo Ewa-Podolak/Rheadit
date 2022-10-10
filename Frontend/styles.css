@@ -187,7 +187,7 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #373F47 !important;
 }
 
-.loginContainer, .registerContainer {
+.loginContainer, .registerContainer, .resetpassContainer {
   margin: 5%;
   background-color: #F6F6F2;
   width: 90%;
@@ -198,50 +198,54 @@ input:-webkit-autofill:active {
   justify-content: center;
   align-items: center;
 }
-.loginContainer #forgotPassword, .registerContainer #forgotPassword {
+.loginContainer #forgotPassword, .registerContainer #forgotPassword, .resetpassContainer #forgotPassword {
   background-color: transparent;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
-.loginContainer #forgotPasswordText, .registerContainer #forgotPasswordText {
+.loginContainer #forgotPasswordText, .registerContainer #forgotPasswordText, .resetpassContainer #forgotPasswordText {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
   justify-content: center;
 }
-.loginContainer .error, .registerContainer .error {
+.loginContainer .error, .registerContainer .error, .resetpassContainer .error {
   display: none;
   font-style: italic;
   text-align: center;
   font-size: 12px;
   color: rgba(255, 0, 0, 0.7);
 }
-.loginContainer #loginBtn, .loginContainer #makeAccount, .registerContainer #loginBtn, .registerContainer #makeAccount {
+.loginContainer #loginBtn, .loginContainer #makeAccount, .registerContainer #loginBtn, .registerContainer #makeAccount, .resetpassContainer #loginBtn, .resetpassContainer #makeAccount {
   margin-top: 5%;
 }
-.loginContainer h1, .registerContainer h1 {
+.loginContainer h1, .registerContainer h1, .resetpassContainer h1 {
   padding: 2%;
 }
-.loginContainer form, .registerContainer form {
+.loginContainer form, .registerContainer form, .resetpassContainer form {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.loginContainer form .inputcontainer, .registerContainer form .inputcontainer {
+.loginContainer form .inputcontainer, .registerContainer form .inputcontainer, .resetpassContainer form .inputcontainer {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 2%;
 }
-.loginContainer form .inputcontainer label, .registerContainer form .inputcontainer label {
+.loginContainer form .inputcontainer label, .registerContainer form .inputcontainer label, .resetpassContainer form .inputcontainer label {
   padding-right: 2%;
 }
-.loginContainer form p, .registerContainer form p {
+.loginContainer form p, .registerContainer form p, .resetpassContainer form p {
   padding: 5%;
+}
+
+.resetpassContainer {
+  margin-top: 55%;
 }
 
 .registerContainer {
