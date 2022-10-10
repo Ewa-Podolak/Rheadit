@@ -11,8 +11,11 @@ class usersSeeder extends Seeder
     public function run()
     {
         user::insert(['username' => 'Ewa', 'password' => 'Potato', 'email' => 'ewa@random.com']);
-
         user::insert(['username' => 'Millie', 'password' => 'Pineapple', 'email' => 'millie@random.com']);
+        user::insert(['username' => 'Will', 'password' => 'Surething', 'email' => 'will@random.com']);
+        user::insert(['username' => 'Frontend']);
+        user::insert(['username' => 'Backend']);
+        user::insert(['username' => 'homepage']);
 
         user::factory()->count(7)->create();
 

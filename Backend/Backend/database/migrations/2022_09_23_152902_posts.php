@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('head', 75);
             $table->string('body', 255)->nullable()->default(NULL);
             $table->string('picture', 255)->nullable()->default(NULL);
-            $table->string('community', 30)->nullable()->default(NULL);
+            $table->string('community', 30)->default('homepage');
             $table->timestamp('created_at')->useCurrent();
         });
     }

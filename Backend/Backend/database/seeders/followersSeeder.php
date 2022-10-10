@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\follower;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class followersSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        //
+        follower::insert(['user' => 1, 'follower' => 2]);
+        follower::insert(['user' => 2, 'follower' => 1]);
+        follower::insert(['user' => 1, 'follower' => 3]);
+        follower::insert(['user' => 2, 'follower' => 3]);
     }
 }

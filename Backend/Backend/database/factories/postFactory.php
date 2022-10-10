@@ -14,14 +14,18 @@ class postFactory extends Factory
         if(rand(0,1) == 1)
         {
             return [
-                'title' => str_random(5, 30),
+                'userid' => 2,
+                'head' => str_random(5, 30),
                 'body' => str_random(5, 150),
+                'community' => 'Frontend',
         ];
         }
-        else if(rand(0,1) == 1)
+        else
         {
             return [
-                'title' => str_random(5, 30),  
+                'userid' => 1,
+                'head' => str_random(5, 30),  
+                'community' => 'Backend',   
         ];
         }
     }
