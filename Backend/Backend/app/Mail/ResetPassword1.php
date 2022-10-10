@@ -15,7 +15,8 @@ class ResetPassword1 extends Mailable
 
     public function __construct($_userid)
     {
-        $this->emaillink = "http://localhost:8000/api/users/resetpassword/" . $_userid;
+        //$this->emaillink = "http://localhost:8000/api/users/resetpassword/" . $_userid;
+        $this->emaillink = "http://127.0.0.1:5555/resetpassword.html";
     }
 
     public function build()
