@@ -1577,11 +1577,23 @@ function setupGeneralPage(){
 function searchbar(){
     var searchBarInput = document.querySelector(".searchBarInput");
     var searchdropDown = document.querySelector(".searchdropDown");
+    var searchopen = false;
 
-    searchBarInput.addEventListener("focus", ()=>{
+    searchBarInput.addEventListener("click", ()=>{
         console.log("search");
 
-        searchdropDown.style.display = "flex";
+        if (!searchopen){
+            searchdropDown.style.display = "flex";
+            searchopen = true;
+        }
+        else{
+            searchdropDown.style.display = "none";
+            searchopen = false;
+        }
+
+        const group = searchdropDown.createElement("div");
+        group.classList.add("group");
+        
     })
 
     // show all available groups
