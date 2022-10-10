@@ -249,13 +249,13 @@ input:-webkit-autofill:active {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  display: none;
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
   background-color: #F6F6F2;
   position: absolute;
   top: 10vh;
   left: 5vw;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;

@@ -1576,13 +1576,15 @@ function setupGeneralPage(){
 
 function searchbar(){
     var searchBarInput = document.querySelector(".searchBarInput");
+    var searchdropDown = document.querySelector(".searchdropDown");
 
-    searchBarInput.addEventListener("click", ()=>{
+    searchBarInput.addEventListener("focus", ()=>{
         console.log("search");
+
+        searchdropDown.style.display = "flex";
     })
 
     // show all available groups
-    var searchdropDown = document.querySelector(".searchdropDown");
 
     //searchdropDown.createElement("div");
     
