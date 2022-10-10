@@ -263,6 +263,7 @@ input:-webkit-autofill:active{
 .searchdropDown{
     width: 90vw;
     height: fit-content;
+    display: none;
 
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -273,7 +274,6 @@ input:-webkit-autofill:active{
     top: 10vh;
     left: 5vw;
 
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
