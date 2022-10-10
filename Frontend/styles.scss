@@ -40,6 +40,19 @@ $light: #F6F6F2;
     justify-content: center;
 }
 
+.success{
+    display: none;
+    background-color: $light;
+
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 90%;
+    padding: 5%;
+}
+
 .arrowupBtn, .arrowdownBtn{
     background-color: $light;
     padding: 1%;

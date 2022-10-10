@@ -100,22 +100,57 @@ if (window.location.href.includes("resetpasswordrequest")){
     var emilmeBtn = document.getElementById("emilmeBtn");
 
     emilmeBtn.addEventListener("click", ()=>{
-        console.log("send email")
-        var emailforreset = document.getElementById("emailforreset");
 
-        const data = { email: emailforreset.value };
+        sendemail();
 
-        fetch(`http://localhost:8000/api/users/sendemail`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        })
+        function sendemail(){
+            console.log("send email")
+            var emailforreset = document.getElementById("emailforreset");
+
+            var reseterrortext = document.getElementById("emailerror");
+
+            if (emailforreset.value.includes("@")){
+                reseterrortext.style.display = "none";
+                const data = { email: emailforreset.value };
+
+                fetch(`http://localhost:8000/api/users/sendemail`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+
+                    var resetpassrequestContainer = document.querySelector(".resetpassrequestContainer");
+                    resetpassrequestContainer.style.opacity = "0.5"
+
+                    var success = document.querySelector(".success");
+                    success.style.display = "flex";
+
+                    var login = document.querySelector(".login");
+
+                    login.addEventListener("click", ()=>{
+                        window.location.href = "index.html";
+                    })
+
+                    var resend = document.querySelector(".resend");
+
+                    resend.addEventListener("click", ()=>{
+                        console.log("resend");
+                        //sendemail();
+                    })
+                })
+            }
+            else{
+                console.log("nothing");
+        
+                reseterrortext.style.display = "block";
+                reseterrortext.innerHTML = "enter a valid email";
+            }
+        }
     })
 }
 
@@ -129,23 +164,31 @@ if (window.location.href.includes("resetpassword.html")){
 
     resetpassBtn.addEventListener("click", ()=>{
         var newpassvalue = document.getElementById("newpassvalue");
-        console.log(newpassvalue)
+        var reseterrortext = document.getElementById("reseterror");
 
-        console.log(newpassvalue.value);
+        if (newpassvalue.value != ""){
+            console.log("something")
 
-        const data = {password: newpassvalue.value}
+            const data = {password: newpassvalue.value}
 
-        fetch(`http://localhost:8000/api/users/resetpassword/${usertoresetid}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-                window.location.href = "index.html";
-        });
+            fetch(`http://localhost:8000/api/users/resetpassword/${usertoresetid}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                    window.location.href = "index.html";
+            });
+        }
+        else{
+            console.log("nothing")
+
+            reseterrortext.style.display = "block";
+            reseterrortext.innerHTML = "enter a new password";
+        }
     })
 }
 

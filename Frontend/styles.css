@@ -32,6 +32,17 @@
   justify-content: center;
 }
 
+.success {
+  display: none;
+  background-color: #F6F6F2;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  padding: 5%;
+}
+
 .arrowupBtn, .arrowdownBtn {
   background-color: #F6F6F2;
   padding: 1%;
