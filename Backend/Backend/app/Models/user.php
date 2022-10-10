@@ -57,11 +57,4 @@ class user extends Model
 
         return ['deleted'=>true];
     }
-
-    public function ResertPassword($userid, $password)
-    {
-        $this::where('userid', $userid)->update(['password'=>$password]);
-
-        return ['updated'=>true];
-    }
 }

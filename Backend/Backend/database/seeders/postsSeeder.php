@@ -11,5 +11,6 @@ class postsSeeder extends Seeder
     public function run()
     {
         post::factory()->count(7)->create();
+        dd('yes');
     }
 }
