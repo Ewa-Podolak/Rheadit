@@ -2,18 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Models\comment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class commentsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        //
+        comment::insert(['postid' => 2, 'userid' => 3, 'comment' => 'Nice Backend stuff']);
+        comment::insert(['postid' => 3, 'userid' => 3, 'comment' => 'Nice Frontend stuff']);
     }
 }
