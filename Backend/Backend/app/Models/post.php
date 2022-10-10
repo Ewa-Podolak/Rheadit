@@ -14,8 +14,6 @@ class post extends Model
 
     public function GetHomePage($page, $userid)
     {
-
-        //dd("hello");
         $allposts = $this::orderby('created_at')->get();
         $allcommunites = community::where('userid', $userid)->get();
 
@@ -32,8 +30,14 @@ class post extends Model
                     $partofcommunity = false;
                     foreach($allcommunites as $community)
                     {
-                        if($allposts[$x]->community == $community->community)
-                            $partofcommunity = true;
+                        if(!$partofcommunity && !$allposts->IsEmpty()) 
+                        {
+                            if($allposts[$x]->community == $community->community)
+                            {
+                                $partofcommunity = true;
+                                unset($allposts[$x]);
+                            }
+                        }
                     }
 
                     if($partofcommunity)
@@ -70,18 +74,20 @@ class post extends Model
 
         for($x = 0; $x<$numberofpostsmax; $x++)
         {
+            $unsetalready = false;
             foreach($allcommunities as $community)
             {
-                // dd($allposts[0]);
-                if($allposts[$x]->community == $community->community)
+                if(!$unsetalready && !$allposts->IsEmpty())
                 {
-                    unset($allposts[$x]);
+                    if($allposts[$x]->community == $community->community)
+                    {
+                        unset($allposts[$x]);
+                        $unsetalready = false;
+                    }
                 }
-                dump('hh');
             }
         }
 
-        dd();
         $numberofpostsmax = $allposts->count();
         $postsarray = [];
         if($numberofpostsmax != 0)
