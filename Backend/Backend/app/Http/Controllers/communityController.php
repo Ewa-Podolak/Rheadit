@@ -126,7 +126,7 @@ class communityController extends Controller
         if(user::where('username', $community)->get()->IsEmpty())
         {
             community::insert(['userid'=>$userid, 'community'=>$community, 'authority'=>'owner']);
-            user::insert(['username'=>'community']);
+            user::insert(['username'=>$community]);
             return ['created'=>true];
         }
         else
