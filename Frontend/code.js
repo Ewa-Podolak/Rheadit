@@ -118,6 +118,7 @@ if (window.location.href.includes("resetpasswordrequest")){
         })
         .then((response) => response.json())
         .then((data) => {
+            console.log(data);
         })
     })
 }
