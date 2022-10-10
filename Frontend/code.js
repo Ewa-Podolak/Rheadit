@@ -99,15 +99,18 @@ if (window.location.href.includes("index.html")){
     })
 }
 
-if (window.location.href.includes("request")){
+if (window.location.href.includes("resetpasswordrequest")){
+    console.log("reset pass request page")
     var emilmeBtn = document.getElementById("emilmeBtn");
 
     emilmeBtn.addEventListener("click", ()=>{
+        console.log("send email")
         var emailforreset = document.getElementById("emailforreset");
 
         const data = { email: emailforreset.value };
 
         fetch(`http://localhost:8000/api/users/sendemail`, {
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -144,7 +147,7 @@ if (window.location.href.includes("resetpassword.html")){
     })
 }
 
-if (!window.location.href.includes("index.html")){
+if (!window.location.href.includes("index.html") && !window.location.href.includes("password") ){
 
     getnotifications();
 
