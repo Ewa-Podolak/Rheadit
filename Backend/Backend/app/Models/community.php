@@ -143,22 +143,30 @@ class community extends Model
         $allcommunities = $this::where('authority', 'owner')->wherenot('userid', $userid)->get();
         $joinablecommunities = [];
 
-        foreach($joinedcommunities as $joinedcommunity)
+        if($joinedcommunities->IsEmpty())
         {
             foreach($allcommunities as $community)
             {
-                if($joinedcommunity->community != $community->community)
+                $membernumber = $this::where('community', $community->community)->get()->count();
+                $profilepic = user::where('username', $community->community)->first()->profilepic;
+                array_push($joinablecommunities, ['communityname'=>$community->community, 'membersnumber'=>$membernumber, 'profilepic'=>$profilepic]);
+            }
+        }
+        else
+        {
+            foreach($joinedcommunities as $joinedcommunity)
+            {
+                foreach($allcommunities as $community)
                 {
-                    $membernumber = $this::where('community', $community->community)->get()->count();
-                    array_push($joinablecommunities, ['communityname'=>$community->community, 'membersnumber'=>$membernumber]);
+                    if($joinedcommunity->community != $community->community)
+                    {
+                        $membernumber = $this::where('community', $community->community)->get()->count();
+                        $profilepic = user::where('username', $community->community)->first()->profilepic;
+                        array_push($joinablecommunities, ['communityname'=>$community->community, 'membersnumber'=>$membernumber, 'profilepic'=>$profilepic]);
+                    }
                 }
             }
         }
-        if($joinablecommunities == [])
-        {
-            $joinablecommunities = ['communityname'=>null, 'membersnumber'=>null];
-        }
-
         return $joinablecommunities;
     }
 }
