@@ -127,6 +127,7 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  justify-content: center;
 }
 
 input:focus {
@@ -242,10 +243,6 @@ input:-webkit-autofill:active {
 }
 .loginContainer form p, .registerContainer form p, .resetpassContainer form p, .resetpassrequestContainer form p {
   padding: 5%;
-}
-
-.resetpassContainer, .resetpassrequestContainer {
-  margin-top: 55%;
 }
 
 .registerContainer {

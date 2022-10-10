@@ -1,7 +1,3 @@
-// login
-
-// login check
-
 if (window.location.href.includes("index.html")){
 
     var loginBtn = document.getElementById("loginBtn");
@@ -132,9 +128,12 @@ if (window.location.href.includes("resetpassword.html")){
     console.log(usertoresetid);
 
     resetpassBtn.addEventListener("click", ()=>{
-        var newpassvalue = document.getElementById("newpassvalue").value;
+        var newpassvalue = document.getElementById("newpassvalue");
+        console.log(newpassvalue)
 
-        const data = {password: newpassvalue}
+        console.log(newpassvalue.value);
+
+        const data = {password: newpassvalue.value}
 
         fetch(`http://localhost:8000/api/users/resetpassword/${usertoresetid}`, {
             method: 'PATCH',
@@ -145,7 +144,7 @@ if (window.location.href.includes("resetpassword.html")){
         })
         .then((response) => response.json())
         .then((data) => {
-                window.location.href = "home.html";
+                window.location.href = "index.html";
         });
     })
 }
