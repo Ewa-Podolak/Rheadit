@@ -87,6 +87,8 @@ Route::get('/followers/follow/{userid}/{username}', [followerController::class, 
 
 
 //Community //All works
+Route::post('/community/{communityname}/create/{userid}', [communityController::class, 'CreateCommunity']); //Allows user to create community
+
 Route::post('/community/{communityname}/join/{userid}', [communityController::class, 'JoinCommunity']); //Allows user to join community
 
 Route::delete('/community/{communityname}/leave/{userid}', [communityController::class, 'LeaveCommunity']); //Allows user to leave

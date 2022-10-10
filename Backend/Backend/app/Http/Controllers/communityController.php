@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\community;
 use App\Models\user;
 
+use function Illuminate\Session\userId;
+
 class communityController extends Controller
 {
     public function JoinCommunity($communityname, $userid)
@@ -117,5 +119,17 @@ class communityController extends Controller
     {
         $community = new community;
         return $community->JoinableComunity($userid);
+    }
+
+    public function CreateCommunity($community, $userid)
+    {
+        if(user::where('username', $community)->get()->IsEmpty())
+        {
+            community::insert(['userid'=>$userid, 'community'=>$community, 'authority'=>'owner']);
+            user::insert(['username'=>'community']);
+            return ['created'=>true];
+        }
+        else
+            return ['created'=>false];
     }
 }
