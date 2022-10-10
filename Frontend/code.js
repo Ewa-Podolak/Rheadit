@@ -1608,7 +1608,13 @@ function searchbar(){
                 searchdropDown.appendChild(group);
 
                 const groupimg = document.createElement("img");
-                //groupimg.src = groupinlist.profilepic //////////////////////////////////////////////
+
+                if (groupinlist.profilepic == null){
+                    groupimg.src = "./images/607426-200.png"
+                }
+                else{
+                    groupimg.src = groupinlist.profilepic
+                }
 
                 group.appendChild(groupimg);
 
