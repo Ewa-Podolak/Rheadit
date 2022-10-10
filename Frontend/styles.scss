@@ -196,7 +196,7 @@ input:-webkit-autofill:active{
     -webkit-text-fill-color: #373F47 !important;
 }
 
-.loginContainer, .registerContainer{
+.loginContainer, .registerContainer, .resetpassContainer{
     margin: 5%;
     background-color: $light;
     width: 90%;
@@ -258,6 +258,10 @@ input:-webkit-autofill:active{
             padding: 5%;
         }
     }
+}
+
+.resetpassContainer{
+    margin-top: 55%;
 }
 
 .registerContainer{
