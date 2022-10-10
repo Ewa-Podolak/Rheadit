@@ -126,11 +126,13 @@ if (window.location.href.includes("resetpasswordrequest")){
 if (window.location.href.includes("resetpassword.html")){
     var resetpassBtn = document.getElementById("resetpassBtn");
 
+    var url = new URLSearchParams(window.location.search);
+    const usertoresetid = url.get("userid");
+
+    console.log(usertoresetid);
+
     resetpassBtn.addEventListener("click", ()=>{
         var newpassvalue = document.getElementById("newpassvalue").value;
-
-        var url = new URLSearchParams(window.location.search);
-        const usertoresetid = url.get("payment")
 
         const data = {password: newpassvalue}
 
