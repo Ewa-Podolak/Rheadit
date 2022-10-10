@@ -331,6 +331,9 @@ form p {
 }
 
 .navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -356,7 +359,7 @@ form p {
   flex-direction: column;
   position: absolute;
   width: 40%;
-  top: 12%;
+  top: 12vh;
   right: 5%;
   border-radius: 5px;
   box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px;

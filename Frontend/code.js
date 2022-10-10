@@ -1748,26 +1748,6 @@ function searchbar(){
 
                 group.appendChild(membersnum);
             });
-
-
-
-            // function searching() {
-            //     var input = document.querySelector(".searchBarInput");
-            //     filter = input.value.toUpperCase();
-
-            //     ul = document.querySelector(".searchdropDown");
-            //     li = document.querySelector(".group");
-                
-            //     for (i = 0; i < li.length; i++) {
-            //         a = li[i].getElementsByTagName("a")[0];
-            //         txtValue = a.textContent || a.innerText;
-            //         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            //             li[i].style.display = "";
-            //         } else {
-            //             li[i].style.display = "none";
-            //         }
-            //     }
-            // }
         });
     })
 
@@ -1778,12 +1758,14 @@ function searchbar(){
 }
 
 function searching() {
+    console.log("searching");
+
     var input = document.querySelector(".searchBarInput");
     filter = input.value.toUpperCase();
     console.log(filter);
 
     ul = document.querySelector(".searchdropDown");
-    li = document.querySelector(".group");
+    li = document.querySelectorAll(".group");
     console.log(li);
     
     console.log("loopstart")
