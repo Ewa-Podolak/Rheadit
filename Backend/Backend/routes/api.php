@@ -20,7 +20,7 @@ Route::patch('/users/profilepicture/{userid}', [userController::class, 'UpdatePi
 //Sent in body
 Route::patch('/users/bio/{userid}', [userController::class, 'UpdateBio']); //Allows user to change their bio //works
 
-Route::patch()('/users/sendemail', [userController::class, 'SendEmail']); //Sends email for resetting password //welp ///////// fe not done
+Route::patch('/users/sendemail', [userController::class, 'SendEmail']); //Sends email for resetting password //welp ///////// fe not done
 
 Route::patch('/users/resetpassword/{userid}', [userController::class, 'ResetPassword']); //Updates password //welp ///////// fe not done
 //Send password in body of api call

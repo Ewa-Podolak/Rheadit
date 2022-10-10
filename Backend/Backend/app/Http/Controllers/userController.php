@@ -56,9 +56,9 @@ class userController extends Controller
 
     public function ResetPassword($userid)
     {
-        $user = new user;
         $password = request()->password;
-        return $user->SendEmail($password);
+        user::where('userid', $userid)->update(['password'=>$password]);
+        return ['updated'=>true];
     }
 
     public function DeleteUser($userid)
