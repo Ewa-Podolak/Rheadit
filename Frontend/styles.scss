@@ -313,6 +313,10 @@ form{
 
 }
 
+.group:hover{
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
 .searchdropDown{
     width: 90vw;
     height: fit-content;
@@ -339,7 +343,7 @@ form{
         align-items: center;
 
         padding: 5%;
-        width: 90%;
+        width: 100%;
     }
 
     h3{
