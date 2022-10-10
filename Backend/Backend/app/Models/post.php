@@ -20,8 +20,7 @@ class post extends Model
         $numberofpostsmax = $allposts->count();
         $postsarray = [];
         if($numberofpostsmax == ($page - 1) * 10)
-            return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
-            'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null, 'commentsnumber'=>null];
+            return [];
         else
             for($x = (($page - 1) * 10); $x < $page * 10; $x++)
             {
@@ -40,7 +39,7 @@ class post extends Model
                         }
                     }
 
-                    if($partofcommunity)
+                    if($allposts->count() != 0)
                     {
                         $username = user::where('userid', $allposts[$x]->userid)->first()->username; 
                         $profilepic = user::where('userid', $allposts[$x]->userid)->first()->profilepic;
@@ -82,7 +81,7 @@ class post extends Model
                     if($allposts[$x]->community == $community->community)
                     {
                         unset($allposts[$x]);
-                        $unsetalready = false;
+                        $unsetalready = true;
                     }
                 }
             }
@@ -101,8 +100,7 @@ class post extends Model
             }
 
             if($numberofpostsmax == ($page - 1) * 10)
-                return ['postid'=>null, 'head'=>null, 'body'=>null, 'picture'=>null,
-                'username'=>null, 'profilepic'=>null, 'votes'=>null, 'voted'=>null, 'community'=>null, 'created_at'=>null, 'commentsnumber'=>null];
+                return [];
             else
             {
                 for($x = (($page - 1) * 10); $x < $page * 10; $x++)
@@ -170,8 +168,7 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null, 'created_at'=>null,
-            'username'=>null, 'voted'=>null, 'community'=>null, 'commentsnumber'=>null];
+            return [];
         }
         else
         {
@@ -221,8 +218,7 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=>null, 'votes' => null,
-            'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null, 'commentsnumber'=>null];
+            return [];
         }
         else
         {
@@ -273,8 +269,7 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 10)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'picture'=> null, 'votes' => null,
-            'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null, 'commentsnumber' => null];
+            return [];
         }
         else
         {
@@ -324,8 +319,7 @@ class post extends Model
 
         if($posts->count() == ($page - 1) * 5)
         {
-            return ['postid' => null, 'head' => null, 'body' => null, 'picture' => null, 'votes' => null,
-            'created_at'=>null, 'username'=>null, 'voted'=>null, 'community'=>null, 'commentsnumber'=>null];
+            return [];
         }
         else
         {
