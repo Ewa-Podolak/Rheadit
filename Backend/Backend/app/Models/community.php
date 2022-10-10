@@ -156,15 +156,13 @@ class community extends Model
         {
             foreach($joinedcommunities as $joinedcommunity)
             {
-                $addedcommunity = false;
                 foreach($allcommunities as $community)
                 {
-                    if($joinedcommunity->community != $community->community && !$addedcommunity)
+                    if($joinedcommunity->community != $community->community)
                     {
                         $membernumber = $this::where('community', $community->community)->get()->count();
                         $profilepic = user::where('username', $community->community)->first()->profilepic;
                         array_push($joinablecommunities, ['communityname'=>$community->community, 'membersnumber'=>$membernumber, 'profilepic'=>$profilepic]);
-                        $addedcommunity = true;
                     }
                 }
             }
