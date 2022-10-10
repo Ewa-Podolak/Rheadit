@@ -6,6 +6,11 @@ if (window.location.href.includes("index.html")){
 
     var loginBtn = document.getElementById("loginBtn");
     var errortext = document.querySelector("#loginerror");
+    var forgotPassword = document.getElementById("forgotPassword");
+
+    forgotPassword.addEventListener("click", ()=>{
+        window.location.href = "resetpasswordrequest.html";
+    })
 
     loginBtn.addEventListener("click", function(){
         var username = document.getElementById("username").value;
@@ -92,28 +97,50 @@ if (window.location.href.includes("index.html")){
             });
         }
     })
+}
 
-    // forgot password ///// not done on ewas side
+if (window.location.href.includes("request")){
+    var emilmeBtn = document.getElementById("emilmeBtn");
 
-    var forgotPassword = document.getElementById("forgotPassword");
+    emilmeBtn.addEventListener("click", ()=>{
+        var emailforreset = document.getElementById("emailforreset");
 
-    forgotPassword.addEventListener("click", function(){
-        console.log("forgot password");
+        const data = { email: emailforreset.value };
 
-        // send password reset request ///////////////////
-
-        // '/users/sendemail'
-        const data = { email: "email example" };
-
-        fetch('https://example.com/profile', {
+        fetch(`http://localhost:8000/api/users/sendemail`, {
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
         })
-          .then((response) => response.json())
-          .then((data) => {
-          })
+        .then((response) => response.json())
+        .then((data) => {
+        })
+    })
+}
+
+if (window.location.href.includes("resetpassword.html")){
+    var resetpassBtn = document.getElementById("resetpassBtn");
+
+    resetpassBtn.addEventListener("click", ()=>{
+        var newpassvalue = document.getElementById("newpassvalue").value;
+
+        var url = new URLSearchParams(window.location.search);
+        const usertoresetid = url.get("payment")
+
+        const data = {password: newpassvalue}
+
+        fetch(`http://localhost:8000/api/users/resetpassword/${usertoresetid}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+                window.location.href = "home.html";
+        });
     })
 }
 

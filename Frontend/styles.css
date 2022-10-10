@@ -187,7 +187,7 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #373F47 !important;
 }
 
-.loginContainer, .registerContainer, .resetpassContainer {
+.loginContainer, .registerContainer, .resetpassContainer, .resetpassrequestContainer {
   margin: 5%;
   background-color: #F6F6F2;
   width: 90%;
@@ -198,53 +198,53 @@ input:-webkit-autofill:active {
   justify-content: center;
   align-items: center;
 }
-.loginContainer #forgotPassword, .registerContainer #forgotPassword, .resetpassContainer #forgotPassword {
+.loginContainer #forgotPassword, .registerContainer #forgotPassword, .resetpassContainer #forgotPassword, .resetpassrequestContainer #forgotPassword {
   background-color: transparent;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
-.loginContainer #forgotPasswordText, .registerContainer #forgotPasswordText, .resetpassContainer #forgotPasswordText {
+.loginContainer #forgotPasswordText, .registerContainer #forgotPasswordText, .resetpassContainer #forgotPasswordText, .resetpassrequestContainer #forgotPasswordText {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
   justify-content: center;
 }
-.loginContainer .error, .registerContainer .error, .resetpassContainer .error {
+.loginContainer .error, .registerContainer .error, .resetpassContainer .error, .resetpassrequestContainer .error {
   display: none;
   font-style: italic;
   text-align: center;
   font-size: 12px;
   color: rgba(255, 0, 0, 0.7);
 }
-.loginContainer #loginBtn, .loginContainer #makeAccount, .registerContainer #loginBtn, .registerContainer #makeAccount, .resetpassContainer #loginBtn, .resetpassContainer #makeAccount {
+.loginContainer #loginBtn, .loginContainer #makeAccount, .registerContainer #loginBtn, .registerContainer #makeAccount, .resetpassContainer #loginBtn, .resetpassContainer #makeAccount, .resetpassrequestContainer #loginBtn, .resetpassrequestContainer #makeAccount {
   margin-top: 5%;
 }
-.loginContainer h1, .registerContainer h1, .resetpassContainer h1 {
+.loginContainer h1, .registerContainer h1, .resetpassContainer h1, .resetpassrequestContainer h1 {
   padding: 2%;
 }
-.loginContainer form, .registerContainer form, .resetpassContainer form {
+.loginContainer form, .registerContainer form, .resetpassContainer form, .resetpassrequestContainer form {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.loginContainer form .inputcontainer, .registerContainer form .inputcontainer, .resetpassContainer form .inputcontainer {
+.loginContainer form .inputcontainer, .registerContainer form .inputcontainer, .resetpassContainer form .inputcontainer, .resetpassrequestContainer form .inputcontainer {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 2%;
 }
-.loginContainer form .inputcontainer label, .registerContainer form .inputcontainer label, .resetpassContainer form .inputcontainer label {
+.loginContainer form .inputcontainer label, .registerContainer form .inputcontainer label, .resetpassContainer form .inputcontainer label, .resetpassrequestContainer form .inputcontainer label {
   padding-right: 2%;
 }
-.loginContainer form p, .registerContainer form p, .resetpassContainer form p {
+.loginContainer form p, .registerContainer form p, .resetpassContainer form p, .resetpassrequestContainer form p {
   padding: 5%;
 }
 
-.resetpassContainer {
+.resetpassContainer, .resetpassrequestContainer {
   margin-top: 55%;
 }
 
