@@ -1652,7 +1652,39 @@ function setupGeneralPage(){
 }
 
 function createnewgroup(){
-    
+    // /community/{communityname}/create/{userid}
+    // post
+
+    var newgroup = document.getElementById("newgroup");
+
+    newgroup.addEventListener("click", ()=>{
+        var createnewgroup = document.querySelector(".createnewgroup");
+        createnewgroup.style.display = "flex";
+
+        var dropdeown = document.querySelector(".dropDown");
+        dropdeown.style.display = "none";
+
+        var container = document.querySelector(".container");
+        container.style.display = "flex"
+
+        var createGroup = document.querySelector(".createGroup");
+        createGroup.addEventListener("click", ()=>{
+            var userid = window.localStorage.getItem("userid");
+            var communityname = document.getElementById("groupname");
+
+            fetch(`http://localhost:8000/api/community/${communityname.value}/create/${userid}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                window.localStorage.setItem("groupname", communityname.value)
+                window.location.href = "group.html";
+            });
+        })
+    })
 }
 
 function searchbar(){

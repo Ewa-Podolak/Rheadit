@@ -254,33 +254,63 @@ input:-webkit-autofill:active{
     h1{
         padding: 2%;
     }
+}
 
-    form{
-        width: 100%;
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .inputcontainer{
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
         align-items: center;
+        margin: 2%;
 
-        .inputcontainer{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 2%;
-
-            label{
-                padding-right: 2%;
-            }
+        label{
+            padding-right: 2%;
         }
+    }
 
-        p{
-            padding: 5%;
-        }
+    p{
+        padding: 5%;
     }
 }
 
 .registerContainer{
     display: none;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.25);
+
+    position: fixed;
+    top: 10vh;
+
+
+}
+
+.createnewgroup{
+    position: absolute;
+    background-color: $light;
+    top: 30vh;
+    width: 90%;
+    border-radius: 15px;
+    padding: 5%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .searchdropDown{
