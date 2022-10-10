@@ -143,6 +143,8 @@ return array(
     'Cron\\HoursField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
     'Cron\\MinutesField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
     'Cron\\MonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+    'Database\\Factories\\commentsFactory' => $baseDir . '/database/factories/commentsFactory.php',
+    'Database\\Factories\\communityFactory' => $baseDir . '/database/factories/communityFactory.php',
     'Database\\Factories\\followersFactory' => $baseDir . '/database/factories/followersFactory.php',
     'Database\\Factories\\interactionsFactory' => $baseDir . '/database/factories/interactionsFactory.php',
     'Database\\Factories\\postFactory' => $baseDir . '/database/factories/postFactory.php',
