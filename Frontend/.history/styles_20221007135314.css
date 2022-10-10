@@ -244,40 +244,6 @@ input:-webkit-autofill:active {
   display: none;
 }
 
-.searchdropDown {
-  width: 90vw;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  background-color: #F6F6F2;
-  position: absolute;
-  top: 10vh;
-  left: 5vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.searchdropDown .group {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 5%;
-  width: 90%;
-}
-.searchdropDown h3 {
-  font-size: 15px;
-}
-.searchdropDown img {
-  width: 25px;
-  height: 25px;
-  border-radius: 15px;
-  margin: 5%;
-}
-
 .navbar {
   width: 100vw;
   display: flex;
@@ -339,20 +305,9 @@ input:-webkit-autofill:active {
   padding: 5%;
 }
 .navbar .notifdropDown {
-  width: 50%;
   top: 20%;
   right: 45%;
-  display: none;
-  background-color: #F6F6F2;
-  padding: 5%;
-}
-
-.notifBtns, .notiftext {
-  width: 50%;
-  font-size: 13px;
-}
-.notifBtns button, .notiftext button {
-  width: 100%;
+  display: flex;
 }
 
 .popularOrRecent {
@@ -673,4 +628,4 @@ span {
 }
 .pageNumContainer #pageNum {
   padding: 10%;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20221007135314.css.map */

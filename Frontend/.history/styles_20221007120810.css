@@ -244,40 +244,6 @@ input:-webkit-autofill:active {
   display: none;
 }
 
-.searchdropDown {
-  width: 90vw;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  background-color: #F6F6F2;
-  position: absolute;
-  top: 10vh;
-  left: 5vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.searchdropDown .group {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 5%;
-  width: 90%;
-}
-.searchdropDown h3 {
-  font-size: 15px;
-}
-.searchdropDown img {
-  width: 25px;
-  height: 25px;
-  border-radius: 15px;
-  margin: 5%;
-}
-
 .navbar {
   width: 100vw;
   display: flex;
@@ -299,7 +265,7 @@ input:-webkit-autofill:active {
 .navbar .hamburger {
   margin: 5%;
 }
-.navbar .dropDown, .navbar .notifdropDown {
+.navbar .dropDown {
   display: none;
   flex-direction: column;
   position: absolute;
@@ -309,7 +275,7 @@ input:-webkit-autofill:active {
   border-radius: 5px;
   box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px;
 }
-.navbar .dropDown .triangle, .navbar .notifdropDown .triangle {
+.navbar .dropDown .triangle {
   width: 0;
   height: 0;
   position: absolute;
@@ -319,7 +285,7 @@ input:-webkit-autofill:active {
   border-right: 5px solid transparent;
   border-bottom: 10px solid #F6F6F2;
 }
-.navbar .dropDown ul, .navbar .notifdropDown ul {
+.navbar .dropDown ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -328,31 +294,11 @@ input:-webkit-autofill:active {
   border-radius: 5px;
   background-color: #F6F6F2;
 }
-.navbar .dropDown ul li, .navbar .notifdropDown ul li {
+.navbar .dropDown ul li {
   padding: 10%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
-.navbar .dropDown ul li #username, .navbar .notifdropDown ul li #username {
+.navbar .dropDown ul li #username {
   padding: 5%;
-}
-.navbar .notifdropDown {
-  width: 50%;
-  top: 20%;
-  right: 45%;
-  display: none;
-  background-color: #F6F6F2;
-  padding: 5%;
-}
-
-.notifBtns, .notiftext {
-  width: 50%;
-  font-size: 13px;
-}
-.notifBtns button, .notiftext button {
-  width: 100%;
 }
 
 .popularOrRecent {
@@ -378,15 +324,11 @@ input:-webkit-autofill:active {
   padding: 5% 0;
 }
 
-.comment {
-  margin-left: 2%;
-}
-
 .profile {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 0;
+  margin-left: 5%;
 }
 .profile img {
   margin-left: 0;
@@ -549,20 +491,11 @@ input:-webkit-autofill:active {
 }
 .postsContainer .comments ul li .comment .commentText, .postsContainer .postcomments ul li .comment .commentText, .postpostsContainer .comments ul li .comment .commentText, .postpostsContainer .postcomments ul li .comment .commentText {
   font-size: 15px;
-  padding-left: 2%;
+  padding-left: 5%;
   width: 100%;
-  margin: 5% 0;
 }
 .postsContainer .comments ul li .profile, .postsContainer .postcomments ul li .profile, .postpostsContainer .comments ul li .profile, .postpostsContainer .postcomments ul li .profile {
   justify-content: space-between;
-}
-
-.requestmod {
-  height: 8vh;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5%;
 }
 
 .profileBox {
@@ -673,4 +606,4 @@ span {
 }
 .pageNumContainer #pageNum {
   padding: 10%;
-}/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles_20221007120810.css.map */

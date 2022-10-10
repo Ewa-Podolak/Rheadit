@@ -260,6 +260,46 @@ input:-webkit-autofill:active{
     display: none;
 }
 
+.searchdropDown{
+    width: 90vw;
+    height: fit-content;
+
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+    background-color: $light;
+
+    position: absolute;
+    top: 10vh;
+    left: 5vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .group{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        padding: 5%;
+        width: 90%;
+    }
+
+    h3{
+        font-size: 15px;
+    }
+
+    img{
+        width: 25px;
+        height: 25px;
+        border-radius: 15px;
+        margin: 5%;
+    }
+}
+
 .navbar{
     width: 100vw;
     display: flex;

@@ -1571,6 +1571,21 @@ function setupGeneralPage(){
     gotoHome();
     logout();
     togglemenu();
+    searchbar();
+}
+
+function searchbar(){
+    var searchBarInput = document.querySelector(".searchBarInput");
+
+    searchBarInput.addEventListener("click", ()=>{
+        console.log("search");
+    })
+
+    // show all available groups
+    var searchdropDown = document.querySelector(".searchdropDown");
+
+    //searchdropDown.createElement("div");
+    
 }
 
 function setdropdownUsername(){
