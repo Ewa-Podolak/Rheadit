@@ -196,6 +196,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
 
     getnotifications();
 
+
     var pagenumber = 1;
     var commentpagenumber = 1;
     var postsContainer = document.querySelector(".postsContainer");
@@ -1647,6 +1648,11 @@ function setupGeneralPage(){
     logout();
     togglemenu();
     searchbar();
+    createnewgroup();
+}
+
+function createnewgroup(){
+    
 }
 
 function searchbar(){
@@ -1699,9 +1705,14 @@ function searchbar(){
 
                 group.appendChild(a);
 
+                a.addEventListener("click", ()=>{
+                    window.localStorage.setItem("groupname", a.innerHTML)
+                    window.location.href = "group.html";
+                })
+
                 const membersnum = document.createElement("h3");
                 membersnum.classList.add("membersnum");
-                membersnum.innerHTML = `${groupinlist.membersnumber} memebers`;
+                membersnum.innerHTML = `${groupinlist.membersnumber} members`;
 
                 group.appendChild(membersnum);
             });

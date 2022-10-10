@@ -2,6 +2,35 @@
   width: 50%;
 }
 
+/* body{
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.explore{
+  width: 20vw;
+  padding: 2%;
+}
+
+.searchdropDown {
+  width: 50%;
+  left: 25%;
+}
+
+.createnewPost, .postsContainer {
+  width: 70%;
+}
+
+.createnewPost i {
+  padding: 2%;
+}
+
+input{
+  padding: 1%;
+}
+
 .follow, .membersAndJoin {
   flex-direction: column;
   width: 50%;
