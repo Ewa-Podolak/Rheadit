@@ -154,16 +154,21 @@ class community extends Model
         }
         else
         {
-            foreach($joinedcommunities as $joinedcommunity)
+            foreach($allcommunities as $community)
             {
-                foreach($allcommunities as $community)
+                $alreadyapartof = false;
+                foreach($joinedcommunities as $joinedcommunity)
                 {
-                    if($joinedcommunity->community != $community->community)
+                    if($joinedcommunity->community == $community->community)
                     {
-                        $membernumber = $this::where('community', $community->community)->get()->count();
-                        $profilepic = user::where('username', $community->community)->first()->profilepic;
-                        array_push($joinablecommunities, ['communityname'=>$community->community, 'membersnumber'=>$membernumber, 'profilepic'=>$profilepic]);
+                        $alreadyapartof = true;
                     }
+                }
+                if(!$alreadyapartof)
+                {
+                    $membernumber = $this::where('community', $community->community)->get()->count();
+                    $profilepic = user::where('username', $community->community)->first()->profilepic;
+                    array_push($joinablecommunities, ['communityname'=>$community->community, 'membersnumber'=>$membernumber, 'profilepic'=>$profilepic]);
                 }
             }
         }
