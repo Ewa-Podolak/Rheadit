@@ -1591,9 +1591,45 @@ function searchbar(){
             searchopen = false;
         }
 
-        const group = searchdropDown.createElement("div");
-        group.classList.add("group");
+        var userid = window.localStorage.getItem("userid");
         
+        fetch(`http://localhost:8000/api/community/joinable/${userid}`)
+        .then((response) => response.json())
+        .then((data) => {
+
+            console.log(data);
+
+            searchdropDown.innerHTML = "";
+
+            data.forEach(groupinlist =>{
+                const group = document.createElement("div");
+                group.classList.add("group");
+
+                searchdropDown.appendChild(group);
+
+                const groupimg = document.createElement("img");
+
+                if (groupinlist.profilepic == null){
+                    groupimg.src = "./images/607426-200.png"
+                }
+                else{
+                    groupimg.src = groupinlist.profilepic
+                }
+
+                group.appendChild(groupimg);
+
+                const groupdownname = document.createElement("h3");
+                groupdownname.innerHTML = groupinlist.communityname;
+
+                group.appendChild(groupdownname);
+
+                const membersnum = document.createElement("h3");
+                membersnum.classList.add("membersnum");
+                membersnum.innerHTML = `${groupinlist.membersnumber} memebers`;
+
+                group.appendChild(membersnum);
+            });
+        });
     })
 
     // show all available groups
