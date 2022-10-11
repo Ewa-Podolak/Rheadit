@@ -12,7 +12,6 @@ data:
         root /src-shared/public;
     
         add_header Pod $hostname;
-    	add_header X-Robots-Tag $robots;
     
         # Add index.php to the list if you are using PHP
         index index.php index.html index.htm;
