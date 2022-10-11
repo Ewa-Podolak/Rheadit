@@ -1,3 +1,5 @@
+const prodUrl ="https://rheadit-main.qa.parallax.dev"
+
 if (window.location.href.includes("index.html")){
 
     var loginBtn = document.getElementById("loginBtn");
@@ -18,7 +20,7 @@ if (window.location.href.includes("index.html")){
             errortext.innerHTML = "Please enter a username and password";
         }
         else{
-            fetch(`http://localhost:8000/api/users/login/${username}/${password}`)
+            fetch(`${pprodUrl}/api/users/login/${username}/${password}`)
             .then(response => response.json())
             .then(data => { 
 
@@ -65,7 +67,7 @@ if (window.location.href.includes("index.html")){
         }
         else{
 
-            fetch(`http://localhost:8000/api/users/register/${registerusername}/${registerpassword}/${registeremail}`, {
+            fetch(`${prodUrl}/api/users/register/${registerusername}/${registerpassword}/${registeremail}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -113,7 +115,7 @@ if (window.location.href.includes("resetpasswordrequest")){
                 reseterrortext.style.display = "none";
                 const data = { email: emailforreset.value };
 
-                fetch(`http://localhost:8000/api/users/sendemail`, {
+                fetch(`${prodUrl}/api/users/sendemail`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -171,7 +173,7 @@ if (window.location.href.includes("resetpassword.html")){
 
             const data = {password: newpassvalue.value}
 
-            fetch(`http://localhost:8000/api/users/resetpassword/${usertoresetid}`, {
+            fetch(`${prodUrl}/api/users/resetpassword/${usertoresetid}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -261,7 +263,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
             var postsContainer = document.querySelector(".postpostsContainer");
             console.log(postsContainer);
             // /posts/{postid}/{userid}
-            fetch(`http://localhost:8000/api/posts/${postids}/${userid}`)
+            fetch(`${prodUrl}/api/posts/${postids}/${userid}`)
             .then(response => response.json())
             .then(data => { 
 
@@ -380,7 +382,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
                     console.log("normal delete button");
                     console.log(postarray[x])
         
-                    fetch(`http://localhost:8000/api/posts/delete/${postids}/${userid}`, { 
+                    fetch(`${prodUrl}/api/posts/delete/${postids}/${userid}`, { 
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -406,7 +408,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
 
                 arrowupBtn.addEventListener("click", function(){
 
-                    fetch(`http://localhost:8000/api/interactions/upvotepost/${postids}/${userid}`, { 
+                    fetch(`${prodUrl}/api/interactions/upvotepost/${postids}/${userid}`, { 
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -426,7 +428,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
                 
                 arrowdownBtn.addEventListener("click", function(){
         
-                    fetch(`http://localhost:8000/api/interactions/downvotepost/${postids}/${userid}`, {
+                    fetch(`${prodUrl}/api/interactions/downvotepost/${postids}/${userid}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -483,7 +485,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
                     if (commentmade != ""){
                         console.log(commentmade)
                         var data = {comment: commentmade}
-                        fetch(`http://localhost:8000/api/comments/create/${postids}/${userid}`, { 
+                        fetch(`${prodUrl}/api/comments/create/${postids}/${userid}`, { 
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -509,7 +511,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
                     
 
 
-                    fetch(`http://localhost:8000/api/comments/${postids}/${commentpagenumber}/${userid}`)
+                    fetch(`${prodUrl}/api/comments/${postids}/${commentpagenumber}/${userid}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
@@ -642,7 +644,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
                         for (let m = 0; m < favouriteComment.length; m++){
                             favouriteComment[m].addEventListener("click", ()=>{
 
-                                fetch(`http://localhost:8000/api/comments/favourite/${postids}/${commentids[m]}/${userid}`, {
+                                fetch(`${prodUrl}/api/comments/favourite/${postids}/${commentids[m]}/${userid}`, {
                                     method: 'PATCH',
                                     headers: {
                                         'Content-Type': 'application/json',
@@ -662,7 +664,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
 
                         for (let m = 0; m<deletecommentBtns.length; m++){
                             deletecommentBtns[m].addEventListener("click", ()=>{
-                                fetch(`http://localhost:8000/api/comments/delete/${commentids[m]}/${userid}`, { 
+                                fetch(`${prodUrl}/api/comments/delete/${commentids[m]}/${userid}`, { 
                                     method: 'DELETE',
                                     headers: {
                                         'Content-Type': 'application/json',
@@ -695,7 +697,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
                             cupbtns[m].addEventListener("click", function(){
                                 console.log(commentids[m]);
 
-                                fetch(`http://localhost:8000/api/interactions/upvotecomment/${commentids[m]}/${userid}`, { 
+                                fetch(`${prodUrl}/api/interactions/upvotecomment/${commentids[m]}/${userid}`, { 
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
@@ -718,7 +720,7 @@ if (!window.location.href.includes("index.html") && !window.location.href.includ
                             cdownbtns[m].addEventListener("click", function(){
                                 console.log(commentids[m]);
 
-                                fetch(`http://localhost:8000/api/interactions/downvotecomment/${commentids[m]}/${userid}`, {
+                                fetch(`${prodUrl}/api/interactions/downvotecomment/${commentids[m]}/${userid}`, {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
@@ -750,7 +752,7 @@ function getnotifications(){
     var userid = window.localStorage.getItem("userid");
     console.log(userid)
 
-    fetch(`http://localhost:8000/api/community/notification/${userid}`)
+    fetch(`${prodUrl}/api/community/notification/${userid}`)
     .then(response => response.json())
     .then(data => {
         console.log("notifications: ")
@@ -794,7 +796,7 @@ function getnotifications(){
                     notificationsList.removeChild(li);
                     console.log(comunity);
                     console.log(un);
-                    fetch(`http://localhost:8000/api/community/approvemod/${comunity}/${userid}/${un}`, {
+                    fetch(`${prodUrl}/api/community/approvemod/${comunity}/${userid}/${un}`, {
                         method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
@@ -809,7 +811,7 @@ function getnotifications(){
 
                 reject.addEventListener("click", ()=>{
                     notificationsList.removeChild(li);
-                    fetch(`http://localhost:8000/api/community/rejectmod/${comunity}/${userid}/${un}`, {
+                    fetch(`${prodUrl}/api/community/rejectmod/${comunity}/${userid}/${un}`, {
                         method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
@@ -840,7 +842,7 @@ function follow(username){
     followBtn.addEventListener("click", ()=>{
         followBtn.innerHTML = "Unfollow";
         
-        fetch(`http://localhost:8000/api/followers/follow/${userid}/${username}`)
+        fetch(`${prodUrl}/api/followers/follow/${userid}/${username}`)
         .then(response => response.json())
         .then(data => {
             window.location.href = "profile.html";
@@ -855,7 +857,7 @@ function jointheGroup(){
             joinGroup.innerHTML = "Requested";
             joinGroup.style.fontWeight = "700"
 
-            fetch(`http://localhost:8000/api/community/${groupname}/join/${userid}`,{
+            fetch(`${prodUrl}/api/community/${groupname}/join/${userid}`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -869,7 +871,7 @@ function jointheGroup(){
 
 function leave(leavegroup, communityname){
     leavegroup.addEventListener("click", ()=>{
-        fetch(`http://localhost:8000/api/community/${communityname}/leave/${userid}`, {
+        fetch(`${prodUrl}/api/community/${communityname}/leave/${userid}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -883,7 +885,7 @@ function leave(leavegroup, communityname){
 }
 
 function setupgroupPage(){
-    fetch(`http://localhost:8000/api/community/getinfo/${groupname}/${userid}`)
+    fetch(`${prodUrl}/api/community/getinfo/${groupname}/${userid}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -950,7 +952,7 @@ function setupgroupPage(){
 }
 
 function requesttmod(groupname){
-    fetch(`http://localhost:8000/api/community/requestmod/${groupname}/${userid}`, {
+    fetch(`${prodUrl}/api/community/requestmod/${groupname}/${userid}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -981,7 +983,7 @@ function deletegroup(communityname){
     deletegroup.addEventListener("click", ()=>{
         userid = window.localStorage.getItem("userid");
 
-        fetch(`http://localhost:8000/api/community/delete/${communityname}/${userid}`, {
+        fetch(`${prodUrl}/api/community/delete/${communityname}/${userid}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -1012,7 +1014,7 @@ function newgroupprofile(editgroupProfile, communityname){
             var data = { profilepic: submitNewProfilePicBox.value};
             var userid = window.localStorage.getItem("userid");
 
-            fetch(`http://localhost:8000/api/community/updateprofilepic/${communityname}/${userid}`, { 
+            fetch(`${prodUrl}/api/community/updateprofilepic/${communityname}/${userid}`, { 
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1045,7 +1047,7 @@ function newgroupbio(communityname){
             newBio.style.display = "none";
             newBioBtn.style.display = "none";
 
-            fetch(`http://localhost:8000/api/community/updatebio/${communityname}/${userid}`, {
+            fetch(`${prodUrl}/api/community/updatebio/${communityname}/${userid}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1091,7 +1093,7 @@ function editprofilepic(){
             var data = { profilepic: submitNewProfilePicBox.value};
             var userid = window.localStorage.getItem("userid");
 
-            fetch(`http://localhost:8000/api/users/profilepicture/${userid}`, { 
+            fetch(`${prodUrl}/api/users/profilepicture/${userid}`, { 
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1122,7 +1124,7 @@ function newbio(){
 
             newBio.style.display = "none";
             newBioBtn.style.display = "none";
-            fetch(`http://localhost:8000/api/users/bio/${window.localStorage.getItem("userid")}`, {
+            fetch(`${prodUrl}/api/users/bio/${window.localStorage.getItem("userid")}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1141,7 +1143,7 @@ function deleteuser(){
     deleteuser.style.display = "block";
     deleteuser.addEventListener("click", ()=>{
         userid = window.localStorage.getItem("userid");
-        fetch(`http://localhost:8000/api/users/delete/${userid}`, {
+        fetch(`${prodUrl}/api/users/delete/${userid}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -1167,7 +1169,7 @@ function setupgeneralProfile(){
 
     follow(usernameProfile);
 
-    fetch(`http://localhost:8000/api/users/${loggedinUsername}/${usernameProfile}`)
+    fetch(`${prodUrl}/api/users/${loggedinUsername}/${usernameProfile}`)
     .then(response => response.json())
     .then(data => {
 
@@ -1195,7 +1197,7 @@ function setupgeneralProfile(){
 }
 
 function checkiffollowing(usernameProfile){
-    fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) 
+    fetch(`${prodUrl}/api/followers/list/followers/${usernameProfile}`) 
     .then(response => response.json())
     .then(data => {
 
@@ -1217,7 +1219,7 @@ function getfollowing(followersOrFollowingListContainer, usernameProfile, boxCon
     followingBtn.addEventListener("click", function(){
         followersOrFollowingListContainer.style.display = "flex";
 
-        fetch(`http://localhost:8000/api/followers/list/followed/${usernameProfile}`) 
+        fetch(`${prodUrl}/api/followers/list/followed/${usernameProfile}`) 
         .then(response => response.json())
         .then(data => {
 
@@ -1246,7 +1248,7 @@ function getfollowers(followersOrFollowingListContainer, usernameProfile, boxCon
     followersBtn.addEventListener("click", function(){
         followersOrFollowingListContainer.style.display = "flex";
 
-        fetch(`http://localhost:8000/api/followers/list/followers/${usernameProfile}`) 
+        fetch(`${prodUrl}/api/followers/list/followers/${usernameProfile}`) 
         .then(response => response.json())
         .then(data => {
 
@@ -1313,7 +1315,7 @@ function getPosts(pagenumber, groupname){
 }
 
 function populargroupposts(){
-    fetch(`http://localhost:8000/api/posts/${groupname}/liked/${userid}/${pagenumber}`) 
+    fetch(`${prodUrl}/api/posts/${groupname}/liked/${userid}/${pagenumber}`) 
     .then(response => response.json())
     .then(data => {
         if(data.length == 0){
@@ -1330,7 +1332,7 @@ function populargroupposts(){
 }
 
 function recentgroupposts(){
-    fetch(`http://localhost:8000/api/posts/${groupname}/newest/${userid}/${pagenumber}`) 
+    fetch(`${prodUrl}/api/posts/${groupname}/newest/${userid}/${pagenumber}`) 
     .then(response => response.json())
     .then(data => {
         if(data.length == 0){
@@ -1347,7 +1349,7 @@ function recentgroupposts(){
 }
 
 function popularprofileposts(){
-    fetch(`http://localhost:8000/api/posts/userposts/liked/${userid}/${pagenumber}`)
+    fetch(`${prodUrl}/api/posts/userposts/liked/${userid}/${pagenumber}`)
     .then(response => response.json())
     .then(data => {
 
@@ -1365,7 +1367,7 @@ function popularprofileposts(){
 }
 
 function recentprofileposts(){
-    fetch(`http://localhost:8000/api/posts/userposts/newest/${userid}/${pagenumber}`)
+    fetch(`${prodUrl}/api/posts/userposts/newest/${userid}/${pagenumber}`)
     .then(response => response.json())
     .then(data => {
 
@@ -1383,7 +1385,7 @@ function recentprofileposts(){
 }
 
 function explorehomepageposts(){
-    fetch(`http://localhost:8000/api/posts/explorehomepage/${pagenumber}/${userid}`)
+    fetch(`${prodUrl}/api/posts/explorehomepage/${pagenumber}/${userid}`)
         .then(response => response.json())
         .then(data => {
 
@@ -1401,7 +1403,7 @@ function explorehomepageposts(){
 }
 
 function homepageposts(){
-    fetch(`http://localhost:8000/api/posts/homepage/${pagenumber}/${userid}`)
+    fetch(`${prodUrl}/api/posts/homepage/${pagenumber}/${userid}`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -1552,7 +1554,7 @@ function populatePosts(data, pagenumber){
             console.log("normal delete button");
             console.log(postarray[x])
 
-            fetch(`http://localhost:8000/api/posts/delete/${postarray[x]}/${userid}`, { 
+            fetch(`${prodUrl}/api/posts/delete/${postarray[x]}/${userid}`, { 
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1578,7 +1580,7 @@ function populatePosts(data, pagenumber){
 
         arrowupBtn.addEventListener("click", function(){
 
-            fetch(`http://localhost:8000/api/interactions/upvotepost/${postarray[x]}/${userid}`, { 
+            fetch(`${prodUrl}/api/interactions/upvotepost/${postarray[x]}/${userid}`, { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1598,7 +1600,7 @@ function populatePosts(data, pagenumber){
 
         arrowdownBtn.addEventListener("click", function(){
 
-                fetch(`http://localhost:8000/api/interactions/downvotepost/${postarray[x]}/${userid}`, {
+                fetch(`${prodUrl}/api/interactions/downvotepost/${postarray[x]}/${userid}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1672,7 +1674,7 @@ function createnewgroup(){
             var userid = window.localStorage.getItem("userid");
             var communityname = document.getElementById("groupname");
 
-            fetch(`http://localhost:8000/api/community/${communityname.value}/create/${userid}`, {
+            fetch(`${prodUrl}/api/community/${communityname.value}/create/${userid}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1706,7 +1708,7 @@ function searchbar(){
 
         var userid = window.localStorage.getItem("userid");
         
-        fetch(`http://localhost:8000/api/community/joinable/${userid}`)
+        fetch(`${prodUrl}/api/community/joinable/${userid}`)
         .then((response) => response.json())
         .then((data) => {
 
@@ -1812,7 +1814,7 @@ function newpost(group){
         if (newposttxt.value != ""){
             data = {head: newposttxt.value, body: newbodytxt.value, picture: newbodyimg.value};
 
-            fetch(`http://localhost:8000/api/posts/${group}/create/${userid}`, {
+            fetch(`${prodUrl}/api/posts/${group}/create/${userid}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
