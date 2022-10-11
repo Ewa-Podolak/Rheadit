@@ -1,0 +1,49 @@
+stage: 3
+repeat: eachDomain
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: '{{ domain }}-https'
+  namespace: '{{ namespace }}'
+spec:
+  entryPoints:
+    - https
+  routes:
+  - match: Host(`{{ domain }}`)
+    kind: Rule
+    services:
+    - name: '{{ branch }}-openresty'
+      port: 80
+  tls:
+    secretName: '{{ domain_md5 }}-ssl'
+---
+stage: 3
+repeat: eachDomain
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: '{{ domain }}-http'
+  namespace: '{{ namespace }}'
+spec:
+  entryPoints:
+    - http
+  routes:
+  - match: Host(`{{ domain }}`)
+    kind: Rule
+    services:
+    - name: '{{ branch }}-openresty'
+      port: 80
+    middlewares:
+    - name: ssl-redirect
+      namespace: '{{ namespace }}'
+---
+stage: 3
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: ssl-redirect
+  namespace: '{{ namespace }}'
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
