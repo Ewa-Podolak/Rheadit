@@ -1,0 +1,15 @@
+stage: 1
+repeat: eachDomain
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: '{{ domain_md5 }}'
+  namespace: '{{ namespace }}'
+spec:
+  dnsNames:
+  - '{{ domain_md5 }}.parallax.dev'
+  - '{{ domain }}'
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: '{{ domain_md5 }}-ssl'

@@ -91,4 +91,29 @@ class userController extends Controller
     {
         return ['userid'=> $dbinfo->userid, 'username' => $dbinfo->username];
     }
+
+    public function Codewars()
+    {
+        $roman = 'MCMXC';
+        $number = 0;
+  
+        $numbersignificance = ['I'=> 1, 'V'=>5, 'X'=>10, 'L'=>50, 'C'=>100, 'D'=>500, 'M'=>1000];
+        $array = str_split($roman);
+        
+        for($i = 0; $i < count($array); $i++)
+          {
+          if($i == count($array)-1)
+            $number += $numbersignificance[$array[$i]];
+          else if($numbersignificance[$array[$i]] < $numbersignificance[$array[$i+1]])
+            {
+            $number += ($numbersignificance[$array[$i+1]] - $numbersignificance[$array[$i]]);
+            $i++;
+          }
+          else
+            $number += $numbersignificance[$array[$i]];
+        }
+        
+        return $number;
+        
+    }
 }
