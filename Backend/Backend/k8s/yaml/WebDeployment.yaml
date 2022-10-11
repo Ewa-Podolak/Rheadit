@@ -59,22 +59,22 @@ spec:
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: 'mysql-credentials-{{ branch }}'
+              name: 'mysql57-credentials-{{ branch }}'
               key: endpoint
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: 'mysql-credentials-{{ branch }}'
+              name: 'mysql57-credentials-{{ branch }}'
               key: username
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: 'mysql-credentials-{{ branch }}'
+              name: 'mysql57-credentials-{{ branch }}'
               key: password
         - name: DB_DATABASE
           valueFrom:
             secretKeyRef:
-              name: 'mysql-credentials-{{ branch }}'
+              name: 'mysql57-credentials-{{ branch }}'
               key: database
         image: '{{ image_php-fpm }}'
         imagePullPolicy: IfNotPresent
