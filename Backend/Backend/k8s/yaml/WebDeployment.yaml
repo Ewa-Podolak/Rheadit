@@ -56,22 +56,26 @@ spec:
       containers:
       - name: php-fpm
         env:
-        - name: AWS_BUCKET
-          value: '{{ app }}-kbuild-{{ environment }}'
-        - name: AWS_URL
-          value: 'https://{{ app }}-kbuild-{{ environment }}.s3-eu-west-1.amazonaws.com/'
-        - name: AWS_DEFAULT_REGION
-          value: 'eu-west-1'
-        - name: AWS_ACCESS_KEY_ID
+        - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: 'aws-credentials'
-              key: AccessKeyId
-        - name: AWS_SECRET_ACCESS_KEY
+              name: 'mysql-credentials-{{ branch }}'
+              key: endpoint
+        - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: 'aws-credentials'
-              key: SecretAccessKey
+              name: 'mysql-credentials-{{ branch }}'
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: 'mysql-credentials-{{ branch }}'
+              key: password
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: 'mysql-credentials-{{ branch }}'
+              key: database
         image: '{{ image_php-fpm }}'
         imagePullPolicy: IfNotPresent
         livenessProbe:
