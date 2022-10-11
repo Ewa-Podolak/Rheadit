@@ -291,6 +291,10 @@ form p {
   align-items: center;
 }
 
+.group:hover {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
 .searchdropDown {
   width: 90vw;
   height: -webkit-fit-content;
@@ -314,7 +318,7 @@ form p {
   justify-content: center;
   align-items: center;
   padding: 5%;
-  width: 90%;
+  width: 100%;
 }
 .searchdropDown h3 {
   font-size: 15px;
@@ -327,6 +331,9 @@ form p {
 }
 
 .navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -352,7 +359,7 @@ form p {
   flex-direction: column;
   position: absolute;
   width: 40%;
-  top: 12%;
+  top: 12vh;
   right: 5%;
   border-radius: 5px;
   box-shadow: rgba(100, 100, 111, 0.7) 0px 7px 29px 0px;

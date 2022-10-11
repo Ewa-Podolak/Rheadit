@@ -2,13 +2,6 @@
   width: 50%;
 }
 
-/* body{
-  width: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 .explore{
   width: 20vw;
   padding: 2%;
@@ -19,7 +12,11 @@
   left: 25%;
 }
 
-.createnewPost, .postsContainer {
+.dropDown{
+  width: 20vw !important;
+}
+
+.createnewPost, .postsContainer, .popularOrRecent, .bio, .wholeProfile {
   width: 70%;
 }
 
