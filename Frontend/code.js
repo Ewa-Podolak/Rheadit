@@ -1,4 +1,7 @@
 const prodUrl ="https://rheadit-main.qa.parallax.dev"
+//const prodUrl ="http://localhost:8000";
+
+
 
 console.log("this is new");
 
@@ -763,8 +766,6 @@ function getnotifications(){
     fetch(`${prodUrl}/api/community/notification/${userid}`)
     .then(response => response.json())
     .then(data => {
-        console.log("notifications: ")
-        console.log(data);
         notifbell.innerHTML = data.length ? data.length:0;
 
         notifbell.addEventListener("click", ()=>{
@@ -924,8 +925,8 @@ function setupgroupPage(){
             showgroupbio.innerHTML = data.bio
             numgroupmembers.innerHTML = data.memebernumber;
             console.log("pp");
-            console.log(data.profilePic);
-            if(data.profilepic == "dsa" || data.profilepic == null){
+            console.log(data.profilepic);
+            if(data.profilepic == null){
                 groupPic.src = "./images/607426-200.png";
             }
             else{
@@ -1359,9 +1360,12 @@ function recentgroupposts(){
 }
 
 function popularprofileposts(){
-    fetch(`${prodUrl}/api/posts/userposts/liked/${userid}/${pagenumber}`)
+    let usernameToGet = window.localStorage.getItem("usernameToGet")
+    console.log(usernameToGet);
+    fetch(`${prodUrl}/api/posts/userposts/liked/${usernameToGet}/${pagenumber}`)
     .then(response => response.json())
     .then(data => {
+        console.log(data);
 
         if(data.length == 0){
             populatePosts(data, pagenumber);
@@ -1377,9 +1381,12 @@ function popularprofileposts(){
 }
 
 function recentprofileposts(){
-    fetch(`${prodUrl}/api/posts/userposts/newest/${userid}/${pagenumber}`)
+    let usernameToGet = window.localStorage.getItem("usernameToGet")
+    console.log(usernameToGet);
+    fetch(`${prodUrl}/api/posts/userposts/newest/${usernameToGet}/${pagenumber}`)
     .then(response => response.json())
     .then(data => {
+        console.log(data);
 
         if(data.length == 0){
             populatePosts(data, pagenumber);
@@ -1736,7 +1743,7 @@ function searchbar(){
                 const groupimg = document.createElement("img");
 
                 console.log("groupinlist.profilepic")
-                if (groupinlist.profilepic == null || groupinlist.profilepic == "dsa"){
+                if (groupinlist.profilepic == null){
                     groupimg.src = "./images/607426-200.png"
                 }
                 else{
