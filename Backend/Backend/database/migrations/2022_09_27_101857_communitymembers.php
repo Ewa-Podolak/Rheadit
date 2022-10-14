@@ -8,8 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('community', function (Blueprint $table)
-        {
+        Schema::create('community', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('userid');
             $table->string('community', 30);

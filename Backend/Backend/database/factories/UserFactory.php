@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class UserFactory extends Factory
 {
     protected $model = user::class;
-    
+
     public function definition()
     {
         return [
