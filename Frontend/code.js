@@ -923,7 +923,9 @@ function setupgroupPage(){
             showgroupname.innerHTML = data.communityname;
             showgroupbio.innerHTML = data.bio
             numgroupmembers.innerHTML = data.memebernumber;
-            if(data.profilepic == null){
+            console.log("pp");
+            console.log(data.profilePic);
+            if(data.profilepic == "dsa"){
                 groupPic.src = "./images/607426-200.png";
             }
             else{
