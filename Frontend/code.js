@@ -1735,7 +1735,8 @@ function searchbar(){
 
                 const groupimg = document.createElement("img");
 
-                if (groupinlist.profilepic == null){
+                console.log("groupinlist.profilepic")
+                if (groupinlist.profilepic == null || groupinlist.profilepic == "dsa"){
                     groupimg.src = "./images/607426-200.png"
                 }
                 else{
