@@ -14,6 +14,8 @@ if (loginPageBody){
     })
 
     loginBtn.addEventListener("click", function(){
+        console.log("login")
+
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
 
@@ -23,7 +25,7 @@ if (loginPageBody){
             errortext.innerHTML = "Please enter a username and password";
         }
         else{
-            fetch(`${pprodUrl}/api/users/login/${username}/${password}`)
+            fetch(`${prodUrl}/api/users/login/${username}/${password}`)
             .then(response => response.json())
             .then(data => { 
 
