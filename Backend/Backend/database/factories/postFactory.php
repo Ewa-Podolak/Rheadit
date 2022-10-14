@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\post;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class postFactory extends Factory
 {
@@ -11,22 +11,19 @@ class postFactory extends Factory
 
     public function definition()
     {
-        if(rand(0,1) == 1)
-        {
+        if (rand(0, 1) == 1) {
             return [
                 'userid' => 2,
                 'head' => str_random(5, 30),
                 'body' => str_random(5, 150),
                 'community' => 'Frontend',
-        ];
-        }
-        else
-        {
+            ];
+        } else {
             return [
                 'userid' => 1,
-                'head' => str_random(5, 30),  
-                'community' => 'Backend',   
-        ];
+                'head' => str_random(5, 30),
+                'community' => 'Backend',
+            ];
         }
     }
 }

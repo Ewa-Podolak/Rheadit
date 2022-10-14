@@ -10,5 +10,6 @@ class follower extends Model
     use HasFactory;
 
     protected $table = 'followers';
+
     public $timestamps = false;
 }

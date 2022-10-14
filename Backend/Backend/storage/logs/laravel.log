@@ -18615,3 +18615,39 @@ Did you mean one of these?
 #39 /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Users/parallax...')
 #40 {main}
 "} 
+[2022-10-11 14:34:39] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:114)
+[stacktrace]
+#0 {main}
+"} 
+[2022-10-11 14:36:56] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:115)
+[stacktrace]
+#0 {main}
+"} 
+[2022-10-11 14:39:27] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:121)
+[stacktrace]
+#0 {main}
+"} 
+[2022-10-11 14:40:41] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:121)
+[stacktrace]
+#0 {main}
+"} 
+[2022-10-14 09:13:23] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:127)
+[stacktrace]
+#0 {main}
+"} 
+[2022-10-14 09:14:23] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:147)
+[stacktrace]
+#0 {main}
+"} 
+[2022-10-14 09:15:24] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:138)
+[stacktrace]
+#0 {main}
+"} 
+[2022-10-14 09:17:44] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:147)
+[stacktrace]
+#0 {main}
+"} 
+[2022-10-14 09:20:46] local.ERROR: Maximum execution time of 60 seconds exceeded {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 60 seconds exceeded at /Users/parallax/Ewa Podolak/Coding Stuff/Rheadit/Rheadit/Backend/Backend/app/Http/Controllers/userController.php:147)
+[stacktrace]
+#0 {main}
+"} 

@@ -5,131 +5,137 @@ namespace App\Http\Controllers;
 use App\Models\community;
 use App\Models\user;
 
-use function Illuminate\Session\userId;
-
 class communityController extends Controller
 {
     public function JoinCommunity($communityname, $userid)
     {
         $owner = community::where('community', $communityname)->where('userid', $userid);
-        if($owner->get()->IsEmpty())
-        {
-            community::insert(['userid'=>$userid, 'community'=>$communityname, 'authority'=>'member']);
-            return ['joined'=>true];
+        if ($owner->get()->IsEmpty()) {
+            community::insert(['userid' => $userid, 'community' => $communityname, 'authority' => 'member']);
+
+            return ['joined' => true];
         }
-        return ['joined'=>false];
+
+        return ['joined' => false];
     }
 
     public function LeaveCommunity($communityname, $userid)
     {
         $community = new community;
+
         return $community->LeaveCommunity($communityname, $userid);
     }
 
     public function TransferOwnership($communityname, $userid, $newowner)
     {
-        if(community::where('community', $communityname)->where('userid', $userid)->get()[0]->authority == 'owner')
-        {
-            community::where('community', $communityname)->where('userid', $userid)->update(['userid'=>$newowner]);
-            return ['transfered'=>true];
+        if (community::where('community', $communityname)->where('userid', $userid)->get()[0]->authority == 'owner') {
+            community::where('community', $communityname)->where('userid', $userid)->update(['userid' => $newowner]);
+
+            return ['transfered' => true];
         }
-        return ['transfered'=>false];
+
+        return ['transfered' => false];
     }
 
     public function DeleteCommunity($communityname, $userid)
     {
         $community = new community;
+
         return $community->DeleteCommunity($communityname, $userid);
     }
 
     public function GetCommunity($communityname, $userid)
     {
         $community = new community;
+
         return $community->GetCommunity($communityname, $userid);
     }
 
     public function RequestMod($communityname, $userid)
     {
         $community = new community;
+
         return $community->RequestMod($communityname, $userid);
     }
 
     public function ApproveMod($communityname, $userid, $username)
     {
         $community = new community;
+
         return $community->ApproveMod($communityname, $userid, $username);
     }
 
     public function RejectMod($communityname, $userid, $username)
     {
         $community = new community;
+
         return $community->RejectMod($communityname, $userid, $username);
     }
 
     public function UpdateCommunityBio($communityname, $userid)
     {
-        if(community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner')
-        {
-            user::where('username', $communityname)->update(['bio'=>request()->bio]);
-            return ['updated'=>true];
+        if (community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner') {
+            user::where('username', $communityname)->update(['bio' => request()->bio]);
+
+            return ['updated' => true];
         }
-        return ['updated'=>false];
+
+        return ['updated' => false];
     }
 
     public function UpdateCommunityPic($communityname, $userid)
     {
-        if(community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner')
-        {
-            user::where('username', $communityname)->update(['profilepic'=>request()->profilepic]);
-            return ['updated'=>true];
+        if (community::where('userid', $userid)->where('community', $communityname)->first()->authority == 'owner') {
+            user::where('username', $communityname)->update(['profilepic' => request()->profilepic]);
+
+            return ['updated' => true];
         }
-        return ['updated'=>false];
+
+        return ['updated' => false];
     }
 
     public function OwnerRequestNotifications($userid)
     {
-       $communities = community::where('userid', $userid)->where('authority', 'owner')->get();
+        $communities = community::where('userid', $userid)->where('authority', 'owner')->get();
 
-       $requests = community::where('requestmod', true)->get();
+        $requests = community::where('requestmod', true)->get();
 
-       $requestsarray = [];
+        $requestsarray = [];
 
-        if($requests->IsEmpty())
-            return ['username'=>null, 'community'=>null];
-        else if($communities->IsEmpty())
-            return ['username'=>null, 'community'=>null];
-        else
-        {
-            foreach($communities as $community)
-            {
-                foreach($requests as $request)
-                {
-                    if($request->community == $community->community)
-                    {
+        if ($requests->IsEmpty()) {
+            return ['username' => null, 'community' => null];
+        } elseif ($communities->IsEmpty()) {
+            return ['username' => null, 'community' => null];
+        } else {
+            foreach ($communities as $community) {
+                foreach ($requests as $request) {
+                    if ($request->community == $community->community) {
                         $username = user::where('userid', $request->userid)->first()->username;
-                        array_push($requestsarray, ['username'=>$username, 'community'=>$community->community]);
+                        array_push($requestsarray, ['username' => $username, 'community' => $community->community]);
                     }
                 }
             }
         }
+
         return $requestsarray;
     }
 
     public function JoinableComunity($userid)
     {
         $community = new community;
+
         return $community->JoinableComunity($userid);
     }
 
     public function CreateCommunity($community, $userid)
     {
-        if(user::where('username', $community)->get()->IsEmpty())
-        {
-            community::insert(['userid'=>$userid, 'community'=>$community, 'authority'=>'owner']);
-            user::insert(['username'=>$community]);
-            return ['created'=>true];
+        if (user::where('username', $community)->get()->IsEmpty()) {
+            community::insert(['userid' => $userid, 'community' => $community, 'authority' => 'owner']);
+            user::insert(['username' => $community]);
+
+            return ['created' => true];
+        } else {
+            return ['created' => false];
         }
-        else
-            return ['created'=>false];
     }
 }

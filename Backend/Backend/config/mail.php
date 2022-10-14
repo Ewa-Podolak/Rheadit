@@ -51,7 +51,6 @@ return [
         ],
     ],
 
-
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'Rheadit@official.com'),
         'name' => env('MAIL_FROM_NAME', 'Rheadit support team'),
