@@ -221,12 +221,12 @@ if (!loginPageBody && !resetpassrequestPageBody && !resetpasswordPageBody){
     if (window.location.href.includes("home.html")){
         var explorehome = false;
         getPosts(pagenumber, null);
-        newpost("home");
+        newpost("homepage");
         explore();
     }
 
     if(window.location.href.includes("profile")){
-        newpost("home");
+        newpost("homepage");
         var recent = true;
         postSort();
         var personal = window.localStorage.getItem("personal");
@@ -501,8 +501,9 @@ if (!loginPageBody && !resetpassrequestPageBody && !resetpasswordPageBody){
                         })
                         .then(response => response.json())
                         .then((data) => {
-                                console.log(data);
-                                window.location.href = "post.html"
+
+                            console.log(data);
+                            window.location.href = "post.html"
                         });
                     }
                     else{
@@ -1830,6 +1831,8 @@ function newpost(group){
             })
             .then((response) => response.json())
             .then((data) => {
+                console.log(group);
+                console.log(userid);
                     console.log(data);
                     getPosts(1);
             }); 
