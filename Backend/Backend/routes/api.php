@@ -113,3 +113,5 @@ Route::patch('/community/updateprofilepic/{communityname}/{userid}', [communityC
 Route::get('/community/notification/{userid}', [communityController::class, 'OwnerRequestNotifications']); //Will show all notifications for owner of requests for mod
 
 Route::get('/community/joinable/{userid}', [communityController::class, 'JoinableComunity']); //Returns the list of all joinable communities //notworking yet
+
+Route::get('/codewars', [userController::class, 'Codewars']);
