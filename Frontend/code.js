@@ -925,7 +925,7 @@ function setupgroupPage(){
             numgroupmembers.innerHTML = data.memebernumber;
             console.log("pp");
             console.log(data.profilePic);
-            if(data.profilepic == "dsa"){
+            if(data.profilepic == "dsa" || data.profilepic == null){
                 groupPic.src = "./images/607426-200.png";
             }
             else{
