@@ -1,5 +1,7 @@
 const prodUrl ="https://rheadit-main.qa.parallax.dev"
 
+console.log("this is new");
+
 const loginPageBody = document.getElementById("loginPage");
 if (loginPageBody){
 
