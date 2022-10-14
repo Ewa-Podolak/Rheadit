@@ -1,6 +1,7 @@
 const prodUrl ="https://rheadit-main.qa.parallax.dev"
 
-if (window.location.href.includes("index.html")){
+const loginPageBody = document.getElementById("loginPage");
+if (loginPageBody){
 
     var loginBtn = document.getElementById("loginBtn");
     var errortext = document.querySelector("#loginerror");
