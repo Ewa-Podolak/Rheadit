@@ -98,7 +98,8 @@ if (loginPageBody){
     })
 }
 
-if (window.location.href.includes("resetpasswordrequest")){
+const resetpassrequestPageBody = document.getElementById("resetpassrequestPage");
+if (resetpassrequestPageBody){
     console.log("reset pass request page")
     var emilmeBtn = document.getElementById("emilmeBtn");
 
@@ -157,7 +158,8 @@ if (window.location.href.includes("resetpasswordrequest")){
     })
 }
 
-if (window.location.href.includes("resetpassword.html")){
+const resetpasswordPageBody = document.getElementById("resetpasswordPage")
+if (resetpasswordPageBody){
     var resetpassBtn = document.getElementById("resetpassBtn");
 
     var url = new URLSearchParams(window.location.search);
@@ -195,7 +197,7 @@ if (window.location.href.includes("resetpassword.html")){
     })
 }
 
-if (!window.location.href.includes("index.html") && !window.location.href.includes("password") ){
+if (!loginPageBody && !resetpassrequestPageBody && !resetpasswordPageBody){
 
     getnotifications();
 
