@@ -35,6 +35,8 @@ class commentController extends Controller
         }
     }
 
+    
+
     public function DeleteComment($commentid, $userid)
     {
         $comment = new comment;
