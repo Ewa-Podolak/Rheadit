@@ -8,6 +8,7 @@ use App\Http\Controllers\postController;
 use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\communityrole;
 
 //User Routes
 Route::get('/users/login/{username}/{pasword}', [userController::class, 'CheckLogin']); //Checks Login Credentials //Works
@@ -47,7 +48,7 @@ Route::get('/posts/{community}/liked/{userid}/{page}', [postController::class, '
 
 Route::post('/posts/{community}/create/{userid}', [postController::class, 'PostInCommunity']); //Allows user to create post
 
-Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost']); //Allows user or mod/owner to delete a pst
+Route::delete('/posts/delete/{postid}/{userid}', [postController::class, 'DeletePost'])->middleware(['communityrole']); //Allows user or mod/owner to delete a pst
 
 //Comments Routes //All works
 Route::get('/comments/{postid}/{page}/{userid}', [commentController::class, 'GetComments']); //Returns all comments of post, with their likes/dislikes

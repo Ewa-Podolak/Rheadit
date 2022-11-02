@@ -26,7 +26,7 @@
         margin: 0;
         padding: 0;
         -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%; 
+        -webkit-text-size-adjust: 100%;  
       }
 
       table {

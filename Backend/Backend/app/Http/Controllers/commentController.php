@@ -41,6 +41,6 @@ class commentController extends Controller
     {
         $comment = new comment;
 
-        return $comment->DeletedComment($commentid, $userid);
+        return $comment->DeleteComment($commentid, $userid);
     }
 }

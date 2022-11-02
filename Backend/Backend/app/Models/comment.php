@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use AuthorizesRequests;
+use Illuminate\Auth\Access\Gate;
 
 class comment extends Model
 {
@@ -141,20 +143,29 @@ class comment extends Model
         $this::where('commentid', $commentid)->delete();
     }
 
-    public function DeletedComment($commentid, $userid) //When the comment is deleted
+    public function DeleteComment($commentid, $userid) //When the comment is deleted
     {
         $interaction = new interaction;
-        $postid = $this::where('commentid', $commentid)->first()->postid;
-        $community = post::where('postid', $postid)->first()->community;
-        $authority = $this->GetAuthority($userid, $community);
 
-        if ($this::where('commentid', $commentid)->first()->userid == $userid || $authority > 1) {
+        //if($this->authorize('delete', [$commentid, $userid]))
+        if($this->authorize('delete', [$commentid, $userid]))
+        {
+            return 'made it here';
             $interaction->DeleteLikesComment($commentid);
             $this::where('commentid', $commentid)->delete();
-
-            return ['deleted' => true];
         }
 
-        return ['deleted' => false];
+        // $postid = $this::where('commentid', $commentid)->first()->postid;
+        // $community = post::where('postid', $postid)->first()->community;
+        // $authority = $this->GetAuthority($userid, $community);
+
+        // if ($this::where('commentid', $commentid)->first()->userid == $userid || $authority > 1) {
+        //     $interaction->DeleteLikesComment($commentid);
+        //     $this::where('commentid', $commentid)->delete();
+
+        //     return ['deleted' => true];
+        // }
+
+        // return ['deleted' => false];
     }
 }

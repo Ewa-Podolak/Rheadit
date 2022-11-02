@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailJob;
 use App\Mail\ResetPassword1;
 use App\Models\user;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class userController extends Controller
@@ -43,9 +45,8 @@ class userController extends Controller
             return ['emailsent' => false];
         } else {
             $userid = $userid[0]->userid;
-
-            Mail::to($email)
-                ->send(new ResetPassword1($userid));
+            $emailJob = (new SendEmailJob($userid, $email))->delay(Carbon::now()->addSeconds(3));
+            dispatch($emailJob);
 
             return ['emailsent' => true];
         }
